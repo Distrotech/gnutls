@@ -40,6 +40,7 @@ libgnutls_x509_la_SOURCES =	\
 	extensions.c		\
 	mpi.c			\
 	output.c		\
+	output.h		\
 	pbkdf2-sha1.c		\
 	pbkdf2-sha1.h		\
 	pkcs12.c		\
@@ -53,5 +54,10 @@ libgnutls_x509_la_SOURCES =	\
 	verify.c		\
 	x509.c			\
 	x509_int.h		\
-	x509_write.c	\
-	verify-high.c
+	x509_write.c		\
+	verify-high.c		\
+	verify-high.h
+
+if ENABLE_OCSP
+libgnutls_x509_la_SOURCES += ocsp.c ocsp_output.c
+endif

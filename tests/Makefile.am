@@ -68,6 +68,10 @@ ctests = simple gc set_pkcs12_cred certder certuniqueid mpi		\
 #gendh is out because it is too slow in valgrind and
 #mini-deflate is out because zlib has warnings in valgrind
 
+if ENABLE_OCSP
+ctests += ocsp
+endif
+
 if ENABLE_OPENSSL
 ctests +=  openssl
 openssl_LDADD = $(LDADD) ../libextra/libgnutls-openssl.la

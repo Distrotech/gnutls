@@ -526,3 +526,11 @@ gl/tests/test-ftello4
 gl/tests/test-pathmax
 gl/tests/test-sys_types
 tests/mini-deflate
+tests/ocsp
+TAGS
+src/ocsptool
+src/libcmd-ocsp.la
+src/ocsptool-gaa.c
+src/ocsptool-gaa.h
+doc/reference/gnutls-decl-list.txt.bak
+doc/reference/gnutls-decl.txt.bak

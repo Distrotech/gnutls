@@ -30,6 +30,7 @@
 #include <gnutls_num.h>
 #include <gnutls_errors.h>
 #include <c-ctype.h>
+#include "output.h"
 
 /* I18n of error codes. */
 #include "gettext.h"
@@ -40,7 +41,7 @@
 
 #define ERROR_STR (char*) "(error)"
 
-static void
+void
 hexdump (gnutls_buffer_st * str, const char *data, size_t len,
          const char *spc)
 {
@@ -65,7 +66,7 @@ hexdump (gnutls_buffer_st * str, const char *data, size_t len,
     adds (str, "\n");
 }
 
-static void
+void
 hexprint (gnutls_buffer_st * str, const char *data, size_t len)
 {
   size_t j;
@@ -79,8 +80,7 @@ hexprint (gnutls_buffer_st * str, const char *data, size_t len)
     }
 }
 
-
-static void
+void
 asciiprint (gnutls_buffer_st * str, const char *data, size_t len)
 {
   size_t j;

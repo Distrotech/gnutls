@@ -157,6 +157,8 @@ gnutls_pubkey_init (gnutls_pubkey_t * key)
 void
 gnutls_pubkey_deinit (gnutls_pubkey_t key)
 {
+  if (!key)
+    return;
   gnutls_pk_params_release(&key->params);
   gnutls_free (key);
 }
