@@ -1930,7 +1930,7 @@ inlist_p (gnutls_x509_trust_list_t list, gnutls_x509_crt_t cert)
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error value.
- */
+ **/
 int
 gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t resp,
 			 gnutls_x509_trust_list_t trustlist,
