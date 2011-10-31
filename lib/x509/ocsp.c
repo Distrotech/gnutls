@@ -1605,7 +1605,6 @@ gnutls_ocsp_resp_get_signature (gnutls_ocsp_resp_t resp,
 				gnutls_datum_t *sig)
 {
   int ret;
-  int bits, len;
 
   if (resp == NULL || sig == NULL)
     {
@@ -1613,33 +1612,11 @@ gnutls_ocsp_resp_get_signature (gnutls_ocsp_resp_t resp,
       return GNUTLS_E_INVALID_REQUEST;
     }
 
-  bits = 0;
-  ret = asn1_read_value (resp->basicresp, "signature", NULL, &bits);
-  if (ret != ASN1_MEM_ERROR)
+  ret = _gnutls_x509_read_value (resp->basicresp, "signature", sig, 2);
+  if (ret != GNUTLS_E_SUCCESS)
     {
       gnutls_assert ();
-      return _gnutls_asn2err (ret);
-    }
-
-  if (bits % 8 != 0)
-    {
-      gnutls_assert ();
-      return GNUTLS_E_CERTIFICATE_ERROR;
-    }
-
-  sig->size = len = bits / 8;
-  sig->data = gnutls_malloc (sig->size);
-  if (sig->data == NULL)
-    {
-      gnutls_assert ();
-      return GNUTLS_E_MEMORY_ERROR;
-    }
-
-  ret = asn1_read_value (resp->basicresp, "signature", sig->data, &len);
-  if (ret != ASN1_SUCCESS)
-    {
-      gnutls_assert ();
-      return _gnutls_asn2err (ret);
+      return ret;
     }
 
   return GNUTLS_E_SUCCESS;
