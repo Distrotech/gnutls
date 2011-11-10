@@ -33,6 +33,7 @@ acceptable.  The framework is illustrated on @ref{fig:x509}.
 * X.509 certificate structure::
 * Verifying X.509 certificate paths::
 * Verifying a certificate in the context of TLS session::
+* Certificate status::
 * Certificate requests::
 * PKCS 12 structures::
 @end menu
@@ -194,6 +195,92 @@ certificate is signed by trusted authority, does not reveal anything
 about the peer's identity. It is required to verify if the
 certificate's owner is the one you expect. For more information
 consult @xcite{RFC2818} and section @ref{ex:verify} for an example.
+
+@node Certificate status
+@subsection OCSP certificate status checking
+@cindex certificate status
+@cindex Online Certificate Status Protocol
+@cindex OCSP
+
+Certificates may be revoked before their expiration time has been
+reached.  There are several reasons for revoking certificates, but a
+typical example is if the private key associated with a certificate
+has been compromised.  Traditionally Certificate Revocation Lists
+(CRLs) has been used by application to implement revocation checking,
+however several disadvantages with CRLs have been identified, see for
+example @xcite{RIVESTCRL}.
+
+The Online Certificate Status Protocol (@acronym{OCSP}) is widely
+implemented protocol to perform certificate (revocation) status
+checking.  An application that wishes to verify the identity of a peer
+will check the certificate against a set of trusted certificates and
+then also check whether the certificate is listed in a CRL and/or
+perform an OCSP check of the certificate.
+
+Before performing the OCSP query, the application will need to figure
+out the address of the OCSP server.  The OCSP server information can
+be provided by the user in manual configuration.  It may also be
+provided in the certificate that is being checked.  There is an
+extension field called the Authority Information Access (AIA) which
+has an access method called @code{id-ad-ocsp} that holds the location
+of the OCSP responder.  There is a function for extracting this
+information from a certificate.
+
+@showfuncA{gnutls_x509_crt_get_authority_info_access}
+
+There are several functions in GnuTLS for creating and manipulating
+OCSP requests and responses.  The idea is that a client application
+create an OCSP request object, store some information about the
+certificate to check in the request, and then export the request in
+DER format.  The request will then need to be sent to the OCSP
+responder, and normally an OCSP response is received that the
+application will need to import into an OCSP response object.  The
+digital signature in the OCSP response needs to be verified before the
+information in the response can be trusted.
+
+The ASN.1 structure of OCSP requests are briefly as follows.  It is
+useful to review the structures to get an understanding of which
+fields are modified by GnuTLS functions.
+
+@example
+OCSPRequest     ::=     SEQUENCE @{
+    tbsRequest                  TBSRequest,
+    optionalSignature   [0]     EXPLICIT Signature OPTIONAL @}
+
+TBSRequest      ::=     SEQUENCE @{
+    version             [0]     EXPLICIT Version DEFAULT v1,
+    requestorName       [1]     EXPLICIT GeneralName OPTIONAL,
+    requestList                 SEQUENCE OF Request,
+    requestExtensions   [2]     EXPLICIT Extensions OPTIONAL @}
+
+Request         ::=     SEQUENCE @{
+    reqCert                     CertID,
+    singleRequestExtensions     [0] EXPLICIT Extensions OPTIONAL @}
+
+CertID          ::=     SEQUENCE @{
+    hashAlgorithm       AlgorithmIdentifier,
+    issuerNameHash      OCTET STRING, -- Hash of Issuer's DN
+    issuerKeyHash       OCTET STRING, -- Hash of Issuers public key
+    serialNumber        CertificateSerialNumber @}
+@end example
+
+The basic functions to initialize, import, export and deallocate OCSP
+requests are the following.
+
+@showfuncE{gnutls_ocsp_req_init,
+        gnutls_ocsp_req_deinit,
+        gnutls_ocsp_req_import,
+        gnutls_ocsp_req_export,
+        gnutls_ocsp_req_print}
+
+There are two interfaces for setting the identity of a certificate in
+a OCSP request, the first being a low-level function when you have the
+issuer name hash, issuer key hash, and certificate serial number in
+binary form.  The second is usually more useful if you have the
+certificate (and its issuer) in a @code{gnutls_x509_crt_t} type.
+
+@showfuncB{gnutls_ocsp_req_add_certid,
+        gnutls_ocsp_req_add_cert}
 
 @node Certificate requests
 @subsection @acronym{PKCS} #10 certificate requests
