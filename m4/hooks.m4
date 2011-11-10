@@ -40,9 +40,9 @@ AC_DEFUN([LIBGNUTLS_HOOKS],
   # Interfaces changed/added/removed:   CURRENT++       REVISION=0
   # Interfaces added:                             AGE++
   # Interfaces removed:                           AGE=0
-  AC_SUBST(LT_CURRENT, 29)
-  AC_SUBST(LT_REVISION, 0)
-  AC_SUBST(LT_AGE, 1)
+  AC_SUBST(LT_CURRENT, 30)
+  AC_SUBST(LT_REVISION, 3)
+  AC_SUBST(LT_AGE, 2)
 
   AC_SUBST(LT_SSL_CURRENT, 27)
   AC_SUBST(LT_SSL_REVISION, 1)
@@ -82,12 +82,12 @@ dnl    fi
   AC_MSG_CHECKING([whether to use nettle])
 if test "$cryptolib" = "nettle";then
   AC_MSG_RESULT(yes)
-    AC_LIB_HAVE_LINKFLAGS([nettle], [hogweed gmp], [#include <nettle/gcm.h>],
-                          [gcm_set_iv (0, 0, 0, 0)])
+    AC_LIB_HAVE_LINKFLAGS([nettle], [hogweed gmp], [#include <nettle/ripemd160.h>],
+                          [ripemd160_init (0)])
     if test "$ac_cv_libnettle" != yes; then
       AC_MSG_ERROR([[
   *** 
-  *** Libnettle 2.2 was not found. 
+  *** Libnettle 2.4 was not found. 
   ]])
     fi
 else

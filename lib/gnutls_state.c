@@ -425,6 +425,10 @@ gnutls_deinit (gnutls_session_t session)
   if (session == NULL)
     return;
 
+  if (IS_DTLS(session) && session->internals.dtls.packets_dropped > 0)
+    _gnutls_audit_log(session, "Discarded %u messages (duplicates or invalid decryption)\n", 
+                      (unsigned int)session->internals.dtls.packets_dropped);
+
   /* remove auth info firstly */
   _gnutls_free_auth_info (session);
 
@@ -1105,7 +1109,7 @@ gnutls_session_is_resumed (gnutls_session_t session)
     }
   else
     {
-      if (session->internals.resumed == RESUME_TRUE)
+      if (session->internals.resumed != RESUME_FALSE)
         return 1;
     }
 

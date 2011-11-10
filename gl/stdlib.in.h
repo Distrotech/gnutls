@@ -247,7 +247,7 @@ _GL_CXXALIASWARN (grantpt);
 #elif defined GNULIB_POSIXCHECK
 # undef grantpt
 # if HAVE_RAW_DECL_GRANTPT
-_GL_WARN_ON_USE (ptsname, "grantpt is not portable - "
+_GL_WARN_ON_USE (grantpt, "grantpt is not portable - "
                  "use gnulib module grantpt for portability");
 # endif
 #endif
@@ -420,6 +420,22 @@ _GL_CXXALIASWARN (mkstemps);
 # if HAVE_RAW_DECL_MKSTEMPS
 _GL_WARN_ON_USE (mkstemps, "mkstemps is unportable - "
                  "use gnulib module mkstemps for portability");
+# endif
+#endif
+
+#if @GNULIB_POSIX_OPENPT@
+/* Return an FD open to the master side of a pseudo-terminal.  Flags should
+   include O_RDWR, and may also include O_NOCTTY.  */
+# if !@HAVE_POSIX_OPENPT@
+_GL_FUNCDECL_SYS (posix_openpt, int, (int flags));
+# endif
+_GL_CXXALIAS_SYS (posix_openpt, int, (int flags));
+_GL_CXXALIASWARN (posix_openpt);
+#elif defined GNULIB_POSIXCHECK
+# undef posix_openpt
+# if HAVE_RAW_DECL_POSIX_OPENPT
+_GL_WARN_ON_USE (posix_openpt, "posix_openpt is not portable - "
+                 "use gnulib module posix_openpt for portability");
 # endif
 #endif
 

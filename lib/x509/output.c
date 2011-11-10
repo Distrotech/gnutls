@@ -29,8 +29,6 @@
 #include <x509_int.h>
 #include <gnutls_num.h>
 #include <gnutls_errors.h>
-#include <c-ctype.h>
-#include "output.h"
 
 /* I18n of error codes. */
 #include "gettext.h"
@@ -40,57 +38,6 @@
 #define adds _gnutls_buffer_append_str
 
 #define ERROR_STR (char*) "(error)"
-
-void
-hexdump (gnutls_buffer_st * str, const char *data, size_t len,
-         const char *spc)
-{
-  size_t j;
-
-  if (spc)
-    adds (str, spc);
-  for (j = 0; j < len; j++)
-    {
-      if (((j + 1) % 16) == 0)
-        {
-          addf (str, "%.2x\n", (unsigned char) data[j]);
-          if (spc && j != (len - 1))
-            adds (str, spc);
-        }
-      else if (j == (len - 1))
-        addf (str, "%.2x", (unsigned char) data[j]);
-      else
-        addf (str, "%.2x:", (unsigned char) data[j]);
-    }
-  if ((j % 16) != 0)
-    adds (str, "\n");
-}
-
-void
-hexprint (gnutls_buffer_st * str, const char *data, size_t len)
-{
-  size_t j;
-
-  if (len == 0)
-    adds (str, "00");
-  else
-    {
-      for (j = 0; j < len; j++)
-        addf (str, "%.2x", (unsigned char) data[j]);
-    }
-}
-
-void
-asciiprint (gnutls_buffer_st * str, const char *data, size_t len)
-{
-  size_t j;
-
-  for (j = 0; j < len; j++)
-    if (c_isprint (data[j]))
-      addf (str, "%c", (unsigned char) data[j]);
-    else
-      addf (str, ".");
-}
 
 static char *
 ip_to_string (void *_ip, int ip_size, char *string, int string_size)
@@ -163,9 +110,9 @@ print_proxy (gnutls_buffer_st * str, gnutls_x509_crt_t cert)
   if (npolicy)
     {
       adds (str, _("\t\t\tPolicy:\n\t\t\t\tASCII: "));
-      asciiprint (str, policy, npolicy);
+      _gnutls_buffer_asciiprint (str, policy, npolicy);
       adds (str, _("\n\t\t\t\tHexdump: "));
-      hexprint (str, policy, npolicy);
+      _gnutls_buffer_hexprint (str, policy, npolicy);
       adds (str, "\n");
     }
 }
@@ -258,7 +205,7 @@ print_ski (gnutls_buffer_st * str, gnutls_x509_crt_t cert)
     }
 
   adds (str, "\t\t\t");
-  hexprint (str, buffer, size);
+  _gnutls_buffer_hexprint (str, buffer, size);
   adds (str, "\n");
 
   gnutls_free (buffer);
@@ -327,7 +274,7 @@ print_aki (gnutls_buffer_st * str, int type, cert_type_t cert)
     }
 
   adds (str, "\t\t\t");
-  hexprint (str, buffer, size);
+  _gnutls_buffer_hexprint (str, buffer, size);
   adds (str, "\n");
 
   gnutls_free (buffer);
@@ -744,9 +691,9 @@ print_altname (gnutls_buffer_st * str, const char *prefix, int altname_type,
                 addf (str, _("%s\t\t\totherName OID: %.*s\n"), prefix,
                       (int) oidsize, oid);
                 addf (str, _("%s\t\t\totherName DER: "), prefix);
-                hexprint (str, buffer, size);
+                _gnutls_buffer_hexprint (str, buffer, size);
                 addf (str, _("\n%s\t\t\totherName ASCII: "), prefix);
-                asciiprint (str, buffer, size);
+                _gnutls_buffer_asciiprint (str, buffer, size);
                 addf (str, "\n");
               }
             gnutls_free (oid);
@@ -803,7 +750,7 @@ print_unique_ids (gnutls_buffer_st * str, const gnutls_x509_crt_t cert)
   if (result >= 0)
     {
       addf (str, ("\t\tIssuer Unique ID:\n"));
-      hexdump (str, buf, buf_size, "\t\t\t");
+      _gnutls_buffer_hexdump (str, buf, buf_size, "\t\t\t");
       if (buf_size == 16)
         {                       /* this could be a GUID */
           guiddump (str, buf, buf_size, "\t\t\t");
@@ -815,7 +762,7 @@ print_unique_ids (gnutls_buffer_st * str, const gnutls_x509_crt_t cert)
   if (result >= 0)
     {
       addf (str, ("\t\tSubject Unique ID:\n"));
-      hexdump (str, buf, buf_size, "\t\t\t");
+      _gnutls_buffer_hexdump (str, buf, buf_size, "\t\t\t");
       if (buf_size == 16)
         {                       /* this could be a GUID */
           guiddump (str, buf, buf_size, "\t\t\t");
@@ -1077,11 +1024,11 @@ print_extensions (gnutls_buffer_st * str, const char *prefix, int type,
             }
 
           addf (str, _("%s\t\t\tASCII: "), prefix);
-          asciiprint (str, buffer, extlen);
+          _gnutls_buffer_asciiprint (str, buffer, extlen);
           addf (str, "\n");
 
           addf (str, _("%s\t\t\tHexdump: "), prefix);
-          hexprint (str, buffer, extlen);
+          _gnutls_buffer_hexprint (str, buffer, extlen);
           adds (str, "\n");
 
           gnutls_free (buffer);
@@ -1113,7 +1060,7 @@ print_cert (gnutls_buffer_st * str, gnutls_x509_crt_t cert, int notsigned)
     else
       {
         adds (str, _("\tSerial Number (hex): "));
-        hexprint (str, serial, serial_size);
+        _gnutls_buffer_hexprint (str, serial, serial_size);
         adds (str, "\n");
       }
   }
@@ -1258,9 +1205,9 @@ print_cert (gnutls_buffer_st * str, gnutls_x509_crt_t cert, int notsigned)
               else
                 {
                   addf (str, _("\t\tModulus (bits %d):\n"), bits);
-                  hexdump (str, m.data, m.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, m.data, m.size, "\t\t\t");
                   addf (str, _("\t\tExponent (bits %d):\n"), e.size * 8);
-                  hexdump (str, e.data, e.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, e.data, e.size, "\t\t\t");
 
                   gnutls_free (m.data);
                   gnutls_free (e.data);
@@ -1282,9 +1229,9 @@ print_cert (gnutls_buffer_st * str, gnutls_x509_crt_t cert, int notsigned)
                 {
                   addf (str, _("\t\tCurve:\t%s\n"), gnutls_ecc_curve_get_name(curve));
                   addf (str, _("\t\tX:\n"));
-                  hexdump (str, x.data, x.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, x.data, x.size, "\t\t\t");
                   adds (str, _("\t\tY:\n"));
-                  hexdump (str, y.data, y.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, y.data, y.size, "\t\t\t");
 
                   gnutls_free (x.data);
                   gnutls_free (y.data);
@@ -1303,13 +1250,13 @@ print_cert (gnutls_buffer_st * str, gnutls_x509_crt_t cert, int notsigned)
               else
                 {
                   addf (str, _("\t\tPublic key (bits %d):\n"), bits);
-                  hexdump (str, y.data, y.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, y.data, y.size, "\t\t\t");
                   adds (str, _("\t\tP:\n"));
-                  hexdump (str, p.data, p.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, p.data, p.size, "\t\t\t");
                   adds (str, _("\t\tQ:\n"));
-                  hexdump (str, q.data, q.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, q.data, q.size, "\t\t\t");
                   adds (str, _("\t\tG:\n"));
-                  hexdump (str, g.data, g.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, g.data, g.size, "\t\t\t");
 
                   gnutls_free (p.data);
                   gnutls_free (q.data);
@@ -1388,7 +1335,7 @@ print_cert (gnutls_buffer_st * str, gnutls_x509_crt_t cert, int notsigned)
         }
 
       adds (str, _("\tSignature:\n"));
-      hexdump (str, buffer, size, "\t\t");
+      _gnutls_buffer_hexdump (str, buffer, size, "\t\t");
 
       gnutls_free (buffer);
     }
@@ -1413,7 +1360,7 @@ print_fingerprint (gnutls_buffer_st * str, gnutls_x509_crt_t cert,
     adds (str, _("\tMD5 fingerprint:\n\t\t"));
   else
     adds (str, _("\tSHA-1 fingerprint:\n\t\t"));
-  hexprint (str, buffer, size);
+  _gnutls_buffer_hexprint (str, buffer, size);
   adds (str, "\n");
 }
 
@@ -1421,8 +1368,8 @@ static void
 print_keyid (gnutls_buffer_st * str, gnutls_x509_crt_t cert)
 {
   int err;
-  char buffer[20];
-  size_t size = 20;
+  char buffer[32];
+  size_t size = sizeof(buffer);
 
   err = gnutls_x509_crt_get_key_id (cert, 0, buffer, &size);
   if (err < 0)
@@ -1432,7 +1379,7 @@ print_keyid (gnutls_buffer_st * str, gnutls_x509_crt_t cert)
     }
 
   adds (str, _("\tPublic Key Id:\n\t\t"));
-  hexprint (str, buffer, size);
+  _gnutls_buffer_hexprint (str, buffer, size);
   adds (str, "\n");
 }
 
@@ -1604,7 +1551,7 @@ print_oneline (gnutls_buffer_st * str, gnutls_x509_crt_t cert)
     else
       {
         addf (str, "SHA-1 fingerprint `");
-        hexprint (str, buffer, size);
+        _gnutls_buffer_hexprint (str, buffer, size);
         adds (str, "'");
       }
   }
@@ -1804,7 +1751,7 @@ print_crl (gnutls_buffer_st * str, gnutls_x509_crl_t crl, int notsigned)
                 addf (str, "error: get_number: %s\n", gnutls_strerror (err));
               else
                 {
-                  hexprint (str, nr, nr_size);
+                  _gnutls_buffer_hexprint (str, nr, nr_size);
                   addf (str, "\n");
                 }
 
@@ -1864,11 +1811,11 @@ print_crl (gnutls_buffer_st * str, gnutls_x509_crl_t crl, int notsigned)
                 }
 
               adds (str, _("\t\t\tASCII: "));
-              asciiprint (str, buffer, extlen);
+              _gnutls_buffer_asciiprint (str, buffer, extlen);
               adds (str, "\n");
 
               adds (str, _("\t\t\tHexdump: "));
-              hexprint (str, buffer, extlen);
+              _gnutls_buffer_hexprint (str, buffer, extlen);
               adds (str, "\n");
 
               gnutls_free (buffer);
@@ -1905,7 +1852,7 @@ print_crl (gnutls_buffer_st * str, gnutls_x509_crl_t crl, int notsigned)
             struct tm t;
 
             adds (str, _("\t\tSerial Number (hex): "));
-            hexprint (str, serial, serial_size);
+            _gnutls_buffer_hexprint (str, serial, serial_size);
             adds (str, "\n");
 
             if (gmtime_r (&tim, &t) == NULL)
@@ -1966,7 +1913,7 @@ print_crl (gnutls_buffer_st * str, gnutls_x509_crl_t crl, int notsigned)
         }
 
       adds (str, _("\tSignature:\n"));
-      hexdump (str, buffer, size, "\t\t");
+      _gnutls_buffer_hexdump (str, buffer, size, "\t\t");
 
       gnutls_free (buffer);
     }
@@ -2074,9 +2021,9 @@ print_crq (gnutls_buffer_st * str, gnutls_x509_crq_t cert)
               else
                 {
                   addf (str, _("\t\tModulus (bits %d):\n"), bits);
-                  hexdump (str, m.data, m.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, m.data, m.size, "\t\t\t");
                   adds (str, _("\t\tExponent:\n"));
-                  hexdump (str, e.data, e.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, e.data, e.size, "\t\t\t");
 
                   gnutls_free (m.data);
                   gnutls_free (e.data);
@@ -2096,13 +2043,13 @@ print_crq (gnutls_buffer_st * str, gnutls_x509_crq_t cert)
               else
                 {
                   addf (str, _("\t\tPublic key (bits %d):\n"), bits);
-                  hexdump (str, y.data, y.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, y.data, y.size, "\t\t\t");
                   addf (str, _("\t\tP:\n"));
-                  hexdump (str, p.data, p.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, p.data, p.size, "\t\t\t");
                   addf (str, _("\t\tQ:\n"));
-                  hexdump (str, q.data, q.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, q.data, q.size, "\t\t\t");
                   addf (str, _("\t\tG:\n"));
-                  hexdump (str, g.data, g.size, "\t\t\t");
+                  _gnutls_buffer_hexdump (str, g.data, g.size, "\t\t\t");
 
                   gnutls_free (p.data);
                   gnutls_free (q.data);
@@ -2234,11 +2181,11 @@ print_crq (gnutls_buffer_st * str, gnutls_x509_crq_t cert)
               }
 
             adds (str, _("\t\t\tASCII: "));
-            asciiprint (str, buffer, extlen);
+            _gnutls_buffer_asciiprint (str, buffer, extlen);
             adds (str, "\n");
 
             adds (str, _("\t\t\tHexdump: "));
-            hexprint (str, buffer, extlen);
+            _gnutls_buffer_hexprint (str, buffer, extlen);
             adds (str, "\n");
 
             gnutls_free (buffer);
@@ -2278,7 +2225,7 @@ print_crq_other (gnutls_buffer_st * str, gnutls_x509_crq_t crq)
     }
 
   adds (str, _("\tPublic Key Id:\n\t\t"));
-  hexprint (str, buffer, size);
+  _gnutls_buffer_hexprint (str, buffer, size);
   adds (str, "\n");
 
   gnutls_free (buffer);

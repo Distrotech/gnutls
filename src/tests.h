@@ -8,13 +8,12 @@ test_code_t test_record_padding (gnutls_session_t state);
 test_code_t test_export (gnutls_session_t state);
 test_code_t test_export_info (gnutls_session_t state);
 test_code_t test_hello_extension (gnutls_session_t state);
+test_code_t test_small_records (gnutls_session_t state);
 test_code_t test_dhe (gnutls_session_t state);
 test_code_t test_dhe_group (gnutls_session_t state);
 test_code_t test_ssl3 (gnutls_session_t state);
 test_code_t test_aes (gnutls_session_t state);
-#ifdef	ENABLE_CAMELLIA
 test_code_t test_camellia (gnutls_session_t state);
-#endif
 test_code_t test_md5 (gnutls_session_t state);
 test_code_t test_sha (gnutls_session_t state);
 test_code_t test_3des (gnutls_session_t state);
@@ -42,3 +41,8 @@ test_code_t test_version_oob (gnutls_session_t session);
 test_code_t test_zlib (gnutls_session_t session);
 int _test_srp_username_callback (gnutls_session_t session,
                                  char **username, char **password);
+
+test_code_t test_ecdhe_curve (gnutls_session_t session);
+test_code_t test_ecdhe (gnutls_session_t session);
+test_code_t test_aes_gcm (gnutls_session_t session);
+test_code_t test_sha256 (gnutls_session_t session);

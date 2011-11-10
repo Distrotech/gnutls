@@ -19,6 +19,9 @@
  */
 
 #include <config.h>
+
+#ifndef _WIN32
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -33,6 +36,12 @@
 #include <gnutls_int.h>
 #include <gnutls_str.h>
 #include <gnutls_errors.h>
+
+#ifdef AF_UNIX
+# define LOCAL_SOCKET_TYPE AF_UNIX
+#else
+# define LOCAL_SOCKET_TYPE AF_LOCAL
+#endif
 
 #ifndef offsetof
 #define offsetof(type, member) ((size_t) &((type *)0)->member)
@@ -142,12 +151,12 @@ _rndegd_connect_socket (void)
     }
 
   memset (&addr, 0, sizeof addr);
-  addr.sun_family = AF_LOCAL;
+  addr.sun_family = LOCAL_SOCKET_TYPE;
   _gnutls_str_cpy (addr.sun_path, sizeof(addr.sun_path), name);
   addr_len = (offsetof (struct sockaddr_un, sun_path)
               + strlen (addr.sun_path));
 
-  fd = socket (AF_LOCAL, SOCK_STREAM, 0);
+  fd = socket (LOCAL_SOCKET_TYPE, SOCK_STREAM, 0);
   if (fd == -1)
     {
       _gnutls_debug_log ("can't create unix domain socket: %s\n",
@@ -262,3 +271,5 @@ restart:
 
   return _length;               /* success */
 }
+
+#endif

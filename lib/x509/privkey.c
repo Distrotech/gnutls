@@ -307,8 +307,8 @@ _gnutls_privkey_decode_ecc_key (const gnutls_datum_t * raw_key,
       goto error;
     }
 
-  ret = _gnutls_ecc_ansi_x963_import (out.data, out.size, &pkey->params.params[5],
-                                         &pkey->params.params[6]);
+  ret = _gnutls_ecc_ansi_x963_import (out.data, out.size, &pkey->params.params[6],
+                                         &pkey->params.params[7]);
   
   _gnutls_free_datum(&out);
   if (ret < 0)
@@ -319,7 +319,7 @@ _gnutls_privkey_decode_ecc_key (const gnutls_datum_t * raw_key,
   pkey->params.params_nr += 2;
 
   /* read the private key */
-  ret = _gnutls_x509_read_int (pkey_asn, "privateKey", &pkey->params.params[7]);
+  ret = _gnutls_x509_read_int (pkey_asn, "privateKey", &pkey->params.params[8]);
   if (ret < 0)
     {
       gnutls_assert();
@@ -860,7 +860,7 @@ gnutls_x509_privkey_import_ecc_raw (gnutls_x509_privkey_t key,
   if (ret < 0)
     return gnutls_assert_val(ret);
 
-  if (_gnutls_mpi_scan_nz (&key->params.params[5], x->data, x->size))
+  if (_gnutls_mpi_scan_nz (&key->params.params[6], x->data, x->size))
     {
       gnutls_assert ();
       ret = GNUTLS_E_MPI_SCAN_FAILED;
@@ -868,7 +868,7 @@ gnutls_x509_privkey_import_ecc_raw (gnutls_x509_privkey_t key,
     }
   key->params.params_nr++;
 
-  if (_gnutls_mpi_scan_nz (&key->params.params[6], y->data, y->size))
+  if (_gnutls_mpi_scan_nz (&key->params.params[7], y->data, y->size))
     {
       gnutls_assert ();
       ret = GNUTLS_E_MPI_SCAN_FAILED;
@@ -876,7 +876,7 @@ gnutls_x509_privkey_import_ecc_raw (gnutls_x509_privkey_t key,
     }
   key->params.params_nr++;
 
-  if (_gnutls_mpi_scan_nz (&key->params.params[7], k->data, k->size))
+  if (_gnutls_mpi_scan_nz (&key->params.params[8], k->data, k->size))
     {
       gnutls_assert ();
       ret = GNUTLS_E_MPI_SCAN_FAILED;
@@ -1022,7 +1022,7 @@ int gnutls_x509_privkey_export_ecc_raw (gnutls_x509_privkey_t key,
   *curve = key->params.flags;
 
   /* X */
-  ret = _gnutls_mpi_dprint_lz (key->params.params[5], x);
+  ret = _gnutls_mpi_dprint_lz (key->params.params[6], x);
   if (ret < 0)
     {
       gnutls_assert ();
@@ -1030,7 +1030,7 @@ int gnutls_x509_privkey_export_ecc_raw (gnutls_x509_privkey_t key,
     }
 
   /* Y */
-  ret = _gnutls_mpi_dprint_lz (key->params.params[6], y);
+  ret = _gnutls_mpi_dprint_lz (key->params.params[7], y);
   if (ret < 0)
     {
       gnutls_assert ();
@@ -1040,7 +1040,7 @@ int gnutls_x509_privkey_export_ecc_raw (gnutls_x509_privkey_t key,
 
 
   /* K */
-  ret = _gnutls_mpi_dprint_lz (key->params.params[7], k);
+  ret = _gnutls_mpi_dprint_lz (key->params.params[8], k);
   if (ret < 0)
     {
       gnutls_assert ();
@@ -1391,9 +1391,7 @@ gnutls_x509_privkey_get_key_id (gnutls_x509_privkey_t key,
                                 unsigned char *output_data,
                                 size_t * output_data_size)
 {
-  int result;
-  digest_hd_st hd;
-  gnutls_datum_t der = { NULL, 0 };
+  int ret;
 
   if (key == NULL)
     {
@@ -1401,38 +1399,13 @@ gnutls_x509_privkey_get_key_id (gnutls_x509_privkey_t key,
       return GNUTLS_E_INVALID_REQUEST;
     }
 
-  if (*output_data_size < 20)
+  ret = _gnutls_get_key_id(key->pk_algorithm, &key->params, output_data, output_data_size);
+  if (ret < 0)
     {
       gnutls_assert ();
-      *output_data_size = 20;
-      return GNUTLS_E_SHORT_MEMORY_BUFFER;
     }
 
-  result = _gnutls_x509_write_pubkey(key->pk_algorithm, &key->params, &der);
-  if (result < 0)
-    {
-      gnutls_assert ();
-      goto cleanup;
-    }
-
-  result = _gnutls_hash_init (&hd, GNUTLS_MAC_SHA1);
-  if (result < 0)
-    {
-      gnutls_assert ();
-      goto cleanup;
-    }
-
-  _gnutls_hash (&hd, der.data, der.size);
-
-  _gnutls_hash_deinit (&hd, output_data);
-  *output_data_size = 20;
-
-  result = 0;
-
-cleanup:
-
-  _gnutls_free_datum (&der);
-  return result;
+  return ret;
 }
 
 

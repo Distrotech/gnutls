@@ -35,10 +35,10 @@ gnutls_TEXINFOS = gnutls.texi fdl-1.3.texi lgpl-2.1.texi gpl-3.0.texi	\
 	cha-ciphersuites.texi cha-copying.texi cha-functions.texi	\
 	cha-gtls-app.texi cha-internals.texi cha-intro-tls.texi		\
 	cha-library.texi cha-preface.texi cha-programs.texi		\
-	cha-tls-app.texi cha-errors.texi cha-support.texi
+	sec-tls-app.texi cha-errors.texi cha-support.texi
 
 # Examples.
-gnutls_TEXINFOS += examples/ex-client1.c examples/ex-client2.c		\
+gnutls_TEXINFOS += examples/ex-client1.c				\
 	examples/ex-session-info.c examples/ex-verify.c			\
 	examples/ex-cert-select.c examples/ex-client-resume.c		\
 	examples/ex-client-srp.c examples/ex-rfc2818.c			\
@@ -88,9 +88,9 @@ MAINTAINERCLEANFILES =
 
 # Generated texinfos.
 
-gnutls_TEXINFOS += gnutls-api.texi extra-api.texi \
+gnutls_TEXINFOS += gnutls-api.texi \
 	x509-api.texi pgp-api.texi
-MAINTAINERCLEANFILES += gnutls-api.texi extra-api.texi \
+MAINTAINERCLEANFILES += gnutls-api.texi \
 	x509-api.texi pgp-api.texi
 
 gnutls-api.texi: $(srcdir)/../lib/*.c $(srcdir)/../lib/ext/*.c $(srcdir)/../lib/auth/*.c $(srcdir)/../lib/algorithms/*.c
@@ -126,25 +126,15 @@ pgp-api.texi: $(srcdir)/../lib/openpgp/*.c
 	rm -f $@-tmp
 	mv -f $@-tmp2 $@
 
-extra-api.texi: $(srcdir)/../libextra/gnutls_extra.c
-	echo "" > $@-tmp
-	for i in $^; do \
-		echo -n "Creating documentation for file $$i... " && \
-		$(srcdir)/scripts/gdoc -texinfo $$i >> $@-tmp && \
-		echo "ok"; \
-	done
-	$(srcdir)/scripts/sort2.pl < $@-tmp > $@-tmp2
-	rm -f $@-tmp
-	mv -f $@-tmp2 $@
-
 # Generated texinfos.
 
 gnutls_TEXINFOS += error_codes.texi algorithms.texi alerts.texi  enums.texi
 MAINTAINERCLEANFILES += error_codes.texi algorithms.texi enums.texi
 
-AM_CPPFLAGS = -I$(top_srcdir)/lib/includes -I$(top_builddir)/lib/includes
+AM_CPPFLAGS = \
+	-I$(top_srcdir)/lib/includes -I$(top_builddir)/lib/includes
 
-noinst_PROGRAMS = errcodes printlist alert-printlist
+EXTRA_PROGRAMS = errcodes printlist alert-printlist
 
 errcodes_SOURCES = errcodes.c
 errcodes_LDADD = ../lib/libgnutls.la ../gl/libgnu.la
@@ -168,7 +158,7 @@ alerts.texi: alert-printlist
 	$(builddir)/alert-printlist > $@-tmp
 	mv -f $@-tmp $@
 
-enums.texi: $(srcdir)/../lib/includes/gnutls/*.h
+enums.texi: $(srcdir)/../lib/includes/gnutls/*.h $(builddir)/../lib/includes/gnutls/*.h
 	echo "" > $@-tmp
 	for i in $^; do \
 		echo -n "Creating documentation for file $$i... " && \
@@ -180,7 +170,7 @@ enums.texi: $(srcdir)/../lib/includes/gnutls/*.h
 
 # Guile texinfos.
 
-guile_texi = core.c.texi extra.c.texi
+guile_texi = core.c.texi
 BUILT_SOURCES        = $(guile_texi)
 MAINTAINERCLEANFILES += $(guile_texi)
 EXTRA_DIST           += $(guile_texi) extract-guile-c-doc.scm
@@ -194,7 +184,7 @@ GUILE_FOR_BUILD =				\
 
 SNARF_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir)			\
 	 -I$(top_srcdir)/lib/includes -I$(top_builddir)/lib/includes	\
-	 -I$(top_srcdir)/libextra/includes				\
+	 -I$(top_srcdir)/extra/includes				\
          -I$(top_srcdir)/guile/src -I$(top_builddir)/guile/src		\
 	 $(GUILE_CFLAGS)
 
@@ -205,22 +195,10 @@ core.c.texi: $(top_srcdir)/guile/src/core.c
 	   -- "$^" "$(CPP)" "$(SNARF_CPPFLAGS) $(CPPFLAGS)"		\
 	   > "$@"
 
-extra.c.texi: $(top_srcdir)/guile/src/extra.c
-	$(MAKE) -C ../guile/src built-sources &&			\
-	$(GUILE_FOR_BUILD) -l "$(srcdir)/extract-guile-c-doc.scm"	\
-	   -e '(apply main (cdr (command-line)))'			\
-	   -- "$^" "$(CPP)" "$(SNARF_CPPFLAGS) $(CPPFLAGS)"		\
-	   > "$@"
-
-
 else !HAVE_GUILE
 
 core.c.texi:
 	echo "(Guile not available, documentation not generated.)" > $@
-
-extra.c.texi:
-	echo "(Guile not available, documentation not generated.)" > $@
-
 
 endif !HAVE_GUILE
 

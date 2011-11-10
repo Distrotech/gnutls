@@ -2,7 +2,7 @@
  * GnuTLS PKCS#11 support
  * Copyright (C) 2010, 2011 Free Software Foundation
  * 
- * Author: Nikos Mavrogiannopoulos
+ * Authors: Nikos Mavrogiannopoulos, Stef Walter
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -447,7 +447,7 @@ gnutls_pkcs11_copy_x509_privkey (const char *token_url,
             goto cleanup;
           }
 
-        ret = _gnutls_mpi_dprint_lz(&key->params.params[7], &x);
+        ret = _gnutls_mpi_dprint_lz(&key->params.params[8], &x);
         if (ret < 0)
           {
             gnutls_assert ();

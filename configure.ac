@@ -21,7 +21,7 @@ dnl Process this file with autoconf to produce a configure script.
 # USA
 
 AC_PREREQ(2.61)
-AC_INIT([GnuTLS], [3.0.3], [bug-gnutls@gnu.org])
+AC_INIT([GnuTLS], [3.0.7], [bug-gnutls@gnu.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -68,12 +68,23 @@ fi
 AM_CONDITIONAL(ENABLE_CXX, test "$use_cxx" != "no")
 AM_CONDITIONAL(WANT_TEST_SUITE, [test -f tests/suite/mini-eagain2.c])
 
+dnl Detect windows build
+case "$host" in
+  *mingw32* | *mingw64*)
+    have_win=yes
+  ;;
+  *)
+  ;;
+esac
+
+AM_CONDITIONAL(WINDOWS, test "$have_win" = yes)
 
 dnl Hardware Acceleration
 AC_ARG_ENABLE(hardware-acceleration,
   AS_HELP_STRING([--disable-hardware-acceleration], [unconditionally disable hardware acceleration]),
     use_accel=$enableval, use_accel=yes)
 hw_accel=none
+
 
 if test "$use_accel" != "no"; then
 case $host_cpu in
@@ -96,6 +107,7 @@ fi
 
 AM_CONDITIONAL(ASM_X86_64, test x"$hw_accel" = x"x86-64")
 AM_CONDITIONAL(ASM_X86_32, test x"$hw_accel" = x"x86")
+AM_CONDITIONAL(ASM_X86, test x"$hw_accel" = x"x86" || test x"$hw_accel" = x"x86-64")
 AM_CONDITIONAL(HAVE_GCC_GNU89_INLINE_OPTION, test "$gnu89_inline" = "yes"])
 AM_CONDITIONAL(HAVE_GCC, test "$GCC" = "yes")
 
@@ -105,7 +117,7 @@ LIBGNUTLS_EXTRA_HOOKS
 
 GTK_DOC_CHECK(1.1)
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.17])
+AM_GNU_GETTEXT_VERSION([0.18])
 
 AC_C_BIGENDIAN
 
@@ -127,14 +139,13 @@ if test "$with_p11_kit" != "no"; then
 	PKG_CHECK_MODULES(P11_KIT, [p11-kit-1 >= 0.4], [with_p11_kit=yes], [with_p11_kit=no])
 	if test "$with_p11_kit" != "no";then
 		AC_DEFINE([ENABLE_PKCS11], 1, [Build PKCS#11 support])
-		CFLAGS="$CFLAGS $P11_KIT_CFLAGS"
-		LIBS="$LIBS $P11_KIT_LIBS"
 		if test "x$GNUTLS_REQUIRES_PRIVATE" = "x"; then
 			GNUTLS_REQUIRES_PRIVATE="Requires.private: p11-kit-1"
 		else
 			GNUTLS_REQUIRES_PRIVATE="${GNUTLS_REQUIRES_PRIVATE}, p11-kit-1"
 		fi
 	else
+	        with_p11_kit=no
 	        AC_MSG_WARN([[
 *** 
 *** p11-kit was not found. PKCS #11 support will be disabled.
@@ -205,7 +216,7 @@ if test x$ac_zlib != xno; then
     if test "x$GNUTLS_REQUIRES_PRIVATE" = x; then
       GNUTLS_REQUIRES_PRIVATE="Requires.private: zlib"
     else
-      GNUTLS_REQUIRES_PRIVATE="$GNUTLS_REQUIRES_PRIVATE , zlib"
+      GNUTLS_REQUIRES_PRIVATE="$GNUTLS_REQUIRES_PRIVATE, zlib"
     fi
   else
     GNUTLS_ZLIB_LIBS_PRIVATE="$LTLIBZ"
@@ -364,6 +375,13 @@ if test "$opt_guile_bindings" = "yes"; then
 	AC_CHECK_FUNCS([scm_gc_malloc_pointerless])
 	CFLAGS="$save_CFLAGS"
 	LIBS="$save_LIBS"
+
+	# The place where guile-gnutls.la will go.
+	AC_MSG_CHECKING([the Guile effective version])
+	guile_effective_version="`$GUILE -c '(display (effective-version))'`"
+	AC_MSG_RESULT([$guile_effective_version])
+	guileextensiondir="$libdir/guile/$guile_effective_version"
+	AC_SUBST([guileextensiondir])
       else
         AC_MSG_RESULT([no])
         AC_MSG_WARN([A sufficiently recent GNU Guile not found.  Guile bindings not built.])
@@ -373,12 +391,6 @@ if test "$opt_guile_bindings" = "yes"; then
 fi
 AM_CONDITIONAL(HAVE_GUILE, test "$opt_guile_bindings" = "yes")
 
-
-LIBGNUTLS_EXTRA_LIBS="-L${libdir} -lgnutls-extra $LIBGNUTLS_LIBS"
-LIBGNUTLS_EXTRA_CFLAGS="-I${includedir}"
-AC_SUBST(LIBGNUTLS_EXTRA_LIBS)
-AC_SUBST(LIBGNUTLS_EXTRA_CFLAGS)
-
 LIBGNUTLS_LIBS="-L${libdir} -lgnutls $LIBS"
 LIBGNUTLS_CFLAGS="-I${includedir}"
 AC_SUBST(LIBGNUTLS_LIBS)
@@ -387,6 +399,10 @@ AC_SUBST(LIBGNUTLS_CFLAGS)
 
 AC_DEFINE([GNUTLS_COMPAT_H], 1, [Make sure we don't use old features in code.])
 AC_DEFINE([GNUTLS_INTERNAL_BUILD], 1, [We allow temporarily usage of deprecated functions - until they are removed.])
+
+AC_DEFINE([fread_file], [_gnutls_fread_file], [static lib rename])
+AC_DEFINE([read_file], [_gnutls_read_file], [static lib rename])
+AC_DEFINE([read_binary_file], [_gnutls_read_binary_file], [static lib rename])
 
 dnl Crywrap dependencies
    AC_MSG_RESULT([***
@@ -433,6 +449,7 @@ AC_CONFIG_FILES([
   doc/examples/Makefile
   doc/manpages/Makefile
   doc/reference/Makefile
+  doc/reference/version.xml
   doc/scripts/Makefile
   gl/Makefile
   gl/tests/Makefile
@@ -458,9 +475,8 @@ AC_CONFIG_FILES([
   tests/rsa-md5-collision/Makefile
   tests/sha2/Makefile
   tests/userid/Makefile
-  libextra/Makefile
-  libextra/gnutls-extra.pc
-  libextra/includes/Makefile
+  extra/Makefile
+  extra/includes/Makefile
   lib/Makefile
   lib/gnutls.pc
   lib/includes/Makefile
@@ -470,11 +486,10 @@ AC_CONFIG_FILES([
   lib/openpgp/Makefile
   po/Makefile.in
   lib/x509/Makefile
-  lib/gcrypt/Makefile
   lib/nettle/Makefile
   tests/suite/Makefile
   lib/accelerated/Makefile
-  lib/accelerated/intel/Makefile
+  lib/accelerated/x86/Makefile
   lib/ext/Makefile
   lib/algorithms/Makefile
   lib/auth/Makefile

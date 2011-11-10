@@ -41,6 +41,12 @@ typedef struct
 
 void _gnutls_buffer_init (gnutls_buffer_st *);
 void _gnutls_buffer_clear (gnutls_buffer_st *);
+inline static void _gnutls_buffer_reset (gnutls_buffer_st * buf)
+{
+  buf->data = buf->allocd;
+  buf->length = 0;
+}
+
 int _gnutls_buffer_resize (gnutls_buffer_st *, size_t new_size);
 
 int _gnutls_buffer_append_str (gnutls_buffer_st *, const char *str);
@@ -86,6 +92,13 @@ int _gnutls_buffer_append_printf (gnutls_buffer_st * dest, const char *fmt,
                                   ...)
   __attribute__ ((format (printf, 2, 3)));
 
+void _gnutls_buffer_hexprint (gnutls_buffer_st * str,
+			      const char *data, size_t len);
+void _gnutls_buffer_hexdump (gnutls_buffer_st * str, const char *data,
+			     size_t len, const char *spc);
+void _gnutls_buffer_asciiprint (gnutls_buffer_st * str,
+				const char *data, size_t len);
+
 char *_gnutls_bin2hex (const void *old, size_t oldlen, char *buffer,
                        size_t buffer_size, const char *separator);
 int _gnutls_hex2bin (const opaque * hex_data, int hex_size, opaque * bin_data,
@@ -93,6 +106,7 @@ int _gnutls_hex2bin (const opaque * hex_data, int hex_size, opaque * bin_data,
 
 int _gnutls_hostname_compare (const char *certname, size_t certnamesize,
                               const char *hostname, int level);
+
 #define MAX_CN 256
 #define MAX_DN 1024
 

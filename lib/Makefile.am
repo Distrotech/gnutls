@@ -30,9 +30,14 @@ localedir = $(datadir)/locale
 AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS)
 AM_CPPFLAGS = \
 	-DLOCALEDIR=\"$(localedir)\"		\
-	-I$(srcdir)/../gl				\
+	-I$(srcdir)/../gl			\
+	-I$(builddir)/../gl			\
+	-I$(builddir)/includes			\
+	-I$(builddir)/x509			\
 	-I$(srcdir)/includes			\
-	-I$(srcdir)/x509
+	-I$(builddir)/includes			\
+	-I$(srcdir)/x509			\
+	$(P11_KIT_CFLAGS)
 
 if ENABLE_OPENPGP
 SUBDIRS += opencdk
@@ -77,8 +82,6 @@ endif
 
 if ENABLE_NETTLE
 SUBDIRS += nettle
-else
-SUBDIRS += gcrypt
 endif
 
 HFILES = abstract_int.h debug.h gnutls_compress.h gnutls_cipher.h	\
@@ -112,7 +115,7 @@ libgnutls_la_LIBADD = ../gl/libgnu.la x509/libgnutls_x509.la \
 	accelerated/libaccelerated.la ext/libgnutls_ext.la \
 	auth/libgnutls_auth.la algorithms/libgnutls_alg.la \
 	$(LTLIBZ)  $(LTLIBINTL) $(LIBSOCKET) $(LTLIBDL) \
-	$(LTLIBPTHREAD)
+	$(LTLIBPTHREAD) $(P11_KIT_LIBS)
 
 if ENABLE_OPENPGP
 libgnutls_la_LIBADD += openpgp/libgnutls_openpgp.la
@@ -134,9 +137,6 @@ endif
 if ENABLE_NETTLE
 libgnutls_la_LDFLAGS += $(LTLIBNETTLE)
 libgnutls_la_LIBADD += nettle/libcrypto.la
-else
-libgnutls_la_LDFLAGS += $(LTLIBGCRYPT)
-libgnutls_la_LIBADD += gcrypt/libcrypto.la
 endif
 
 if HAVE_LD_OUTPUT_DEF
@@ -151,7 +151,9 @@ endif
 if ENABLE_CXX
 libgnutlsxx_la_CPPFLAGS = -I$(top_srcdir)/includes -I$(top_builddir)/includes -I$(srcdir)/includes
 
-AM_CXXFLAGS = -I$(srcdir)/includes
+AM_CXXFLAGS = \
+	-I$(srcdir)/includes	\
+	-I$(builddir)/includes	
 
 lib_LTLIBRARIES += libgnutlsxx.la
 

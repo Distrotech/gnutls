@@ -29,6 +29,7 @@
 
 #include <gnutls_int.h>
 #include <gnutls_errors.h>
+#include <locks.h>
 #include <gnutls_num.h>
 #include <nettle/yarrow.h>
 
@@ -55,11 +56,12 @@ static void *rnd_mutex;
 #ifdef _WIN32
 
 #include <windows.h>
+#include <wincrypt.h>
 
 #define DEVICE_READ_SIZE 16
 #define DEVICE_READ_SIZE_MAX 32
 
-static HCRYPTPROV device_fd = NULL;
+static HCRYPTPROV device_fd = 0;
 
 static int
 do_trivia_source (int init)
@@ -110,7 +112,7 @@ do_device_source (int init)
       read_size = DEVICE_READ_SIZE_MAX; /* initially read more data */
     }
 
-  if ((device_fd != NULL)
+  if ((device_fd != 0)
       && (init || ((now - device_last_read) > DEVICE_READ_INTERVAL)))
     {
 

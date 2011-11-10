@@ -25,7 +25,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <gnutls/gnutls.h>
-#include <gnutls/extra.h>
 #include <srptool-gaa.h>
 #include <gnutls/crypto.h>      /* for random */
 
@@ -93,7 +92,7 @@ generate_create_conf (char *tpasswd_conf)
       return -1;
     }
 
-  for (index = 1; index <= 3; index++)
+  for (index = 1; index <= 5; index++)
     {
 
       if (index == 1)
@@ -106,10 +105,25 @@ generate_create_conf (char *tpasswd_conf)
           n = gnutls_srp_1536_group_prime;
           g = gnutls_srp_1536_group_generator;
         }
-      else
+      else if (index == 3)
         {
           n = gnutls_srp_2048_group_prime;
           g = gnutls_srp_2048_group_generator;
+        }
+      else if (index == 4)
+        {
+          n = gnutls_srp_3072_group_prime;
+          g = gnutls_srp_3072_group_generator;
+        }
+      else if (index == 5)
+        {
+          n = gnutls_srp_4096_group_prime;
+          g = gnutls_srp_4096_group_generator;
+        }
+      else
+        {
+          fprintf(stderr, "Unknown index: %d\n", index);
+          return -1;
         }
 
       printf ("\nGroup %d, of %d bits:\n", index, n.size * 8);

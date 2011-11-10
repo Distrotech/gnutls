@@ -1,3 +1,23 @@
+/*
+ * Copyright (C) 2011 Free Software Foundation, Inc.
+ *
+ * This file is part of GnuTLS.
+ *
+ * GnuTLS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GnuTLS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include <config.h>
 #include <stdio.h>
 #include <string.h>
 #include <signal.h>
@@ -63,7 +83,9 @@ value2human (unsigned long bytes, double time, double *data, double *speed,
 void start_benchmark(struct benchmark_st * st)
 {
   memset(st, 0, sizeof(*st));
+#ifndef _WIN32
   st->old_handler = signal (SIGALRM, alarm_handler);
+#endif
   gettime (&st->start);
   benchmark_must_finish = 0;
 
@@ -80,13 +102,12 @@ void start_benchmark(struct benchmark_st * st)
       fprintf (stderr, "error: CreateThread %u\n", GetLastError ());
       exit(1);
     }
-  alarm_timeout.QuadPart = (5) * 10000000;
-  if (SetWaitableTimer (st->wtimer, &alarm_timeout, 0, NULL, NULL, FALSE) == 0)
+  st->alarm_timeout.QuadPart = (5) * 10000000;
+  if (SetWaitableTimer (st->wtimer, &st->alarm_timeout, 0, NULL, NULL, FALSE) == 0)
     {
       fprintf (stderr, "error: SetWaitableTimer %u\n", GetLastError ());
       exit(1);
     }
-  }
 #else
   alarm (5);
 #endif
@@ -97,6 +118,7 @@ void start_benchmark(struct benchmark_st * st)
 double stop_benchmark(struct benchmark_st * st, const char* metric)
 {
   double secs;
+  unsigned long lsecs;
   struct timespec stop;
   double dspeed, ddata;
   char imetric[16];
@@ -112,8 +134,9 @@ double stop_benchmark(struct benchmark_st * st, const char* metric)
 
   gettime (&stop);
 
-  secs = (stop.tv_sec * 1000 + stop.tv_nsec / (1000 * 1000) -
+  lsecs = (stop.tv_sec * 1000 + stop.tv_nsec / (1000 * 1000) -
           (st->start.tv_sec * 1000 + st->start.tv_nsec / (1000 * 1000)));
+  secs = lsecs;
   secs /= 1000;
 
   if (metric == NULL)

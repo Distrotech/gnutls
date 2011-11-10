@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, 2010 Free Software Foundation, Inc.
+ * Copyright (C) 2008, 2010, 2011 Free Software Foundation, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -35,7 +35,7 @@ typedef void (*update_func) (void *, unsigned, const uint8_t *);
 typedef void (*digest_func) (void *, unsigned, uint8_t *);
 typedef void (*set_key_func) (void *, unsigned, const uint8_t *);
 
-static int wrap_nettle_hash_init (gnutls_mac_algorithm_t algo, void **_ctx);
+static int wrap_nettle_hash_init (gnutls_digest_algorithm_t algo, void **_ctx);
 
 struct nettle_hash_ctx
 {
@@ -50,7 +50,7 @@ struct nettle_hash_ctx
     struct sha1_ctx sha1;
   } ctx;
   void *ctx_ptr;
-  gnutls_mac_algorithm_t algo;
+  gnutls_digest_algorithm_t algo;
   size_t length;
   update_func update;
   digest_func digest;
@@ -67,36 +67,29 @@ struct nettle_hmac_ctx
     struct hmac_sha512_ctx sha512;
     struct hmac_sha1_ctx sha1;
   } ctx;
+  
+  /* this is the context just after
+   * the set_key. Used in reset().
+   */
+  union
+  {
+    struct hmac_md5_ctx md5;
+    struct hmac_sha224_ctx sha224;
+    struct hmac_sha256_ctx sha256;
+    struct hmac_sha384_ctx sha384;
+    struct hmac_sha512_ctx sha512;
+    struct hmac_sha1_ctx sha1;
+  } init_ctx;
   void *ctx_ptr;
   gnutls_mac_algorithm_t algo;
   size_t length;
   update_func update;
   digest_func digest;
   set_key_func setkey;
-
-/* Note: Nettle doesn't have a reset function for
- * hmac so we need to manually reset a context, by
- * calling set_key(). For that reason we need to
- * store the hmac key here.
- */
-  opaque *key;
-  size_t key_size;
 };
 
-static int
-wrap_nettle_hmac_init (gnutls_mac_algorithm_t algo, void **_ctx)
+static int _hmac_ctx_init(gnutls_mac_algorithm_t algo, struct nettle_hmac_ctx *ctx)
 {
-  struct nettle_hmac_ctx *ctx;
-
-  ctx = gnutls_calloc (1, sizeof (struct nettle_hmac_ctx));
-  if (ctx == NULL)
-    {
-      gnutls_assert ();
-      return GNUTLS_E_MEMORY_ERROR;
-    }
-
-  ctx->algo = algo;
-
   switch (algo)
     {
     case GNUTLS_MAC_MD5:
@@ -145,6 +138,49 @@ wrap_nettle_hmac_init (gnutls_mac_algorithm_t algo, void **_ctx)
       gnutls_assert ();
       return GNUTLS_E_INVALID_REQUEST;
     }
+  
+  return 0;
+}
+
+static int wrap_nettle_hmac_fast(gnutls_mac_algorithm_t algo, 
+  const void *key, size_t key_size, const void* text, size_t text_size, 
+  void* digest)
+{
+  struct nettle_hmac_ctx ctx;
+  int ret;
+  
+  ret = _hmac_ctx_init(algo, &ctx);
+  if (ret < 0)
+    return gnutls_assert_val(ret);
+
+  ctx.setkey (&ctx, key_size, key);
+  ctx.update (&ctx, text_size, text);
+  ctx.digest (&ctx, ctx.length, digest);
+  
+  return 0;
+}
+
+static int
+wrap_nettle_hmac_init (gnutls_mac_algorithm_t algo, void **_ctx)
+{
+  struct nettle_hmac_ctx *ctx;
+  int ret;
+
+  ctx = gnutls_calloc (1, sizeof (struct nettle_hmac_ctx));
+  if (ctx == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_MEMORY_ERROR;
+    }
+
+  ctx->algo = algo;
+
+  ret = _hmac_ctx_init(algo, ctx);
+  if (ret < 0)
+    {
+      gnutls_free(ctx);
+      return gnutls_assert_val(ret);
+    }
 
   *_ctx = ctx;
 
@@ -156,17 +192,9 @@ wrap_nettle_hmac_setkey (void *_ctx, const void *key, size_t keylen)
 {
   struct nettle_hmac_ctx *ctx = _ctx;
 
-  if (ctx->key)
-    gnutls_free(ctx->key);
-
-  ctx->key = gnutls_malloc(keylen);
-  if (ctx->key == NULL)
-    return GNUTLS_E_MEMORY_ERROR;
-
-  memcpy(ctx->key, key, keylen);
-  ctx->key_size = keylen;
-
   ctx->setkey (ctx->ctx_ptr, keylen, key);
+  
+  memcpy(&ctx->init_ctx, &ctx->ctx, sizeof(ctx->ctx));
 
   return GNUTLS_E_SUCCESS;
 }
@@ -176,7 +204,7 @@ wrap_nettle_hmac_reset (void *_ctx)
 {
   struct nettle_hmac_ctx *ctx = _ctx;
 
-  ctx->setkey (ctx->ctx_ptr, ctx->key_size, ctx->key);
+  memcpy(&ctx->ctx, &ctx->init_ctx, sizeof(ctx->ctx));
 }
 
 static int
@@ -189,12 +217,26 @@ wrap_nettle_hmac_update (void *_ctx, const void *text, size_t textsize)
   return GNUTLS_E_SUCCESS;
 }
 
+static int
+wrap_nettle_hmac_output (void *src_ctx, void *digest, size_t digestsize)
+{
+  struct nettle_hmac_ctx *ctx;
+  ctx = src_ctx;
+
+  if (digestsize < ctx->length)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_SHORT_MEMORY_BUFFER;
+    }
+
+  ctx->digest (ctx->ctx_ptr, digestsize, digest);
+
+  return 0;
+}
+
 static void
 wrap_nettle_hmac_deinit (void *hd)
 {
-  struct nettle_hmac_ctx *ctx = hd;
-
-  gnutls_free (ctx->key);
   gnutls_free (hd);
 }
 
@@ -237,7 +279,7 @@ wrap_nettle_hash_deinit (void *hd)
   gnutls_free (hd);
 }
 
-static int _ctx_init(struct nettle_hash_ctx *ctx, gnutls_mac_algorithm_t algo)
+static int _ctx_init(gnutls_digest_algorithm_t algo, struct nettle_hash_ctx *ctx)
 {
   switch (algo)
     {
@@ -298,8 +340,25 @@ static int _ctx_init(struct nettle_hash_ctx *ctx, gnutls_mac_algorithm_t algo)
     return 0;
 }
 
+static int wrap_nettle_hash_fast(gnutls_digest_algorithm_t algo, 
+  const void* text, size_t text_size, 
+  void* digest)
+{
+  struct nettle_hash_ctx ctx;
+  int ret;
+  
+  ret = _ctx_init(algo, &ctx);
+  if (ret < 0)
+    return gnutls_assert_val(ret);
+
+  ctx.update (&ctx, text_size, text);
+  ctx.digest (&ctx, ctx.length, digest);
+  
+  return 0;
+}
+
 static int
-wrap_nettle_hash_init (gnutls_mac_algorithm_t algo, void **_ctx)
+wrap_nettle_hash_init (gnutls_digest_algorithm_t algo, void **_ctx)
 {
   struct nettle_hash_ctx *ctx;
   int ret;
@@ -313,9 +372,10 @@ wrap_nettle_hash_init (gnutls_mac_algorithm_t algo, void **_ctx)
 
   ctx->algo = algo;
 
-  if ((ret=_ctx_init( ctx, algo)) < 0)
+  if ((ret=_ctx_init( algo, ctx)) < 0)
     {
       gnutls_assert ();
+      gnutls_free(ctx);
       return ret;
     }
 
@@ -347,25 +407,9 @@ wrap_nettle_hash_reset (void *src_ctx)
   struct nettle_hash_ctx *ctx;
   ctx = src_ctx;
 
-  _ctx_init(ctx->ctx_ptr, ctx->algo);
+  _ctx_init(ctx->algo, ctx->ctx_ptr);
 }
 
-static int
-wrap_nettle_hmac_output (void *src_ctx, void *digest, size_t digestsize)
-{
-  struct nettle_hmac_ctx *ctx;
-  ctx = src_ctx;
-
-  if (digestsize < ctx->length)
-    {
-      gnutls_assert ();
-      return GNUTLS_E_SHORT_MEMORY_BUFFER;
-    }
-
-  ctx->digest (ctx->ctx_ptr, digestsize, digest);
-
-  return 0;
-}
 
 gnutls_crypto_mac_st _gnutls_mac_ops = {
   .init = wrap_nettle_hmac_init,
@@ -374,6 +418,7 @@ gnutls_crypto_mac_st _gnutls_mac_ops = {
   .reset = wrap_nettle_hmac_reset,
   .output = wrap_nettle_hmac_output,
   .deinit = wrap_nettle_hmac_deinit,
+  .fast = wrap_nettle_hmac_fast,
 };
 
 gnutls_crypto_digest_st _gnutls_digest_ops = {
@@ -383,4 +428,5 @@ gnutls_crypto_digest_st _gnutls_digest_ops = {
   .copy = wrap_nettle_hash_copy,
   .output = wrap_nettle_hash_output,
   .deinit = wrap_nettle_hash_deinit,
+  .fast = wrap_nettle_hash_fast,
 };

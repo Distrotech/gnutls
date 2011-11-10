@@ -43,7 +43,11 @@ typedef int ssize_t;
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include <sys/socket.h>
+#if HAVE_SYS_SOCKET_H
+# include <sys/socket.h>
+#elif HAVE_WS2TCPIP_H
+# include <ws2tcpip.h>
+#endif
 #include <time.h>
 #include <u64.h> /* gnulib for uint64_t */
 
@@ -137,6 +141,9 @@ typedef struct
 /* expire time for resuming sessions */
 #define DEFAULT_EXPIRE_TIME 3600
 
+/* printing period of messages */
+#define PRINT_MESSAGE_PERIOD 30
+
 typedef enum transport_t
 {
   GNUTLS_STREAM,
@@ -188,8 +195,6 @@ typedef enum transport_t
 #define DECR_LENGTH_RET(len, x, RET) do { len-=x; if (len<0) {gnutls_assert(); return RET;} } while (0)
 #define DECR_LENGTH_COM(len, x, COM) do { len-=x; if (len<0) {gnutls_assert(); COM;} } while (0)
 
-#define HASH2MAC(x) ((gnutls_mac_algorithm_t)x)
-
 #define GNUTLS_POINTER_TO_INT(_) ((int) GNUTLS_POINTER_TO_INT_CAST (_))
 #define GNUTLS_INT_TO_POINTER(_) ((void*) GNUTLS_POINTER_TO_INT_CAST (_))
 
@@ -233,8 +238,8 @@ typedef enum extensions_t
 typedef enum
 { CIPHER_STREAM, CIPHER_BLOCK } cipher_type_t;
 
-#define RESUME_TRUE 0
-#define RESUME_FALSE -1
+#define RESUME_TRUE 1
+#define RESUME_FALSE 0
 
 /* Record Protocol */
 typedef enum content_type_t
@@ -495,7 +500,7 @@ struct record_state_st
   gnutls_datum_t IV;
   gnutls_datum_t key;
   auth_cipher_hd_st cipher_state;
-  comp_hd_t compression_state;
+  comp_hd_st compression_state;
   uint64 sequence_number;
 };
 
@@ -623,6 +628,7 @@ typedef struct
   /* last retransmission triggered by record layer */
   time_t last_retransmit;
   unsigned int packets_dropped;
+  time_t last_print;
 } dtls_st;
 
 
@@ -641,7 +647,7 @@ typedef struct
                                                  * the last received message */
   gnutls_buffer_st handshake_hash_buffer;       /* used to keep the last received handshake 
                                                  * message */
-  int resumable:1;              /* TRUE or FALSE - if we can resume that session */
+  unsigned int resumable:1;              /* TRUE or FALSE - if we can resume that session */
   handshake_state_t handshake_state;    /* holds
                                          * a number which indicates where
                                          * the handshake procedure has been
@@ -667,7 +673,7 @@ typedef struct
   struct gnutls_priority_st priorities;
 
   /* resumed session */
-  int resumed:1;                /* RESUME_TRUE or FALSE - if we are resuming a session */
+  unsigned int resumed:1;                /* RESUME_TRUE or FALSE - if we are resuming a session */
   security_parameters_st resumed_security_parameters;
 
   /* These buffers are used in the handshake

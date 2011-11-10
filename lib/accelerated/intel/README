@@ -1,3 +1,0 @@
-The AES-NI implementation by Andy Polyakov is not part of the GnuTLS library, but is 
-used with GnuTLS. Its license is included in license.txt.
-

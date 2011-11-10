@@ -33,13 +33,13 @@
 #include <sys/types.h>
 #include <string.h>
 #include <gnutls/gnutls.h>
-#include <gnutls/extra.h>
 #include <gnutls/openpgp.h>
 #include <sys/time.h>
 #include <sys/select.h>
 #include <fcntl.h>
 #include <list.h>
 #include <netdb.h>
+#include <unistd.h>
 
 /* Gnulib portability files. */
 #include "progname.h"
@@ -932,12 +932,6 @@ main (int argc, char **argv)
   if ((ret = gnutls_global_init ()) < 0)
     {
       fprintf (stderr, "global_init: %s\n", gnutls_strerror (ret));
-      exit (1);
-    }
-
-  if ((ret = gnutls_global_init_extra ()) < 0)
-    {
-      fprintf (stderr, "global_init_extra: %s\n", gnutls_strerror (ret));
       exit (1);
     }
 

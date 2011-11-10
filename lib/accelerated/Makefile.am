@@ -22,7 +22,9 @@ AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS)
 SUBDIRS = 
 AM_CPPFLAGS = \
 	-I$(srcdir)/../../gl		\
+	-I$(builddir)/../../gl		\
 	-I$(srcdir)/../includes		\
+	-I$(builddir)/../../gl		\
 	-I$(builddir)/../includes	\
 	-I$(srcdir)/..
 
@@ -32,18 +34,20 @@ endif
 
 noinst_LTLIBRARIES = libaccelerated.la
 
-EXTRA_DIST = x86.h accelerated.h cryptodev.h
+EXTRA_DIST = accelerated.h cryptodev.h
 libaccelerated_la_SOURCES = accelerated.c cryptodev.c
 libaccelerated_la_LIBADD =
 
-if ASM_X86_64
-SUBDIRS += intel
-AM_CFLAGS += -DASM_X86_64
-libaccelerated_la_LIBADD += intel/libintel.la
+if ASM_X86
+SUBDIRS += x86
+AM_CFLAGS += -DASM_X86
+libaccelerated_la_LIBADD += x86/libx86.la
 endif
 
 if ASM_X86_32
-SUBDIRS += intel
 AM_CFLAGS += -DASM_X86_32
-libaccelerated_la_LIBADD += intel/libintel.la
+endif
+
+if ASM_X86_64
+AM_CFLAGS += -DASM_X86_64
 endif

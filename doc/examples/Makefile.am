@@ -23,8 +23,9 @@
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
 AM_CPPFLAGS = \
 	-I$(top_srcdir)/lib/includes -I$(top_builddir)/lib/includes	\
-	-I$(top_srcdir)/libextra/includes \
-	-I$(top_srcdir)/gl
+	-I$(top_srcdir)/extra/includes \
+	-I$(top_srcdir)/gl \
+	-I$(top_builddir)/gl
 
 # Gnulib warns and suggests use of fseeko instead of fseek, which is
 # used in ex-cert-select.c, but certificate files will not be > 4 GB,
@@ -34,14 +35,13 @@ AM_CPPFLAGS += -D_GL_NO_LARGE_FILES
 AM_LDFLAGS = -no-install
 LDADD = libexamples.la				\
 	../../lib/libgnutls.la			\
-	../../libextra/libgnutls-extra.la	\
 	../../gl/libgnu.la			\
 	$(LIBSOCKET) $(INET_NTOP_LIB) $(INET_PTON_LIB)
 
 CXX_LDADD = $(LDADD) \
 	../../lib/libgnutlsxx.la
 
-noinst_PROGRAMS = ex-client2 ex-client-resume ex-client-udp
+noinst_PROGRAMS = ex-client-resume ex-client-udp
 noinst_PROGRAMS += ex-cert-select ex-rfc2818
 
 if ENABLE_PKI
@@ -81,4 +81,4 @@ noinst_LTLIBRARIES = libexamples.la
 
 libexamples_la_SOURCES = examples.h ex-alert.c ex-pkcs12.c		\
 	ex-session-info.c ex-x509-info.c ex-verify.c	\
-	tcp.c udp.c ex-pkcs11-list.c
+	tcp.c udp.c ex-pkcs11-list.c verify.c

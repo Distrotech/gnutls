@@ -26,9 +26,12 @@
 #include <sys/types.h>
 #include <string.h>
 #include <gnutls/gnutls.h>
-#include <gnutls/extra.h>
 #include <sys/time.h>
-#include <sys/socket.h>
+#if HAVE_SYS_SOCKET_H
+# include <sys/socket.h>
+#elif HAVE_WS2TCPIP_H
+# include <ws2tcpip.h>
+#endif
 #include <tests.h>
 #include <common.h>
 #include <tls_test-gaa.h>
@@ -106,6 +109,8 @@ static const TLS_TEST tls_tests[] = {
    test_rsa_pms_version_check, "yes", "no", "dunno"},
   {"whether the server can accept Hello Extensions",
    test_hello_extension, "yes", "no", "dunno"},
+  {"whether the server can accept small records (512 bytes)",
+   test_small_records, "yes", "no", "dunno"},
   {"whether the server can accept cipher suites not in SSL 3.0 spec",
    test_unknown_ciphersuites, "yes", "no", "dunno"},
   {"whether the server can accept a bogus TLS record version in the client hello", test_version_oob, "yes", "no", "dunno"},
@@ -130,25 +135,30 @@ static const TLS_TEST tls_tests[] = {
    "dunno"},
   {"ephemeral Diffie-Hellman group info", test_dhe_group, "", "N/A",
    "N/A"},
-  {"for AES cipher support (TLS extension)", test_aes, "yes", "no",
+  {"for ephemeral EC Diffie-Hellman support", test_ecdhe, "yes", "no",
    "dunno"},
-#ifdef	ENABLE_CAMELLIA
-  {"for CAMELLIA cipher support (TLS extension)", test_camellia, "yes", "no",
+  {"ephemeral EC Diffie-Hellman group info", test_ecdhe_curve, "", "N/A",
+   "N/A"},
+  {"for AES-GCM cipher support", test_aes_gcm, "yes", "no",
    "dunno"},
-#endif
-  {"for 3DES cipher support", test_3des, "yes", "no", "dunno"},
+  {"for AES-CBC cipher support", test_aes, "yes", "no",
+   "dunno"},
+  {"for CAMELLIA cipher support", test_camellia, "yes", "no",
+   "dunno"},
+  {"for 3DES-CBC cipher support", test_3des, "yes", "no", "dunno"},
   {"for ARCFOUR 128 cipher support", test_arcfour, "yes", "no", "dunno"},
   {"for ARCFOUR 40 cipher support", test_arcfour_40, "yes", "no",
    "dunno"},
   {"for MD5 MAC support", test_md5, "yes", "no", "dunno"},
   {"for SHA1 MAC support", test_sha, "yes", "no", "dunno"},
+  {"for SHA256 MAC support", test_sha256, "yes", "no", "dunno"},
 #ifdef HAVE_LIBZ
-  {"for ZLIB compression support (TLS extension)", test_zlib, "yes",
+  {"for ZLIB compression support", test_zlib, "yes",
    "no", "dunno"},
 #endif
-  {"for max record size (TLS extension)", test_max_record_size, "yes",
+  {"for max record size", test_max_record_size, "yes",
    "no", "dunno"},
-  {"for OpenPGP authentication support (TLS extension)", test_openpgp1,
+  {"for OpenPGP authentication support", test_openpgp1,
    "yes", "no", "dunno"},
   {NULL, NULL, NULL, NULL, NULL}
 };

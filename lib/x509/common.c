@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 Free
- * Software Foundation, Inc.
+ * Copyright (C) 2003-2011 Free Software Foundation, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -390,6 +389,7 @@ _gnutls_x509_data2hex (const opaque * data, size_t data_size,
   if (out)
     {
       out[0] = '#';
+      out[1] = 0;
       _gnutls_str_cat (out, *sizeof_out, res);
     }
 
@@ -1169,6 +1169,7 @@ _asnstr_append_name (char *name, size_t name_size, const char *part1,
 }
 
 
+
 /* Encodes and copies the private key parameters into a
  * subjectPublicKeyInfo structure.
  *
@@ -1243,6 +1244,43 @@ _gnutls_x509_encode_and_copy_PKI_params (ASN1_TYPE dst,
     }
 
   return 0;
+}
+
+/* Encodes and public key parameters into a
+ * subjectPublicKeyInfo structure and stores it in der.
+ */
+int
+_gnutls_x509_encode_PKI_params (gnutls_datum_t *der,
+                                gnutls_pk_algorithm_t
+                                pk_algorithm, gnutls_pk_params_st * params)
+{
+  int ret;
+  ASN1_TYPE tmp;
+
+  ret = asn1_create_element (_gnutls_get_pkix (),
+                                "PKIX1.Certificate", &tmp);
+  if (ret != ASN1_SUCCESS)
+    {
+      gnutls_assert ();
+      return _gnutls_asn2err (ret);
+    }
+    
+  ret = _gnutls_x509_encode_and_copy_PKI_params (tmp,
+                                         "tbsCertificate.subjectPublicKeyInfo",
+                                         pk_algorithm, params);
+  if (ret != ASN1_SUCCESS)
+    {
+      gnutls_assert ();
+      ret = _gnutls_asn2err (ret);
+      goto cleanup;
+    }
+
+  ret = _gnutls_x509_der_encode(tmp, "tbsCertificate.subjectPublicKeyInfo", der, 0);
+
+cleanup:
+  asn1_delete_structure (&tmp);
+
+  return ret;
 }
 
 /* Reads and returns the PK algorithm of the given certificate-like

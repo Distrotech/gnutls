@@ -2,15 +2,117 @@ GnuTLS NEWS -- History of user-visible changes.                -*- outline -*-
 Copyright (C) 2000-2011 Free Software Foundation, Inc.
 See the end for copying conditions.
 
-* Version 3.0.4 (unreleased)
+* Version 3.0.8 (unreleased)
+
+** doc: man pages for API functions were removed.
+The reason was that the code that auto-generated the man pages missed
+many APIs and we couldn't fix it (volunteers welcome).  See the info
+manual or the GTK-DOC manual instead.
+
+* Version 3.0.7 (released 2011-11-08)
+
+** libgnutls: Corrected fix in gnutls_session_get_data()
+to report the actual session size when the provided buffer
+is not enough.
+
+** libgnutls: Fixed ciphersuite GNUTLS_ECDHE_RSA_AES_128_CBC_SHA256,
+which was using a wrong MAC algorithm. Reported by Fabrice Gautier.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.0.6 (released 2011-11-07)
+
+** gnutls-guile: Compilation fixes.
+
+** libgnutls: Fixed possible buffer overflow in 
+gnutls_session_get_data(). Reported and fix by Alban Crequy.
+
+** libgnutls: Bug fixes in the ciphersuites with NULL cipher.
+Reported by Fabrice Gautier.
+
+** libgnutls: Bug fixes in ECC code for 64-bit MIPS systems. 
+Thanks to Joseph Graham for providing access to such a system.
+
+** libgnutls: Correctly report ECC private key parsing errors.
+Reported by Fabrice Gautier.
+
+** libgnutls: In ECDHE verify that the received point lies on
+the selected curve. The ECDHE ciphersuites now take precendence
+to plain DHE.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.0.5 (released 2011-10-27)
+
+** libgnutls-extra: is no more
+
+** libgnutls: Corrections in order to compile with mingw32.
+
+** libgnutls: Corrections in VIA padlock code for VIA C5 processor
+and new detection of PHE with support for partial hashing.
+
+** libgnutls: Corrected bug in gnutls_x509_data2hex. Report and fix 
+by Vincent Untz.
+
+** minitasn1: Upgraded to libtasn1 version 2.10.
+
+** API and ABI modifications:
+No changes since last version.
+
+
+* Version 3.0.4 (released 2011-10-15)
+
+** libgnutls-extra: gnutls_register_md5_handler() was
+removed.
+
+** gnutls-cli-debug: Added more tests including AES-GCM,
+SHA256 and elliptic curves.
+
+** gnutls-cli: Added --benchmark-soft-ciphers to benchmark
+the software version of the ciphers instead of hw accelerated 
+(where available)
+
+** libgnutls: Public key ID calculation is consistent among
+all structures. It uses a SHA-1 hash of the subjectPublicKeyInfo.
+
+** libgnutls: gnutls_privkey_t allows setting external callback
+to perform signing or decryption. Can be set using
+gnutls_privkey_import_ext()
+
+** libgnutls: A certificate credentials structure can be
+used with a gnutls_privkey_t and a gnutls_pcert_st
+structure using gnutls_certificate_set_key().
+
+** libgnutls: Fixes to enable external signing callback to
+operate with TLS 1.2. 
+
+** libgnutls: Fixed crash when printing ECDSA certificate key 
+ID. Reported by Erik Jensen.
+
+** libgnutls: Corrected VIA padlock code for C3. In C3 benchmarks 
+show a 50x increase in AES speed and a 14x increase in VIA nano. Added 
+support for hashes and HMACs.
+
+** libgnutls: Compilation fixed when p11-kit is not detected.
+
+** libgnutls: Fixed the deflate compression code.
 
 ** libgnutls: Added gnutls_x509_crt_get_authority_info_access.
 Used to get the PKIX Authority Information Access (AIA) field.
 
 ** libgnutls: gnutls_x509_crt_print supports printing AIA fields.
 
+** libgnutls: Added ability to gnutls_privkey_t to operate with
+signing callback function.
+
 ** API and ABI modifications:
 gnutls_x509_crt_get_authority_info_access (x509.h): Added function.
+gnutls_privkey_import_ext: Added function.
+gnutls_certificate_set_key: Added function.
 gnutls_info_access_what_t (x509.h): Added enum.
 GNUTLS_OID_AIA (x509.h): Added symbol.
 GNUTLS_OID_AD_OCSP (x509.h): Added symbol.

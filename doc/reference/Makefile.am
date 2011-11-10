@@ -18,11 +18,11 @@ DOC_MODULE=$(PACKAGE)
 # The top-level SGML file. You can change this if you want to.
 DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.sgml
 
-# Directories containing the source code, relative to $(srcdir).
+# Directories containing the source code.
 # gtk-doc will search all .c and .h files beneath these paths
 # for inline comments documenting functions and macros.
-# e.g. DOC_SOURCE_DIR=../../../gtk ../../../gdk
-DOC_SOURCE_DIR=../../lib ../../libextra
+# e.g. DOC_SOURCE_DIR=$(top_srcdir)/gtk $(top_srcdir)/gdk
+DOC_SOURCE_DIR=../../lib
 
 # Extra options to pass to gtkdoc-scangobj. Not normally needed.
 SCANGOBJ_OPTIONS=
@@ -33,8 +33,8 @@ SCAN_OPTIONS=--ignore-decorators=ASN1_API \
 	--deprecated-guards=ASN1_DISABLE_DEPRECATED
 
 # Extra options to supply to gtkdoc-mkdb.
-# e.g. MKDB_OPTIONS=--sgml-mode --output-format=xml
-MKDB_OPTIONS=--sgml-mode --output-format=xml
+# e.g. MKDB_OPTIONS=--xml-mode --output-format=xml
+MKDB_OPTIONS=--xml-mode --output-format=xml
 
 # Extra options to supply to gtkdoc-mktmpl
 # e.g. MKTMPL_OPTIONS=--only-section-tmpl
@@ -51,32 +51,28 @@ FIXXREF_OPTIONS=
 # e.g. HFILE_GLOB=$(top_srcdir)/gtk/*.h
 # e.g. CFILE_GLOB=$(top_srcdir)/gtk/*.c
 HFILE_GLOB=$(top_srcdir)/lib/includes/gnutls/*.h \
-	$(top_builddir)/lib/includes/gnutls/*.h \
-	$(top_srcdir)/libextra/includes/gnutls/*.h
+	$(top_builddir)/lib/includes/gnutls/*.h
 CFILE_GLOB=$(top_srcdir)/lib/*.c \
 	$(top_srcdir)/lib/x509/*.c \
 	$(top_srcdir)/lib/openpgp/*.c \
-	$(top_srcdir)/libextra/*.c \
-	$(top_srcdir)/lib/minitasn1/*.c \
-	$(top_srcdir)/libextra/*.c
+	$(top_srcdir)/lib/minitasn1/*.c
 
 # Extra header to include when scanning, which are not under DOC_SOURCE_DIR
 # e.g. EXTRA_HFILES=$(top_srcdir}/contrib/extra.h
 EXTRA_HFILES=
 
-# Header files to ignore when scanning. Use base file name, no paths
-# e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h
+# Header files or dirs to ignore when scanning. Use base file/dir names
+# e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h private_code
 IGNORE_HFILES=
 
 # find lib -name \*.h -exec basename {} \; | grep -v -e ^abstract.h$ -e ^crypto.h$ -e ^dtls.h$ -e ^gnutls.h$ -e ^openpgp.h$ -e ^pkcs11.h$ -e ^pkcs12.h$ -e ^x509.h$ | sort | uniq | sed -e 's/^/\t/' -e 's/$/ \\/'
 IGNORE_HFILES += \
 	abstract_int.h \
 	accelerated.h \
+	aes-padlock.h \
 	aes-x86.h \
 	algorithms.h \
 	anon.h \
-	arg-nonnull.h \
-	c++defs.h \
 	cert.h \
 	cert_type.h \
 	common.h \
@@ -123,6 +119,7 @@ IGNORE_HFILES += \
 	gnutls_sig.h \
 	gnutls_srp.h \
 	gnutls_state.h \
+	gnutls_str_array.h \
 	gnutls_str.h \
 	gnutls_supplemental.h \
 	gnutls_v2_compat.h \
@@ -148,6 +145,7 @@ IGNORE_HFILES += \
 	safe_renegotiation.h \
 	server_name.h \
 	session_ticket.h \
+	sha-padlock.h \
 	signature.h \
 	srp.h \
 	srp_passwd.h \
@@ -155,14 +153,9 @@ IGNORE_HFILES += \
 	structure.h \
 	system.h \
 	types.h \
-	warn-on-use.h \
 	x509_b64.h \
 	x509_int.h \
 	x86.h
-
-# find libextra -name \*.h -exec basename {} \; | grep -v -e extra.h -e openssl.h | sort | uniq | sed -e 's/^/\t/' -e 's/$/ \\/'
-IGNORE_HFILES += \
-	openssl_compat.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
@@ -197,8 +190,13 @@ EXTRA_DIST +=
 # for --rebuild-sections in $(SCAN_OPTIONS) e.g. $(DOC_MODULE)-sections.txt
 #DISTCLEANFILES +=
 
-# Comment this out if you want your docs-status tested during 'make check'
+# Comment this out if you want 'make check' to test you doc status
+# and run some sanity checks
 if ENABLE_GTK_DOC
-#TESTS_ENVIRONMENT = cd $(srcsrc) &&
+TESTS_ENVIRONMENT = cd $(srcdir) && \
+  DOC_MODULE=$(DOC_MODULE) DOC_MAIN_SGML_FILE=$(DOC_MAIN_SGML_FILE) \
+  SRCDIR=$(abs_srcdir) BUILDDIR=$(abs_builddir)
 #TESTS = $(GTKDOC_CHECK)
 endif
+
+-include $(top_srcdir)/git.mk

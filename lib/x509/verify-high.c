@@ -32,10 +32,9 @@
 #include <hash.h>
 #include "x509_int.h"
 #include <common.h>
+#include "verify-high.h"
 
 #define DEFAULT_SIZE 503
-
-#include "verify-high.h"
 
 /**
  * gnutls_x509_trust_list_init:

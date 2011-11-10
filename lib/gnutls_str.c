@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2005, 2007, 2008, 2009, 2010 Free Software
- * Foundation, Inc.
+ * Copyright (C) 2002-2011 Free Software Foundation, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -729,4 +728,57 @@ _gnutls_buffer_pop_data_prefix (gnutls_buffer_st * buf, void *data,
     _gnutls_buffer_pop_data (buf, data, data_size);
 
   return 0;
+}
+
+void
+_gnutls_buffer_hexprint (gnutls_buffer_st * str,
+			 const char *data, size_t len)
+{
+  size_t j;
+
+  if (len == 0)
+    _gnutls_buffer_append_str (str, "00");
+  else
+    {
+      for (j = 0; j < len; j++)
+        _gnutls_buffer_append_printf (str, "%.2x", (unsigned char) data[j]);
+    }
+}
+
+void
+_gnutls_buffer_hexdump (gnutls_buffer_st * str, const char *data, size_t len,
+			const char *spc)
+{
+  size_t j;
+
+  if (spc)
+    _gnutls_buffer_append_str (str, spc);
+  for (j = 0; j < len; j++)
+    {
+      if (((j + 1) % 16) == 0)
+        {
+          _gnutls_buffer_append_printf (str, "%.2x\n", (unsigned char) data[j]);
+          if (spc && j != (len - 1))
+            _gnutls_buffer_append_str (str, spc);
+        }
+      else if (j == (len - 1))
+        _gnutls_buffer_append_printf (str, "%.2x", (unsigned char) data[j]);
+      else
+        _gnutls_buffer_append_printf (str, "%.2x:", (unsigned char) data[j]);
+    }
+  if ((j % 16) != 0)
+    _gnutls_buffer_append_str (str, "\n");
+}
+
+void
+_gnutls_buffer_asciiprint (gnutls_buffer_st * str,
+			   const char *data, size_t len)
+{
+  size_t j;
+
+  for (j = 0; j < len; j++)
+    if (c_isprint (data[j]))
+      _gnutls_buffer_append_printf (str, "%c", (unsigned char) data[j]);
+    else
+      _gnutls_buffer_append_printf (str, ".");
 }

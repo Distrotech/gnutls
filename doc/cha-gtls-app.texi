@@ -37,10 +37,6 @@ defined in the header file @file{gnutls/gnutls.h}.  This must be
 included in all programs that make use of the @acronym{GnuTLS}
 library.
 
-The extra functionality of the @acronym{GnuTLS-extra} library is
-available by including the header file @file{gnutls/extra.h} in your
-programs.
-
 @node Initialization
 @subsection Initialization
 
@@ -49,9 +45,6 @@ initialized by calling @funcref{gnutls_global_init}.  The resources
 allocated by the initialization process can be released if the
 application no longer has a need to call GnuTLS functions, this is
 done by calling @funcref{gnutls_global_deinit}.
-
-The extra functionality of the @acronym{GnuTLS-extra} library is
-available after calling @funcref{gnutls_global_init_extra}.
 
 In order to take advantage of the internationalization features in
 GnuTLS, such as translated error messages, the application must set
@@ -224,9 +217,11 @@ messages may arrive out of order.
 
 @showfuncdesc{gnutls_record_recv_seq}
 
-A helper function is available to check whether data
-to be read are pending in a @acronym{GnuTLS} session.
-This is the equivalent of @code{select} in @acronym{POSIX} systems.
+The @funcref{gnutls_record_check_pending} helper function is available to 
+allow checking whether data are available to be read in a @acronym{GnuTLS} session 
+buffers. Note that this function complements but does not replace @code{select()},
+i.e., @funcref{gnutls_record_check_pending} reports no data to be read, @code{select()}
+should be called to check for data in the network buffers.
 
 @showfuncdesc{gnutls_record_check_pending}
 
@@ -278,8 +273,9 @@ to generate a secret key that is used to sign a cookie@footnote{A key of 128 bit
 That cookie is sent to the client using @funcref{gnutls_dtls_cookie_send}, and 
 the client must reply using the correct cookie. The server side
 should verify the initial message sent by client using @funcref{gnutls_dtls_cookie_verify}.
-If successful a the session should be initialization and associated with
-the cookie using @funcref{gnutls_dtls_prestate_set}.
+If successful the session should be initialized and associated with
+the cookie using @funcref{gnutls_dtls_prestate_set}, before proceeding to
+the handshake.
 
 @showfuncD{gnutls_key_generate,gnutls_dtls_cookie_send,gnutls_dtls_cookie_verify,gnutls_dtls_prestate_set}
 
@@ -486,7 +482,6 @@ implemented by another example.
 * Simple client example with X.509 certificate support::
 * Simple Datagram TLS client example::
 * Obtaining session information::
-* Verifying peer's certificate::
 * Using a callback to select the certificate to use::
 * Verifying a certificate::
 * Client using a PKCS 11 token with TLS::
@@ -509,16 +504,17 @@ However, the data is integrity and privacy protected.
 
 @node Simple client example with X.509 certificate support
 @subsection Simple client example with @acronym{X.509} certificate support
+@anchor{ex:verify}
 
 Let's assume now that we want to create a TCP client which
 communicates with servers that use @acronym{X.509} or
 @acronym{OpenPGP} certificate authentication. The following client is
-a very simple @acronym{TLS} client, it does not support session
-resuming, not even certificate verification. The TCP functions defined
-in this example are used in most of the other examples below, without
-redefining them.
+a very simple @acronym{TLS} client, which uses the high level verification
+functions for certificates, but does not support session
+resumption. The TCP functions defined in this example are used 
+in most of the other examples below, without redefining them.
 
-@verbatiminclude examples/ex-client2.c
+@verbatiminclude examples/ex-rfc2818.c
 
 @node Simple Datagram TLS client example
 @subsection Simple datagram @acronym{TLS} client example
@@ -539,19 +535,6 @@ function.  Note that this function will print meaningful values only
 if called after a successful @funcref{gnutls_handshake}.
 
 @verbatiminclude examples/ex-session-info.c
-
-@node Verifying peer's certificate
-@subsection Verifying peer's certificate
-@anchor{ex:verify}
-
-A @acronym{TLS} session is not secure just after the handshake
-procedure has finished.  It must be considered secure, only after the
-peer's certificate and identity have been verified. That is, you have
-to verify the signature in peer's certificate, the hostname in the
-certificate, and expiration dates.  Just after this step you should
-treat the connection as being a secure one.
-
-@verbatiminclude examples/ex-rfc2818.c
 
 @node Using a callback to select the certificate to use
 @subsection Using a callback to select the certificate to use

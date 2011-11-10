@@ -2,7 +2,7 @@ TEX_OBJECTS = gnutls.tex macros.tex macros-epub.tex fdl.tex cover.tex gnutls.bib
 	cover-epub.tex
 
 GEN_TEX_OBJECTS = cha-preface.tex cha-library.tex cha-intro-tls.tex cha-auth.tex \
-  cha-cert-auth.tex cha-gtls-app.tex cha-tls-app.tex cha-programs.tex cha-support.tex \
+  cha-cert-auth.tex cha-gtls-app.tex sec-tls-app.tex cha-programs.tex cha-support.tex \
   cha-functions.tex error_codes.tex cha-ciphersuites.tex algorithms.tex \
   cha-errors.tex alerts.tex cha-internals.tex
 
@@ -24,7 +24,7 @@ cha-cert-auth.tex: ../cha-cert-auth.texi
 cha-gtls-app.tex: ../cha-gtls-app.texi
 	../scripts/mytexi2latex $< > $@
 
-cha-tls-app.tex: ../cha-tls-app.texi
+sec-tls-app.tex: ../sec-tls-app.texi
 	../scripts/mytexi2latex $< > $@
 
 cha-programs.tex: ../cha-programs.texi
@@ -106,19 +106,7 @@ pgp-api.tex: $(srcdir)/../../lib/openpgp/*.c
 	rm -f $@-tmp
 	mv -f $@-tmp2 $@
 
-extra-api.tex: $(srcdir)/../../libextra/gnutls_extra.c
-	echo "" > $@-tmp
-	for i in $^; do \
-		echo -n "Creating documentation for file $$i... " && \
-		$(srcdir)/../scripts/gdoc -tex $$i >> $@-tmp && \
-		echo "ok"; \
-	done
-	$(srcdir)/../scripts/sort1.pl < $@-tmp > $@-tmp2
-	$(srcdir)/../scripts/split.pl functions < $@-tmp 
-	rm -f $@-tmp
-	mv -f $@-tmp2 $@
-
-SOURCE_GEN_FILES =  extra-api.tex pgp-api.tex x509-api.tex gnutls-api.tex gnutls-enums.tex
+SOURCE_GEN_FILES =  pgp-api.tex x509-api.tex gnutls-api.tex gnutls-enums.tex
 
 PDF_FILES = gnutls-client-server-use-case.pdf gnutls-crypto-layers.pdf \
 	gnutls-handshake-sequence.pdf gnutls-handshake-state.pdf \

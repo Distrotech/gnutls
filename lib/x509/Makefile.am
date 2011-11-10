@@ -19,6 +19,7 @@
 AM_CFLAGS = $(WERROR_CFLAGS) $(WSTACK_CFLAGS) $(WARN_CFLAGS)
 AM_CPPFLAGS = \
 	-I$(srcdir)/../../gl		\
+	-I$(builddir)/../../gl		\
 	-I$(srcdir)/../includes		\
 	-I$(builddir)/../includes	\
 	-I$(srcdir)/..			\
@@ -40,7 +41,6 @@ libgnutls_x509_la_SOURCES =	\
 	extensions.c		\
 	mpi.c			\
 	output.c		\
-	output.h		\
 	pbkdf2-sha1.c		\
 	pbkdf2-sha1.h		\
 	pkcs12.c		\

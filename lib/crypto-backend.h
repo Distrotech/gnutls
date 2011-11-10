@@ -51,16 +51,18 @@
     int (*hash) (void *ctx, const void *text, size_t textsize);
     int (*output) (void *src_ctx, void *digest, size_t digestsize);
     void (*deinit) (void *ctx);
+    int (*fast)(gnutls_mac_algorithm_t, const void *key, size_t keysize, const void *text, size_t textsize, void *digest);
   } gnutls_crypto_mac_st;
 
   typedef struct
   {
-    int (*init) (gnutls_mac_algorithm_t, void **ctx);
+    int (*init) (gnutls_digest_algorithm_t, void **ctx);
     void (*reset) (void *ctx);
-    int (*hash) (void *ctx, const void *text, size_t textsize);
+    int (*hash) (void *ctx, const void *src, size_t srcsize);
     int (*copy) (void **dst_ctx, void *src_ctx);
     int (*output) (void *src_ctx, void *digest, size_t digestsize);
     void (*deinit) (void *ctx);
+    int (*fast)(gnutls_digest_algorithm_t, const void *src, size_t srcsize, void *digest);
   } gnutls_crypto_digest_st;
 
   typedef struct gnutls_crypto_rnd
@@ -181,6 +183,35 @@
   void gnutls_pk_params_release (gnutls_pk_params_st * p);
   void gnutls_pk_params_init (gnutls_pk_params_st * p);
 
+
+#define MAX_PUBLIC_PARAMS_SIZE 4        /* ok for RSA and DSA */
+
+/* parameters should not be larger than this limit */
+#define DSA_PUBLIC_PARAMS 4
+#define RSA_PUBLIC_PARAMS 2
+#define ECC_PUBLIC_PARAMS 8
+
+
+#define MAX_PRIV_PARAMS_SIZE GNUTLS_MAX_PK_PARAMS       /* ok for RSA and DSA */
+
+/* parameters should not be larger than this limit */
+#define DSA_PRIVATE_PARAMS 5
+#define RSA_PRIVATE_PARAMS 8
+#define ECC_PRIVATE_PARAMS 9
+
+#if MAX_PRIV_PARAMS_SIZE - RSA_PRIVATE_PARAMS < 0
+#error INCREASE MAX_PRIV_PARAMS
+#endif
+
+#if MAX_PRIV_PARAMS_SIZE - ECC_PRIVATE_PARAMS < 0
+#error INCREASE MAX_PRIV_PARAMS
+#endif
+
+#if MAX_PRIV_PARAMS_SIZE - DSA_PRIVATE_PARAMS < 0
+#error INCREASE MAX_PRIV_PARAMS
+#endif
+
+
 /* params are:
  * RSA:
  *  [0] is modulus
@@ -206,11 +237,12 @@
  *  [0] is prime
  *  [1] is order
  *  [2] is A
- *  [3] is Gx
- *  [4] is Gy
- *  [5] is x
- *  [6] is y
- *  [7] is k (private key)
+ *  [3] is B
+ *  [4] is Gx
+ *  [5] is Gy
+ *  [6] is x
+ *  [7] is y
+ *  [8] is k (private key)
  */
 
 /**
