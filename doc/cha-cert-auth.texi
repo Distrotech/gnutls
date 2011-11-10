@@ -229,14 +229,15 @@ information from a certificate.
 @showfuncA{gnutls_x509_crt_get_authority_info_access}
 
 There are several functions in GnuTLS for creating and manipulating
-OCSP requests and responses.  The idea is that a client application
-create an OCSP request object, store some information about the
-certificate to check in the request, and then export the request in
-DER format.  The request will then need to be sent to the OCSP
-responder, and normally an OCSP response is received that the
-application will need to import into an OCSP response object.  The
-digital signature in the OCSP response needs to be verified before the
-information in the response can be trusted.
+OCSP requests and responses.  The general idea is that a client
+application create an OCSP request object, store some information
+about the certificate to check in the request, and then export the
+request in DER format.  The request will then need to be sent to the
+OCSP responder, which needs to be done by the application (GnuTLS does
+not send and receive OCSP packets).  Normally an OCSP response is
+received that the application will need to import into an OCSP
+response object.  The digital signature in the OCSP response needs to
+be verified before the information in the response can be trusted.
 
 The ASN.1 structure of OCSP requests are briefly as follows.  It is
 useful to review the structures to get an understanding of which
@@ -278,9 +279,28 @@ a OCSP request, the first being a low-level function when you have the
 issuer name hash, issuer key hash, and certificate serial number in
 binary form.  The second is usually more useful if you have the
 certificate (and its issuer) in a @code{gnutls_x509_crt_t} type.
+There is also a function to extract this information from an OCSP
+request.
 
-@showfuncB{gnutls_ocsp_req_add_certid,
-        gnutls_ocsp_req_add_cert}
+@showfuncC{gnutls_ocsp_req_add_certid,
+        gnutls_ocsp_req_add_cert,
+        gnutls_ocsp_req_get_certid}
+
+Each OCSP request may contain a number of extensions.  Extensions are
+identified by an Object Identifier (OID) and an opaque data buffer
+whose syntax and semantics is implied by the OID.
+
+@showfuncB{gnutls_ocsp_req_get_extension,
+        gnutls_ocsp_req_set_extension}
+
+A common OCSP Request extension is the nonce extension (OID
+1.3.6.1.5.5.7.48.1.2), which is used to avoid replay attacks of
+earlier recorded OCSP responses.  The nonce extension carries a value
+that is intended to be sufficiently random and unique so that an
+attacker will not be able to give a stale response for the same nonce.
+
+@showfuncB{gnutls_ocsp_req_get_nonce,
+        gnutls_ocsp_req_set_nonce}
 
 @node Certificate requests
 @subsection @acronym{PKCS} #10 certificate requests
