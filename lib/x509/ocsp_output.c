@@ -28,7 +28,6 @@
 #include <libtasn1.h>
 #include <gnutls_pk.h>
 #include "algorithms.h"
-#include "output.h"
 
 #include <gnutls/ocsp.h>
 
@@ -77,15 +76,15 @@ print_req (gnutls_buffer_st * str, gnutls_ocsp_req_t req)
 	    _gnutls_digest_get_name (digest));
 
       adds (str, "\t\t\tIssuer Name Hash: ");
-      hexprint (str, in.data, in.size);
+      _gnutls_buffer_hexprint (str, in.data, in.size);
       adds (str, "\n");
 
       adds (str, "\t\t\tIssuer Key Hash: ");
-      hexprint (str, ik.data, ik.size);
+      _gnutls_buffer_hexprint (str, ik.data, ik.size);
       adds (str, "\n");
 
       adds (str, "\t\t\tSerial Number: ");
-      hexprint (str, sn.data, sn.size);
+      _gnutls_buffer_hexprint (str, sn.data, sn.size);
       adds (str, "\n");
 
       gnutls_free (in.data);
@@ -127,7 +126,7 @@ print_req (gnutls_buffer_st * str, gnutls_ocsp_req_t req)
 	  else
 	    {
 	      addf (str, "\t\tNonce%s: ", critical ? " (critical)" : "");
-	      hexprint (str, nonce.data, nonce.size);
+	      _gnutls_buffer_hexprint (str, nonce.data, nonce.size);
 	      adds (str, "\n");
 	    }
 	}
@@ -137,11 +136,11 @@ print_req (gnutls_buffer_st * str, gnutls_ocsp_req_t req)
 		critical ? "critical" : "not critical");
 
 	  addf (str, _("\t\t\tASCII: "));
-	  asciiprint (str, data.data, data.size);
+	  _gnutls_buffer_asciiprint (str, data.data, data.size);
 	  addf (str, "\n");
 
 	  addf (str, _("\t\t\tHexdump: "));
-	  hexprint (str, data.data, data.size);
+	  _gnutls_buffer_hexprint (str, data.data, data.size);
 	  adds (str, "\n");
 	}
 
@@ -341,15 +340,15 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
 	    _gnutls_digest_get_name (digest));
 
       adds (str, "\t\t\tIssuer Name Hash: ");
-      hexprint (str, in.data, in.size);
+      _gnutls_buffer_hexprint (str, in.data, in.size);
       adds (str, "\n");
 
       adds (str, "\t\t\tIssuer Key Hash: ");
-      hexprint (str, ik.data, ik.size);
+      _gnutls_buffer_hexprint (str, ik.data, ik.size);
       adds (str, "\n");
 
       adds (str, "\t\t\tSerial Number: ");
-      hexprint (str, sn.data, sn.size);
+      _gnutls_buffer_hexprint (str, sn.data, sn.size);
       adds (str, "\n");
 
       gnutls_free (in.data);
@@ -467,7 +466,7 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
 	  else
 	    {
 	      addf (str, "\t\tNonce%s: ", critical ? " (critical)" : "");
-	      hexprint (str, nonce.data, nonce.size);
+	      _gnutls_buffer_hexprint (str, nonce.data, nonce.size);
 	      adds (str, "\n");
 	    }
 	}
@@ -477,11 +476,11 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
 		critical ? "critical" : "not critical");
 
 	  addf (str, _("\t\t\tASCII: "));
-	  asciiprint (str, data.data, data.size);
+	  _gnutls_buffer_asciiprint (str, data.data, data.size);
 	  addf (str, "\n");
 
 	  addf (str, _("\t\t\tHexdump: "));
-	  hexprint (str, data.data, data.size);
+	  _gnutls_buffer_hexprint (str, data.data, data.size);
 	  adds (str, "\n");
 	}
 
@@ -516,7 +515,7 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
     else
       {
 	adds (str, _("\tSignature:\n"));
-	hexdump (str, sig.data, sig.size, "\t\t");
+	_gnutls_buffer_hexdump (str, sig.data, sig.size, "\t\t");
 
 	gnutls_free (sig.data);
       }
