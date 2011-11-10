@@ -741,65 +741,6 @@ gnutls_ocsp_req_add_cert (gnutls_ocsp_req_t req,
 }
 
 /**
- * gnutls_ocsp_req_get_nonce:
- * @req: should contain a #gnutls_ocsp_req_t structure
- * @critical: whether nonce extension is marked critical
- * @nonce: will hold newly allocated buffer with nonce data
- *
- * This function will return the OCSP request nonce extension data.
- *
- * The caller needs to deallocate memory by calling gnutls_free() on
- * @nonce->data.
- *
- * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
- *   negative error code is returned.
- **/
-int
-gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t req,
-			   unsigned int *critical,
-			   gnutls_datum_t *nonce)
-{
-  int ret;
-  size_t l = 0;
-  gnutls_datum_t tmp;
-
-  ret = get_extension (req->req, "tbsRequest.requestExtensions",
-		       GNUTLS_OCSP_NONCE, 0,
-		       &tmp, critical);
-  if (ret != GNUTLS_E_SUCCESS)
-    {
-      gnutls_assert ();
-      return ret;
-    }
-
-  ret = _gnutls_x509_decode_octet_string (NULL, tmp.data, (size_t) tmp.size,
-					  NULL, &l);
-  if (ret != GNUTLS_E_SHORT_MEMORY_BUFFER)
-    {
-      gnutls_assert ();
-      return ret;
-    }
-
-  nonce->data = gnutls_malloc (l);
-  if (nonce->data == NULL)
-    {
-      gnutls_assert ();
-      return GNUTLS_E_MEMORY_ERROR;
-    }
-
-  ret = _gnutls_x509_decode_octet_string (NULL, tmp.data, (size_t) tmp.size,
-					  nonce->data, &l);
-  if (ret != GNUTLS_E_SUCCESS)
-    {
-      gnutls_assert ();
-      return ret;
-    }
-  nonce->size = l;
-
-  return GNUTLS_E_SUCCESS;
-}
-
-/**
  * gnutls_ocsp_req_get_extension:
  * @req: should contain a #gnutls_ocsp_req_t structure
  * @indx: Specifies which extension OID to get. Use (0) to get the first one.
@@ -914,6 +855,65 @@ gnutls_ocsp_req_set_extension (gnutls_ocsp_req_t req,
 }
 
 /**
+ * gnutls_ocsp_req_get_nonce:
+ * @req: should contain a #gnutls_ocsp_req_t structure
+ * @critical: whether nonce extension is marked critical
+ * @nonce: will hold newly allocated buffer with nonce data
+ *
+ * This function will return the OCSP request nonce extension data.
+ *
+ * The caller needs to deallocate memory by calling gnutls_free() on
+ * @nonce->data.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error code is returned.
+ **/
+int
+gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t req,
+			   unsigned int *critical,
+			   gnutls_datum_t *nonce)
+{
+  int ret;
+  size_t l = 0;
+  gnutls_datum_t tmp;
+
+  ret = get_extension (req->req, "tbsRequest.requestExtensions",
+		       GNUTLS_OCSP_NONCE, 0,
+		       &tmp, critical);
+  if (ret != GNUTLS_E_SUCCESS)
+    {
+      gnutls_assert ();
+      return ret;
+    }
+
+  ret = _gnutls_x509_decode_octet_string (NULL, tmp.data, (size_t) tmp.size,
+					  NULL, &l);
+  if (ret != GNUTLS_E_SHORT_MEMORY_BUFFER)
+    {
+      gnutls_assert ();
+      return ret;
+    }
+
+  nonce->data = gnutls_malloc (l);
+  if (nonce->data == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_MEMORY_ERROR;
+    }
+
+  ret = _gnutls_x509_decode_octet_string (NULL, tmp.data, (size_t) tmp.size,
+					  nonce->data, &l);
+  if (ret != GNUTLS_E_SUCCESS)
+    {
+      gnutls_assert ();
+      return ret;
+    }
+  nonce->size = l;
+
+  return GNUTLS_E_SUCCESS;
+}
+
+/**
  * gnutls_ocsp_req_set_nonce:
  * @req: should contain a #gnutls_ocsp_req_t structure
  * @critical: critical flag, normally false.
@@ -960,6 +960,40 @@ gnutls_ocsp_req_set_nonce (gnutls_ocsp_req_t req,
     }
 
   return ret;
+}
+
+/**
+ * gnutls_ocsp_req_randomize_nonce:
+ * @req: should contain a #gnutls_ocsp_req_t structure
+ *
+ * This function will add or update an nonce extension to the OCSP
+ * request with a newly generated random value.
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
+ *   negative error code is returned.
+ **/
+int
+gnutls_ocsp_req_randomize_nonce (gnutls_ocsp_req_t req)
+{
+  int ret;
+  char rndbuf[23];
+  gnutls_datum_t nonce = { rndbuf, sizeof (rndbuf) };
+
+  ret = gnutls_rnd (GNUTLS_RND_NONCE, rndbuf, sizeof (rndbuf));
+  if (ret != GNUTLS_E_SUCCESS)
+    {
+      gnutls_assert ();
+      return ret;
+    }
+
+  ret = gnutls_ocsp_req_set_nonce (req, 0, &nonce);
+  if (ret != GNUTLS_E_SUCCESS)
+    {
+      gnutls_assert ();
+      return ret;
+    }
+
+  return GNUTLS_E_SUCCESS;
 }
 
 /**

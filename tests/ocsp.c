@@ -162,6 +162,36 @@ req_parse (void)
       exit (1);
     }
 
+  /* check nonce */
+  {
+    gnutls_datum_t expect =
+      { (unsigned char*) REQ1NONCE + 2, sizeof (REQ1NONCE) - 3 };
+    gnutls_datum_t got;
+    unsigned int critical;
+
+    ret = gnutls_ocsp_req_get_nonce (req, &critical, &got);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_get_nonce %d\n", ret);
+	exit (1);
+      }
+
+    if (critical != 0)
+      {
+	fail ("unexpected critical %d\n", critical);
+	exit (1);
+      }
+
+    if (expect.size != got.size ||
+	memcmp (expect.data, got.data, got.size) != 0)
+      {
+	fail ("ocsp request nonce memcmp failed\n");
+	exit (1);
+      }
+
+    gnutls_free (got.data);
+  }
+
   /* print request */
 
   ret = gnutls_ocsp_req_print (req, GNUTLS_OCSP_PRINT_FULL, &d);
@@ -196,6 +226,125 @@ req_parse (void)
       exit (1);
     }
   gnutls_free (d.data);
+
+  /* test setting nonce */
+  {
+    gnutls_datum_t n1 = { (unsigned char *) "foo", 3 };
+    gnutls_datum_t n2 = { (unsigned char *) "foobar", 6 };
+    gnutls_datum_t got;
+    unsigned critical;
+
+    ret = gnutls_ocsp_req_set_nonce (req, 0, &n1);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_set_nonce %d\n", ret);
+	exit (1);
+      }
+
+    ret = gnutls_ocsp_req_get_nonce (req, &critical, &got);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_get_nonce %d\n", ret);
+	exit (1);
+      }
+
+    if (critical != 0)
+      {
+	fail ("unexpected critical %d\n", critical);
+	exit (1);
+      }
+
+    if (n1.size != got.size ||
+	memcmp (n1.data, got.data, got.size) != 0)
+      {
+	fail ("ocsp request parse nonce memcmp failed\n");
+	exit (1);
+      }
+
+    gnutls_free (got.data);
+
+    /* set another time */
+
+    ret = gnutls_ocsp_req_set_nonce (req, 1, &n2);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_set_nonce %d\n", ret);
+	exit (1);
+      }
+
+    ret = gnutls_ocsp_req_get_nonce (req, &critical, &got);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_get_nonce %d\n", ret);
+	exit (1);
+      }
+
+    if (critical != 1)
+      {
+	fail ("unexpected critical %d\n", critical);
+	exit (1);
+      }
+
+    if (n2.size != got.size ||
+	memcmp (n2.data, got.data, got.size) != 0)
+      {
+	fail ("ocsp request parse2 nonce memcmp failed\n");
+	exit (1);
+      }
+
+    gnutls_free (got.data);
+
+    /* randomize nonce */
+
+    ret = gnutls_ocsp_req_randomize_nonce (req);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_randomize_nonce %d\n", ret);
+	exit (1);
+      }
+
+    ret = gnutls_ocsp_req_get_nonce (req, &critical, &n1);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_get_nonce %d\n", ret);
+	exit (1);
+      }
+
+    if (critical != 0)
+      {
+	fail ("unexpected random critical %d\n", critical);
+	exit (1);
+      }
+
+    ret = gnutls_ocsp_req_randomize_nonce (req);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_randomize_nonce %d\n", ret);
+	exit (1);
+      }
+
+    ret = gnutls_ocsp_req_get_nonce (req, &critical, &n2);
+    if (ret != 0)
+      {
+	fail ("gnutls_ocsp_req_get_nonce %d\n", ret);
+	exit (1);
+      }
+
+    if (critical != 0)
+      {
+	fail ("unexpected random critical %d\n", critical);
+	exit (1);
+      }
+
+    if (n2.size == got.size && memcmp (n1.data, n2.data, n1.size) == 0)
+      {
+	fail ("ocsp request random nonce memcmp failed\n");
+	exit (1);
+      }
+
+    gnutls_free (n1.data);
+    gnutls_free (n2.data);
+  }
 
   /* cleanup */
 

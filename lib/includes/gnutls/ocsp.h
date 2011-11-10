@@ -139,6 +139,7 @@ extern "C"
 			     gnutls_datum_t * out);
 
   int gnutls_ocsp_req_get_version (gnutls_ocsp_req_t req);
+
   int gnutls_ocsp_req_get_certid (gnutls_ocsp_req_t req,
 				  unsigned indx,
 				  gnutls_digest_algorithm_t *digest,
@@ -160,17 +161,18 @@ extern "C"
 				     gnutls_datum_t *oid,
 				     unsigned int *critical,
 				     gnutls_datum_t *data);
-  int gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t req,
-				 unsigned int *critical,
-				 gnutls_datum_t *nonce);
-
   int gnutls_ocsp_req_set_extension (gnutls_ocsp_req_t req,
 				     const char *oid,
 				     unsigned int critical,
 				     const gnutls_datum_t *data);
+
+  int gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t req,
+				 unsigned int *critical,
+				 gnutls_datum_t *nonce);
   int gnutls_ocsp_req_set_nonce (gnutls_ocsp_req_t req,
 				 unsigned int critical,
 				 const gnutls_datum_t *nonce);
+  int gnutls_ocsp_req_randomize_nonce (gnutls_ocsp_req_t req);
 
   struct gnutls_ocsp_resp_int;
   typedef struct gnutls_ocsp_resp_int *gnutls_ocsp_resp_t;

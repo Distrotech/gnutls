@@ -748,6 +748,7 @@ GNUTLS_3_0_0 {
 	gnutls_ocsp_resp_get_nonce;
 	gnutls_ocsp_req_set_nonce;
 	gnutls_ocsp_resp_verify;
+	gnutls_ocsp_req_randomize_nonce;
 	gnutls_privkey_import_ext;
 	gnutls_certificate_set_key;
 	gnutls_srp_3072_group_generator;
