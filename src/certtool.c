@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
- *   2011 Free Software Foundation, Inc.
+ * Copyright (C) 2003-2011 Free Software Foundation, Inc.
  *
  * This file is part of GnuTLS.
  *
@@ -222,6 +221,10 @@ generate_private_key_int (void)
   ret = gnutls_x509_privkey_generate (key, key_type, bits, 0);
   if (ret < 0)
     error (EXIT_FAILURE, 0, "privkey_generate: %s", gnutls_strerror (ret));
+
+  ret = gnutls_x509_privkey_verify_params (key);
+  if (ret < 0)
+    error (EXIT_FAILURE, 0, "privkey_verify_params: %s", gnutls_strerror (ret));
 
   return key;
 }
@@ -1561,6 +1564,16 @@ print_crq_info (gnutls_x509_crq_t crq, FILE * out)
 
       gnutls_free (cinfo.data);
     }
+    
+  ret = gnutls_x509_crq_verify(crq, 0);
+  if (ret < 0)
+    {
+      fprintf(out, "Self signature: FAILED\n\n");
+    } 
+  else 
+    {
+      fprintf(out, "Self signature: verified\n\n");
+    }
 
   size = buffer_size;
   ret = gnutls_x509_crq_export (crq, info.outcert_format, buffer, &size);
@@ -1728,8 +1741,11 @@ privkey_info (void)
   if (ret < 0)
     error (EXIT_FAILURE, 0, "import error: %s", gnutls_strerror (ret));
 
-
   privkey_info_int (key);
+
+  ret = gnutls_x509_privkey_verify_params (key);
+  if (ret < 0)
+    fprintf (outfile, "\n** Private key parameters validation failed **\n\n");
 
   if (info.fix_key != 0)
     {
@@ -1935,7 +1951,6 @@ static int detailed_verification(gnutls_x509_crt_t cert,
   size_t issuer_name_size;
   int ret;
 
-
   issuer_name_size = sizeof (issuer_name);
   ret =
     gnutls_x509_crt_get_issuer_dn (cert, issuer_name, &issuer_name_size);
@@ -2090,8 +2105,8 @@ _verify_x509_mem (const void *cert, int cert_size, const void* ca, int ca_size)
   gnutls_free(x509_cert_list);
   gnutls_x509_trust_list_deinit(list, 1);
 
-  if (ret < 0)
-    error (EXIT_FAILURE, 0, "verification error: %s", gnutls_strerror (ret));
+  if (output != 0)
+    exit(EXIT_FAILURE);
 
   return 0;
 }

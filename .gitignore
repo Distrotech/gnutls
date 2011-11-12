@@ -534,3 +534,4 @@ tests/x509paths/
 tests/x509self
 tests/x509sign-verify
 tests/x509signself
+tests/keygen

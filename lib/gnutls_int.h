@@ -58,6 +58,21 @@ typedef int ssize_t;
 # define memxor gl_memxor
 #endif
 
+#ifdef __GNUC__
+# ifndef _GNUTLS_GCC_VERSION
+#  define _GNUTLS_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
+# endif
+# if _GNUTLS_GCC_VERSION >= 30100
+#  define likely(x)      __builtin_expect((x), 1)
+#  define unlikely(x)    __builtin_expect((x), 0)
+# endif
+#endif
+
+#ifndef likely
+# define likely
+# define unlikely
+#endif
+
 /* some systems had problems with long long int, thus,
  * it is not used.
  */
@@ -140,9 +155,6 @@ typedef struct
 
 /* expire time for resuming sessions */
 #define DEFAULT_EXPIRE_TIME 3600
-
-/* printing period of messages */
-#define PRINT_MESSAGE_PERIOD 30
 
 typedef enum transport_t
 {
@@ -628,7 +640,6 @@ typedef struct
   /* last retransmission triggered by record layer */
   time_t last_retransmit;
   unsigned int packets_dropped;
-  time_t last_print;
 } dtls_st;
 
 
