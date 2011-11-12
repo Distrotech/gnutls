@@ -1843,73 +1843,6 @@ find_signercert (gnutls_ocsp_resp_t resp)
   return signercert;
 }
 
-static int
-same_cert_p (gnutls_x509_crt_t cert1, gnutls_x509_crt_t cert2)
-{
-  gnutls_datum_t cert1bin, cert2bin;
-  int result;
-
-  result = _gnutls_x509_der_encode (cert1->cert, "", &cert1bin, 0);
-  if (result < 0)
-    {
-      gnutls_assert ();
-      goto cleanup;
-    }
-
-  result = _gnutls_x509_der_encode (cert2->cert, "", &cert2bin, 0);
-  if (result < 0)
-    {
-      gnutls_assert ();
-      goto cleanup;
-    }
-
-  if ((cert1bin.size == cert2bin.size) &&
-      (memcmp (cert1bin.data, cert2bin.data, cert1bin.size) == 0))
-    result = 1;
-  else
-    result = 0;
-
- cleanup:
-  _gnutls_free_datum (&cert1bin);
-  _gnutls_free_datum (&cert2bin);
-  return result;
-}
-
-static int
-inlist_p (gnutls_x509_trust_list_t list, gnutls_x509_crt_t cert)
-{
-  gnutls_datum_t dn;
-  int ret, i;
-  uint32_t hash;
-
-  ret = gnutls_x509_crt_get_raw_dn (cert, &dn);
-  if (ret < 0)
-    {
-      gnutls_assert();
-      return ret;
-    }
-
-  hash = _gnutls_bhash(dn.data, dn.size, INIT_HASH);
-  hash %= list->size;
-
-  _gnutls_free_datum (&dn);
-
-  for (i = 0; i < list->node[hash].trusted_ca_size; i++)
-    {
-      ret = same_cert_p (cert, list->node[hash].trusted_cas[i]);
-      if (ret < 0)
-	{
-	  gnutls_assert ();
-	  return ret;
-	}
-
-      if (ret == 1)
-	return 1;
-    }
-
-  return 0;
-}
-
 /**
  * gnutls_ocsp_resp_verify:
  * @resp: should contain a #gnutls_ocsp_resp_t structure
@@ -1982,7 +1915,7 @@ gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t resp,
 	 directly signed by something we trust, and has proper OCSP
 	 extkeyusage. */
 
-      rc = inlist_p (trustlist, signercert);
+      rc = _gnutls_trustlist_inlist_p (trustlist, signercert);
       if (rc < 0)
 	{
 	  gnutls_assert ();
