@@ -63,8 +63,7 @@ Documentation License''.
 @end macro
 
 @macro xcite{ref}
-[@cite{\ref\}]
-@c (@pxref{Bibliography})
+[@emph{\ref\}]
 @end macro
 
 @macro funcref{ref}
@@ -147,16 +146,18 @@ Documentation License''.
 
 @menu
 * Preface::
-* The Library::
+* Introduction to GnuTLS::
 * Introduction to TLS::
-* Authentication methods::
+* Certificate authentication::
+* Shared-key and anonymous authentication::
 * More on certificate authentication::
 * How to use GnuTLS in applications::
-* Included programs::
+* GnuTLS application examples::
+* Other included programs::
 * Internal architecture of GnuTLS::
 * Support::
 * Error codes::
-* Function reference::
+* API reference::
 * Supported ciphersuites in GnuTLS::
 * Copying Information::
 * Concept Index::
@@ -171,11 +172,15 @@ Documentation License''.
 
 @include cha-intro-tls.texi
 
-@include cha-auth.texi
-
 @include cha-cert-auth.texi
 
+@include cha-shared-key.texi
+
+@include cha-cert-auth2.texi
+
 @include cha-gtls-app.texi
+
+@include cha-gtls-examples.texi
 
 @include cha-programs.texi
 

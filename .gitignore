@@ -71,9 +71,14 @@ doc/examples/ex-serv-psk
 doc/examples/ex-serv-srp
 doc/examples/ex-serv1
 doc/examples/libexamples.la
-doc/extra-api.texi
 doc/extra.c.texi
 doc/gnutls-api.texi
+doc/abstract-api.texi
+doc/pkcs11-api.texi
+doc/pkcs12-api.texi
+doc/dtls-api.texi
+doc/crypto-api.texi
+doc/compat-api.texi
 doc/gnutls-extra-api.texi
 doc/gnutls-guile.html
 doc/gnutls.aux
@@ -466,7 +471,6 @@ tests/dn
 tests/dn2
 tests/finished
 tests/gc
-tests/gendh
 tests/hostname-check
 tests/infoaccess
 tests/init_roundtrip
@@ -534,4 +538,6 @@ tests/x509paths/
 tests/x509self
 tests/x509sign-verify
 tests/x509signself
-tests/keygen
+tests/slow/keygen
+tests/slow/gendh
+doc/reference/*.bak

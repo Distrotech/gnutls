@@ -78,7 +78,7 @@ my $match = "[\\w\\d-\\.\\/\\@\\:\_\\\\\#]";
 my $spacematch = "[\\s\\w\\d-\\.\\/\\@\\#\\:]";
 my $mathmatch = "[\\s\\w\\d-\\.\\/\\:\\(\\)\\+\\/\\^\\'\\=\{\}\\\\\\,]";
 my $underscorematch = "[\\s\\w\\d-\\.\\/\\@\\_\\\\\:\\~]";
-my $codematch = "[\\s\\w\\d-\\.\\/\\@\\_\\\\\:\\-\\\"\+\\%\\,]";
+my $codematch = "[\\s\\w\\d-\\.\\/\\@\\_\\\\\:\\-\\\"\+\\%\\#\\,]";
 my $extcodematch = "[\\s\\w\\d-\\.\\/\\@\\_\\\\\:\\-\\\"\+\\%\\,\\{\\}]";
 my ($line, $prev_mode);
 my ($verbatim, $label);
@@ -127,6 +127,7 @@ while ($line = <FILE>) {
 				push(@stack, FLOAT_TABLE);
 				$line =~ s/\@multitable \@columnfractions ([\.\d]+) ([\.\d]+)$/\n\\begin{tabular}{|p{$1\\linewidth}|p{$2\\linewidth}|}\n\\hline\n/g;
 				$line =~ s/\@multitable \@columnfractions ([\.\d]+) ([\.\d]+) ([\.\d]+)$/\n\\begin{tabular}{|p{$1\\linewidth}|p{$2\\linewidth}|p{$3\\linewidth}|}\n\\hline\n/g;
+				$line =~ s/\@multitable \@columnfractions ([\.\d]+) ([\.\d]+) ([\.\d]+) ([\.\d]+)$/\n\\begin{tabular}{|p{$1\\linewidth}|p{$2\\linewidth}|p{$3\\linewidth}|p{$4\\linewidth}|}\n\\hline\n/g;
 				$line =~ s/\@multitable \@columnfractions ([\.\d]+) ([\.\d]+) ([\.\d]+) ([\.\d]+) ([\.\d]+)$/\n\\begin{tabular}{|p{$1\\linewidth}|p{$2\\linewidth}|p{$3\\linewidth}|p{$4\\linewidth}|p{$5\\linewidth}|}\n\\hline\n/g;
 			}
 			
@@ -220,6 +221,9 @@ multitable:
 				$line .= "\\label{$label}\n";
 			}
 		}
+
+		$line =~ s/\@subsubheading (.+)/\\subsubsection\*{$1}/g;
+		$line =~ s/\@subheading (.+)/\\subsection\*{$1}/g;
 
                 if ($line =~ s/\@section (.+)/\\section{$1}/g) {
 			if ($label ne '') {

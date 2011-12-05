@@ -40,7 +40,7 @@ local-checks-to-skip = sc_GPL_version sc_bindtextdomain			\
 	sc_require_config_h_first sc_texinfo_acronym sc_trailing_blank	\
 	sc_unmarked_diagnostics sc_useless_cpp_parens
 
-VC_LIST_ALWAYS_EXCLUDE_REGEX = ^maint.mk|(build-aux/|gl/|src/cfg/|tests/suite/ecore/|doc/protocol/).*$$
+VC_LIST_ALWAYS_EXCLUDE_REGEX = ^maint.mk|(devel/perlasm/|build-aux/|gl/|src/cfg/|tests/suite/ecore/|doc/protocol/).*$$
 
 # Explicit syntax-check exceptions.
 exclude_file_name_regexp--sc_cast_of_alloca_return_value = ^guile/modules/gnutls/build/priorities.scm|guile/src/core.c$$
@@ -50,7 +50,7 @@ exclude_file_name_regexp--sc_file_system = ^doc/doxygen/Doxyfile
 exclude_file_name_regexp--sc_prohibit_cvs_keyword = ^lib/nettle/.*$$
 exclude_file_name_regexp--sc_prohibit_undesirable_word_seq = ^tests/nist-pkits/gnutls-nist-tests.html$$
 exclude_file_name_regexp--sc_space_tab = ^gtk-doc.make|doc/.*.(pdf|png)|tests/nist-pkits/|tests/suite/x509paths/.*$$
-exclude_file_name_regexp--sc_two_space_separator_in_usage = ^doc/cha-programs.texi|tests/sha2/sha2|tests/sha2/sha2-dsa$$
+exclude_file_name_regexp--sc_two_space_separator_in_usage = ^doc/cha-programs.texi|doc/cha-cert-auth2.texi|tests/sha2/sha2|tests/sha2/sha2-dsa|tests/ecdsa/ecdsa
 
 autoreconf:
 	for f in $(PODIR)/*.po.in; do \
@@ -107,6 +107,7 @@ prepare:
 	! git tag -l $(tag) | grep $(PACKAGE) > /dev/null
 	rm -f ChangeLog
 	$(MAKE) ChangeLog distcheck
+	$(MAKE) -C doc/manpages/ manpages-update
 	git commit -m Generated. ChangeLog
 	git tag -u b565716f! -m $(VERSION) $(tag)
 
@@ -118,16 +119,110 @@ upload:
 	ssh igloo.linux.gr 'cd ~ftp/pub/gnutls/devel/ && sha1sum *.tar.bz2 > CHECKSUMS'
 	cp $(distdir).tar.bz2 $(distdir).tar.bz2.sig ../releases/$(PACKAGE)/
 
+
 web:
 	echo generating documentation for $(PACKAGE)
 	cd doc && $(SHELL) ../build-aux/gendocs.sh \
 		--html "--css-include=texinfo.css" \
+		--texi2html \
 		-o ../$(htmldir)/manual/ $(PACKAGE) "$(PACKAGE_NAME)"
+	cd doc && cp *.png ../$(htmldir)/manual/html_node/
 	#cd doc/doxygen && doxygen && cd ../.. && cp -v doc/doxygen/html/* $(htmldir)/devel/doxygen/ && cd doc/doxygen/latex && make refman.pdf && cd ../../../ && cp doc/doxygen/latex/refman.pdf $(htmldir)/devel/doxygen/$(PACKAGE).pdf
-	cp -v doc/reference/html/*.html doc/reference/html/*.png doc/reference/html/*.devhelp doc/reference/html/*.css $(htmldir)/reference/
+	-cp -v doc/reference/html/*.html doc/reference/html/*.png doc/reference/html/*.devhelp doc/reference/html/*.css $(htmldir)/reference/
 	#cp -v doc/cyclo/cyclo-$(PACKAGE).html $(htmldir)/cyclo/
 
 upload-web:
 	cd $(htmldir) && \
 		cvs commit -m "Update." manual/ reference/ \
 			doxygen/ devel/ cyclo/
+
+ASM_SOURCES:= lib/accelerated/x86/asm-coff/cpuid-x86-64-coff.s \
+	lib/accelerated/x86/asm/cpuid-x86-64.s \
+	lib/accelerated/x86/asm-coff/cpuid-x86-coff.s \
+	lib/accelerated/x86/asm/cpuid-x86.s \
+	lib/accelerated/x86/asm/appro-aes-gcm-x86-64.s \
+	lib/accelerated/x86/asm/appro-aes-x86-64.s \
+	lib/accelerated/x86/asm/appro-aes-x86.s \
+	lib/accelerated/x86/asm/padlock-x86-64.s \
+	lib/accelerated/x86/asm/padlock-x86.s \
+	lib/accelerated/x86/asm-coff/appro-aes-gcm-x86-64-coff.s \
+	lib/accelerated/x86/asm-coff/appro-aes-x86-64-coff.s \
+	lib/accelerated/x86/asm-coff/appro-aes-x86-coff.s \
+	lib/accelerated/x86/asm-coff/padlock-x86-64-coff.s \
+	lib/accelerated/x86/asm-coff/padlock-x86-coff.s
+
+asm-sources: $(ASM_SOURCES)
+
+asm-sources-clean:
+	rm -f $(ASM_SOURCES)
+
+lib/accelerated/x86/asm/cpuid-x86-64.s: devel/perlasm/cpuid-x86_64.pl
+	cat devel/perlasm/license-gnutls.txt > $@
+	perl $< elf >> $@
+	echo "" >> $@
+	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
+
+
+lib/accelerated/x86/asm/cpuid-x86.s: devel/perlasm/cpuid-x86.pl
+	cat devel/perlasm/license-gnutls.txt > $@
+	perl $< elf >> $@
+	echo "" >> $@
+	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
+
+lib/accelerated/x86/asm/appro-aes-gcm-x86-64.s: devel/perlasm/ghash-x86_64.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< elf >> $@
+	echo "" >> $@
+	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
+
+lib/accelerated/x86/asm/appro-aes-x86-64.s: devel/perlasm/aesni-x86_64.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< elf >> $@
+	echo "" >> $@
+	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
+
+lib/accelerated/x86/asm/appro-aes-x86.s: devel/perlasm/aesni-x86.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< elf >> $@
+	echo "" >> $@
+	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
+
+lib/accelerated/x86/asm/padlock-x86-64.s: devel/perlasm/e_padlock-x86_64.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< elf >> $@
+	echo "" >> $@
+	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
+
+lib/accelerated/x86/asm/padlock-x86.s: devel/perlasm/e_padlock-x86.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< elf >> $@
+	echo "" >> $@
+	echo ".section .note.GNU-stack,\"\",%progbits" >> $@
+
+lib/accelerated/x86/asm-coff/appro-aes-gcm-x86-64-coff.s: devel/perlasm/ghash-x86_64.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< mingw64 >> $@
+
+lib/accelerated/x86/asm-coff/appro-aes-x86-64-coff.s: devel/perlasm/aesni-x86_64.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< mingw64 >> $@
+
+lib/accelerated/x86/asm-coff/appro-aes-x86-coff.s: devel/perlasm/aesni-x86.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< coff >> $@
+
+lib/accelerated/x86/asm-coff/padlock-x86-64-coff.s: devel/perlasm/e_padlock-x86_64.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< mingw64 >> $@
+
+lib/accelerated/x86/asm-coff/padlock-x86-coff.s: devel/perlasm/e_padlock-x86.pl
+	cat devel/perlasm/license.txt > $@
+	perl $< coff >> $@
+
+lib/accelerated/x86/asm-coff/cpuid-x86-64-coff.s: devel/perlasm/cpuid-x86_64.pl
+	cat devel/perlasm/license-gnutls.txt > $@
+	perl $< mingw64 >> $@
+
+lib/accelerated/x86/asm-coff/cpuid-x86-coff.s: devel/perlasm/cpuid-x86.pl
+	cat devel/perlasm/license-gnutls.txt > $@
+	perl $< coff >> $@
