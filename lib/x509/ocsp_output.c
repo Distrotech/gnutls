@@ -160,8 +160,8 @@ print_req (gnutls_buffer_st * str, gnutls_ocsp_req_t req)
  * This function will pretty print a OCSP request, suitable for
  * display to a human.
  *
- * If the format is %GNUTLS_REQ_PRINT_FULL then all fields of the
- * request will be output, on multiple lines.
+ * If the format is %GNUTLS_PRINT_FULL then all fields of the request
+ * will be output, on multiple lines.
  *
  * The output @out->data needs to be deallocate using gnutls_free().
  *
@@ -582,8 +582,8 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
  * This function will pretty print a OCSP response, suitable for
  * display to a human.
  *
- * If the format is %GNUTLS_RESP_PRINT_FULL then all fields of the
- * response will be output, on multiple lines.
+ * If the format is %GNUTLS_PRINT_FULL then all fields of the response
+ * will be output, on multiple lines.
  *
  * The output @out->data needs to be deallocate using gnutls_free().
  *
