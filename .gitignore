@@ -108,6 +108,7 @@ doc/latex/gnutls.lof
 doc/latex/gnutls.lot
 doc/manpages/Makefile
 doc/manpages/Makefile.in
+doc/ocsp-api.texi
 doc/pgp-api.texi
 doc/printlist
 doc/reference/Makefile
