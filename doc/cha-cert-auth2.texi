@@ -6,7 +6,7 @@
 * PKCS 10 certificate requests::
 * PKIX certificate revocation lists::
 * OCSP certificate status checking::
-* PKCS 12 structures::
+* Managing encrypted keys::
 * The certtool application::
 * Hardware tokens::
 * Abstract key types::
@@ -277,8 +277,40 @@ automatically parsed when an OCSP Response is imported.
 
 @showfuncE{gnutls_ocsp_resp_init,gnutls_ocsp_resp_deinit,gnutls_ocsp_resp_import,gnutls_ocsp_resp_export,gnutls_ocsp_resp_print}
 
-@node PKCS 12 structures
-@section @acronym{PKCS} #12 structures
+@node Managing encrypted keys
+@section Managing encrypted keys
+@cindex Encrypted keys
+
+Transferring or storing private keys in plain might not be a
+good idea. Any access on the keys becomes a fatal compromise.
+Storing the keys in hardware tokens (see @ref{Hardware tokens})
+could solve the storage problem but it is not always practical
+or efficient enough. This section describes alternative ways
+that involve encryption of the private keys to store and
+transfer.
+
+There are two alternatives to use for key encryption, 
+PKCS #8 and #12 methods of private key encryption. The PKCS #8
+method only allows encryption of the private key, whilst the
+PKCS #12 method allows in addition the bundling of other
+data into the structure. That could be bundling together the
+certificate as well as the trusted CA certificate.
+
+@subheading @acronym{PKCS} #8 structures
+@cindex PKCS #8
+
+PKCS #8 keys can be imported and exported as normal private keys using
+the functions below. An addition to the normal import functions, are
+a password and a flags argument. The flags can be any element of the @code{gnutls_pkcs_encrypt_flags_t}
+enumeration. Note however, that GnuTLS only supports the PKCS #5 PBES2
+encryption scheme. Keys encrypted with the obsolete PBES1 scheme cannot 
+be decrypted.
+
+@showfuncB{gnutls_x509_privkey_import_pkcs8,gnutls_x509_privkey_export_pkcs8}
+
+@showenumdesc{gnutls_pkcs_encrypt_flags_t,Encryption flags}
+
+@subheading @acronym{PKCS} #12 structures
 @cindex PKCS #12
 
 A @acronym{PKCS} #12 structure @xcite{PKCS12} usually contains a user's
@@ -649,13 +681,14 @@ signing_key
 
 
 @node Hardware tokens
-@section Hardware tokens
+@section Security modules
 @cindex PKCS #11 tokens
 @cindex hardware tokens
+@cindex hardware security modules
 @cindex smart cards
 
 @menu
-* Introduction on hardware tokens::
+* Introduction on security modules::
 * PKCS11 Initialization::
 * Reading objects::
 * Writing objects::
@@ -663,24 +696,27 @@ signing_key
 * The p11tool application::
 @end menu
 
-@node Introduction on hardware tokens
+@node Introduction on security modules
 @subsection Introduction
-This section copes with hardware token support in @acronym{GnuTLS} using 
-@acronym{PKCS} #11 @xcite{PKCS11}.
-@acronym{PKCS} #11 is plugin API allowing applications to access cryptographic
-operations on a token, as well as to objects residing on the token. A token can 
-be a real hardware token such as a smart card and a trusted platform module (TPM), 
-or it can be a software component such as @acronym{Gnome Keyring}. The objects residing
-on such token can be
-certificates, public keys, private keys or even plain data or  secret keys. Of those
-certificates and public/private key pairs can be used with @acronym{GnuTLS}. Its
-main advantage is that it allows operations on private key objects such as decryption
-and signing without exposing the key.
+In this section we present the smart-card and hardware security module support 
+in @acronym{GnuTLS} using @acronym{PKCS} #11 @xcite{PKCS11}. Hardware security
+modules and smart cards provide a way to store private keys and perform
+operations on them without exposing them. This allows decoupling cryptographic
+keys from the applications that use them providing an additional security layer.
+Since this can also be achieved in software components such as in Gnome keyring,
+we will use the term security module to describe such an isolation interface.
 
-A @acronym{PKCS} #11 module to access smart cards is provided by the 
-Opensc@footnote{@url{http://www.opensc-project.org}} project, and a 
-module to access the TPM chip on a PC is available from the Trousers@footnote{@url{http://trousers.sourceforge.net/}}
-project.
+@acronym{PKCS} #11 is plugin API allowing applications to access cryptographic
+operations on a security module, as well as to objects residing on it. PKCS
+#11 modules exist for hardware tokens such as smart cards@footnote{@url{http://www.opensc-project.org}},
+the trusted 
+platform module (TPM)@footnote{@url{http://trousers.sourceforge.net/}}
+as well as for software modules like @acronym{Gnome Keyring}. 
+The objects residing on a security module may be certificates, public keys, 
+private keys or secret keys. Of those certificates and public/private key 
+pairs can be used with @acronym{GnuTLS}. PKCS #11's main advantage is that 
+it allows operations on private key objects such as decryption
+and signing without exposing the key.
 
 Moreover @acronym{PKCS} #11 can be (ab)used to allow all applications in the same operating system to access
 shared cryptographic keys and certificates in a uniform way, as in @ref{fig:pkcs11-vision}.

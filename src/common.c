@@ -478,15 +478,14 @@ print_info (gnutls_session_t session, const char *hostname, int insecure)
           }
       }
 
-      if (kx == GNUTLS_KX_DHE_RSA || kx == GNUTLS_KX_DHE_DSS)
-        print_dh_info (session, "Ephemeral ");
-      else if (kx == GNUTLS_KX_ECDHE_RSA || kx == GNUTLS_KX_ECDHE_ECDSA)
-        print_ecdh_info(session, "Ephemeral ");
-
       print_cert_info (session, hostname, insecure);
 
       print_cert_vrfy (session);
 
+      if (kx == GNUTLS_KX_DHE_RSA || kx == GNUTLS_KX_DHE_DSS)
+        print_dh_info (session, "Ephemeral ");
+      else if (kx == GNUTLS_KX_ECDHE_RSA || kx == GNUTLS_KX_ECDHE_ECDSA)
+        print_ecdh_info(session, "Ephemeral ");
     }
 
   tmp = SU (gnutls_protocol_get_name (gnutls_protocol_get_version (session)));
@@ -571,16 +570,47 @@ print_cert_info (gnutls_session_t session, const char *hostname, int insecure)
 }
 
 void
-print_list (int verbose)
+print_list (const char* priorities, int verbose)
 {
-  {
     size_t i;
+    int ret;
+    unsigned int idx;
     const char *name;
-    char id[2];
+    const char *err;
+    unsigned char id[2];
     gnutls_kx_algorithm_t kx;
     gnutls_cipher_algorithm_t cipher;
     gnutls_mac_algorithm_t mac;
     gnutls_protocol_t version;
+    gnutls_priority_t pcache;
+
+    if (priorities != NULL)
+      {
+        printf ("Cipher suites for %s\n", priorities);
+        
+        ret = gnutls_priority_init(&pcache, priorities, &err);
+        if (ret < 0)
+          {
+            fprintf (stderr, "Syntax error at: %s\n", err);
+            exit(1);
+          }
+      
+        for (i=0;;i++)
+          {
+            ret = gnutls_priority_get_cipher_suite_index(pcache, i, &idx);
+            if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE) break;
+            if (ret == GNUTLS_E_UNKNOWN_CIPHER_SUITE) continue;
+            
+            name = gnutls_cipher_suite_info(idx, id, NULL, NULL, NULL, &version);
+            
+            if (name != NULL)
+              printf ("%-50s\t0x%02x, 0x%02x\t%s\n",
+                      name, (unsigned char) id[0], (unsigned char) id[1],
+                      gnutls_protocol_get_name (version));
+          }
+          
+        return;
+      }
 
     printf ("Cipher suites:\n");
     for (i = 0; (name = gnutls_cipher_suite_info
@@ -595,7 +625,6 @@ print_list (int verbose)
                   gnutls_kx_get_name (kx),
                   gnutls_cipher_get_name (cipher), gnutls_mac_get_name (mac));
       }
-  }
 
   {
     const gnutls_certificate_type_t *p = gnutls_certificate_type_list ();

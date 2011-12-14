@@ -214,6 +214,7 @@ gnutls_certificate_type_set_priority (gnutls_session_t session,
 }
 
 static const int supported_ecc_normal[] = {
+  GNUTLS_ECC_CURVE_SECP192R1,
   GNUTLS_ECC_CURVE_SECP224R1,
   GNUTLS_ECC_CURVE_SECP256R1,
   GNUTLS_ECC_CURVE_SECP384R1,
@@ -239,6 +240,7 @@ static const int supported_ecc_suiteb192[] = {
 };
 
 static const int supported_ecc_secure192[] = {
+  GNUTLS_ECC_CURVE_SECP384R1,
   GNUTLS_ECC_CURVE_SECP521R1,
   0
 };
@@ -376,11 +378,7 @@ static const int cipher_priority_secure128[] = {
 static const int cipher_priority_secure192[] = {
   GNUTLS_CIPHER_AES_256_CBC,
   GNUTLS_CIPHER_CAMELLIA_256_CBC,
-  GNUTLS_CIPHER_AES_128_CBC,
-  GNUTLS_CIPHER_CAMELLIA_128_CBC,
-  GNUTLS_CIPHER_AES_128_GCM,
   GNUTLS_CIPHER_AES_256_GCM,
-  GNUTLS_CIPHER_3DES_CBC,
   0
 };
 
@@ -446,6 +444,8 @@ static const int sign_priority_secure128[] = {
 };
 
 static const int sign_priority_secure192[] = {
+  GNUTLS_SIGN_RSA_SHA384,
+  GNUTLS_SIGN_ECDSA_SHA384,
   GNUTLS_SIGN_RSA_SHA512,
   GNUTLS_SIGN_ECDSA_SHA512,
   0
@@ -481,6 +481,7 @@ static const int mac_priority_secure128[] = {
 };
 
 static const int mac_priority_secure192[] = {
+  GNUTLS_MAC_SHA256,
   GNUTLS_MAC_SHA384,
   GNUTLS_MAC_AEAD,
   0
@@ -943,6 +944,11 @@ gnutls_priority_init (gnutls_priority_t * priority_cache,
                                "DISABLE_SAFE_RENEGOTIATION") == 0)
             {
               (*priority_cache)->sr = SR_DISABLED;
+            }
+          else if (strcasecmp (&broken_list[i][1],
+                               "SERVER_PRECEDENCE") == 0)
+            {
+              (*priority_cache)->server_precedence = 1;
             }
           else
             goto error;

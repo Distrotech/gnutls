@@ -93,7 +93,7 @@ _gnutls_get_private_rsa_params (gnutls_session_t session,
   ret = _gnutls_pubkey_is_over_rsa_512(session->internals.selected_cert_list[0].pubkey);
 
   if (_gnutls_cipher_suite_get_kx_algo
-      (&session->security_parameters.current_cipher_suite)
+      (session->security_parameters.cipher_suite)
       != GNUTLS_KX_RSA_EXPORT || ret < 0)
     {
       gnutls_assert ();
@@ -204,7 +204,7 @@ proc_rsa_export_client_kx (gnutls_session_t session, opaque * data,
 
       /* we do not need strong random numbers here.
        */
-      ret = gnutls_rnd (GNUTLS_RND_NONCE, session->key->key.data,
+      ret = _gnutls_rnd (GNUTLS_RND_NONCE, session->key->key.data,
                          session->key->key.size);
       if (ret < 0)
         {

@@ -555,7 +555,7 @@ gnutls_session_ticket_enable_server (gnutls_session_t session,
     }
   epriv.ptr = priv;
 
-  ret = gnutls_rnd (GNUTLS_RND_NONCE, priv->session_ticket_IV, IV_SIZE);
+  ret = _gnutls_rnd (GNUTLS_RND_NONCE, priv->session_ticket_IV, IV_SIZE);
   if (ret < 0)
     {
       gnutls_assert ();
@@ -658,6 +658,8 @@ _gnutls_send_new_session_ticket (gnutls_session_t session, int again)
       p += MAC_SIZE;
 
       data_size = p - data;
+      
+      session->internals.ticket_sent = 1;
     }
   return _gnutls_send_handshake (session, data_size ? bufel : NULL,
                                 GNUTLS_HANDSHAKE_NEW_SESSION_TICKET);

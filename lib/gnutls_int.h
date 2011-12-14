@@ -421,11 +421,6 @@ typedef struct record_parameters_st record_parameters_st;
 
 typedef struct
 {
-  uint8_t suite[2];
-} cipher_suite_st;
-
-typedef struct
-{
   uint8_t hash_algorithm;
   uint8_t sign_algorithm;       /* pk algorithm actually */
 } sign_algorithm_st;
@@ -477,7 +472,7 @@ typedef struct
    * moved here from internals in order to be restored
    * on resume;
    */
-  cipher_suite_st current_cipher_suite;
+  uint8_t cipher_suite[2];
   gnutls_compression_method_t compression_method;
   opaque master_secret[GNUTLS_MASTER_SIZE];
   opaque client_random[GNUTLS_RANDOM_SIZE];
@@ -575,6 +570,7 @@ struct gnutls_priority_st
   unsigned int allow_large_records:1;
   safe_renegotiation_t sr;
   unsigned int ssl3_record_version:1;
+  unsigned int server_precedence:1;
   unsigned int additional_verify_flags;
 };
 
@@ -586,6 +582,8 @@ typedef struct gnutls_dh_params_int
   /* [0] is the prime, [1] is the generator.
    */
   bigint_t params[2];
+  int q_bits; /* length of q in bits. If zero then length is unknown.
+              */
 } dh_params_st;
 
 typedef struct
@@ -659,6 +657,7 @@ typedef struct
   gnutls_buffer_st handshake_hash_buffer;       /* used to keep the last received handshake 
                                                  * message */
   unsigned int resumable:1;              /* TRUE or FALSE - if we can resume that session */
+  unsigned int ticket_sent:1;            /* whether a session ticket was sent */
   handshake_state_t handshake_state;    /* holds
                                          * a number which indicates where
                                          * the handshake procedure has been

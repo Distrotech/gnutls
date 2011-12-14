@@ -129,7 +129,7 @@ _gnutls_gen_dh_common_client_kx_int (gnutls_session_t session, gnutls_buffer_st*
   int ret;
 
   X = gnutls_calc_dh_secret (&x, session->key->client_g,
-                             session->key->client_p);
+                             session->key->client_p, 0);
   if (X == NULL || x == NULL)
     {
       gnutls_assert ();
@@ -163,7 +163,7 @@ _gnutls_gen_dh_common_client_kx_int (gnutls_session_t session, gnutls_buffer_st*
   _gnutls_mpi_release (&session->key->client_g);
 
   if (_gnutls_cipher_suite_get_kx_algo
-      (&session->security_parameters.current_cipher_suite)
+      (session->security_parameters.cipher_suite)
       != GNUTLS_KX_DHE_PSK)
     {
       ret = _gnutls_mpi_dprint (session->key->KEY, &session->key->key);
@@ -283,17 +283,17 @@ _gnutls_proc_dh_common_server_kx (gnutls_session_t session,
   return ret;
 }
 
-/* If the psk flag is set, then an empty psk_identity_hint will
- * be inserted */
 int
 _gnutls_dh_common_print_server_kx (gnutls_session_t session,
-                                   bigint_t g, bigint_t p, gnutls_buffer_st* data)
+                                   bigint_t g, bigint_t p, unsigned int q_bits,
+                                   gnutls_buffer_st* data)
 {
-  bigint_t x, X;
+  bigint_t x, Y;
   int ret;
 
-  X = gnutls_calc_dh_secret (&x, g, p);
-  if (X == NULL || x == NULL)
+  /* Y=g^x mod p */
+  Y = gnutls_calc_dh_secret (&x, g, p, q_bits);
+  if (Y == NULL || x == NULL)
     {
       gnutls_assert ();
       return GNUTLS_E_MEMORY_ERROR;
@@ -316,7 +316,7 @@ _gnutls_dh_common_print_server_kx (gnutls_session_t session,
       goto cleanup;
     }
 
-  ret = _gnutls_buffer_append_mpi(data, 16, X, 0);
+  ret = _gnutls_buffer_append_mpi(data, 16, Y, 0);
   if (ret < 0)
     {
       ret = gnutls_assert_val(ret);
@@ -324,7 +324,7 @@ _gnutls_dh_common_print_server_kx (gnutls_session_t session,
     }
 
 cleanup:
-  _gnutls_mpi_release (&X);
+  _gnutls_mpi_release (&Y);
 
   return data->length;
 }

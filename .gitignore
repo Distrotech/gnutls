@@ -542,3 +542,4 @@ tests/x509signself
 tests/slow/keygen
 tests/slow/gendh
 doc/reference/*.bak
+doc/manpages/gnutls_*.3

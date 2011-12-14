@@ -25,24 +25,16 @@
 #include <gnutls_errors.h>
 #include <x509/common.h>
 
-static int
-compare_algo (gnutls_session_t session, const void *i_A1,
-                      const void *i_A2);
-static void
-_gnutls_qsort (gnutls_session_t session, void *_base, size_t nmemb,
-               size_t size, int (*compar) (gnutls_session_t, const void *,
-                                           const void *));
-
 /* Cipher SUITES */
-#define GNUTLS_CIPHER_SUITE_ENTRY( name, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls ) \
-	{ #name, {name}, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls, GNUTLS_MAC_SHA256}
-#define GNUTLS_CIPHER_SUITE_ENTRY_PRF( name, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls, prf ) \
-	{ #name, {name}, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls, prf}
+#define ENTRY( name, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls ) \
+	{ #name, name, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls, GNUTLS_MAC_SHA256}
+#define ENTRY_PRF( name, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls, prf ) \
+	{ #name, name, block_algorithm, kx_algorithm, mac_algorithm, min_version, max_version, dtls, prf}
 
 typedef struct
 {
   const char *name;
-  cipher_suite_st id;
+  const uint8_t id[2];
   gnutls_cipher_algorithm_t block_algorithm;
   gnutls_kx_algorithm_t kx_algorithm;
   gnutls_mac_algorithm_t mac_algorithm;
@@ -228,467 +220,476 @@ typedef struct
 
 static const gnutls_cipher_suite_entry cs_algorithms[] = {
   /* DH_ANON */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_ARCFOUR_MD5,
+  ENTRY (GNUTLS_DH_ANON_ARCFOUR_MD5,
                              GNUTLS_CIPHER_ARCFOUR_128,
                              GNUTLS_KX_ANON_DH, GNUTLS_MAC_MD5,
                              GNUTLS_SSL3, GNUTLS_VERSION_MAX, 0),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_DH_ANON_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_DH_ANON_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_DH_ANON_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_CAMELLIA_128_CBC_SHA1,
+  ENTRY (GNUTLS_DH_ANON_CAMELLIA_128_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_128_CBC,
                              GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_CAMELLIA_256_CBC_SHA1,
+  ENTRY (GNUTLS_DH_ANON_CAMELLIA_256_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_256_CBC,
                              GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_DH_ANON_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_AES_256_CBC_SHA256,
+  ENTRY (GNUTLS_DH_ANON_AES_256_CBC_SHA256,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
 
   /* PSK */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_PSK_SHA_ARCFOUR_SHA1,
+  ENTRY (GNUTLS_PSK_SHA_ARCFOUR_SHA1,
                              GNUTLS_CIPHER_ARCFOUR, GNUTLS_KX_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 0),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_PSK_SHA_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_PSK_SHA_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_PSK_SHA_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_PSK_SHA_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_PSK_SHA_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_PSK_SHA_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_PSK_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_PSK_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_PSK,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_PSK_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_PSK_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_PSK,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_PSK_NULL_SHA256,
+  ENTRY (GNUTLS_PSK_NULL_SHA256,
                              GNUTLS_CIPHER_NULL, GNUTLS_KX_PSK,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
   /* DHE-PSK */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_PSK_SHA_ARCFOUR_SHA1,
+  ENTRY (GNUTLS_DHE_PSK_SHA_ARCFOUR_SHA1,
                              GNUTLS_CIPHER_ARCFOUR, GNUTLS_KX_DHE_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 0),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_PSK_SHA_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_PSK_SHA_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_DHE_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_PSK_SHA_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_PSK_SHA_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_DHE_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_PSK_SHA_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_PSK_SHA_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_DHE_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_PSK_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_DHE_PSK_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_DHE_PSK,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_PSK_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_DHE_PSK_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_DHE_PSK,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_PSK_NULL_SHA256,
+  ENTRY (GNUTLS_DHE_PSK_NULL_SHA256,
                              GNUTLS_CIPHER_NULL, GNUTLS_KX_DHE_PSK,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
   /* SRP */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_SRP,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_SRP,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_SRP,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_DSS_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_DSS_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_SRP_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_RSA_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_RSA_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_SRP_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_DSS_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_DSS_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_SRP_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_RSA_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_RSA_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_SRP_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_DSS_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_DSS_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_SRP_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_SRP_SHA_RSA_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_SRP_SHA_RSA_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_SRP_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
 
   /* DHE_DSS */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_ARCFOUR_SHA1,
+  ENTRY (GNUTLS_DHE_DSS_ARCFOUR_SHA1,
                              GNUTLS_CIPHER_ARCFOUR_128, GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 0),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_DSS_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_DSS_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_DSS_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_CAMELLIA_128_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_DSS_CAMELLIA_128_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_128_CBC,
                              GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_CAMELLIA_256_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_DSS_CAMELLIA_256_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_256_CBC,
                              GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_DHE_DSS_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_AES_256_CBC_SHA256,
+  ENTRY (GNUTLS_DHE_DSS_AES_256_CBC_SHA256,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
   /* DHE_RSA */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_RSA_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_RSA_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_RSA_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_CAMELLIA_128_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_RSA_CAMELLIA_128_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_128_CBC,
                              GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_CAMELLIA_256_CBC_SHA1,
+  ENTRY (GNUTLS_DHE_RSA_CAMELLIA_256_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_256_CBC,
                              GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_DHE_RSA_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_AES_256_CBC_SHA256,
+  ENTRY (GNUTLS_DHE_RSA_AES_256_CBC_SHA256,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
   /* RSA-NULL */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_NULL_MD5,
+  ENTRY (GNUTLS_RSA_NULL_MD5,
                              GNUTLS_CIPHER_NULL,
                              GNUTLS_KX_RSA, GNUTLS_MAC_MD5, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_NULL_SHA1,
+  ENTRY (GNUTLS_RSA_NULL_SHA1,
                              GNUTLS_CIPHER_NULL,
                              GNUTLS_KX_RSA, GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_NULL_SHA256,
+  ENTRY (GNUTLS_RSA_NULL_SHA256,
                              GNUTLS_CIPHER_NULL,
                              GNUTLS_KX_RSA, GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
 
   /* RSA-EXPORT */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_EXPORT_ARCFOUR_40_MD5,
+  ENTRY (GNUTLS_RSA_EXPORT_ARCFOUR_40_MD5,
                              GNUTLS_CIPHER_ARCFOUR_40,
                              GNUTLS_KX_RSA_EXPORT, GNUTLS_MAC_MD5,
                              GNUTLS_SSL3, GNUTLS_TLS1_0, 0),
 
   /* RSA */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_ARCFOUR_SHA1,
+  ENTRY (GNUTLS_RSA_ARCFOUR_SHA1,
                              GNUTLS_CIPHER_ARCFOUR_128,
                              GNUTLS_KX_RSA, GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 0),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_ARCFOUR_MD5,
+  ENTRY (GNUTLS_RSA_ARCFOUR_MD5,
                              GNUTLS_CIPHER_ARCFOUR_128,
                              GNUTLS_KX_RSA, GNUTLS_MAC_MD5, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 0),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_3DES_EDE_CBC_SHA1,
+  ENTRY (GNUTLS_RSA_3DES_EDE_CBC_SHA1,
                              GNUTLS_CIPHER_3DES_CBC,
                              GNUTLS_KX_RSA, GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_AES_128_CBC_SHA1,
+  ENTRY (GNUTLS_RSA_AES_128_CBC_SHA1,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_AES_256_CBC_SHA1,
+  ENTRY (GNUTLS_RSA_AES_256_CBC_SHA1,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_SSL3,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_CAMELLIA_128_CBC_SHA1,
+  ENTRY (GNUTLS_RSA_CAMELLIA_128_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_128_CBC, GNUTLS_KX_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_CAMELLIA_256_CBC_SHA1,
+  ENTRY (GNUTLS_RSA_CAMELLIA_256_CBC_SHA1,
                              GNUTLS_CIPHER_CAMELLIA_256_CBC, GNUTLS_KX_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_RSA_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_RSA,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_AES_256_CBC_SHA256,
+  ENTRY (GNUTLS_RSA_AES_256_CBC_SHA256,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_RSA,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
 /* GCM */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_RSA_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_RSA_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_RSA,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_RSA_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_DHE_RSA_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_DHE_RSA,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DHE_DSS_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_DHE_DSS_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_DHE_DSS,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_DH_ANON_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_DH_ANON_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_ANON_DH,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
 /* ECC-ANON */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDH_ANON_NULL_SHA,
+  ENTRY (GNUTLS_ECDH_ANON_NULL_SHA,
                              GNUTLS_CIPHER_NULL, GNUTLS_KX_ANON_ECDH,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDH_ANON_3DES_EDE_CBC_SHA,
+  ENTRY (GNUTLS_ECDH_ANON_3DES_EDE_CBC_SHA,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_ANON_ECDH,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDH_ANON_AES_128_CBC_SHA,
+  ENTRY (GNUTLS_ECDH_ANON_AES_128_CBC_SHA,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ANON_ECDH,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDH_ANON_AES_256_CBC_SHA,
+  ENTRY (GNUTLS_ECDH_ANON_AES_256_CBC_SHA,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_ANON_ECDH,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
 /* ECC-RSA */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_RSA_NULL_SHA,
+  ENTRY (GNUTLS_ECDHE_RSA_NULL_SHA,
                              GNUTLS_CIPHER_NULL, GNUTLS_KX_ECDHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_RSA_3DES_EDE_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_RSA_3DES_EDE_CBC_SHA,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_ECDHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_RSA_AES_128_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_RSA_AES_128_CBC_SHA,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ECDHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_RSA_AES_256_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_RSA_AES_256_CBC_SHA,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_ECDHE_RSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
   /* ECDHE-ECDSA */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_ECDSA_NULL_SHA,
+  ENTRY (GNUTLS_ECDHE_ECDSA_NULL_SHA,
                              GNUTLS_CIPHER_NULL, GNUTLS_KX_ECDHE_ECDSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_ECDSA_3DES_EDE_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_ECDSA_3DES_EDE_CBC_SHA,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_ECDHE_ECDSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_ECDSA_AES_128_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_ECDSA_AES_128_CBC_SHA,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ECDHE_ECDSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_ECDSA_AES_256_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_ECDSA_AES_256_CBC_SHA,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_ECDHE_ECDSA,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
   /* More ECC */
 
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_ECDSA_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_ECDHE_ECDSA_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ECDHE_ECDSA,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_RSA_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_ECDHE_RSA_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ECDHE_RSA,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_ECDSA_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_ECDHE_ECDSA_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_ECDHE_ECDSA,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_RSA_AES_128_GCM_SHA256,
+  ENTRY (GNUTLS_ECDHE_RSA_AES_128_GCM_SHA256,
                              GNUTLS_CIPHER_AES_128_GCM, GNUTLS_KX_ECDHE_RSA,
                              GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                              GNUTLS_VERSION_MAX, 1),
   /* ECC - PSK */
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_PSK_3DES_EDE_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_PSK_3DES_EDE_CBC_SHA,
                              GNUTLS_CIPHER_3DES_CBC, GNUTLS_KX_ECDHE_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_PSK_AES_128_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_PSK_AES_128_CBC_SHA,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ECDHE_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_PSK_AES_256_CBC_SHA,
+  ENTRY (GNUTLS_ECDHE_PSK_AES_256_CBC_SHA,
                              GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_ECDHE_PSK,
                              GNUTLS_MAC_SHA1, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_PSK_AES_128_CBC_SHA256,
+  ENTRY (GNUTLS_ECDHE_PSK_AES_128_CBC_SHA256,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ECDHE_PSK,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY_PRF (GNUTLS_ECDHE_PSK_AES_256_CBC_SHA384,
+  ENTRY_PRF (GNUTLS_ECDHE_PSK_AES_256_CBC_SHA384,
                              GNUTLS_CIPHER_AES_128_CBC, GNUTLS_KX_ECDHE_PSK,
                              GNUTLS_MAC_SHA384, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1, GNUTLS_MAC_SHA384),
-  GNUTLS_CIPHER_SUITE_ENTRY (GNUTLS_ECDHE_PSK_NULL_SHA256,
+  ENTRY (GNUTLS_ECDHE_PSK_NULL_SHA256,
                              GNUTLS_CIPHER_NULL, GNUTLS_KX_ECDHE_PSK,
                              GNUTLS_MAC_SHA256, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1),
-  GNUTLS_CIPHER_SUITE_ENTRY_PRF (GNUTLS_ECDHE_PSK_NULL_SHA384,
+  ENTRY_PRF (GNUTLS_ECDHE_PSK_NULL_SHA384,
                              GNUTLS_CIPHER_NULL, GNUTLS_KX_ECDHE_PSK,
                              GNUTLS_MAC_SHA384, GNUTLS_TLS1_0,
                              GNUTLS_VERSION_MAX, 1, GNUTLS_MAC_SHA384),
-  GNUTLS_CIPHER_SUITE_ENTRY_PRF(GNUTLS_ECDHE_ECDSA_AES_256_GCM_SHA384,
+  ENTRY_PRF(GNUTLS_ECDHE_ECDSA_AES_256_GCM_SHA384,
                                 GNUTLS_CIPHER_AES_256_GCM, GNUTLS_KX_ECDHE_ECDSA,
                                 GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                                 GNUTLS_VERSION_MAX, 1, GNUTLS_DIG_SHA384),
-  GNUTLS_CIPHER_SUITE_ENTRY_PRF(GNUTLS_ECDHE_RSA_AES_256_GCM_SHA384,
+  ENTRY_PRF(GNUTLS_ECDHE_RSA_AES_256_GCM_SHA384,
                                 GNUTLS_CIPHER_AES_256_GCM, GNUTLS_KX_ECDHE_RSA,
                                 GNUTLS_MAC_AEAD, GNUTLS_TLS1_2,
                                 GNUTLS_VERSION_MAX, 1, GNUTLS_DIG_SHA384),
-  GNUTLS_CIPHER_SUITE_ENTRY_PRF(GNUTLS_ECDHE_ECDSA_AES_256_CBC_SHA384,
+  ENTRY_PRF(GNUTLS_ECDHE_ECDSA_AES_256_CBC_SHA384,
                                 GNUTLS_CIPHER_AES_256_CBC, GNUTLS_KX_ECDHE_ECDSA,
                                 GNUTLS_MAC_SHA384, GNUTLS_TLS1_2,
                                 GNUTLS_VERSION_MAX, 1, GNUTLS_DIG_SHA384),
 
-  {0, {{0, 0}}, 0, 0, 0, 0, 0, 0}
+  {0, {0, 0}, 0, 0, 0, 0, 0, 0}
 };
 
-#define GNUTLS_CIPHER_SUITE_LOOP(b) \
+#define CIPHER_SUITE_LOOP(b) \
         const gnutls_cipher_suite_entry *p; \
                 for(p = cs_algorithms; p->name != NULL; p++) { b ; }
 
-#define GNUTLS_CIPHER_SUITE_ALG_LOOP(a) \
-                        GNUTLS_CIPHER_SUITE_LOOP( if( (p->id.suite[0] == suite->suite[0]) && (p->id.suite[1] == suite->suite[1])) { a; break; } )
+#define CIPHER_SUITE_ALG_LOOP(a) \
+        CIPHER_SUITE_LOOP( if( (p->id[0] == suite[0]) && (p->id[1] == suite[1])) { a; break; } )
 
 
 /* Cipher Suite's functions */
 gnutls_cipher_algorithm_t
-_gnutls_cipher_suite_get_cipher_algo (const cipher_suite_st * suite)
+_gnutls_cipher_suite_get_cipher_algo (const uint8_t suite[2])
 {
   int ret = 0;
-  GNUTLS_CIPHER_SUITE_ALG_LOOP (ret = p->block_algorithm);
-  return ret;
-}
-
-static int
-_gnutls_cipher_suite_is_version_supported (gnutls_session_t session, const cipher_suite_st * suite)
-{
-  int ret = 0;
-  int version = gnutls_protocol_get_version( session);
-  
-  GNUTLS_CIPHER_SUITE_ALG_LOOP (if (version >= p->min_version
-                                 && version <= p->max_version) ret = 1;
-                                 if (IS_DTLS(session) && p->dtls==0) ret = 0;);
+  CIPHER_SUITE_ALG_LOOP (ret = p->block_algorithm);
   return ret;
 }
 
 gnutls_kx_algorithm_t
-_gnutls_cipher_suite_get_kx_algo (const cipher_suite_st * suite)
+_gnutls_cipher_suite_get_kx_algo (const uint8_t suite[2])
 {
   int ret = 0;
 
-  GNUTLS_CIPHER_SUITE_ALG_LOOP (ret = p->kx_algorithm);
+  CIPHER_SUITE_ALG_LOOP (ret = p->kx_algorithm);
   return ret;
 
 }
 
 gnutls_mac_algorithm_t
-_gnutls_cipher_suite_get_prf (const cipher_suite_st * suite)
+_gnutls_cipher_suite_get_prf (const uint8_t suite[2])
 {
   int ret = 0;
 
-  GNUTLS_CIPHER_SUITE_ALG_LOOP (ret = p->prf);
+  CIPHER_SUITE_ALG_LOOP (ret = p->prf);
   return ret;
 
 }
 
 gnutls_mac_algorithm_t
-_gnutls_cipher_suite_get_mac_algo (const cipher_suite_st * suite)
+_gnutls_cipher_suite_get_mac_algo (const uint8_t suite[2])
 {                               /* In bytes */
   int ret = 0;
-  GNUTLS_CIPHER_SUITE_ALG_LOOP (ret = p->mac_algorithm);
+  CIPHER_SUITE_ALG_LOOP (ret = p->mac_algorithm);
   return ret;
 
 }
 
 const char *
-_gnutls_cipher_suite_get_name (cipher_suite_st * suite)
+_gnutls_cipher_suite_get_name (const uint8_t suite[2])
 {
   const char *ret = NULL;
 
   /* avoid prefix */
-  GNUTLS_CIPHER_SUITE_ALG_LOOP (ret = p->name + sizeof ("GNUTLS_") - 1);
+  CIPHER_SUITE_ALG_LOOP (ret = p->name + sizeof ("GNUTLS_") - 1);
 
   return ret;
 }
+
+
+static const gnutls_cipher_suite_entry *
+cipher_suite_get (gnutls_kx_algorithm_t kx_algorithm,
+                              gnutls_cipher_algorithm_t cipher_algorithm,
+                              gnutls_mac_algorithm_t mac_algorithm)
+{
+  const gnutls_cipher_suite_entry *ret = NULL;
+
+  CIPHER_SUITE_LOOP (
+      if (kx_algorithm == p->kx_algorithm &&
+          cipher_algorithm == p->block_algorithm && mac_algorithm == p->mac_algorithm)
+        {
+          ret = p;
+          break;
+        }
+  );
+
+  return ret;
+}
+
 
 /**
  * gnutls_cipher_suite_get_name:
@@ -707,18 +708,13 @@ gnutls_cipher_suite_get_name (gnutls_kx_algorithm_t kx_algorithm,
                               gnutls_cipher_algorithm_t cipher_algorithm,
                               gnutls_mac_algorithm_t mac_algorithm)
 {
-  const char *ret = NULL;
+const gnutls_cipher_suite_entry * ce;
 
-  GNUTLS_CIPHER_SUITE_LOOP (
-      if (kx_algorithm == p->kx_algorithm &&
-          cipher_algorithm == p->block_algorithm && mac_algorithm == p->mac_algorithm)
-        {
-          ret = p->name + sizeof ("GNUTLS_") - 1;
-          break;
-        }
-  );
-
-  return ret;
+  ce = cipher_suite_get (kx_algorithm, cipher_algorithm, mac_algorithm);
+  if (ce == NULL)
+    return NULL;
+  else 
+    return ce->name + sizeof ("GNUTLS_") - 1;
 }
 
 /**
@@ -741,7 +737,7 @@ gnutls_cipher_suite_get_name (gnutls_kx_algorithm_t kx_algorithm,
  **/
 const char *
 gnutls_cipher_suite_info (size_t idx,
-                          char *cs_id,
+                          unsigned char *cs_id,
                           gnutls_kx_algorithm_t * kx,
                           gnutls_cipher_algorithm_t * cipher,
                           gnutls_mac_algorithm_t * mac,
@@ -751,7 +747,7 @@ gnutls_cipher_suite_info (size_t idx,
     return NULL;
 
   if (cs_id)
-    memcpy (cs_id, cs_algorithms[idx].id.suite, 2);
+    memcpy (cs_id, cs_algorithms[idx].id, 2);
   if (kx)
     *kx = cs_algorithms[idx].kx_algorithm;
   if (cipher)
@@ -766,12 +762,12 @@ gnutls_cipher_suite_info (size_t idx,
 
 
 static inline int
-_gnutls_cipher_suite_is_ok (cipher_suite_st * suite)
+_gnutls_cipher_suite_is_ok (const uint8_t suite[2])
 {
   size_t ret;
   const char *name = NULL;
 
-  GNUTLS_CIPHER_SUITE_ALG_LOOP (name = p->name);
+  CIPHER_SUITE_ALG_LOOP (name = p->name);
   if (name != NULL)
     ret = 0;
   else
@@ -781,65 +777,38 @@ _gnutls_cipher_suite_is_ok (cipher_suite_st * suite)
 }
 
 int
-_gnutls_supported_ciphersuites_sorted (gnutls_session_t session,
-                                       uint8_t* cipher_suites, int max_cipher_suites_size)
-{
-
-  int count;
-
-  count = _gnutls_supported_ciphersuites (session, cipher_suites, max_cipher_suites_size);
-  if (count < 0)
-    return gnutls_assert_val(count);
-
-  _gnutls_qsort (session, cipher_suites, count/2,
-                 2, compare_algo);
-
-  return count;
-}
-
-int
 _gnutls_supported_ciphersuites (gnutls_session_t session,
                                 uint8_t *cipher_suites, int max_cipher_suite_size)
 {
 
-  unsigned int i, ret_count, j;
+  unsigned int i, ret_count, j, z, k=0;
+  const gnutls_cipher_suite_entry * ce;
+  int version = gnutls_protocol_get_version( session);
 
-  if (max_cipher_suite_size < (CIPHER_SUITES_COUNT)*2)
-    return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
+  for (i = 0; i < session->internals.priorities.kx.algorithms; i++)
+    for (j = 0; j < session->internals.priorities.cipher.algorithms; j++)
+      for (z = 0; z < session->internals.priorities.mac.algorithms; z++) 
+        {
+          ce = cipher_suite_get(session->internals.priorities.kx.priority[i],
+                                   session->internals.priorities.cipher.priority[j],
+                                   session->internals.priorities.mac.priority[z]);
 
-  for (i = j = 0; i < CIPHER_SUITES_COUNT; i++)
-    {
-      /* remove private cipher suites, if requested.
-       */
-      if (cs_algorithms[i].id.suite[0] == 0xFF &&
-          session->internals.enable_private == 0)
-        continue;
+          if (ce == NULL) continue;
 
-      /* remove cipher suites which do not support the
-       * protocol version used.
-       */
-      if (_gnutls_cipher_suite_is_version_supported (session, &cs_algorithms[i].id)
-          == 0)
-        continue;
+          if (!(version >= ce->min_version && version <= ce->max_version)) 
+            continue;
 
-      if (_gnutls_kx_priority
-          (session, _gnutls_cipher_suite_get_kx_algo (&cs_algorithms[i].id)) < 0)
-        continue;
+          if (IS_DTLS(session) && ce->dtls==0) 
+            continue;
 
-      if (_gnutls_mac_priority
-          (session, _gnutls_cipher_suite_get_mac_algo (&cs_algorithms[i].id)) < 0)
-        continue;
+          if (k+2 > max_cipher_suite_size)
+            return gnutls_assert_val(GNUTLS_E_INTERNAL_ERROR);
 
-      if (_gnutls_cipher_priority
-          (session,
-           _gnutls_cipher_suite_get_cipher_algo (&cs_algorithms[i].id)) < 0)
-        continue;
+          memcpy (&cipher_suites[k], ce->id, 2);
+          k+=2;
+        }
 
-      memcpy (&cipher_suites[j], &cs_algorithms[i].id.suite, 2);
-      j+=2;
-    }
-
-  ret_count = j;
+  ret_count = k;
 
   /* This function can no longer return 0 cipher suites.
    * It returns an error code instead.
@@ -852,128 +821,48 @@ _gnutls_supported_ciphersuites (gnutls_session_t session,
   return ret_count;
 }
 
-#define SWAP(x, y) memcpy(tmp,x,size); \
-		   memcpy(x,y,size); \
-		   memcpy(y,tmp,size);
-
-#define MAX_ELEM_SIZE 4
-static inline int
-_gnutls_partition (gnutls_session_t session, void *_base,
-                   size_t nmemb, size_t size,
-                   int (*compar) (gnutls_session_t,
-                                  const void *, const void *))
+/**
+ * gnutls_priority_get_cipher_suite:
+ * @pcache: is a #gnutls_prioritity_t structure.
+ * @idx: is an index number.
+ * @sidx: internal index of cipher suite to get information about.
+ *
+ * Provides the internal ciphersuite index to be used with
+ * gnutls_cipher_suite_info(). The index @idx provided is an 
+ * index kept at the priorities structure. It might be that a valid
+ * priorities index does not correspond to a ciphersuite and in 
+ * that case %GNUTLS_E_UNKNOWN_CIPHER_SUITE will be returned. 
+ * Once the last available index is crossed then 
+ * %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be returned.
+ *
+ * Returns: On success it returns %GNUTLS_E_SUCCESS (0), or a negative error value otherwise.
+ **/
+int
+gnutls_priority_get_cipher_suite_index (gnutls_priority_t pcache, unsigned int idx, unsigned int *sidx)
 {
-  uint8_t *base = _base;
-  uint8_t tmp[MAX_ELEM_SIZE];
-  uint8_t ptmp[MAX_ELEM_SIZE];
-  unsigned int pivot;
-  unsigned int i, j;
-  unsigned int full;
+int mac_idx, cipher_idx, kx_idx, i;
+int total = pcache->mac.algorithms * pcache->cipher.algorithms * pcache->kx.algorithms;
 
-  i = pivot = 0;
-  j = full = (nmemb - 1) * size;
+  if (idx >= total)
+    return GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE;
 
-  memcpy (ptmp, &base[0], size);        /* set pivot item */
-
-  while (i < j)
-    {
-      while ((compar (session, &base[i], ptmp) <= 0) && (i < full))
-        {
-          i += size;
-        }
-      while ((compar (session, &base[j], ptmp) >= 0) && (j > 0))
-        j -= size;
-
-      if (i < j)
-        {
-          SWAP (&base[j], &base[i]);
-        }
-    }
-
-  if (j > pivot)
-    {
-      SWAP (&base[pivot], &base[j]);
-      pivot = j;
-    }
-  else if (i < pivot)
-    {
-      SWAP (&base[pivot], &base[i]);
-      pivot = i;
-    }
-  return pivot / size;
-}
-
-static void
-_gnutls_qsort (gnutls_session_t session, void *_base, size_t nmemb,
-               size_t size, int (*compar) (gnutls_session_t, const void *,
-                                           const void *))
-{
-  unsigned int pivot;
-  char *base = _base;
-  size_t snmemb = nmemb;
-
-#ifdef DEBUG
-  if (size > MAX_ELEM_SIZE)
-    {
-      gnutls_assert ();
-      _gnutls_debug_log ("QSORT BUG\n");
-      exit (1);
-    }
-#endif
-
-  if (snmemb <= 1)
-    return;
-  pivot = _gnutls_partition (session, _base, nmemb, size, compar);
-
-  _gnutls_qsort (session, base, pivot < nmemb ? pivot + 1 : pivot, size,
-                 compar);
-  _gnutls_qsort (session, &base[(pivot + 1) * size], nmemb - pivot - 1,
-                 size, compar);
-}
-
-
-/* a compare function for KX algorithms (using priorities). 
- * For use with qsort 
- */
-static int
-compare_algo (gnutls_session_t session, const void *i_A1,
-                      const void *i_A2)
-{
-  cipher_suite_st A1, A2;
-  gnutls_kx_algorithm_t kA1, kA2;
-  gnutls_cipher_algorithm_t cA1, cA2;
-  gnutls_mac_algorithm_t mA1, mA2;
-  int p1, p2;
+  mac_idx = idx % pcache->mac.algorithms;
   
-  memcpy(A1.suite, i_A1, 2);
-  memcpy(A2.suite, i_A2, 2);
+  idx /= pcache->mac.algorithms;
+  cipher_idx = idx % pcache->cipher.algorithms;
 
-  kA1 = _gnutls_cipher_suite_get_kx_algo (&A1);
-  kA2 = _gnutls_cipher_suite_get_kx_algo (&A2);
-  
-  cA1 = _gnutls_cipher_suite_get_cipher_algo (&A1);
-  cA2 = _gnutls_cipher_suite_get_cipher_algo (&A2);
-  
-  mA1 = _gnutls_cipher_suite_get_mac_algo (&A1);
-  mA2 = _gnutls_cipher_suite_get_mac_algo (&A2);
+  idx /= pcache->cipher.algorithms;
+  kx_idx = idx % pcache->kx.algorithms;
 
-  p1 = (_gnutls_kx_priority (session, kA1) + 1) * 256;
-  p2 = (_gnutls_kx_priority (session, kA2) + 1) * 256;
-  p1 += (_gnutls_cipher_priority (session, cA1) + 1) * 16;
-  p2 += (_gnutls_cipher_priority (session, cA2) + 1) * 16;
-  p1 += _gnutls_mac_priority (session, mA1);
-  p2 += _gnutls_mac_priority (session, mA2);
-
-  if (p1 > p2)
+  for (i=0;i<CIPHER_SUITES_COUNT;i++)
     {
-      return 1;
-    }
-  else
-    {
-      if (p1 == p2)
+      if (cs_algorithms[i].kx_algorithm == pcache->kx.priority[kx_idx] &&
+          cs_algorithms[i].block_algorithm == pcache->cipher.priority[cipher_idx] &&
+          cs_algorithms[i].mac_algorithm == pcache->mac.priority[mac_idx])
         {
+          *sidx = i;
           return 0;
         }
-      return -1;
     }
+  return GNUTLS_E_UNKNOWN_CIPHER_SUITE;
 }

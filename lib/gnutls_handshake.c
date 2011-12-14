@@ -128,14 +128,13 @@ resume_copy_required_values (gnutls_session_t session)
    * That is because the client must see these in our
    * hello message.
    */
-  memcpy (session->security_parameters.current_cipher_suite.suite,
-          session->internals.resumed_security_parameters.current_cipher_suite.
-          suite, 2);
+  memcpy (session->security_parameters.cipher_suite,
+          session->internals.resumed_security_parameters.cipher_suite, 2);
   session->security_parameters.compression_method = session->internals.resumed_security_parameters.compression_method;
 
   _gnutls_epoch_set_cipher_suite (session, EPOCH_NEXT,
-                                  &session->
-                                  internals.resumed_security_parameters.current_cipher_suite);
+                                  session->
+                                  internals.resumed_security_parameters.cipher_suite);
   _gnutls_epoch_set_compression (session, EPOCH_NEXT,
                                  session->
                                  internals.resumed_security_parameters.compression_method);
@@ -273,7 +272,7 @@ _gnutls_finished (gnutls_session_t session, int type, void *ret, int sending)
     }
   else 
     {
-      int algorithm = _gnutls_cipher_suite_get_prf(&session->security_parameters.current_cipher_suite);
+      int algorithm = _gnutls_cipher_suite_get_prf(session->security_parameters.cipher_suite);
 
       rc = _gnutls_hash_fast( algorithm, session->internals.handshake_hash_buffer.data, len, concat);
       if (rc < 0)
@@ -313,7 +312,7 @@ _gnutls_tls_create_random (opaque * dst)
   /* generate server random value */
   _gnutls_write_uint32 (tim, dst);
 
-  ret = gnutls_rnd (GNUTLS_RND_NONCE, &dst[4], GNUTLS_RANDOM_SIZE - 4);
+  ret = _gnutls_rnd (GNUTLS_RND_NONCE, &dst[4], GNUTLS_RANDOM_SIZE - 4);
   if (ret < 0)
     {
       gnutls_assert ();
@@ -772,7 +771,6 @@ server_find_pk_algos_in_ciphersuites (const opaque *
 {
   unsigned int j;
   gnutls_kx_algorithm_t kx;
-  cipher_suite_st cs;
   int max = *algos_size;
 
   if (datalen % 2 != 0)
@@ -784,8 +782,7 @@ server_find_pk_algos_in_ciphersuites (const opaque *
   *algos_size = 0;
   for (j = 0; j < datalen; j += 2)
     {
-      memcpy (&cs.suite, &data[j], 2);
-      kx = _gnutls_cipher_suite_get_kx_algo (&cs);
+      kx = _gnutls_cipher_suite_get_kx_algo (&data[j]);
       if (_gnutls_map_kx_get_cred (kx, 1) == GNUTLS_CRD_CERTIFICATE)
         {
           algos[(*algos_size)++] = _gnutls_map_pk_get_pk (kx);
@@ -807,7 +804,6 @@ _gnutls_server_select_suite (gnutls_session_t session, opaque * data,
 {
   int i, j, ret, cipher_suites_size;
   size_t pk_algos_size;
-  cipher_suite_st cs;
   uint8_t cipher_suites[MAX_CIPHERSUITE_SIZE];
   int retval, err;
   gnutls_pk_algorithm_t pk_algos[MAX_ALGOS];        /* will hold the pk algorithms
@@ -876,35 +872,61 @@ _gnutls_server_select_suite (gnutls_session_t session, opaque * data,
       return GNUTLS_E_UNEXPECTED_PACKET_LENGTH;
     }
 
-  memset (session->security_parameters.current_cipher_suite.suite, 0, 2);
+  memset (session->security_parameters.cipher_suite, 0, 2);
 
   retval = GNUTLS_E_UNKNOWN_CIPHER_SUITE;
 
   _gnutls_handshake_log ("HSK[%p]: Requested cipher suites[size: %d]: \n", session, (int)datalen);
-  for (j = 0; j < datalen; j += 2)
+
+  if (session->internals.priorities.server_precedence == 0)
     {
-      memcpy (&cs.suite, &data[j], 2);
-      _gnutls_handshake_log ("\t0x%.2x, 0x%.2x %s\n", data[j], data[j+1], _gnutls_cipher_suite_get_name (&cs));
-      for (i = 0; i < cipher_suites_size; i+=2)
+      for (j = 0; j < datalen; j += 2)
         {
-          if (memcmp (&cipher_suites[i], &data[j], 2) == 0)
+          _gnutls_handshake_log ("\t0x%.2x, 0x%.2x %s\n", data[j], data[j+1], _gnutls_cipher_suite_get_name (&data[j]));
+          for (i = 0; i < cipher_suites_size; i+=2)
             {
-              _gnutls_handshake_log
-                ("HSK[%p]: Selected cipher suite: %s\n", session,
-                 _gnutls_cipher_suite_get_name (&cs));
-              memcpy (session->security_parameters.current_cipher_suite.suite,
+              if (memcmp (&cipher_suites[i], &data[j], 2) == 0)
+                {
+                  _gnutls_handshake_log
+                    ("HSK[%p]: Selected cipher suite: %s\n", session,
+                    _gnutls_cipher_suite_get_name (&data[j]));
+                  memcpy (session->security_parameters.cipher_suite,
                       &cipher_suites[i], 2);
-              _gnutls_epoch_set_cipher_suite (session, EPOCH_NEXT,
-                                              &session->
-                                              security_parameters.current_cipher_suite);
+                  _gnutls_epoch_set_cipher_suite (session, EPOCH_NEXT,
+                                                  session->
+                                                  security_parameters.cipher_suite);
 
 
-              retval = 0;
-              goto finish;
+                  retval = 0;
+                  goto finish;
+                }
             }
         }
     }
+  else /* server selects */
+    {
+      for (i = 0; i < cipher_suites_size; i+=2)
+        {
+          for (j = 0; j < datalen; j += 2)
+            {
+              if (memcmp (&cipher_suites[i], &data[j], 2) == 0)
+                {
+                  _gnutls_handshake_log
+                    ("HSK[%p]: Selected cipher suite: %s\n", session,
+                    _gnutls_cipher_suite_get_name (&data[j]));
+                  memcpy (session->security_parameters.cipher_suite,
+                      &cipher_suites[i], 2);
+                  _gnutls_epoch_set_cipher_suite (session, EPOCH_NEXT,
+                                                  session->
+                                                  security_parameters.cipher_suite);
 
+
+                  retval = 0;
+                  goto finish;
+                }
+            }
+        }
+    }
 finish:
 
   if (retval != 0)
@@ -917,8 +939,8 @@ finish:
    */
   if (_gnutls_get_kx_cred
       (session,
-       _gnutls_cipher_suite_get_kx_algo (&session->
-                                         security_parameters.current_cipher_suite),
+       _gnutls_cipher_suite_get_kx_algo (session->
+                                         security_parameters.cipher_suite),
        &err) == NULL && err != 0)
     {
       gnutls_assert ();
@@ -932,8 +954,8 @@ finish:
    */
   session->internals.auth_struct =
     _gnutls_kx_auth_struct (_gnutls_cipher_suite_get_kx_algo
-                            (&session->
-                             security_parameters.current_cipher_suite));
+                            (session->
+                             security_parameters.cipher_suite));
   if (session->internals.auth_struct == NULL)
     {
 
@@ -965,24 +987,47 @@ _gnutls_server_select_comp_method (gnutls_session_t session,
       return x;
     }
 
-  for (j = 0; j < datalen; j++)
+  if (session->internals.priorities.server_precedence == 0)
+    {
+      for (j = 0; j < datalen; j++)
+        {
+          for (i = 0; i < x; i++)
+            {
+              if (comps[i] == data[j])
+                {
+                  gnutls_compression_method_t method =
+                    _gnutls_compression_get_id (comps[i]);
+
+                  _gnutls_epoch_set_compression (session, EPOCH_NEXT, method);
+                  session->security_parameters.compression_method = method;
+
+                  _gnutls_handshake_log
+                    ("HSK[%p]: Selected Compression Method: %s\n", session,
+                    gnutls_compression_get_name (method));
+                  return 0;
+                }
+            }
+        }
+    }
+  else
     {
       for (i = 0; i < x; i++)
         {
-          if (comps[i] == data[j])
+          for (j = 0; j < datalen; j++)
             {
-              gnutls_compression_method_t method =
-                _gnutls_compression_get_id (comps[i]);
+              if (comps[i] == data[j])
+                {
+                  gnutls_compression_method_t method =
+                    _gnutls_compression_get_id (comps[i]);
 
-              _gnutls_epoch_set_compression (session, EPOCH_NEXT, method);
-              session->security_parameters.compression_method = method;
+                  _gnutls_epoch_set_compression (session, EPOCH_NEXT, method);
+                  session->security_parameters.compression_method = method;
 
-              _gnutls_handshake_log
-                ("HSK[%p]: Selected Compression Method: %s\n", session,
-                 gnutls_compression_get_name (method));
-
-
-              return 0;
+                  _gnutls_handshake_log
+                    ("HSK[%p]: Selected Compression Method: %s\n", session,
+                    gnutls_compression_get_name (method));
+                  return 0;
+                }
             }
         }
     }
@@ -1343,15 +1388,15 @@ _gnutls_client_set_ciphersuite (gnutls_session_t session, opaque suite[2])
       return GNUTLS_E_UNKNOWN_CIPHER_SUITE;
     }
 
-  memcpy (session->security_parameters.current_cipher_suite.suite, suite, 2);
+  memcpy (session->security_parameters.cipher_suite, suite, 2);
   _gnutls_epoch_set_cipher_suite (session, EPOCH_NEXT,
-                                  &session->
-                                  security_parameters.current_cipher_suite);
+                                  session->
+                                  security_parameters.cipher_suite);
 
   _gnutls_handshake_log ("HSK[%p]: Selected cipher suite: %s\n", session,
                          _gnutls_cipher_suite_get_name
-                         (&session->
-                          security_parameters.current_cipher_suite));
+                         (session->
+                          security_parameters.cipher_suite));
 
 
   /* check if the credentials (username, public key etc.) are ok.
@@ -1360,7 +1405,7 @@ _gnutls_client_set_ciphersuite (gnutls_session_t session, opaque suite[2])
   if (_gnutls_get_kx_cred
       (session,
        _gnutls_cipher_suite_get_kx_algo
-       (&session->security_parameters.current_cipher_suite), &err) == NULL
+       (session->security_parameters.cipher_suite), &err) == NULL
       && err != 0)
     {
       gnutls_assert ();
@@ -1374,8 +1419,8 @@ _gnutls_client_set_ciphersuite (gnutls_session_t session, opaque suite[2])
    */
   session->internals.auth_struct =
     _gnutls_kx_auth_struct (_gnutls_cipher_suite_get_kx_algo
-                            (&session->
-                             security_parameters.current_cipher_suite));
+                            (session->
+                             security_parameters.cipher_suite));
 
   if (session->internals.auth_struct == NULL)
     {
@@ -1464,8 +1509,8 @@ _gnutls_client_check_if_resuming (gnutls_session_t session,
 
       _gnutls_epoch_set_cipher_suite
         (session, EPOCH_NEXT,
-         &session->internals.
-         resumed_security_parameters.current_cipher_suite);
+         session->internals.
+         resumed_security_parameters.cipher_suite);
       _gnutls_epoch_set_compression (session, EPOCH_NEXT,
                                      session->
                                      internals.resumed_security_parameters.compression_method);
@@ -1613,7 +1658,7 @@ _gnutls_copy_ciphersuites (gnutls_session_t session,
   int cipher_suites_size;
   size_t init_length = cdata->length;
 
-  ret = _gnutls_supported_ciphersuites_sorted (session, cipher_suites, sizeof(cipher_suites)-2);
+  ret = _gnutls_supported_ciphersuites (session, cipher_suites, sizeof(cipher_suites)-2);
   if (ret < 0)
     return gnutls_assert_val(ret);
 
@@ -1957,7 +2002,7 @@ _gnutls_send_server_hello (gnutls_session_t session, int again)
                                               sizeof (buf), NULL));
 
       memcpy (&data[pos],
-              session->security_parameters.current_cipher_suite.suite, 2);
+              session->security_parameters.cipher_suite, 2);
       pos += 2;
 
       comp = _gnutls_compression_get_num ( session->security_parameters.compression_method);
@@ -1997,7 +2042,7 @@ _gnutls_send_hello (gnutls_session_t session, int again)
 }
 
 /* RECEIVE A HELLO MESSAGE. This should be called from gnutls_recv_handshake_int only if a
- * hello message is expected. It uses the security_parameters.current_cipher_suite
+ * hello message is expected. It uses the security_parameters.cipher_suite
  * and internals.compression_method.
  */
 int
@@ -2784,7 +2829,6 @@ _gnutls_handshake_common (gnutls_session_t session)
           && session->security_parameters.entity == GNUTLS_SERVER))
     {
       /* if we are a client resuming - or we are a server not resuming */
-
       ret = _gnutls_recv_handshake_final (session, TRUE);
       IMED_RET ("recv handshake final", ret, 1);
 
@@ -2803,8 +2847,9 @@ _gnutls_handshake_common (gnutls_session_t session)
       ret = _gnutls_send_handshake_final (session, FALSE);
       IMED_RET ("send handshake final", ret, 1);
 
-      /* only store if we are not resuming */
-      if (session->security_parameters.entity == GNUTLS_SERVER)
+      /* only store if we are not resuming a session and we didn't previously send a ticket 
+       */
+      if (session->security_parameters.entity == GNUTLS_SERVER && session->internals.ticket_sent == 0)
         {
           /* in order to support session resuming */
           _gnutls_server_register_current_session (session);
@@ -2847,7 +2892,7 @@ _gnutls_generate_session_id (opaque * session_id, uint8_t * len)
 
   *len = TLS_MAX_SESSION_ID_SIZE;
 
-  ret = gnutls_rnd (GNUTLS_RND_NONCE, session_id, *len);
+  ret = _gnutls_rnd (GNUTLS_RND_NONCE, session_id, *len);
   if (ret < 0)
     {
       gnutls_assert ();
@@ -3011,7 +3056,6 @@ _gnutls_remove_unwanted_ciphersuites (gnutls_session_t session,
 {
 
   int ret = 0;
-  cipher_suite_st cs;
   int i, new_suites_size;
   gnutls_certificate_credentials_t cert_cred;
   gnutls_kx_algorithm_t kx;
@@ -3066,9 +3110,7 @@ _gnutls_remove_unwanted_ciphersuites (gnutls_session_t session,
       /* finds the key exchange algorithm in
        * the ciphersuite
        */
-      cs.suite[0] = cipher_suites[i];
-      cs.suite[1] = cipher_suites[i+1];
-      kx = _gnutls_cipher_suite_get_kx_algo (&cs);
+      kx = _gnutls_cipher_suite_get_kx_algo (&cipher_suites[i]);
 
       /* if it is defined but had no credentials 
        */
@@ -3112,7 +3154,7 @@ _gnutls_remove_unwanted_ciphersuites (gnutls_session_t session,
 
           _gnutls_handshake_log ("HSK[%p]: Keeping ciphersuite: %s\n",
                                  session,
-                                 _gnutls_cipher_suite_get_name (&cs));
+                                 _gnutls_cipher_suite_get_name (&cipher_suites[i]));
 
           if (i != new_suites_size)
             memmove( &cipher_suites[new_suites_size], &cipher_suites[i], 2);
@@ -3122,7 +3164,7 @@ _gnutls_remove_unwanted_ciphersuites (gnutls_session_t session,
         {
           _gnutls_handshake_log ("HSK[%p]: Removing ciphersuite: %s\n",
                                  session,
-                                 _gnutls_cipher_suite_get_name (&cs));
+                                 _gnutls_cipher_suite_get_name (&cipher_suites[i]));
 
         }
     }

@@ -2,13 +2,39 @@ GnuTLS NEWS -- History of user-visible changes.                -*- outline -*-
 Copyright (C) 2000-2011 Free Software Foundation, Inc.
 See the end for copying conditions.
 
-* Version 3.0.9 (unreleased)
+* Version 3.0.9 (released 2011-12-13)
+
+** certtool: Added new parameter --dh-info.
+
+** certtool: -l option was overloaded so if combined with --priority
+it will only list the ciphersuites that are enabled by the given
+priority string.
+
+** libgnutls: Added new priority string %SERVER_PRECEDENCE, which
+changes the ciphersuite selection procedure. If specified the server
+priorities will be used for selection instead of the client's.
+
+** libgnutls: Optimizations in Diffie-Hellman parameters generation
+and key exchange.
+
+** libgnutls: When session tickets are negotiated and used in a
+session, a server will not store that session data into its cache.
+
+** libgnutls: Added the SECP192R1 curve.
+
+** libgnutls: Added gnutls_priority_get_cipher_suite_index() to
+allow listing the ciphersuites enabled in a priority structure.
+It outputs an index to be used in gnutls_get_cipher_suite_info().
+
+** libgnutls: Optimizations in the elliptic curve code --timing
+attacks resistant code is only used in ECDSA private key operations.
 
 ** doc: man pages for API functions generation was fixed and are
 now added again in the distribution.
 
 ** API and ABI modifications:
-No changes since last version.
+GNUTLS_ECC_CURVE_SECP192R1: New curve definition
+gnutls_priority_get_cipher_suite_index: Added
 
 
 * Version 3.0.8 (released 2011-11-12)
