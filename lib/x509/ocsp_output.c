@@ -62,13 +62,13 @@ print_req (gnutls_buffer_st * str, gnutls_ocsp_req_t req)
       gnutls_digest_algorithm_t digest;
       gnutls_datum_t in, ik, sn;
 
-      ret = gnutls_ocsp_req_get_certid (req, indx, &digest, &in, &ik, &sn);
+      ret = gnutls_ocsp_req_get_cert_id (req, indx, &digest, &in, &ik, &sn);
       if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
 	break;
       addf (str, "\t\tCertificate ID:\n");
       if (ret != GNUTLS_E_SUCCESS)
 	{
-	  addf (str, "error: get_certid: %s\n",
+	  addf (str, "error: get_cert_id: %s\n",
 		gnutls_strerror (ret));
 	  continue;
 	}
@@ -288,7 +288,7 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
 
     /* XXX byKey */
 
-    ret = gnutls_ocsp_resp_get_responderid_dn (resp, &dn);
+    ret = gnutls_ocsp_resp_get_responder (resp, &dn);
     if (ret < 0)
       addf (str, "error: get_dn: %s\n", gnutls_strerror (ret));
     else
@@ -302,10 +302,10 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
     char s[42];
     size_t max = sizeof (s);
     struct tm t;
-    time_t tim = gnutls_ocsp_resp_get_produceat (resp);
+    time_t tim = gnutls_ocsp_resp_get_produced (resp);
 
     if (tim == (time_t) -1)
-      addf (str, "error: ocsp_resp_get_produceat\n");
+      addf (str, "error: ocsp_resp_get_produced\n");
     else if (gmtime_r (&tim, &t) == NULL)
       addf (str, "error: gmtime_r (%ld)\n", (unsigned long) tim);
     else if (strftime (s, max, "%a %b %d %H:%M:%S UTC %Y", &t) == 0)
@@ -325,14 +325,14 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
       time_t revocation_time;
       int revocation_reason;
 
-      ret = gnutls_ocsp_resp_get_singleresponse (resp,
-						 indx,
-						 &digest, &in, &ik, &sn,
-						 &cert_status,
-						 &this_update,
-						 &next_update,
-						 &revocation_time,
-						 &revocation_reason);
+      ret = gnutls_ocsp_resp_get_single (resp,
+					 indx,
+					 &digest, &in, &ik, &sn,
+					 &cert_status,
+					 &this_update,
+					 &next_update,
+					 &revocation_time,
+					 &revocation_reason);
       if (ret == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
 	break;
       addf (str, "\t\tCertificate ID:\n");

@@ -433,7 +433,7 @@ gnutls_ocsp_req_get_version (gnutls_ocsp_req_t req)
 }
 
 /**
- * gnutls_ocsp_req_get_certid:
+ * gnutls_ocsp_req_get_cert_id:
  * @req: should contain a #gnutls_ocsp_req_t structure
  * @indx: Specifies which extension OID to get. Use (0) to get the first one.
  * @digest: output variable with #gnutls_digest_algorithm_t hash algorithm
@@ -455,16 +455,16 @@ gnutls_ocsp_req_get_version (gnutls_ocsp_req_t req)
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error code is returned.  If you have reached the last
- *   certid available %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be
+ *   CertID available %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be
  *   returned.
  **/
 int
-gnutls_ocsp_req_get_certid (gnutls_ocsp_req_t req,
-			    unsigned indx,
-			    gnutls_digest_algorithm_t *digest,
-			    gnutls_datum_t *issuer_name_hash,
-			    gnutls_datum_t *issuer_key_hash,
-			    gnutls_datum_t *serial_number)
+gnutls_ocsp_req_get_cert_id (gnutls_ocsp_req_t req,
+			     unsigned indx,
+			     gnutls_digest_algorithm_t *digest,
+			     gnutls_datum_t *issuer_name_hash,
+			     gnutls_datum_t *issuer_key_hash,
+			     gnutls_datum_t *serial_number)
 {
   gnutls_datum_t sa;
   char name[ASN1_MAX_NAME_SIZE];
@@ -539,7 +539,7 @@ gnutls_ocsp_req_get_certid (gnutls_ocsp_req_t req,
 }
 
 /**
- * gnutls_ocsp_req_add_certid:
+ * gnutls_ocsp_req_add_cert_id:
  * @req: should contain a #gnutls_ocsp_req_t structure
  * @digest: hash algorithm, a #gnutls_digest_algorithm_t value
  * @issuer_name_hash: hash of issuer's DN
@@ -565,11 +565,11 @@ gnutls_ocsp_req_get_certid (gnutls_ocsp_req_t req,
  *   negative error code is returned.
  **/
 int
-gnutls_ocsp_req_add_certid (gnutls_ocsp_req_t req,
-			    gnutls_digest_algorithm_t digest,
-			    const gnutls_datum_t *issuer_name_hash,
-			    const gnutls_datum_t *issuer_key_hash,
-			    const gnutls_datum_t *serial_number)
+gnutls_ocsp_req_add_cert_id (gnutls_ocsp_req_t req,
+			     gnutls_digest_algorithm_t digest,
+			     const gnutls_datum_t *issuer_name_hash,
+			     const gnutls_datum_t *issuer_key_hash,
+			     const gnutls_datum_t *serial_number)
 {
   int result;
   const char *oid;
@@ -729,7 +729,7 @@ gnutls_ocsp_req_add_cert (gnutls_ocsp_req_t req,
       return ret;
     }
 
-  ret = gnutls_ocsp_req_add_certid (req, digest, &inh, &ikh, &sn);
+  ret = gnutls_ocsp_req_add_cert_id (req, digest, &inh, &ikh, &sn);
   gnutls_free (sn.data);
   if (ret != GNUTLS_E_SUCCESS)
     {
@@ -1136,7 +1136,7 @@ gnutls_ocsp_resp_get_version (gnutls_ocsp_resp_t resp)
 }
 
 /**
- * gnutls_ocsp_resp_get_dn:
+ * gnutls_ocsp_resp_get_responder:
  * @resp: should contain a #gnutls_ocsp_resp_t structure
  * @dn: newly allocated buffer with name
  *
@@ -1152,8 +1152,8 @@ gnutls_ocsp_resp_get_version (gnutls_ocsp_resp_t resp)
  *   negative error code is returned.
  **/
 int
-gnutls_ocsp_resp_get_responderid_dn (gnutls_ocsp_resp_t resp,
-				     gnutls_datum_t *dn)
+gnutls_ocsp_resp_get_responder (gnutls_ocsp_resp_t resp,
+				gnutls_datum_t *dn)
 {
   int ret;
   size_t l = 0;
@@ -1195,7 +1195,7 @@ gnutls_ocsp_resp_get_responderid_dn (gnutls_ocsp_resp_t resp,
 }
 
 /**
- * gnutls_ocsp_resp_get_producedat:
+ * gnutls_ocsp_resp_get_produced:
  * @resp: should contain a #gnutls_ocsp_resp_t structure
  *
  * This function will return the time when the OCSP response was
@@ -1204,7 +1204,7 @@ gnutls_ocsp_resp_get_responderid_dn (gnutls_ocsp_resp_t resp,
  * Returns: signing time, or (time_t)-1 on error.
  **/
 time_t
-gnutls_ocsp_resp_get_produceat (gnutls_ocsp_resp_t resp)
+gnutls_ocsp_resp_get_produced (gnutls_ocsp_resp_t resp)
 {
   char ttime[MAX_TIME];
   int len, ret;
@@ -1231,7 +1231,7 @@ gnutls_ocsp_resp_get_produceat (gnutls_ocsp_resp_t resp)
 }
 
 /**
- * gnutls_ocsp_resp_get_singleresponse:
+ * gnutls_ocsp_resp_get_single:
  * @resp: should contain a #gnutls_ocsp_resp_t structure
  * @indx: Specifies which extension OID to get. Use (0) to get the first one.
  * @digest: output variable with #gnutls_digest_algorithm_t hash algorithm
@@ -1261,21 +1261,21 @@ gnutls_ocsp_resp_get_produceat (gnutls_ocsp_resp_t resp)
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error code is returned.  If you have reached the last
- *   certid available %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be
+ *   CertID available %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be
  *   returned.
  **/
 int
-gnutls_ocsp_resp_get_singleresponse (gnutls_ocsp_resp_t resp,
-				     unsigned indx,
-				     gnutls_digest_algorithm_t *digest,
-				     gnutls_datum_t *issuer_name_hash,
-				     gnutls_datum_t *issuer_key_hash,
-				     gnutls_datum_t *serial_number,
-				     int *cert_status,
-				     time_t *this_update,
-				     time_t *next_update,
-				     time_t *revocation_time,
-				     int *revocation_reason)
+gnutls_ocsp_resp_get_single (gnutls_ocsp_resp_t resp,
+			     unsigned indx,
+			     gnutls_digest_algorithm_t *digest,
+			     gnutls_datum_t *issuer_name_hash,
+			     gnutls_datum_t *issuer_key_hash,
+			     gnutls_datum_t *serial_number,
+			     int *cert_status,
+			     time_t *this_update,
+			     time_t *next_update,
+			     time_t *revocation_time,
+			     int *revocation_reason)
 {
   gnutls_datum_t sa;
   char name[ASN1_MAX_NAME_SIZE];
@@ -1776,7 +1776,7 @@ find_signercert (gnutls_ocsp_resp_t resp)
   gnutls_datum_t riddn;
   gnutls_x509_crt_t signercert = NULL;
 
-  rc = gnutls_ocsp_resp_get_responderid_dn (resp, &riddn);
+  rc = gnutls_ocsp_resp_get_responder (resp, &riddn);
   if (rc != GNUTLS_E_SUCCESS)
     {
       gnutls_assert ();

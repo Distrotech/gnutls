@@ -718,10 +718,10 @@ GNUTLS_3_0_0 {
 	gnutls_pubkey_import_ecc_raw2;
 	gnutls_record_get_discarded;
 	gnutls_x509_crt_get_authority_info_access;
-	gnutls_ocsp_req_add_certid;
+	gnutls_ocsp_req_add_cert_id;
 	gnutls_ocsp_req_deinit;
 	gnutls_ocsp_req_export;
-	gnutls_ocsp_req_get_certid;
+	gnutls_ocsp_req_get_cert_id;
 	gnutls_ocsp_req_add_cert;
 	gnutls_ocsp_req_get_nonce;
 	gnutls_ocsp_req_get_extension;
@@ -734,12 +734,12 @@ GNUTLS_3_0_0 {
 	gnutls_ocsp_resp_export;
 	gnutls_ocsp_resp_get_certs;
 	gnutls_ocsp_resp_get_extension;
-	gnutls_ocsp_resp_get_produceat;
-	gnutls_ocsp_resp_get_responderid_dn;
+	gnutls_ocsp_resp_get_produced;
+	gnutls_ocsp_resp_get_responder;
 	gnutls_ocsp_resp_get_response;
 	gnutls_ocsp_resp_get_signature;
 	gnutls_ocsp_resp_get_signature_algorithm;
-	gnutls_ocsp_resp_get_singleresponse;
+	gnutls_ocsp_resp_get_single;
 	gnutls_ocsp_resp_get_status;
 	gnutls_ocsp_resp_get_version;
 	gnutls_ocsp_resp_import;

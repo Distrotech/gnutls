@@ -194,7 +194,7 @@ certificate (and its issuer) in a @code{gnutls_x509_crt_t} type.
 There is also a function to extract this information from an OCSP
 request.
 
-@showfuncC{gnutls_ocsp_req_add_certid,gnutls_ocsp_req_add_cert,gnutls_ocsp_req_get_certid}
+@showfuncC{gnutls_ocsp_req_add_cert_id,gnutls_ocsp_req_add_cert,gnutls_ocsp_req_get_cert_id}
 
 Each OCSP request may contain a number of extensions.  Extensions are
 identified by an Object Identifier (OID) and an opaque data buffer
