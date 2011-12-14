@@ -1257,6 +1257,21 @@ gnutls_ocsp_resp_get_produced (gnutls_ocsp_resp_t resp)
  *    thisUpdate                   GeneralizedTime,
  *    nextUpdate         [0]       EXPLICIT GeneralizedTime OPTIONAL,
  *    singleExtensions   [1]       EXPLICIT Extensions OPTIONAL }
+ *
+ *    CertID          ::=     SEQUENCE {
+ *        hashAlgorithm       AlgorithmIdentifier,
+ *        issuerNameHash      OCTET STRING, -- Hash of Issuer's DN
+ *        issuerKeyHash       OCTET STRING, -- Hash of Issuers public key
+ *        serialNumber        CertificateSerialNumber }
+ *
+ * CertStatus ::= CHOICE {
+ *     good                [0]     IMPLICIT NULL,
+ *     revoked             [1]     IMPLICIT RevokedInfo,
+ *     unknown             [2]     IMPLICIT UnknownInfo }
+ * 
+ * RevokedInfo ::= SEQUENCE {
+ *     revocationTime              GeneralizedTime,
+ *     revocationReason    [0]     EXPLICIT CRLReason OPTIONAL }
  * </programlisting></informalexample>
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
