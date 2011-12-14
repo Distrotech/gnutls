@@ -174,6 +174,7 @@ gnutls_ocsp_req_print (gnutls_ocsp_req_t req,
                        gnutls_datum_t * out)
 {
   gnutls_buffer_st str;
+  int rc;
 
   if (format != GNUTLS_OCSP_PRINT_FULL)
     {
@@ -188,8 +189,13 @@ gnutls_ocsp_req_print (gnutls_ocsp_req_t req,
   print_req (&str, req);
 
   _gnutls_buffer_append_data (&str, "\0", 1);
-  out->data = str.data;
-  out->size = strlen (str.data);
+
+  rc = _gnutls_buffer_to_datum (&str, out);
+  if (rc != GNUTLS_E_SUCCESS)
+    {
+      gnutls_assert ();
+      return rc;
+    }
 
   return GNUTLS_E_SUCCESS;
 }
@@ -596,6 +602,7 @@ gnutls_ocsp_resp_print (gnutls_ocsp_resp_t resp,
 			gnutls_datum_t * out)
 {
   gnutls_buffer_st str;
+  int rc;
 
   if (format != GNUTLS_OCSP_PRINT_FULL)
     {
@@ -610,8 +617,13 @@ gnutls_ocsp_resp_print (gnutls_ocsp_resp_t resp,
   print_resp (&str, resp);
 
   _gnutls_buffer_append_data (&str, "\0", 1);
-  out->data = str.data;
-  out->size = strlen (str.data);
+
+  rc = _gnutls_buffer_to_datum (&str, out);
+  if (rc != GNUTLS_E_SUCCESS)
+    {
+      gnutls_assert ();
+      return rc;
+    }
 
   return GNUTLS_E_SUCCESS;
 }
