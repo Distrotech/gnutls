@@ -302,7 +302,7 @@ verify_response (void)
   if (ret < 0)
     error (EXIT_FAILURE, 0, "importing response: %s", gnutls_strerror (ret));
 
-  ret = gnutls_ocsp_resp_verify (resp, list, NULL, &verify, 0);
+  ret = gnutls_ocsp_resp_verify (resp, list, &verify, 0);
   if (ret < 0)
     error (EXIT_FAILURE, 0, "gnutls_ocsp_resp_verify: %s",
 	   gnutls_strerror (ret));

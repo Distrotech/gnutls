@@ -384,6 +384,7 @@ APIMANS += gnutls_ocsp_resp_get_nonce.3
 APIMANS += gnutls_ocsp_resp_get_signature_algorithm.3
 APIMANS += gnutls_ocsp_resp_get_signature.3
 APIMANS += gnutls_ocsp_resp_get_certs.3
+APIMANS += gnutls_ocsp_resp_verify_direct.3
 APIMANS += gnutls_ocsp_resp_verify.3
 APIMANS += gnutls_openpgp_crt_init.3
 APIMANS += gnutls_openpgp_crt_deinit.3
