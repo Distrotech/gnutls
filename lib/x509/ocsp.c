@@ -453,6 +453,9 @@ gnutls_ocsp_req_get_version (gnutls_ocsp_req_t req)
  *        serialNumber        CertificateSerialNumber }
  * </programlisting></informalexample>
  *
+ * Each of the pointers to output variables may be NULL to indicate
+ * that the caller is not interested in that value.
+ *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error code is returned.  If you have reached the last
  *   CertID available %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE will be
@@ -1247,8 +1250,7 @@ gnutls_ocsp_resp_get_produced (gnutls_ocsp_resp_t resp)
  * This function will return the certificate information of the
  * @indx'ed response in the Basic OCSP Response @resp.  The
  * information returned corresponds to the SingleResponse structure
- * except the final singleExtensions (use
- * gnutls_ocsp_get_singleextensions() for that).
+ * except the final singleExtensions, reproduced here for illustration:
  *
  * <informalexample><programlisting>
  * SingleResponse ::= SEQUENCE {
@@ -1273,6 +1275,9 @@ gnutls_ocsp_resp_get_produced (gnutls_ocsp_resp_t resp)
  *     revocationTime              GeneralizedTime,
  *     revocationReason    [0]     EXPLICIT CRLReason OPTIONAL }
  * </programlisting></informalexample>
+ *
+ * Each of the pointers to output variables may be NULL to indicate
+ * that the caller is not interested in that value.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error code is returned.  If you have reached the last
@@ -1481,10 +1486,10 @@ gnutls_ocsp_resp_get_single (gnutls_ocsp_resp_t resp,
  **/
 int
 gnutls_ocsp_resp_get_extension (gnutls_ocsp_resp_t resp,
-			       unsigned indx,
-			       gnutls_datum_t *oid,
-			       unsigned int *critical,
-			       gnutls_datum_t *data)
+				unsigned indx,
+				gnutls_datum_t *oid,
+				unsigned int *critical,
+				gnutls_datum_t *data)
 {
   int ret;
   char str_critical[10];

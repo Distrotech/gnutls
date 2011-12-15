@@ -9,7 +9,8 @@ There is a new header file gnutls/ocsp.h and a set of new functions
 under the gnutls_ocsp namespace.  Currently the functionality provided
 is to parse and extract information from OCSP requests/responses, to
 generate OCSP requests and to verify OCSP responses.  See the manual
-for more information.
+for more information.  Run ./configure with --disable-ocsp to build
+GnuTLS without OCSP support.
 
 ** ocsptool: Added new command line tool.
 The tool can parse OCSP request/responses, generate OCSP requests and
