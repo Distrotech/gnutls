@@ -771,6 +771,20 @@ doit:
 		echo -n "."; \
 	done
 	@echo ""
+	@echo -n "Creating man pages for ocsp.h..." && \
+	for i in `$(top_srcdir)/doc/scripts/getfuncs.pl <$(top_srcdir)/lib/includes/gnutls/ocsp.h`; do \
+		$(top_srcdir)/doc/scripts/gdoc -man \
+			-module $(PACKAGE) -sourceversion $(VERSION) \
+			-bugsto $(PACKAGE_BUGREPORT) \
+			-pkg-name "$(PACKAGE_NAME)" \
+			-include "gnutls/ocsp.h" \
+			-seeinfo $(PACKAGE) -verbatimcopying \
+			-copyright "2011 Free Software Foundation" \
+			-function $$i \
+			$(top_srcdir)/lib/*.c $(top_srcdir)/lib/*/*.c > $$i.3 2>/dev/null && \
+		echo -n "."; \
+	done
+	@echo ""
 	@echo -n "Creating man pages for abstract.h..." && \
 	for i in `$(top_srcdir)/doc/scripts/getfuncs.pl <$(top_srcdir)/lib/includes/gnutls/abstract.h`; do \
 		$(top_srcdir)/doc/scripts/gdoc -man \
@@ -854,5 +868,6 @@ doit:
 			$(top_srcdir)/lib/*.c $(top_srcdir)/lib/*/*.c > $$i.3 2>/dev/null && \
 		echo -n "."; \
 	done
+	@echo ""
 
 .PHONY: update-makefile doit
