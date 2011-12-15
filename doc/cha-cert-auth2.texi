@@ -8,6 +8,7 @@
 * OCSP certificate status checking::
 * Managing encrypted keys::
 * The certtool application::
+* The ocsptool application::
 * Hardware tokens::
 * Abstract key types::
 @end menu
@@ -113,7 +114,7 @@ CRL number extension and the authority key identifier.
 @showfuncB{gnutls_x509_crl_set_number,gnutls_x509_crl_set_authority_key_id}
 
 @node OCSP certificate status checking
-@section OCSP certificate status checking
+@section @acronym{OCSP} certificate status checking
 @cindex certificate status
 @cindex Online Certificate Status Protocol
 @cindex OCSP
@@ -684,6 +685,87 @@ signing_key
 #ipsec_ike_key
 @end example
 
+
+@node The ocsptool application
+@section The ocsptool application
+@cindex ocsptool
+
+This is a program that can parse and print information about
+@acronym{OCSP} requests/responses, generate requests and verify
+responses.
+
+@example
+Ocsptool help
+Usage : ocsptool [options]
+     -e, --verify-response    Verify response.
+     -i, --request-info       Print information on a OCSP request.
+     -j, --response-info      Print information on a OCSP response.
+     -q, --generate-request   Generate a OCSP request.
+     --no-nonce               don't add nonce to OCSP request.
+     --load-issuer FILE       read issuer certificate from FILE.
+     --load-cert FILE         read certificate to check from FILE.
+     --load-trust FILE        read trust anchors from FILE.
+     --inder                  Use DER format for input certificates.
+     -Q, --load-request FILE
+                              read DER encoded OCSP request from
+                              FILE.
+     -S, --load-response FILE
+                              read DER encoded OCSP response from
+                              FILE.
+     --outfile FILE           Output file.
+     --infile FILE            Input file.
+     -V, --verbose            More verbose output.
+     -d, --debug integer      Enable debugging
+     -v, --version            prints the program's version number
+     -h, --help               shows this help text
+@end example
+
+@subheading Print information about OCSP requests
+
+To parse an OCSP request and print information about the content, the
+@code{-i} or @code{--request-info} parameter may be used as follows.
+The @code{-Q} parameter specify the name of the file containing the
+OCSP request, and it should contain the OCSP request in binary DER
+format.
+
+@smallexample
+$ ocsptool -i -Q ocsp-request.der
+@end smallexample
+
+The input file may also be sent to standard input like this:
+
+@smallexample
+$ cat ocsp-request.der | ocsptool --request-info
+@end smallexample
+
+@subheading Print information about OCSP responses
+
+Similar to parsing OCSP requests, OCSP responses can be parsed using
+the @code{-j} or @code{--response-info} as follows.
+
+@smallexample
+$ ocsptool -j -Q ocsp-response.der
+$ cat ocsp-response.der | ocsptool --response-info
+@end smallexample
+
+@subheading Generate an OCSP request
+
+The @code{-q} or @code{--generate-request} parameters are used to
+generate an OCSP request.  By default the OCSP request is written to
+standard output in binary DER format, but can be stored in a file
+using @code{--outfile}.  To generate an OCSP request the issuer of the
+certificate to check needs to be specified with @code{--load-issuer}
+and the certificate to check with @code{--load-cert}.  By default PEM
+format is used for these files, although @code{--inder} can be used to
+specify that the input files are in DER format.
+
+@smallexample
+$ ocsptool -q --load-issuer issuer.pem --load-cert client.pem --outfile ocsp-request.der
+@end smallexample
+
+When generating OCSP requests, the tool will add an OCSP extension
+containing a nonce.  This behaviour can be disabled by specifying
+@code{--no-nonce}.
 
 @node Hardware tokens
 @section Security modules
