@@ -4,6 +4,11 @@ See the end for copying conditions.
 
 * Version 3.0.10 (unreleased)
 
+** libgnutls: Corrected ciphersuite GNUTLS_ECDHE_PSK_AES_256_CBC_SHA384
+
+** libgnutls: Added ciphersuites: GNUTLS_PSK_WITH_AES_256_GCM_SHA384
+and GNUTLS_DHE_PSK_WITH_AES_256_GCM_SHA384.
+
 ** libgnutls: Added OCSP support.
 There is a new header file gnutls/ocsp.h and a set of new functions
 under the gnutls_ocsp namespace.  Currently the functionality provided
@@ -53,6 +58,9 @@ gnutls_ocsp_resp_get_nonce: Added.
 gnutls_ocsp_req_set_nonce: Added.
 gnutls_ocsp_resp_verify: Added.
 gnutls_ocsp_req_randomize_nonce: Added.
+
+** API and ABI modifications:
+No changes since last version.
 
 * Version 3.0.9 (released 2011-12-13)
 
