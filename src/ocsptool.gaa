@@ -23,7 +23,7 @@ option (j, response-info) { $action = ACTION_RESP_INFO; } "Print information on 
 
 option (q, generate-request) { $action = ACTION_GEN_REQ; } "Generate a OCSP request."
 
-#char *nononce;
+#int nononce;
 option (no-nonce) { $nononce = 1 } "don't add nonce to OCSP request."
 
 #char *issuer;
