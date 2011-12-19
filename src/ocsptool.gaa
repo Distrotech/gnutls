@@ -33,7 +33,10 @@ option (load-issuer) STR "FILE" { $issuer = $1 } "read issuer certificate from F
 option (load-cert) STR "FILE" { $cert = $1 } "read certificate to check from FILE."
 
 #char *trust;
-option (load-trust) STR "FILE" { $trust = $1 } "read trust anchors from FILE."
+option (load-trust) STR "FILE" { $trust = $1 } "read OCSP trust anchors from FILE."
+
+#char *signer;
+option (load-signer) STR "FILE" { $signer = $1 } "read OCSP response signer from FILE."
 
 #int inder;
 option (inder) { $inder=1 } "Use DER format for input certificates."

@@ -229,6 +229,79 @@ generate_request (void)
 }
 
 static void
+print_verify_res (unsigned int output)
+{
+  int comma = 0;
+
+  if (output)
+    {
+      printf ("Failure");
+      comma = 1;
+    }
+  else
+    {
+      printf ("Success");
+      comma = 1;
+    }
+
+  if (output & GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND)
+    {
+      if (comma)
+        printf (", ");
+      printf ("Signer cert not found");
+      comma = 1;
+    }
+
+  if (output & GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR)
+    {
+      if (comma)
+        printf (", ");
+      printf ("Signer cert keyusage error");
+      comma = 1;
+    }
+
+  if (output & GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER)
+    {
+      if (comma)
+        printf (", ");
+      printf ("Signer cert is not trusted");
+      comma = 1;
+    }
+
+  if (output & GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM)
+    {
+      if (comma)
+        printf (", ");
+      printf ("Insecure algorithm");
+      comma = 1;
+    }
+
+  if (output & GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE)
+    {
+      if (comma)
+        printf (", ");
+      printf ("Signature failure");
+      comma = 1;
+    }
+
+  if (output & GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED)
+    {
+      if (comma)
+        printf (", ");
+      printf ("Signer cert not yet activated");
+      comma = 1;
+    }
+
+  if (output & GNUTLS_OCSP_VERIFY_CERT_EXPIRED)
+    {
+      if (comma)
+        printf (", ");
+      printf ("Signer cert expired");
+      comma = 1;
+    }
+}
+
+static void
 verify_response (void)
 {
   gnutls_ocsp_resp_t resp;
@@ -238,52 +311,8 @@ verify_response (void)
   gnutls_x509_crt_t *x509_ca_list = NULL;
   unsigned int x509_ncas = 0;
   gnutls_x509_trust_list_t list;
+  gnutls_x509_crt_t signer;
   unsigned verify;
-
-  if (info.trust == NULL)
-    error (EXIT_FAILURE, 0, "missing --load-trust");
-
-  dat.data = read_binary_file (info.trust, &size);
-  if (dat.data == NULL)
-    error (EXIT_FAILURE, errno, "reading --load-trust: %s", info.trust);
-  dat.size = size;
-
-  ret = gnutls_x509_trust_list_init (&list, 0);
-  if (ret < 0)
-    error (EXIT_FAILURE, 0, "gnutls_x509_trust_list_init: %s",
-	   gnutls_strerror (ret));
-
-  ret = gnutls_x509_crt_list_import2 (&x509_ca_list, &x509_ncas, &dat,
-				      GNUTLS_X509_FMT_PEM, 0);
-  if (ret < 0 || x509_ncas < 1)
-    error (EXIT_FAILURE, 0, "error parsing CAs: %s",
-	   gnutls_strerror (ret));
-
-  if (info.verbose)
-    {
-      unsigned int i;
-      for (i = 0; i < x509_ncas; i++)
-	{
-	  gnutls_datum_t out;
-
-	  ret = gnutls_x509_crt_print (x509_ca_list[i],
-				       GNUTLS_CRT_PRINT_ONELINE, &out);
-	  if (ret < 0)
-	    error (EXIT_FAILURE, 0, "gnutls_x509_crt_print: %s",
-		   gnutls_strerror (ret));
-
-	  printf ("Trust anchor %d: %.*s\n", i, out.size, out.data);
-	  gnutls_free (out.data);
-	}
-    }
-
-  ret = gnutls_x509_trust_list_add_cas (list, x509_ca_list, x509_ncas, 0);
-  if (ret < 0)
-    error (EXIT_FAILURE, 0, "gnutls_x509_trust_add_cas: %s",
-	   gnutls_strerror (ret));
-
-  if (info.verbose)
-    fprintf (stdout, "Loaded %d trust anchors\n", x509_ncas);
 
   ret = gnutls_ocsp_resp_init (&resp);
   if (ret < 0)
@@ -302,15 +331,98 @@ verify_response (void)
   if (ret < 0)
     error (EXIT_FAILURE, 0, "importing response: %s", gnutls_strerror (ret));
 
-  ret = gnutls_ocsp_resp_verify (resp, list, &verify, 0);
-  if (ret < 0)
-    error (EXIT_FAILURE, 0, "gnutls_ocsp_resp_verify: %s",
-	   gnutls_strerror (ret));
+  if (info.trust && info.signer)
+    error (EXIT_FAILURE, 0, "cannot mix --load-trust and --load-signer");
+  else if (info.signer == NULL)
+    {
+      dat.data = read_binary_file (info.trust, &size);
+      if (dat.data == NULL)
+	error (EXIT_FAILURE, errno, "reading --load-trust: %s", info.trust);
+      dat.size = size;
 
-  if (verify == 0)
-    printf ("Verifying OCSP Response: Success.\n");
+      ret = gnutls_x509_trust_list_init (&list, 0);
+      if (ret < 0)
+	error (EXIT_FAILURE, 0, "gnutls_x509_trust_list_init: %s",
+	       gnutls_strerror (ret));
+
+      ret = gnutls_x509_crt_list_import2 (&x509_ca_list, &x509_ncas, &dat,
+					  GNUTLS_X509_FMT_PEM, 0);
+      if (ret < 0 || x509_ncas < 1)
+	error (EXIT_FAILURE, 0, "error parsing CAs: %s",
+	       gnutls_strerror (ret));
+
+      if (info.verbose)
+	{
+	  unsigned int i;
+	  for (i = 0; i < x509_ncas; i++)
+	    {
+	      gnutls_datum_t out;
+
+	      ret = gnutls_x509_crt_print (x509_ca_list[i],
+					   GNUTLS_CRT_PRINT_ONELINE, &out);
+	      if (ret < 0)
+		error (EXIT_FAILURE, 0, "gnutls_x509_crt_print: %s",
+		       gnutls_strerror (ret));
+
+	      printf ("Trust anchor %d: %.*s\n", i, out.size, out.data);
+	      gnutls_free (out.data);
+	    }
+	}
+
+      ret = gnutls_x509_trust_list_add_cas (list, x509_ca_list, x509_ncas, 0);
+      if (ret < 0)
+	error (EXIT_FAILURE, 0, "gnutls_x509_trust_add_cas: %s",
+	       gnutls_strerror (ret));
+
+      if (info.verbose)
+	fprintf (stdout, "Loaded %d trust anchors\n", x509_ncas);
+
+      ret = gnutls_ocsp_resp_verify (resp, list, &verify, 0);
+      if (ret < 0)
+	error (EXIT_FAILURE, 0, "gnutls_ocsp_resp_verify: %s",
+	       gnutls_strerror (ret));
+    }
+  else if (info.trust == NULL)
+    {
+      ret = gnutls_x509_crt_init (&signer);
+      if (ret < 0)
+	error (EXIT_FAILURE, 0, "crt_init: %s", gnutls_strerror (ret));
+
+      dat.data = read_binary_file (info.signer, &size);
+      if (dat.data == NULL)
+	error (EXIT_FAILURE, errno, "reading --load-signer: %s", info.signer);
+      dat.size = size;
+
+      ret = gnutls_x509_crt_import (signer, &dat, info.inder);
+      free (dat.data);
+      if (ret < 0)
+	error (EXIT_FAILURE, 0, "importing --load-signer: %s: %s",
+	       info.signer, gnutls_strerror (ret));
+
+      if (info.verbose)
+	{
+	  gnutls_datum_t out;
+
+	  ret = gnutls_x509_crt_print (signer, GNUTLS_CRT_PRINT_ONELINE, &out);
+	  if (ret < 0)
+	    error (EXIT_FAILURE, 0, "gnutls_x509_crt_print: %s",
+		   gnutls_strerror (ret));
+
+	  printf ("Signer: %.*s\n", out.size, out.data);
+	  gnutls_free (out.data);
+	}
+
+      ret = gnutls_ocsp_resp_verify_direct (resp, signer, &verify, 0);
+      if (ret < 0)
+	error (EXIT_FAILURE, 0, "gnutls_ocsp_resp_verify_direct: %s",
+	       gnutls_strerror (ret));
+    }
   else
-    printf ("Verifying OCSP Response: Failed (%d)\n", verify);
+    error (EXIT_FAILURE, 0, "missing --load-trust or --load-signer");
+
+  printf ("Verifying OCSP Response: ");
+  print_verify_res (verify);
+  printf (".\n");
 
   gnutls_ocsp_resp_deinit (resp);
 }

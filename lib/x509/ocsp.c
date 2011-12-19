@@ -1787,6 +1787,8 @@ gnutls_ocsp_resp_get_certs (gnutls_ocsp_resp_t resp,
   return ret;
 }
 
+/* Search the OCSP response for a certificate matching the responderId
+   mentioned in the OCSP response. */
 static gnutls_x509_crt_t
 find_signercert (gnutls_ocsp_resp_t resp)
 {
@@ -1867,7 +1869,7 @@ find_signercert (gnutls_ocsp_resp_t resp)
  * gnutls_ocsp_resp_verify_direct:
  * @resp: should contain a #gnutls_ocsp_resp_t structure
  * @signercert: certificate believed to have signed the response
- * @verify: output variable with verification status codes
+ * @verify: output variable with verification status, an #gnutls_ocsp_cert_status_t
  * @flags: verification flags, 0 for now.
  *
  * Verify signature of the Basic OCSP Response against the public key
@@ -1961,14 +1963,17 @@ gnutls_ocsp_resp_verify_direct (gnutls_ocsp_resp_t resp,
  * gnutls_ocsp_resp_verify:
  * @resp: should contain a #gnutls_ocsp_resp_t structure
  * @trustlist: trust anchors as a #gnutls_x509_trust_list_t structure
- * @verify: output variable with verification status codes
+ * @verify: output variable with verification status, an #gnutls_ocsp_cert_status_t
  * @flags: verification flags, 0 for now.
  *
  * Verify signature of the Basic OCSP Response against the public key
  * in the certificate of a trusted signer.  The @trustlist should be
- * populated with trusted CAs.  The function will extract the signer
+ * populated with trust anchors.  The function will extract the signer
  * certificate from the Basic OCSP Response and will verify it against
- * the @trustlist.
+ * the @trustlist.  A trusted signer is a certificate that is either
+ * in @trustlist, or it is signed directly by a certificate in
+ * @trustlist and has the id-ad-ocspSigning Extended Key Usage bit
+ * set.
  *
  * The output @verify variable will hold verification status codes
  * (e.g., %GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND,
@@ -2013,20 +2018,18 @@ gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t resp,
       goto done;
     }
 
-  /* Either it is directly trusted (i.e., in the list) or it is
-     directly signed by something we trust, and has proper OCSP
+  /* Either the signer is directly trusted (i.e., in trustlist) or it
+     is directly signed by something in trustlist and has proper OCSP
      extkeyusage. */
-
-  rc = _gnutls_trustlist_inlist_p (trustlist, signercert);
+  rc = _gnutls_trustlist_inlist (trustlist, signercert);
   if (rc < 0)
     {
       gnutls_assert ();
       goto done;
     }
-
-  /* indirect trust, need to verify signature and bits */
-  if (rc == 0)
+  if (rc == 1)
     {
+      /* not in trustlist, need to verify signature and bits */
       gnutls_x509_crt_t issuer;
       unsigned vtmp;
       char oidtmp[sizeof (GNUTLS_KP_OCSP_SIGNING)];

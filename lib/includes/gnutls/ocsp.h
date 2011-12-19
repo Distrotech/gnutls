@@ -75,7 +75,7 @@ extern "C"
    * @GNUTLS_OCSP_CERT_UNKNOWN: The responder doesn't know about the
    *   certificate.
    *
-   * Enumeration of different OCSP response status codes.
+   * Enumeration of different OCSP response certificate status codes.
    */
   typedef enum gnutls_ocsp_cert_status_t
     {
@@ -116,14 +116,29 @@ extern "C"
       GNUTLS_X509_CRLREASON_AACOMPROMISE = 10
     } gnutls_x509_crl_reason_t;
 
-   /* Enumeration of OCSP verify status codes. */
-#define GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND 1
-#define GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR 2
-#define GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER 4
-#define GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM 8
-#define GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE 16
-#define GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED 32
-#define GNUTLS_OCSP_VERIFY_CERT_EXPIRED 64
+  /**
+   * gnutls_ocsp_verify_reason_t:
+   * @GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND: Signer cert not found.
+   * @GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR: Signer keyusage bits incorrect.
+   * @GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER: Signer is not trusted.
+   * @GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM: Signature using insecure algorithm.
+   * @GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE: Signature mismatch.
+   * @GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED: Signer cert is not yet activated.
+   * @GNUTLS_OCSP_VERIFY_CERT_EXPIRED: Signer cert has expired.
+   *
+   * Enumeration of OCSP verify status codes, used by
+   * gnutls_ocsp_resp_verify() and gnutls_ocsp_resp_verify_direct().
+   */
+  typedef enum gnutls_ocsp_verify_reason_t
+    {
+      GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND = 1,
+      GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR = 2,
+      GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER = 4,
+      GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM = 8,
+      GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE = 16,
+      GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED = 32,
+      GNUTLS_OCSP_VERIFY_CERT_EXPIRED = 64
+    } gnutls_ocsp_verify_reason_t;
 
   struct gnutls_ocsp_req_int;
   typedef struct gnutls_ocsp_req_int *gnutls_ocsp_req_t;
