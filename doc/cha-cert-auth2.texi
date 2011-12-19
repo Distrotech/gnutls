@@ -113,7 +113,6 @@ CRL number extension and the authority key identifier.
 
 @showfuncB{gnutls_x509_crl_set_number,gnutls_x509_crl_set_authority_key_id}
 
-<<<<<<< HEAD
 @node OCSP certificate status checking
 @section @acronym{OCSP} certificate status checking
 @cindex certificate status
