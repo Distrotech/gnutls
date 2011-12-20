@@ -1938,16 +1938,18 @@ gnutls_ocsp_resp_verify_direct (gnutls_ocsp_resp_t resp,
     }
 
   rc = gnutls_pubkey_verify_data2 (pubkey, sigalg, 0, &data, &sig);
-  if (rc < 0)
+  if (rc == GNUTLS_E_PK_SIG_VERIFY_FAILED)
+    {
+      gnutls_assert ();
+      *verify = GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE;
+    }
+  else if (rc < 0)
     {
       gnutls_assert ();
       goto done;
     }
-
-  if (rc == 1)
-    *verify = 0;
   else
-    *verify = GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE;
+    *verify = 0;
 
   rc = GNUTLS_E_SUCCESS;
 
@@ -2036,6 +2038,8 @@ gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t resp,
       size_t oidsize;
       int indx;
 
+      gnutls_assert ();
+
       rc = gnutls_x509_trust_list_get_issuer (trustlist, signercert,
 					      &issuer, 0);
       if (rc != GNUTLS_E_SUCCESS)
@@ -2055,6 +2059,7 @@ gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t resp,
 
       if (vtmp != 0)
 	{
+	  gnutls_assert ();
 	  if (vtmp & GNUTLS_CERT_INSECURE_ALGORITHM)
 	    *verify = GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM;
 	  else if (vtmp & GNUTLS_CERT_NOT_ACTIVATED)
@@ -2075,12 +2080,16 @@ gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t resp,
 						    NULL);
 	  if (rc == GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
 	    {
+	      gnutls_assert ();
 	      *verify = GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR;
 	      rc = GNUTLS_E_SUCCESS;
 	      goto done;
 	    }
 	  else if (rc == GNUTLS_E_SHORT_MEMORY_BUFFER)
-	    continue;
+	    {
+	      gnutls_assert ();
+	      continue;
+	    }
 	  else if (rc != GNUTLS_E_SUCCESS)
 	    {
 	      gnutls_assert ();
@@ -2089,9 +2098,8 @@ gnutls_ocsp_resp_verify (gnutls_ocsp_resp_t resp,
 
 	  if (memcmp (oidtmp, GNUTLS_KP_OCSP_SIGNING, oidsize) != 0)
 	    {
-	      *verify = GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR;
-	      rc = GNUTLS_E_SUCCESS;
-	      goto done;
+	      gnutls_assert ();
+	      continue;
 	    }
 
 	  break;

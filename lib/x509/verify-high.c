@@ -650,9 +650,9 @@ _gnutls_trustlist_inlist (gnutls_x509_trust_list_t list,
 	  return ret;
 	}
 
-      if (ret == 1)
-	return 1;
+      if (ret == 0)
+	return 0;
     }
 
-  return 0;
+  return 1;
 }
