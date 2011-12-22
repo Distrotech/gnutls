@@ -127,6 +127,384 @@ static unsigned char subject_pem[] =
   "-----END CERTIFICATE-----\n";
 const gnutls_datum_t subject_data = { subject_pem, sizeof (subject_pem) };
 
+static void
+ocsp_invalid_calls (void)
+{
+  gnutls_ocsp_req_t req;
+  gnutls_ocsp_resp_t resp;
+  gnutls_datum_t dat;
+  char c = 42;
+  void *p = &c;
+  int rc;
+
+  rc = gnutls_ocsp_req_init (&req);
+  if (rc != GNUTLS_E_SUCCESS)
+    {
+      fail ("gnutls_ocsp_req_init alloc\n");
+      exit (1);
+    }
+  rc = gnutls_ocsp_resp_init (&resp);
+  if (rc != GNUTLS_E_SUCCESS)
+    {
+      fail ("gnutls_ocsp_resp_init alloc\n");
+      exit (1);
+    }
+
+  gnutls_ocsp_req_deinit (NULL);
+  gnutls_ocsp_resp_deinit (NULL);
+
+  rc = gnutls_ocsp_req_import (NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_import NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_import (NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_import NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_import (req, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_import NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_import (NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_import NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_import (NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_import NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_import (resp, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_import NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_export (NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_export NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_export (NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_export NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_export (req, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_export NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_export (NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_export NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_export (NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_export NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_export (resp, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_export NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_version (NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_get_version NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_cert_id (NULL, 0, NULL, NULL, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_get_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_cert_id (req, 0, NULL, NULL, NULL, NULL);
+  if (rc != GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
+    {
+      fail ("gnutls_ocsp_req_get_cert_id empty\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (NULL, 0, NULL, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, 0, NULL, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1, NULL, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1, p, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1, NULL, p, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1, NULL, NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1, p, p, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1, p, NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1, NULL, p, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert (NULL, 0, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert (req, 0, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+
+  rc = gnutls_ocsp_req_add_cert (req, 0, p, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_add_cert (req, 0, NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_add_cert_id NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_extension (NULL, 0, NULL, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_get_extension NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_extension (req, 0, NULL, NULL, NULL);
+  if (rc != GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
+    {
+      fail ("gnutls_ocsp_req_get_extension NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_extension (req, 0, p, p, p);
+  if (rc != GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE)
+    {
+      fail ("gnutls_ocsp_req_get_extension NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_set_extension (NULL, NULL, 0, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_set_extension NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_set_extension (req, NULL, 0, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_set_extension NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_set_extension (req, p, 0, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_set_extension NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_set_extension (req, NULL, 0, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_set_extension NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_nonce (NULL, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_get_nonce NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_get_nonce (NULL, NULL, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_get_nonce NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_set_nonce (NULL, 0, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_set_nonce NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_set_nonce (req, 0, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_set_nonce NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_req_randomize_nonce (NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_req_randomize_nonce NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_status (NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_get_status NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_status (resp);
+  if (rc != GNUTLS_E_ASN1_VALUE_NOT_FOUND)
+    {
+      fail ("gnutls_ocsp_resp_get_status %d\n", rc);
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_response (NULL, NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_get_response NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_response (NULL, p, p);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_get_response NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_response (resp, NULL, NULL);
+  if (rc != GNUTLS_E_SUCCESS)
+    {
+      fail ("gnutls_ocsp_resp_get_response %d\n", rc);
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_version (NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_get_version NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_version (resp);
+  if (rc != 1)
+    {
+      fail ("gnutls_ocsp_resp_get_version ret %d\n", rc);
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_responder (NULL, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_get_responder NULL\n");
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_responder (resp, NULL);
+  if (rc != GNUTLS_E_INVALID_REQUEST)
+    {
+      fail ("gnutls_ocsp_resp_get_responder 2nd %d\n", rc);
+      exit (1);
+    }
+
+  rc = gnutls_ocsp_resp_get_responder (resp, &dat);
+  if (rc != GNUTLS_E_SUCCESS || dat.size != 0)
+    {
+      fail ("gnutls_ocsp_resp_get_responder %d\n", rc);
+      exit (1);
+    }
+}
+
 /* import a request, query some fields and print and export it */
 static void
 req_parse (void)
@@ -650,6 +1028,7 @@ doit (void)
       exit (1);
     }
 
+  ocsp_invalid_calls ();
   req_parse ();
   resp_import ();
   req_addcert_id ();

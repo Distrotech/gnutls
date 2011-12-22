@@ -184,7 +184,7 @@ gnutls_ocsp_req_import (gnutls_ocsp_req_t req,
 {
   int ret = 0;
 
-  if (req == NULL)
+  if (req == NULL || data == NULL)
     {
       gnutls_assert ();
       return GNUTLS_E_INVALID_REQUEST;
@@ -234,7 +234,7 @@ gnutls_ocsp_resp_import (gnutls_ocsp_resp_t resp,
 {
   int ret = 0;
 
-  if (resp == NULL)
+  if (resp == NULL || data == NULL)
     {
       gnutls_assert ();
       return GNUTLS_E_INVALID_REQUEST;
@@ -473,6 +473,12 @@ gnutls_ocsp_req_get_cert_id (gnutls_ocsp_req_t req,
   char name[ASN1_MAX_NAME_SIZE];
   int ret;
 
+  if (req == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_INVALID_REQUEST;
+    }
+
   snprintf (name, sizeof (name),
 	    "tbsRequest.requestList.?%u.reqCert.hashAlgorithm.algorithm",
 	    indx + 1);
@@ -576,6 +582,13 @@ gnutls_ocsp_req_add_cert_id (gnutls_ocsp_req_t req,
 {
   int result;
   const char *oid;
+
+  if (req == NULL || issuer_name_hash == NULL
+      || issuer_key_hash == NULL || serial_number == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_INVALID_REQUEST;
+    }
 
   oid = _gnutls_x509_digest_to_oid (digest);
   if (oid == NULL)
@@ -853,6 +866,12 @@ gnutls_ocsp_req_set_extension (gnutls_ocsp_req_t req,
 			       unsigned int critical,
 			       const gnutls_datum_t *data)
 {
+  if (req == NULL || oid == NULL || data == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_INVALID_REQUEST;
+    }
+
   return set_extension (req->req, "tbsRequest.requestExtensions", oid,
 			data, critical);
 }
@@ -860,7 +879,7 @@ gnutls_ocsp_req_set_extension (gnutls_ocsp_req_t req,
 /**
  * gnutls_ocsp_req_get_nonce:
  * @req: should contain a #gnutls_ocsp_req_t structure
- * @critical: whether nonce extension is marked critical
+ * @critical: whether nonce extension is marked critical, or NULL
  * @nonce: will hold newly allocated buffer with nonce data
  *
  * This function will return the OCSP request nonce extension data.
@@ -879,6 +898,12 @@ gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t req,
   int ret;
   size_t l = 0;
   gnutls_datum_t tmp;
+
+  if (req == NULL || nonce == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_INVALID_REQUEST;
+    }
 
   ret = get_extension (req->req, "tbsRequest.requestExtensions",
 		       GNUTLS_OCSP_NONCE, 0,
@@ -939,6 +964,12 @@ gnutls_ocsp_req_set_nonce (gnutls_ocsp_req_t req,
   unsigned char temp[SIZEOF_UNSIGNED_LONG_INT + 1];
   int len;
 
+  if (req == NULL || nonce == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_INVALID_REQUEST;
+    }
+
   asn1_length_der (nonce->size, temp, &len);
 
   dernonce.size = 1 + len + nonce->size;
@@ -981,6 +1012,12 @@ gnutls_ocsp_req_randomize_nonce (gnutls_ocsp_req_t req)
   int ret;
   char rndbuf[23];
   gnutls_datum_t nonce = { rndbuf, sizeof (rndbuf) };
+
+  if (req == NULL)
+    {
+      gnutls_assert ();
+      return GNUTLS_E_INVALID_REQUEST;
+    }
 
   ret = gnutls_rnd (GNUTLS_RND_NONCE, rndbuf, sizeof (rndbuf));
   if (ret != GNUTLS_E_SUCCESS)
@@ -1161,7 +1198,7 @@ gnutls_ocsp_resp_get_responder (gnutls_ocsp_resp_t resp,
   int ret;
   size_t l = 0;
 
-  if (resp == NULL)
+  if (resp == NULL || dn == NULL)
     {
       gnutls_assert ();
       return GNUTLS_E_INVALID_REQUEST;
