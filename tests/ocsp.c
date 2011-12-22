@@ -201,9 +201,12 @@ req_parse (void)
       exit (1);
     }
 
-  if (d.size != strlen (REQ1INFO) ||
+  if (strlen (REQ1INFO) != d.size - 1 ||
       memcmp (REQ1INFO, d.data, strlen (REQ1INFO)) != 0)
     {
+      printf ("expected (len %ld):\n%s\ngot (len %d):\n%.*s\n",
+	      strlen (REQ1INFO), REQ1INFO, (int) d.size - 1,
+	      (int) d.size, d.data);
       fail ("ocsp request print failed\n");
       exit (1);
     }
@@ -351,10 +354,10 @@ req_parse (void)
   gnutls_ocsp_req_deinit (req);
 }
 
-/* check that creating a request (using low-level add_certid) ends up
+/* check that creating a request (using low-level add_cert_id) ends up
    with same DER as above. */
 static void
-req_addcertid (void)
+req_addcert_id (void)
 {
   gnutls_ocsp_req_t req;
   int ret;
@@ -384,7 +387,7 @@ req_addcertid (void)
       }
   }
 
-  /* add certid */
+  /* add cert_id */
   {
     gnutls_datum_t issuer_name_hash =
       { (unsigned char*) REQ1INH, sizeof (REQ1INH) - 1 };
@@ -393,13 +396,13 @@ req_addcertid (void)
     gnutls_datum_t serial_number =
       { (unsigned char*) REQ1SN, sizeof (REQ1SN) - 1 };
 
-    ret = gnutls_ocsp_req_add_certid (req, GNUTLS_DIG_SHA1,
+    ret = gnutls_ocsp_req_add_cert_id (req, GNUTLS_DIG_SHA1,
 				      &issuer_name_hash,
 				      &issuer_key_hash,
 				      &serial_number);
     if (ret != 0)
       {
-	fail ("gnutls_ocsp_add_certid %d\n", ret);
+	fail ("gnutls_ocsp_add_cert_id %d\n", ret);
 	exit (1);
       }
   }
@@ -413,9 +416,12 @@ req_addcertid (void)
       exit (1);
     }
 
-  if (d.size != strlen (REQ1INFO) ||
+  if (strlen (REQ1INFO) != d.size - 1 ||
       memcmp (REQ1INFO, d.data, strlen (REQ1INFO)) != 0)
     {
+      printf ("expected (len %ld):\n%s\ngot (len %d):\n%.*s\n",
+	      strlen (REQ1INFO), REQ1INFO, (int) d.size - 1,
+	      (int) d.size, d.data);
       fail ("ocsp request print failed\n");
       exit (1);
     }
@@ -477,7 +483,7 @@ req_addcert (void)
       }
   }
 
-  /* add certid */
+  /* add cert_id */
   {
     gnutls_x509_crt_t issuer = NULL, subject = NULL;
 
@@ -530,9 +536,12 @@ req_addcert (void)
       exit (1);
     }
 
-  if (d.size != strlen (REQ1INFO) ||
+  if (strlen (REQ1INFO) != d.size - 1 ||
       memcmp (REQ1INFO, d.data, strlen (REQ1INFO)) != 0)
     {
+      printf ("expected (len %ld):\n%s\ngot (len %d):\n%.*s\n",
+	      strlen (REQ1INFO), REQ1INFO, (int) d.size - 1,
+	      (int) d.size, d.data);
       fail ("ocsp request print failed\n");
       exit (1);
     }
@@ -595,9 +604,12 @@ resp_import (void)
       exit (1);
     }
 
-  if (d.size != strlen (RESP1INFO) ||
+  if (strlen (RESP1INFO) != d.size - 1 ||
       memcmp (RESP1INFO, d.data, strlen (RESP1INFO)) != 0)
     {
+      printf ("expected (len %ld):\n%s\ngot (len %d):\n%.*s\n",
+	      strlen (REQ1INFO), REQ1INFO, (int) d.size - 1,
+	      (int) d.size, d.data);
       fail ("ocsp response print failed\n");
       exit (1);
     }
@@ -640,7 +652,7 @@ doit (void)
 
   req_parse ();
   resp_import ();
-  req_addcertid ();
+  req_addcert_id ();
   req_addcert ();
 
   /* we're done */
