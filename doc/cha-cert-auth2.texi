@@ -121,24 +121,24 @@ CRL number extension and the authority key identifier.
 
 Certificates may be revoked before their expiration time has been
 reached.  There are several reasons for revoking certificates, but a
-typical example is if the private key associated with a certificate
-has been compromised.  Traditionally Certificate Revocation Lists
-(CRLs) has been used by application to implement revocation checking,
-however several disadvantages with CRLs have been identified, see for
-example @xcite{RIVESTCRL}.
+typical situation is when the private key associated with a
+certificate has been compromised.  Traditionally, Certificate
+Revocation Lists (CRLs) have been used by application to implement
+revocation checking, however several disadvantages with CRLs have been
+identified, see for example @xcite{RIVESTCRL}.
 
-The Online Certificate Status Protocol (@acronym{OCSP}) is widely
+The Online Certificate Status Protocol (@acronym{OCSP}) is a widely
 implemented protocol to perform certificate (revocation) status
 checking.  @xcite{RFC2560}.  An application that wish to verify the
-identity of a peer will check the certificate against a set of trusted
-certificates and then also check whether the certificate is listed in
-a CRL and/or perform an OCSP check of the certificate.
+identity of a peer will verify the certificate against a set of
+trusted certificates and then check whether the certificate is listed
+in a CRL and/or perform an OCSP check for the certificate.
 
 Before performing the OCSP query, the application will need to figure
-out the address of the OCSP server.  The OCSP server information can
-be provided by the user in manual configuration.  It may also be
-provided in the certificate that is being checked.  There is an
-extension field called the Authority Information Access (AIA) which
+out the address of the OCSP server.  The OCSP server address can be
+provided by the local user in manual configuration.  The address can
+also be provided in the certificate that is being checked.  There is
+an extension field called the Authority Information Access (AIA) which
 has an access method called @code{id-ad-ocsp} that holds the location
 of the OCSP responder.  There is a function for extracting this
 information from a certificate.
@@ -154,7 +154,8 @@ OCSP responder, which needs to be done by the application (GnuTLS does
 not send and receive OCSP packets).  Normally an OCSP response is
 received that the application will need to import into an OCSP
 response object.  The digital signature in the OCSP response needs to
-be verified before the information in the response can be trusted.
+be verified against a set of trust anchors before the information in
+the response can be trusted.
 
 The ASN.1 structure of OCSP requests are briefly as follows.  It is
 useful to review the structures to get an understanding of which
