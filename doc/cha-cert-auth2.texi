@@ -825,10 +825,10 @@ certificate for the domain itself, secondly @code{issuer.pem} for the
 intermediate certificate and @code{root.pem} for the final root
 certificate.
 
-The issuer certificate normally contains a pointer to where the OCSP
-responder for its end-entity certificates are located, in the
-Authority Information Access Information extension.  For example, from
-@code{certtool -i < issuer.pem} there is this information:
+The domain certificate normally contains a pointer to where the OCSP
+responder is located, in the Authority Information Access Information
+extension.  For example, from @code{certtool -i < cert.pem} there is
+this information:
 
 @smallexample
 		Authority Information Access Information (not critical):
@@ -843,7 +843,8 @@ create a OCSP request for the certificate.
 $ ocsptool --generate-request --load-issuer issuer.pem  --load-cert cert.pem --outfile ocsp-request.der
 @end smallexample
 
-The request is sent base64 encoded via HTTP as follows.
+The request is sent base64 encoded via HTTP to the address indicated
+by the id-ad-ocsp extension, as follows.
 
 @smallexample
 $ wget -O ocsp-response.der http://ocsp.CAcert.org/$(base64 -w0 ocsp-request.der)
@@ -873,7 +874,7 @@ $
 
 You may experiment passing different certificates to
 @code{--load-trust} and @code{--load-signer} to find common error
-conditions.
+conditions for OCSP response verification failures.
 
 @node Hardware tokens
 @section Security modules
