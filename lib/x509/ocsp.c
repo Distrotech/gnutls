@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011, 2012 Free Software Foundation, Inc.
+ * Copyright (C) 2011-2012 Free Software Foundation, Inc.
  * Author: Simon Josefsson
  *
  * This file is part of GnuTLS.
@@ -1629,6 +1629,7 @@ gnutls_ocsp_resp_get_nonce (gnutls_ocsp_resp_t resp,
   if (ret != GNUTLS_E_SHORT_MEMORY_BUFFER)
     {
       gnutls_assert ();
+      gnutls_free (tmp.data);
       return ret;
     }
 
@@ -1636,11 +1637,13 @@ gnutls_ocsp_resp_get_nonce (gnutls_ocsp_resp_t resp,
   if (nonce->data == NULL)
     {
       gnutls_assert ();
+      gnutls_free (tmp.data);
       return GNUTLS_E_MEMORY_ERROR;
     }
 
   ret = _gnutls_x509_decode_octet_string (NULL, tmp.data, (size_t) tmp.size,
 					  nonce->data, &l);
+  gnutls_free (tmp.data);
   if (ret != GNUTLS_E_SUCCESS)
     {
       gnutls_assert ();
