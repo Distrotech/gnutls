@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Free Software Foundation, Inc.
+ * Copyright (C) 2011, 2012 Free Software Foundation, Inc.
  * Author: Simon Josefsson
  *
  * This file is part of GnuTLS.
@@ -675,7 +675,7 @@ gnutls_ocsp_req_add_cert_id (gnutls_ocsp_req_t req,
  * serial number fields is populated as follows.  The issuer name and
  * the serial number is taken from @cert.  The issuer key is taken
  * from @issuer.  The hashed values will be hashed using the @digest
- * algorithm.
+ * algorithm, normally %GNUTLS_DIG_SHA1.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise a
  *   negative error code is returned.
@@ -1431,8 +1431,10 @@ gnutls_ocsp_resp_get_single (gnutls_ocsp_resp_t resp,
       else
 	{
 	  gnutls_assert ();
+	  gnutls_free (sa.data);
 	  return GNUTLS_E_ASN1_DER_ERROR;
 	}
+      gnutls_free (sa.data);
     }
 
   if (this_update)
