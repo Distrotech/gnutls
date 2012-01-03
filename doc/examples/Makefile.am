@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2005-2011 Free Software Foundation, Inc.
+# Copyright (C) 2005-2012 Free Software Foundation, Inc.
 #
 # Author: Simon Josefsson
 #
@@ -77,7 +77,7 @@ noinst_PROGRAMS += ex-client-srp ex-serv-srp
 endif
 
 if ENABLE_OCSP
-noinst_PROGRAMS += ex-ocsp-client
+noinst_PROGRAMS += ex-ocsp-client ex-ocsp-verify
 endif
 
 noinst_LTLIBRARIES = libexamples.la
