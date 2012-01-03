@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Free Software Foundation, Inc.
+ * Copyright (C) 2011-2012 Free Software Foundation, Inc.
  * Author: Simon Josefsson
  *
  * This file is part of GnuTLS.
@@ -128,6 +128,7 @@ print_req (gnutls_buffer_st * str, gnutls_ocsp_req_t req)
 	      addf (str, "\t\tNonce%s: ", critical ? " (critical)" : "");
 	      _gnutls_buffer_hexprint (str, nonce.data, nonce.size);
 	      adds (str, "\n");
+	      gnutls_free (nonce.data);
 	    }
 	}
       else
@@ -474,6 +475,7 @@ print_resp (gnutls_buffer_st * str, gnutls_ocsp_resp_t resp)
 	      addf (str, "\t\tNonce%s: ", critical ? " (critical)" : "");
 	      _gnutls_buffer_hexprint (str, nonce.data, nonce.size);
 	      adds (str, "\n");
+	      gnutls_free (nonce.data);
 	    }
 	}
       else
