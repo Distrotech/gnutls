@@ -2,6 +2,11 @@
 @chapter More on certificate authentication
 @cindex certificate authentication
 
+Certificates are not the only structures involved in a public key
+infrastructure. Several other structures that are used for certificate
+requests, encrypted private keys, revocation lists, GnuTLS abstract key
+structures, etc., are discussed in this chapter.
+
 @menu
 * PKCS 10 certificate requests::
 * PKIX certificate revocation lists::
@@ -9,7 +14,7 @@
 * Managing encrypted keys::
 * The certtool application::
 * The ocsptool application::
-* Hardware tokens::
+* Smart cards and HSMs::
 * Abstract key types::
 @end menu
 
@@ -290,7 +295,7 @@ anchors before it can be relied upon.
 
 Transferring or storing private keys in plain might not be a
 good idea. Any access on the keys becomes a fatal compromise.
-Storing the keys in hardware tokens (see @ref{Hardware tokens})
+Storing the keys in hardware security modules (see @ref{Smart cards and HSMs})
 could solve the storage problem but it is not always practical
 or efficient enough. This section describes alternative ways
 that involve encryption of the private keys to store and
@@ -454,18 +459,18 @@ example of a template file.
 
 @subheading Diffie-Hellman parameter generation
 To generate parameters for Diffie-Hellman key exchange, use the command:
-@smallexample
-$ certtool --generate-dh-params --outfile dh.pem
-@end smallexample
+@example
+$ certtool --generate-dh-params --outfile dh.pem --sec-param normal
+@end example
 
 @subheading Self-signed certificate generation
 
 To create a self signed certificate, use the command:
-@smallexample
+@example
 $ certtool --generate-privkey --outfile ca-key.pem
 $ certtool --generate-self-signed --load-privkey ca-key.pem \
    --outfile ca-cert.pem
-@end smallexample
+@end example
 
 Note that a self-signed certificate usually belongs to a certificate
 authority, that signs other certificates.
@@ -473,9 +478,9 @@ authority, that signs other certificates.
 @subheading Private key generation
 To create a private key (RSA by default), run:
 
-@smallexample
+@example
 $ certtool --generate-privkey --outfile key.pem
-@end smallexample
+@end example
 
 To create a DSA or elliptic curves (ECDSA) private key use the
 above command combined with @code{--dsa} or @code{--ecc} options.
@@ -483,63 +488,63 @@ above command combined with @code{--dsa} or @code{--ecc} options.
 @subheading Certificate generation
 To generate a certificate using the private key, use the command:
 
-@smallexample
+@example
 $ certtool --generate-certificate --load-privkey key.pem \
    --outfile cert.pem --load-ca-certificate ca-cert.pem \
    --load-ca-privkey ca-key.pem
-@end smallexample
+@end example
 
 Alternatively you may create a certificate request, which is needed
 when the certificate will be signed by a third party authority.
 
-@smallexample
+@example
 $ certtool --generate-request --load-privkey key.pem \
   --outfile request.pem
-@end smallexample
+@end example
 
 If the private key is stored in a smart card you can generate
 a request by specifying the private key object URL (see @ref{The p11tool application}
 on how to obtain the URL).
 
-@smallexample
+@example
 $ certtool --generate-request --load-privkey pkcs11:(PRIVKEY URL) \
   --load-pubkey pkcs11:(PUBKEY URL) --outfile request.pem
-@end smallexample
+@end example
 
 To generate a certificate using the previous request, use the command:
 
-@smallexample
+@example
 $ certtool --generate-certificate --load-request request.pem \
    --outfile cert.pem \
    --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem
-@end smallexample
+@end example
 
 @subheading Certificate information
 To view the certificate information, use:
 
-@smallexample
+@example
 $ certtool --certificate-info --infile cert.pem
-@end smallexample
+@end example
 
 @subheading @acronym{PKCS} #12 structure generation
 To generate a @acronym{PKCS} #12 structure using the previous key and
 certificate, use the command:
 
-@smallexample
+@example
 $ certtool --load-certificate cert.pem --load-privkey key.pem \
   --to-p12 --outder --outfile key.p12
-@end smallexample
+@end example
 
 Some tools (reportedly web browsers) have problems with that file
 because it does not contain the CA certificate for the certificate.
 To work around that problem in the tool, you can use the
 --load-ca-certificate parameter as follows:
 
-@smallexample
+@example
 $ certtool --load-ca-certificate ca.pem \
   --load-certificate cert.pem --load-privkey key.pem \
   --to-p12 --outder --outfile key.p12
-@end smallexample
+@end example
 
 @subheading Proxy certificate generation
 Proxy certificate can be used to delegate your credential to a
@@ -547,34 +552,34 @@ temporary, typically short-lived, certificate.  To create one from the
 previously created certificate, first create a temporary key and then
 generate a proxy certificate for it, using the commands:
 
-@smallexample
+@example
 $ certtool --generate-privkey > proxy-key.pem
 $ certtool --generate-proxy --load-ca-privkey key.pem \
   --load-privkey proxy-key.pem --load-certificate cert.pem \
   --outfile proxy-cert.pem
-@end smallexample
+@end example
 
 @subheading Certificate revocation list generation
 To create an empty Certificate Revocation List (CRL) do:
 
-@smallexample
+@example
 $ certtool --generate-crl --load-ca-privkey x509-ca-key.pem \
            --load-ca-certificate x509-ca.pem
-@end smallexample
+@end example
 
 To create a CRL that contains some revoked certificates, place the
 certificates in a file and use @code{--load-certificate} as follows:
 
-@smallexample
+@example
 $ certtool --generate-crl --load-ca-privkey x509-ca-key.pem \
   --load-ca-certificate x509-ca.pem --load-certificate revoked-certs.pem
-@end smallexample
+@end example
 
 To verify a Certificate Revocation List (CRL) do:
 
-@smallexample
+@example
 $ certtool --verify-crl --load-ca-certificate x509-ca.pem < crl.pem
-@end smallexample
+@end example
 
 
 
@@ -583,11 +588,11 @@ A template file can be used to avoid the interactive questions of
 certtool. Initially create a file named 'cert.cfg' that contains the information
 about the certificate. The template can be used as below:
 
-@smallexample
+@example
 $ certtool --generate-certificate cert.pem --load-privkey key.pem  \
    --template cert.cfg \
    --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem
-@end smallexample
+@end example
 
 An example certtool template file:
 
@@ -876,25 +881,14 @@ You may experiment passing different certificates to
 @code{--load-trust} and @code{--load-signer} to find common error
 conditions for OCSP response verification failures.
 
-@node Hardware tokens
-@section Security modules
+@node Smart cards and HSMs
+@section Smart cards and HSMs
 @cindex PKCS #11 tokens
 @cindex hardware tokens
 @cindex hardware security modules
 @cindex smart cards
 
-@menu
-* Introduction on security modules::
-* PKCS11 Initialization::
-* Reading objects::
-* Writing objects::
-* Using a PKCS11 token with TLS::
-* The p11tool application::
-@end menu
-
-@node Introduction on security modules
-@subsection Introduction
-In this section we present the smart-card and hardware security module support 
+In this section we present the smart-card and hardware security module (HSM) support 
 in @acronym{GnuTLS} using @acronym{PKCS} #11 @xcite{PKCS11}. Hardware security
 modules and smart cards provide a way to store private keys and perform
 operations on them without exposing them. This allows decoupling cryptographic
@@ -925,6 +919,14 @@ system, being the @acronym{Gnome Keyring}.
 @caption{PKCS #11 module usage.}
 @end float
 
+@menu
+* PKCS11 Initialization::
+* Reading objects::
+* Writing objects::
+* Using a PKCS11 token with TLS::
+* The p11tool application::
+@end menu
+
 @node PKCS11 Initialization
 @subsection Initialization
 To allow all the  @acronym{GnuTLS} applications to access @acronym{PKCS} #11 tokens
@@ -933,9 +935,9 @@ These are the configuration files of @acronym{p11-kit}@footnote{@url{http://p11-
 For example a file that will load the @acronym{OpenSC} module, could be named
 @code{/etc/pkcs11/modules/opensc} and contain the following:
 
-@smallexample
+@example
 module: /usr/lib/opensc-pkcs11.so
-@end smallexample
+@end example
 
 If you use this file, then there is no need for other initialization in
 @acronym{GnuTLS}, except for the PIN and token functions. Those allow retrieving a PIN
@@ -959,16 +961,16 @@ This allows for a consistent naming of objects across systems and applications
 in the same system. For example a public
 key on a smart card may be referenced as:
 
-@smallexample
+@example
 pkcs11:token=Nikos;serial=307521161601031;model=PKCS%2315; \
 manufacturer=EnterSafe;object=test1;objecttype=public;\
 id=32f153f3e37990b08624141077ca5dec2d15faed
-@end smallexample
+@end example
 
 while the smart card itself can be referenced as:
-@smallexample
+@example
 pkcs11:token=Nikos;serial=307521161601031;model=PKCS%2315;manufacturer=EnterSafe
-@end smallexample
+@end example
 
 Objects stored in a @acronym{PKCS} #11 token can be extracted
 if they are not marked as sensitive. Usually only private keys are marked as
@@ -1049,7 +1051,7 @@ p11tool is a program that is used to access tokens
 and security modules that support the PKCS #11 API. It requires
 individual PKCS #11 modules to be loaded either with the
 @code{--provider} option, or by setting up the GnuTLS configuration
-file for PKCS #11 as in @ref{Hardware tokens}.
+file for PKCS #11 as in @ref{Smart cards and HSMs}.
 
 @example
 p11tool help
@@ -1109,32 +1111,32 @@ on them.
 Some examples on how to use p11tool are illustrated in the following  paragraphs.
 
 @subsubheading List all tokens
-@smallexample
+@example
 $ p11tool --list-tokens
-@end smallexample
+@end example
 
 @subsubheading List all objects
 The following command will list all objects in a token. The @code{--login}
 is required to show objects marked as private.
-@smallexample
+@example
 $ p11tool --login --list-all
-@end smallexample
+@end example
 
 @subsubheading Exporting an object
 To retrieve an object stored in the card use the following command.
 Note however that objects marked as sensitive (typically PKCS #11 private keys) 
 are not allowed to be extracted from the token.
-@smallexample 
+@example 
 $ p11tool --login --export [OBJECT URL]
-@end smallexample
+@end example
 
 @subsubheading Copy an object to a token
 To copy an object, such as a certificate or private key to a token
 use the following command.
-@smallexample 
+@example 
 $ p11tool --login --write [TOKEN URL] \
   --load-certificate cert.pem --label "my_cert"
-@end smallexample
+@end example
 
 
 @node Abstract key types
@@ -1208,8 +1210,16 @@ but unlike public keys it cannot be exported. That is
 to allow abstraction over @acronym{PKCS} #11 keys that
 are not extractable.
 
-@showfuncD{gnutls_privkey_import_x509,gnutls_privkey_import_openpgp,gnutls_privkey_import_pkcs11,gnutls_privkey_import_ext}
+@showfuncC{gnutls_privkey_import_x509,gnutls_privkey_import_openpgp,gnutls_privkey_import_pkcs11}
+
 @showfuncB{gnutls_privkey_get_pk_algorithm,gnutls_privkey_get_type}
+
+In order to support cryptographic operations using 
+an external API, the following function is provided.
+This allows for a simple extensibility API without
+resorting to @acronym{PKCS} #11.
+
+@showfuncdesc{gnutls_privkey_import_ext}
 
 @node Operations
 @subsection Operations
@@ -1218,8 +1228,11 @@ signature verification operations with the underlying keys.
 
 @showfuncdesc{gnutls_pubkey_verify_data2}
 @showfuncdesc{gnutls_pubkey_verify_hash}
+@showfuncdesc{gnutls_pubkey_encrypt_data}
+
 @showfuncdesc{gnutls_privkey_sign_data}
 @showfuncdesc{gnutls_privkey_sign_hash}
+@showfuncdesc{gnutls_privkey_decrypt_data}
 
 Signing existing structures, such as certificates, CRLs,
 or certificate requests, as well as associating public

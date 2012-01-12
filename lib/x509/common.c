@@ -171,8 +171,22 @@ _gnutls_x509_oid_data_choice (const char *oid)
   return 0;
 }
 
-const char *
-_gnutls_x509_oid2ldap_string (const char *oid)
+/**
+ * gnutls_x509_dn_oid_name:
+ * @oid: holds an Object Identifier in a null terminated string
+ * @flags: 0 or %GNUTLS_X509_DN_OID_*
+ *
+ * This function will return the name of a known DN OID. If
+ * %GNUTLS_X509_DN_OID_RETURN_OID is specified this function
+ * will return the given OID if no descriptive name has been
+ * found.
+ *
+ * Returns: A null terminated string or NULL otherwise.
+ *
+ * Since: 3.0.0
+ **/
+const char*
+gnutls_x509_dn_oid_name (const char *oid, unsigned int flags)
 {
   int i = 0;
 
@@ -184,7 +198,8 @@ _gnutls_x509_oid2ldap_string (const char *oid)
     }
   while (_oid2str[i].oid != NULL);
 
-  return NULL;
+  if (flags & GNUTLS_X509_DN_OID_RETURN_OID) return oid;
+  else return NULL;
 }
 
 const char *

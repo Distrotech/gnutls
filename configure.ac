@@ -21,7 +21,7 @@ dnl Process this file with autoconf to produce a configure script.
 # USA
 
 AC_PREREQ(2.61)
-AC_INIT([GnuTLS], [3.0.9], [bug-gnutls@gnu.org])
+AC_INIT([GnuTLS], [3.0.11], [bug-gnutls@gnu.org])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -276,7 +276,12 @@ if test "$gl_gcc_warnings" = yes; then
 
   gl_WARN_ADD([-Wno-missing-field-initializers]) # We need this one
   gl_WARN_ADD([-Wno-sign-compare])     # Too many warnings for now
+  gl_WARN_ADD([-Wno-format-y2k])     # Too many warnings for now
+  gl_WARN_ADD([-Wno-suggest-attribute=pure])     # Too many warnings for now
+  gl_WARN_ADD([-Wno-suggest-attribute=const])     # Too many warnings for now
+  gl_WARN_ADD([-Wno-suggest-attribute=noreturn])     # Too many warnings for now
   gl_WARN_ADD([-Wno-pointer-sign])     # Too many warnings for now
+  gl_WARN_ADD([-Wno-unused-value]) # warnings for things we don't want to get
   gl_WARN_ADD([-Wno-unused-result]) # warnings for things we don't want to get
   gl_WARN_ADD([-Wno-unused-parameter]) # Too many warnings for now
   gl_WARN_ADD([-Wno-unused-parameter]) # Too many warnings for now
@@ -409,6 +414,8 @@ dnl Crywrap dependencies
 *** Checking dependencies for crywrap...
 ])
 
+if test "$have_win" != "yes"; then
+
 AC_CHECK_HEADERS([arpa/inet.h netinet/in.h sys/select.h sys/types.h sys/wait.h])
 
 dnl **********************
@@ -430,6 +437,10 @@ AC_CHECK_FUNCS([alarm atexit dup2 epoll_create kqueue memchr memset munmap \
 		strdup strerror strncasecmp strrchr strstr strtoul uname])
 
 PKG_CHECK_MODULES(LIBIDN, libidn >= 0.0.0, [libidn=yes], [libidn=no])
+
+else
+libidn=no
+fi
 
 AM_CONDITIONAL(ENABLE_CRYWRAP, test "x$libidn" != "xno")
 
@@ -465,6 +476,7 @@ AC_CONFIG_FILES([
   lib/algorithms/Makefile
   lib/auth/Makefile
   lib/ext/Makefile
+  lib/extras/Makefile
   lib/gnutls.pc
   lib/includes/Makefile
   lib/includes/gnutls/gnutls.h

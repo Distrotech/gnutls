@@ -22,7 +22,7 @@
  */
 
 /* This file contains certificate authentication functions to be exported in the
- * API and did not fit elsewhere.
+ * API which did not fit elsewhere.
  */
 
 #include <gnutls_int.h>
@@ -34,6 +34,40 @@
 #include <gnutls_auth.h>
 #include <gnutls_state.h>
 #include <gnutls_datum.h>
+#include <extras/randomart.h>
+
+/**
+ * gnutls_random_art:
+ * @type: The type of the random art
+ * @key_type: The type of the key (RSA, DSA etc.)
+ * @key_size: The size of the key in bits
+ * @fpr: The fingerprint of the key
+ * @fpr_size: The size of the fingerprint
+ * @art: The returned random art
+ *
+ * This function will convert a given fingerprint to an "artistic"
+ * image. The returned image is allocated using gnutls_malloc()
+ *
+ * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, otherwise
+ *   an error code is returned.
+ *
+ **/
+int gnutls_random_art (gnutls_random_art_t type, 
+                       const char* key_type, unsigned int key_size,
+                       void * fpr, size_t fpr_size,
+                       gnutls_datum_t* art)
+{
+  if (type != GNUTLS_RANDOM_ART_OPENSSH)
+    return gnutls_assert_val(GNUTLS_E_INVALID_REQUEST);
+
+  art->data = _gnutls_key_fingerprint_randomart(fpr, fpr_size, key_type, key_size, NULL);
+  if (art->data == NULL)
+    return gnutls_assert_val(GNUTLS_E_MEMORY_ERROR);
+  
+  art->size = strlen(art->data);
+  
+  return 0;
+}
 
 /* ANON & DHE */
 
@@ -42,7 +76,7 @@
  * @session: is a #gnutls_session_t structure.
  * @bits: is the number of bits
  *
- * This function sets the number of bits, for use in an Diffie-Hellman
+ * This function sets the number of bits, for use in a Diffie-Hellman
  * key exchange.  This is used both in DH ephemeral and DH anonymous
  * cipher suites.  This will set the minimum size of the prime that
  * will be used for the handshake.
@@ -313,7 +347,7 @@ mpi_buf2bits (gnutls_datum_t * mpi_buf)
  * This function will return the bits of the prime used in the last
  * Diffie-Hellman key exchange with the peer.  Should be used for both
  * anonymous and ephemeral Diffie-Hellman.  Note that some ciphers,
- * like RSA and DSA without DHE, does not use a Diffie-Hellman key
+ * like RSA and DSA without DHE, do not use a Diffie-Hellman key
  * exchange, and then this function will return 0.
  *
  * Returns: The Diffie-Hellman bit strength is returned, or 0 if no

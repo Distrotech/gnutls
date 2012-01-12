@@ -81,7 +81,7 @@ char *dh_params_file;
 char *x509_crlfile = NULL;
 
 gnutls_datum_t session_ticket_key;
-static int tcp_server(const char* name, int port);
+static void tcp_server(const char* name, int port);
 
 /* end of globals */
 
@@ -692,7 +692,11 @@ listen_socket (const char *name, int listen_port, int socktype)
   snprintf (portname, sizeof (portname), "%d", listen_port);
   memset (&hints, 0, sizeof (hints));
   hints.ai_socktype = socktype;
-  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;
+  hints.ai_flags = AI_PASSIVE
+#ifdef AI_ADDRCONFIG
+   | AI_ADDRCONFIG
+#endif
+   ;
 
   if ((s = getaddrinfo (NULL, portname, &hints, &res)) != 0)
     {
@@ -733,18 +737,21 @@ listen_socket (const char *name, int listen_port, int socktype)
               continue;
             }
         }
-#ifdef IP_DONTFRAG
       else
         {
+#if defined(IP_DONTFRAG)
           yes = 1;
           if (setsockopt (s, IPPROTO_IP, IP_DONTFRAG,
                           (const void *) &yes, sizeof (yes)) < 0)
-            {
               perror ("setsockopt(IP_DF) failed");
-            }
-        }
+#elif defined(IP_MTU_DISCOVER)
+          yes = IP_PMTUDISC_DO;
+          if (setsockopt(s, IPPROTO_IP, IP_MTU_DISCOVER, 
+                         (const void*) &yes, sizeof (yes)) < 0)
+              perror ("setsockopt(IP_DF) failed");
 #endif
-      
+        }
+
       if (bind (s, ptr->ai_addr, ptr->ai_addrlen) < 0)
         {
           perror ("bind() failed");
@@ -916,13 +923,17 @@ main (int argc, char **argv)
   if (nodb == 0)
     wrap_db_init ();
 
+  if (info.udp != 0)
+    strcpy(name, "UDP ");
+  else name[0] = 0;
+
   if (http == 1)
     {
-      strcpy (name, "HTTP Server");
+      strcat (name, "HTTP Server");
     }
   else
     {
-      strcpy (name, "Echo Server");
+      strcat (name, "Echo Server");
     }
 
   gnutls_global_set_log_function (tls_log_func);
@@ -1126,12 +1137,12 @@ main (int argc, char **argv)
 #endif
 
   if (info.udp)
-    return udp_server(name, info.port, info.mtu);
+    udp_server(name, info.port, info.mtu);
   else
-    return tcp_server(name, info.port);
+    tcp_server(name, info.port);
 }
 
-static int tcp_server(const char* name, int port)
+static void tcp_server(const char* name, int port)
 {
   int n, s;
   char topbuf[512];
@@ -1516,8 +1527,6 @@ static int tcp_server(const char* name, int port)
   if (nodb == 0)
     wrap_db_deinit ();
   gnutls_global_deinit ();
-
-  return 0;
 
 }
 

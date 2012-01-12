@@ -1401,7 +1401,7 @@ cleanup:
 #endif
 
 int
-_gnutls_proc_cert_server_certificate (gnutls_session_t session,
+_gnutls_proc_certificate (gnutls_session_t session,
                                       opaque * data, size_t data_size)
 {
   int ret;
@@ -1458,7 +1458,7 @@ _gnutls_check_supported_sign_algo (CertificateSigType algo)
     case DSA_SIGN:
       return GNUTLS_PK_DSA;
     case ECDSA_SIGN:
-      return GNUTLS_PK_ECC;
+      return GNUTLS_PK_EC;
     }
 
   return -1;

@@ -57,6 +57,7 @@ endif
 
 noinst_LTLIBRARIES = libutils.la
 libutils_la_SOURCES = utils.h utils.c
+libutils_la_LIBADD = ../gl/libgnu.la
 
 ctests = mini-deflate simple gc set_pkcs12_cred certder certuniqueid	\
 	 mpi certificate_set_x509_crl dn parse_ca moredn mini		\
@@ -65,7 +66,7 @@ ctests = mini-deflate simple gc set_pkcs12_cred certder certuniqueid	\
 	 crq_apis init_roundtrip pkcs12_s2k_pem dn2 mini-eagain		\
 	 nul-in-x509-names x509_altname pkcs12_encode mini-x509		\
 	 mini-x509-rehandshake rng-fork mini-eagain-dtls	\
-	 x509cert x509cert-tl infoaccess
+	 x509cert x509cert-tl infoaccess rsa-encrypt-decrypt
 
 if ENABLE_OCSP
 ctests += ocsp
@@ -101,6 +102,9 @@ TESTS_ENVIRONMENT =						\
 	PKCS12FILE_2=$(srcdir)/pkcs12-decode/pkcs12_2certs.p12	\
 	PKCS12PASSWORD_2=""					\
 	EXEEXT=$(EXEEXT)					\
-	srcdir="$(srcdir)"					\
-	$(VALGRIND)
+	srcdir="$(srcdir)"
 
+if !WINDOWS
+TESTS_ENVIRONMENT +=						\
+	$(VALGRIND)
+endif

@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 Free
- * Software Foundation, Inc.
+ * Copyright (C) 2003-2012 Free Software Foundation, Inc.
  * Author: Nikos Mavrogiannopoulos, Simon Josefsson, Howard Chu
  *
  * This file is part of GnuTLS.
@@ -255,12 +254,10 @@ cleanup:
  *
  * This function will copy the name of the Certificate issuer in the
  * provided buffer. The name will be in the form
- * "C=xxxx,O=yyyy,CN=zzzz" as described in RFC2253. The output string
+ * "C=xxxx,O=yyyy,CN=zzzz" as described in RFC4514. The output string
  * will be ASCII or UTF-8 encoded, depending on the certificate data.
  *
- * If @buf is null then only the size will be filled. If the @raw_flag
- * is not specified the output is always null terminated, although the
- * @buf_size will not include the null character.
+ * If @buf is null then only the size will be filled. 
  *
  * Returns: GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
  * long enough, and in that case the @buf_size will be updated with
@@ -292,13 +289,13 @@ gnutls_x509_crt_get_issuer_dn (gnutls_x509_crt_t cert, char *buf,
  *
  * This function will extract the part of the name of the Certificate
  * issuer specified by the given OID. The output, if the raw flag is not
- * used, will be encoded as described in RFC2253. Thus a string that is
+ * used, will be encoded as described in RFC4514. Thus a string that is
  * ASCII or UTF-8 encoded, depending on the certificate data.
  *
  * Some helper macros with popular OIDs can be found in gnutls/x509.h
  * If raw flag is (0), this function will only return known OIDs as
- * text. Other OIDs will be DER encoded, as described in RFC2253 --
- * in hex format with a '\#' prefix.  You can check about known OIDs
+ * text. Other OIDs will be DER encoded, as described in RFC4514 --
+ * in hex format with a '#' prefix.  You can check about known OIDs
  * using gnutls_x509_dn_oid_known().
  *
  * If @buf is null then only the size will be filled. If the @raw_flag
@@ -336,9 +333,9 @@ gnutls_x509_crt_get_issuer_dn_by_oid (gnutls_x509_crt_t cert,
  * This function will extract the OIDs of the name of the Certificate
  * issuer specified by the given index.
  *
- * If @oid is null then only the size will be filled. If the @raw_flag
- * is not specified the output is always null terminated, although the
- * @oid_size will not include the null character.
+ * If @oid is null then only the size will be filled. The @oid
+ * returned will be null terminated, although @oid_size will not
+ * account for the trailing null.
  *
  * Returns: GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
  *   long enough, and in that case the @oid_size will be updated
@@ -367,12 +364,10 @@ gnutls_x509_crt_get_issuer_dn_oid (gnutls_x509_crt_t cert,
  *
  * This function will copy the name of the Certificate in the provided
  * buffer. The name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as
- * described in RFC2253. The output string will be ASCII or UTF-8
+ * described in RFC4514. The output string will be ASCII or UTF-8
  * encoded, depending on the certificate data.
  *
- * If @buf is null then only the size will be filled. If the @raw_flag
- * is not specified the output is always null terminated, although the
- * @buf_size will not include the null character.
+ * If @buf is null then only the size will be filled. 
  *
  * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is not
  *   long enough, and in that case the @buf_size will be updated
@@ -404,13 +399,13 @@ gnutls_x509_crt_get_dn (gnutls_x509_crt_t cert, char *buf,
  *
  * This function will extract the part of the name of the Certificate
  * subject specified by the given OID. The output, if the raw flag is
- * not used, will be encoded as described in RFC2253. Thus a string
+ * not used, will be encoded as described in RFC4514. Thus a string
  * that is ASCII or UTF-8 encoded, depending on the certificate data.
  *
  * Some helper macros with popular OIDs can be found in gnutls/x509.h
  * If raw flag is (0), this function will only return known OIDs as
- * text. Other OIDs will be DER encoded, as described in RFC2253 --
- * in hex format with a '\#' prefix.  You can check about known OIDs
+ * text. Other OIDs will be DER encoded, as described in RFC4514 --
+ * in hex format with a '#' prefix.  You can check about known OIDs
  * using gnutls_x509_dn_oid_known().
  *
  * If @buf is null then only the size will be filled. If the @raw_flag
@@ -447,9 +442,9 @@ gnutls_x509_crt_get_dn_by_oid (gnutls_x509_crt_t cert, const char *oid,
  * This function will extract the OIDs of the name of the Certificate
  * subject specified by the given index.
  *
- * If @oid is null then only the size will be filled. If the @raw_flag
- * is not specified the output is always null terminated, although the
- * @oid_size will not include the null character.
+ * If @oid is null then only the size will be filled. The @oid
+ * returned will be null terminated, although @oid_size will not
+ * account for the trailing null.
  *
  * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is
  *   not long enough, and in that case the @oid_size will be updated
@@ -1336,9 +1331,9 @@ gnutls_x509_crt_get_issuer_alt_name2 (gnutls_x509_crt_t cert,
  * gnutls_x509_crt_get_subject_alt_name() returned
  * %GNUTLS_SAN_OTHERNAME.
  *
- * If @oid is null then only the size will be filled. If the @raw_flag
- * is not specified the output is always null terminated, although the
- * @oid_size will not include the null character.
+ * If @oid is null then only the size will be filled. The @oid
+ * returned will be null terminated, although @oid_size will not
+ * account for the trailing null.
  *
  * Returns: the alternative subject name type on success, one of the
  * enumerated gnutls_x509_subject_alt_name_t.  For supported OIDs, it
@@ -1370,9 +1365,9 @@ gnutls_x509_crt_get_subject_alt_othername_oid (gnutls_x509_crt_t cert,
  * Alternative Name, contained in the given certificate, and return
  * the type as an enumerated element.
  *
- * If @oid is null then only the size will be filled. If the @raw_flag
- * is not specified the output is always null terminated, although the
- * @oid_size will not include the null character.
+ * If @oid is null then only the size will be filled. The @oid
+ * returned will be null terminated, although @oid_size will not
+ * account for the trailing null.
  *
  * This function is only useful if
  * gnutls_x509_crt_get_issuer_alt_name() returned
@@ -1690,6 +1685,9 @@ gnutls_x509_crt_get_extension_by_oid (gnutls_x509_crt_t cert,
  * This function will return the requested extension OID in the certificate.
  * The extension OID will be stored as a string in the provided buffer.
  *
+ * The @oid returned will be null terminated, although @oid_size will not
+ * account for the trailing null.
+ *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned,
  *   otherwise a negative error code is returned.  If you have reached the
  *   last extension available %GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE
@@ -1732,8 +1730,9 @@ gnutls_x509_crt_get_extension_oid (gnutls_x509_crt_t cert, int indx,
  * gnutls_x509_crt_get_extension_data() to extract the data.
  *
  * If the buffer provided is not long enough to hold the output, then
- * *@oid_size is updated and %GNUTLS_E_SHORT_MEMORY_BUFFER will be
- * returned.
+ * @oid_size is updated and %GNUTLS_E_SHORT_MEMORY_BUFFER will be
+ * returned. The @oid returned will be null terminated, although 
+ * @oid_size will not account for the trailing null.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned,
  *   otherwise a negative error code is returned.  If you have reached the
@@ -2719,9 +2718,9 @@ gnutls_x509_crt_get_crl_dist_points (gnutls_x509_crt_t cert,
  * Usage extension (2.5.29.37) See the GNUTLS_KP_* definitions for
  * human readable names.
  *
- * If @oid is null then only the size will be filled. If the @raw_flag
- * is not specified the output is always null terminated, although the
- * @oid_size will not include the null character.
+ * If @oid is null then only the size will be filled. The @oid
+ * returned will be null terminated, although @oid_size will not
+ * account for the trailing null.
  *
  * Returns: %GNUTLS_E_SHORT_MEMORY_BUFFER if the provided buffer is
  *   not long enough, and in that case the *oid_size will be updated

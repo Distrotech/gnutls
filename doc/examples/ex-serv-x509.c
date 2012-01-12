@@ -23,12 +23,8 @@
 /* This is a sample TLS 1.0 echo server, using X.509 authentication.
  */
 
-
-#define SA struct sockaddr
-#define SOCKET_ERR(err,s) if(err==-1) {perror(s);return(1);}
 #define MAX_BUF 1024
 #define PORT 5556               /* listen to 5556 port */
-#define DH_BITS 1024
 
 /* These are global */
 gnutls_certificate_credentials_t x509_cred;
@@ -45,14 +41,10 @@ initialize_tls_session (void)
 
   gnutls_credentials_set (session, GNUTLS_CRD_CERTIFICATE, x509_cred);
 
-  /* request client certificate if any.
+  /* We don't request any certificate from the client.
+   * If we did we would need to verify it.
    */
-  gnutls_certificate_server_set_request (session, GNUTLS_CERT_REQUEST);
-
-  /* Set maximum compatibility mode. This is only suggested on public webservers
-   * that need to trade security for compatibility
-   */
-  gnutls_session_enable_compatibility_mode (session);
+  gnutls_certificate_server_set_request (session, GNUTLS_CERT_IGNORE);
 
   return session;
 }
@@ -62,16 +54,14 @@ static gnutls_dh_params_t dh_params;
 static int
 generate_dh_params (void)
 {
+  int bits = gnutls_sec_param_to_pk_bits (GNUTLS_PK_DH, GNUTLS_SEC_PARAM_LOW);
 
   /* Generate Diffie-Hellman parameters - for use with DHE
    * kx algorithms. When short bit length is used, it might
-   * be wise to regenerate parameters.
-   *
-   * Check the ex-serv-export.c example for using static
-   * parameters.
+   * be wise to regenerate parameters often.
    */
   gnutls_dh_params_init (&dh_params);
-  gnutls_dh_params_generate2 (dh_params, DH_BITS);
+  gnutls_dh_params_generate2 (dh_params, bits);
 
   return 0;
 }
@@ -79,7 +69,7 @@ generate_dh_params (void)
 int
 main (void)
 {
-  int err, listen_sd;
+  int listen_sd;
   int sd, ret;
   struct sockaddr_in sa_serv;
   struct sockaddr_in sa_cli;
@@ -100,12 +90,17 @@ main (void)
   gnutls_certificate_set_x509_crl_file (x509_cred, CRLFILE,
                                         GNUTLS_X509_FMT_PEM);
 
-  gnutls_certificate_set_x509_key_file (x509_cred, CERTFILE, KEYFILE,
+  ret = gnutls_certificate_set_x509_key_file (x509_cred, CERTFILE, KEYFILE,
                                         GNUTLS_X509_FMT_PEM);
+  if (ret < 0)
+    {
+      printf("No certificate or key were found\n");
+      exit(1);
+    }
 
   generate_dh_params ();
 
-  gnutls_priority_init (&priority_cache, "NORMAL", NULL);
+  gnutls_priority_init (&priority_cache, "PERFORMANCE:%SERVER_PRECEDENCE", NULL);
 
 
   gnutls_certificate_set_dh_params (x509_cred, dh_params);
@@ -113,7 +108,6 @@ main (void)
   /* Socket operations
    */
   listen_sd = socket (AF_INET, SOCK_STREAM, 0);
-  SOCKET_ERR (listen_sd, "socket");
 
   memset (&sa_serv, '\0', sizeof (sa_serv));
   sa_serv.sin_family = AF_INET;
@@ -123,10 +117,9 @@ main (void)
   setsockopt (listen_sd, SOL_SOCKET, SO_REUSEADDR, (void *) &optval,
               sizeof (int));
 
-  err = bind (listen_sd, (SA *) & sa_serv, sizeof (sa_serv));
-  SOCKET_ERR (err, "bind");
-  err = listen (listen_sd, 1024);
-  SOCKET_ERR (err, "listen");
+  bind (listen_sd, (struct sockaddr *) & sa_serv, sizeof (sa_serv));
+
+  listen (listen_sd, 1024);
 
   printf ("Server ready. Listening to port '%d'.\n\n", PORT);
 
@@ -135,14 +128,20 @@ main (void)
     {
       session = initialize_tls_session ();
 
-      sd = accept (listen_sd, (SA *) & sa_cli, &client_len);
+      sd = accept (listen_sd, (struct sockaddr *) & sa_cli, &client_len);
 
       printf ("- connection from %s, port %d\n",
               inet_ntop (AF_INET, &sa_cli.sin_addr, topbuf,
                          sizeof (topbuf)), ntohs (sa_cli.sin_port));
 
       gnutls_transport_set_ptr (session, (gnutls_transport_ptr_t) sd);
-      ret = gnutls_handshake (session);
+
+      do
+        {
+          ret = gnutls_handshake (session);
+        }
+      while (gnutls_error_is_fatal (ret) == 0);
+
       if (ret < 0)
         {
           close (sd);

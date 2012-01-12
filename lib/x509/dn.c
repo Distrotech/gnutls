@@ -34,23 +34,7 @@
  * Name (you need a parser just to read a name in the X.509 protoocols!!!)
  */
 
-/* Converts the given OID to an ldap acceptable string or
- * a dotted OID.
- */
-static const char *
-oid2ldap_string (const char *oid)
-{
-  const char *ret;
-
-  ret = _gnutls_x509_oid2ldap_string (oid);
-  if (ret)
-    return ret;
-
-  /* else return the OID in dotted format */
-  return oid;
-}
-
-/* Escapes a string following the rules from RFC2253.
+/* Escapes a string following the rules from RFC4514.
  */
 static char *
 str_escape (char *str, char *buffer, unsigned int buffer_size)
@@ -236,7 +220,7 @@ _gnutls_x509_parse_dn (ASN1_TYPE asn1_struct,
                 }
             }
 
-          ldap_desc = oid2ldap_string (oid);
+          ldap_desc = gnutls_x509_dn_oid_name (oid, GNUTLS_X509_DN_OID_RETURN_OID);
           printable = _gnutls_x509_oid_data_printable (oid);
 
           /* leading #, hex encoded value and terminating NULL */
@@ -1030,7 +1014,7 @@ gnutls_x509_dn_deinit (gnutls_x509_dn_t dn)
  *
  * This function will return the name of the given RDN sequence.  The
  * name will be in the form "C=xxxx,O=yyyy,CN=zzzz" as described in
- * RFC2253.
+ * RFC4514.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, or
  * %GNUTLS_E_SHORT_MEMORY_BUFFER is returned and *@sizeof_buf is
@@ -1090,7 +1074,7 @@ gnutls_x509_rdn_get (const gnutls_datum_t * idn,
  *
  * This function will return the name of the given Object identifier,
  * of the RDN sequence.  The name will be encoded using the rules
- * from RFC2253.
+ * from RFC4514.
  *
  * Returns: On success, %GNUTLS_E_SUCCESS (0) is returned, or
  * %GNUTLS_E_SHORT_MEMORY_BUFFER is returned and *@sizeof_buf is

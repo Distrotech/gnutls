@@ -29,6 +29,11 @@
 #include <gnutls/pkcs11.h>
 #include <gnutls/openpgp.h>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /* Public key operations */
 
 struct gnutls_pubkey_st;
@@ -120,6 +125,11 @@ gnutls_pubkey_import_ecc_raw (gnutls_pubkey_t key,
                               gnutls_ecc_curve_t curve,
                               const gnutls_datum_t * x,
                               const gnutls_datum_t * y);
+
+int
+gnutls_pubkey_encrypt_data (gnutls_pubkey_t key, unsigned int flags,
+                           const gnutls_datum_t * plaintext,
+                           gnutls_datum_t * ciphertext);
 
 int gnutls_x509_crt_set_pubkey (gnutls_x509_crt_t crt, gnutls_pubkey_t key);
 
@@ -279,5 +289,9 @@ gnutls_certificate_set_key (gnutls_certificate_credentials_t res,
                             gnutls_pcert_st * pcert_list,
                             int pcert_list_size,
                             gnutls_privkey_t key);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

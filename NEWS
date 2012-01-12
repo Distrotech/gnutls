@@ -1,13 +1,6 @@
 GnuTLS NEWS -- History of user-visible changes.                -*- outline -*-
-Copyright (C) 2000-2011 Free Software Foundation, Inc.
+Copyright (C) 2000-2012 Free Software Foundation, Inc.
 See the end for copying conditions.
-
-* Version 3.0.10 (unreleased)
-
-** libgnutls: Corrected ciphersuite GNUTLS_ECDHE_PSK_AES_256_CBC_SHA384
-
-** libgnutls: Added ciphersuites: GNUTLS_PSK_WITH_AES_256_GCM_SHA384
-and GNUTLS_DHE_PSK_WITH_AES_256_GCM_SHA384.
 
 ** libgnutls: Added OCSP support.
 There is a new header file gnutls/ocsp.h and a set of new functions
@@ -59,8 +52,63 @@ gnutls_ocsp_req_set_nonce: Added.
 gnutls_ocsp_resp_verify: Added.
 gnutls_ocsp_req_randomize_nonce: Added.
 
+* Version 3.0.12 (unreleased)
+
+** certtool: --outder option now works for private
+and public keys as well.
+
+** libgnutls: Corrected an alignment issue in ECDH
+key generation which prevented some keys from being
+correctly aligned in rare circumstances.
+
+** libgnutls: Corrected memory leaks in DH parameter
+generation and ecc_projective_check_point().
+
+** libgnutls: Added gnutls_x509_dn_oid_name() to 
+return a descriptive name of a DN OID.
+
+** API and ABI modifications:
+gnutls_pubkey_encrypt_data: Added
+gnutls_x509_dn_oid_name: Added
+gnutls_session_resumption_requested: Added
+
+* Version 3.0.11 (released 2012-01-06)
+
+** libgnutls: Corrected functionality of 
+gnutls_record_get_direction(). Reported by Philip Allison.
+
+** libgnutls: Provide less timing information when decoding
+TLS/DTLS record packets. Patch by Nadhem Alfardan.
+
 ** API and ABI modifications:
 No changes since last version.
+
+
+* Version 3.0.10 (released 2012-01-04)
+
+** gnutls-cli/serv: Set don't fragment bit in DTLS sessions
+in Linux as well as in BSD.
+
+** gnutls-cli: Fixed reading from windows terminals.
+
+** libgnutls: When GNUTLS_OPENPGP_FMT_BASE64 is specified
+the stream is assumed to be base64 encoded (previously
+the encoding was auto-detected). This avoids a decoding
+issue in windows systems.
+
+** libgnutls: Corrected ciphersuite GNUTLS_ECDHE_PSK_AES_256_CBC_SHA384
+
+** libgnutls: Added ciphersuites: GNUTLS_PSK_WITH_AES_256_GCM_SHA384
+and GNUTLS_DHE_PSK_WITH_AES_256_GCM_SHA384.
+
+** libgnutls: Added function gnutls_random_art() to convert 
+fingerprints to images (currently ascii-art).
+
+** libgnutls: Corrected bug in DSA private key parsing, which
+prevented the verification of the key.
+
+** API and ABI modifications:
+gnutls_random_art: Added
 
 * Version 3.0.9 (released 2011-12-13)
 

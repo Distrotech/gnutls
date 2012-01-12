@@ -196,7 +196,7 @@ generate_private_key_int (void)
   if (info.dsa)
     key_type = GNUTLS_PK_DSA;
   else if (info.ecc)
-    key_type = GNUTLS_PK_ECC;
+    key_type = GNUTLS_PK_EC;
   else
     key_type = GNUTLS_PK_RSA;
 
@@ -275,7 +275,8 @@ print_private_key (gnutls_x509_privkey_t key)
   if (!key)
     return;
 
-  privkey_info_int(key);
+  if (info.outcert_format == GNUTLS_X509_FMT_PEM)
+    privkey_info_int(key);
 
   if (!info.pkcs8)
     {
@@ -1198,16 +1199,18 @@ certificate_info (int pubkey, common_info_st * cinfo)
       if (info.outcert_format == GNUTLS_X509_FMT_PEM)
         print_certificate_info (crt[i], outfile, 1);
 
-      size = buffer_size;
-      ret = gnutls_x509_crt_export (crt[i], info.outcert_format, buffer,
-                                    &size);
-      if (ret < 0)
-        error (EXIT_FAILURE, 0, "export error: %s", gnutls_strerror (ret));
-
-      fwrite (buffer, 1, size, outfile);
-
       if (pubkey)
         pubkey_info (crt[i], cinfo);
+      else
+        {
+          size = buffer_size;
+          ret = gnutls_x509_crt_export (crt[i], info.outcert_format, buffer,
+                                        &size);
+          if (ret < 0)
+            error (EXIT_FAILURE, 0, "export error: %s", gnutls_strerror (ret));
+
+          fwrite (buffer, 1, size, outfile);
+        }
 
       gnutls_x509_crt_deinit (crt[i]);
     }
@@ -1285,7 +1288,7 @@ pgp_privkey_info (void)
   gnutls_openpgp_privkey_t key;
   unsigned char keyid[GNUTLS_OPENPGP_KEYID_SIZE];
   size_t size;
-  int ret, i, subkeys;
+  int ret, i, subkeys, bits = 0;
   gnutls_datum_t pem;
   const char *cprint;
 
@@ -1352,6 +1355,7 @@ pgp_privkey_info (void)
           else
             print_rsa_pkey (&m, &e, &d, &p, &q, &u, NULL, NULL);
 
+          bits = m.size * 8;
         }
       else if (ret == GNUTLS_PK_DSA)
         {
@@ -1369,6 +1373,8 @@ pgp_privkey_info (void)
                      gnutls_strerror (ret));
           else
             print_dsa_pkey (&x, &y, &p, &q, &g);
+            
+          bits = y.size * 8;
         }
 
       fprintf (outfile, "\n");
@@ -1386,9 +1392,33 @@ pgp_privkey_info (void)
         }
       else
         {
-          fprintf (outfile, "Public Key ID: %s\n", raw_to_string (keyid, 8));
+          fprintf (outfile, "Public key ID: %s\n", raw_to_string (keyid, 8));
         }
 
+      size = buffer_size;
+      if (i == -1)
+        ret = gnutls_openpgp_privkey_get_fingerprint (key, buffer, &size);
+      else
+        ret = gnutls_openpgp_privkey_get_subkey_fingerprint (key, i, buffer, &size);
+
+      if (ret < 0)
+        {
+          fprintf (stderr, "Error in fingerprint calculation: %s\n",
+                   gnutls_strerror (ret));
+        }
+      else
+        {
+          gnutls_datum_t art;
+
+          fprintf (outfile, "Fingerprint: %s\n", raw_to_string (buffer, size));
+
+          ret = gnutls_random_art(GNUTLS_RANDOM_ART_OPENSSH, cprint, bits, buffer, size, &art);
+          if (ret >= 0)
+            {
+              fprintf (outfile, "Fingerprint's random art:\n%s\n\n", art.data);
+              gnutls_free(art.data);
+            }
+        }
     }
 
   size = buffer_size;
@@ -1427,7 +1457,7 @@ pgp_ring_info (void)
   free (pem.data);
 
   count = gnutls_openpgp_keyring_get_crt_count (ring);
-  if (count > 0)
+  if (count >= 0)
     fprintf (outfile, "Keyring contains %d OpenPGP certificates\n\n", count);
   else
     error (EXIT_FAILURE, 0, "keyring error: %s", gnutls_strerror (count));
@@ -1618,7 +1648,7 @@ crq_info (void)
 
 static void privkey_info_int (gnutls_x509_privkey_t key)
 {
-int ret;
+int ret, key_type, bits = 0;
 size_t size;
 const char *cprint;
 
@@ -1628,14 +1658,16 @@ const char *cprint;
   ret = gnutls_x509_privkey_get_pk_algorithm (key);
   fprintf (outfile, "\tPublic Key Algorithm: ");
 
-  cprint = gnutls_pk_algorithm_get_name (ret);
+  key_type = ret;
+
+  cprint = gnutls_pk_algorithm_get_name (key_type);
   fprintf (outfile, "%s\n", cprint ? cprint : "Unknown");
   fprintf (outfile, "\tKey Security Level: %s\n\n",
            gnutls_sec_param_get_name (gnutls_x509_privkey_sec_param (key)));
 
   /* Print the raw public and private keys
    */
-  if (ret == GNUTLS_PK_RSA)
+  if (key_type == GNUTLS_PK_RSA)
     {
       gnutls_datum_t m, e, d, p, q, u, exp1, exp2;
 
@@ -1648,6 +1680,8 @@ const char *cprint;
       else
         {
           print_rsa_pkey (&m, &e, &d, &p, &q, &u, &exp1, &exp2);
+          bits = m.size * 8;
+
           gnutls_free (m.data);
           gnutls_free (e.data);
           gnutls_free (d.data);
@@ -1658,7 +1692,7 @@ const char *cprint;
           gnutls_free (exp2.data);
         }
     }
-  else if (ret == GNUTLS_PK_DSA)
+  else if (key_type == GNUTLS_PK_DSA)
     {
       gnutls_datum_t p, q, g, y, x;
 
@@ -1669,6 +1703,8 @@ const char *cprint;
       else
         {
           print_dsa_pkey (&x, &y, &p, &q, &g);
+          bits = y.size * 8;
+
           gnutls_free (x.data);
           gnutls_free (y.data);
           gnutls_free (p.data);
@@ -1676,7 +1712,7 @@ const char *cprint;
           gnutls_free (g.data);
         }
     }
-  else if (ret == GNUTLS_PK_ECC)
+  else if (key_type == GNUTLS_PK_EC)
     {
       gnutls_datum_t y, x, k;
       gnutls_ecc_curve_t curve;
@@ -1688,6 +1724,8 @@ const char *cprint;
       else
         {
           print_ecc_pkey (curve, &k, &x, &y);
+          bits = gnutls_ecc_curve_get_size(curve) * 8;
+
           gnutls_free (x.data);
           gnutls_free (y.data);
           gnutls_free (k.data);
@@ -1704,7 +1742,16 @@ const char *cprint;
     }
   else
     {
+      gnutls_datum_t art;
+
       fprintf (outfile, "Public Key ID: %s\n", raw_to_string (buffer, size));
+      
+      ret = gnutls_random_art(GNUTLS_RANDOM_ART_OPENSSH, cprint, bits, buffer, size, &art);
+      if (ret >= 0)
+        {
+          fprintf (outfile, "Public key's random art:\n%s\n", art.data);
+          gnutls_free(art.data);
+        }
     }
   fprintf (outfile, "\n");
 
@@ -1744,7 +1791,8 @@ privkey_info (void)
   if (ret < 0)
     error (EXIT_FAILURE, 0, "import error: %s", gnutls_strerror (ret));
 
-  privkey_info_int (key);
+  if (info.outcert_format == GNUTLS_X509_FMT_PEM)
+    privkey_info_int (key);
 
   ret = gnutls_x509_privkey_verify_params (key);
   if (ret < 0)
@@ -1758,11 +1806,11 @@ privkey_info (void)
     }
 
   size = buffer_size;
-  ret = gnutls_x509_privkey_export (key, GNUTLS_X509_FMT_PEM, buffer, &size);
+  ret = gnutls_x509_privkey_export (key, info.outcert_format, buffer, &size);
   if (ret < 0)
     error (EXIT_FAILURE, 0, "export error: %s", gnutls_strerror (ret));
 
-  fprintf (outfile, "\n%s\n", buffer);
+  fwrite (buffer, 1, size, outfile);
 
   gnutls_x509_privkey_deinit (key);
 }
@@ -2901,6 +2949,22 @@ pubkey_info (gnutls_x509_crt_t crt, common_info_st * cinfo)
       pubkey = load_pubkey (1, cinfo);
     }
 
+  if (info.outcert_format == GNUTLS_X509_FMT_DER)
+    {
+      size = buffer_size;
+      ret = gnutls_pubkey_export (pubkey, info.outcert_format, buffer, &size);
+      if (ret < 0)
+        error (EXIT_FAILURE, 0, "export error: %s", gnutls_strerror (ret));
+
+      fwrite (buffer, 1, size, outfile);
+
+      gnutls_pubkey_deinit (pubkey);
+      
+      return;
+    }
+    
+  /* PEM */
+
   fprintf (outfile, "Public Key Info:\n\n");
   ret = gnutls_pubkey_get_pk_algorithm (pubkey, &bits);
   fprintf (outfile, "Public Key Algorithm: ");
@@ -2943,7 +3007,7 @@ pubkey_info (gnutls_x509_crt_t crt, common_info_st * cinfo)
           gnutls_free (g.data);
         }
     }
-  else if (ret == GNUTLS_PK_ECC)
+  else if (ret == GNUTLS_PK_EC)
     {
       gnutls_datum_t x, y;
       gnutls_ecc_curve_t curve;

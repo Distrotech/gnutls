@@ -298,6 +298,7 @@ APIMANS += gnutls_session_set_ptr.3
 APIMANS += gnutls_session_get_ptr.3
 APIMANS += gnutls_openpgp_send_cert.3
 APIMANS += gnutls_fingerprint.3
+APIMANS += gnutls_random_art.3
 APIMANS += gnutls_srp_free_client_credentials.3
 APIMANS += gnutls_srp_allocate_client_credentials.3
 APIMANS += gnutls_srp_set_client_credentials.3

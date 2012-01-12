@@ -130,7 +130,7 @@ gnutls_global_set_log_level (int level)
  * @realloc_func: A realloc function
  * @free_func: The function that frees allocated data. Must accept a NULL pointer.
  *
- * This is the function were you set the memory allocation functions
+ * This is the function where you set the memory allocation functions
  * gnutls is going to use. By default the libc's allocation functions
  * (malloc(), free()), are used by gnutls, to allocate both sensitive
  * and not sensitive data.  This function is provided to set the
@@ -150,11 +150,6 @@ gnutls_global_set_mem_functions (gnutls_alloc_function alloc_func,
   gnutls_malloc = alloc_func;
   gnutls_realloc = realloc_func;
   gnutls_free = free_func;
-
-  if (is_secure_func != NULL)
-    _gnutls_is_secure_memory = is_secure_func;
-  else
-    _gnutls_is_secure_memory = _gnutls_is_secure_mem_null;
 
   /* if using the libc's default malloc
    * use libc's calloc as well.
@@ -184,7 +179,7 @@ static int _gnutls_init = 0;
  * Note that this function will also initialize the underlying crypto
  * backend, if it has not been initialized before.  
  *
- * This function increment a global counter, so that
+ * This function increments a global counter, so that
  * gnutls_global_deinit() only releases resources when it has been
  * called as many times as gnutls_global_init().  This is useful when
  * GnuTLS is used by more than one library in an application.  This

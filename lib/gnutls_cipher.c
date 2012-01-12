@@ -253,7 +253,7 @@ calc_enc_length (gnutls_session_t session, int data_size,
 #define MAX_PREAMBLE_SIZE 16
 
 /* generates the authentication data (data to be hashed only
- * and are not to be send). Returns their size.
+ * and are not to be sent). Returns their size.
  */
 static inline int
 make_preamble (opaque * uint64_data, opaque type, int length,
@@ -560,7 +560,12 @@ ciphertext_to_compressed (gnutls_session_t session,
           }
 
       if (length < 0)
-        length = 0;
+        {
+          /* Setting a proper length to prevent timing differences in
+           * processing of records with invalid encryption.
+           */
+          length = ciphertext->size - tag_size;
+        }
 
       /* Pass the type, version, length and compressed through
        * MAC.

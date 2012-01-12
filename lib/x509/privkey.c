@@ -360,7 +360,6 @@ decode_dsa_key (const gnutls_datum_t * raw_key, gnutls_x509_privkey_t pkey)
       gnutls_assert ();
       goto error;
     }
-  pkey->params.params_nr++;
 
   if ((result = _gnutls_x509_read_int (dsa_asn, "p", &pkey->params.params[0])) < 0)
     {
@@ -477,7 +476,7 @@ gnutls_x509_privkey_import (gnutls_x509_privkey_t key,
                 _gnutls_fbase64_decode (PEM_KEY_ECC, data->data, data->size,
                                     &out);
               if (result >= 0)
-                key->pk_algorithm = GNUTLS_PK_ECC;
+                key->pk_algorithm = GNUTLS_PK_EC;
              }
         }
 
@@ -505,7 +504,7 @@ gnutls_x509_privkey_import (gnutls_x509_privkey_t key,
       if (key->key == NULL)
         gnutls_assert ();
     }
-  else if (key->pk_algorithm == GNUTLS_PK_ECC)
+  else if (key->pk_algorithm == GNUTLS_PK_EC)
     {
       key->key = _gnutls_privkey_decode_ecc_key (&_data, key);
       if (key->key == NULL)
@@ -884,7 +883,7 @@ gnutls_x509_privkey_import_ecc_raw (gnutls_x509_privkey_t key,
     }
   key->params.params_nr++;
 
-  key->pk_algorithm = GNUTLS_PK_ECC;
+  key->pk_algorithm = GNUTLS_PK_EC;
 
   return 0;
 
@@ -956,7 +955,7 @@ gnutls_x509_privkey_export (gnutls_x509_privkey_t key,
     msg = PEM_KEY_RSA;
   else if (key->pk_algorithm == GNUTLS_PK_DSA)
     msg = PEM_KEY_DSA;
-  else if (key->pk_algorithm == GNUTLS_PK_ECC)
+  else if (key->pk_algorithm == GNUTLS_PK_EC)
     msg = PEM_KEY_ECC;
   else
     msg = "UNKNOWN";
@@ -1336,7 +1335,7 @@ gnutls_x509_privkey_generate (gnutls_x509_privkey_t key,
 
   gnutls_pk_params_init(&key->params);
   
-  if (algo == GNUTLS_PK_ECC)
+  if (algo == GNUTLS_PK_EC)
     bits = _gnutls_ecc_bits_to_curve(bits);
 
   ret = _gnutls_pk_generate (algo, bits, &key->params);

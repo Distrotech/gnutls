@@ -9,6 +9,7 @@
 * Setting up the transport layer::
 * TLS handshake::
 * Data transfer and termination::
+* Handling alerts::
 * Priority Strings::
 * Advanced and other topics::
 * Using the cryptographic library::
@@ -124,16 +125,16 @@ threads as long as a single thread accesses a single object. This is
 sufficient to support a server which handles several sessions per thread.
 If, however, an object needs to be shared across threads then access must be 
 protected with a mutex. Read-only access to objects, for example the
-credentials holding structures (see @ref{Authentication}), is also thread-safe. 
+credentials holding structures, is also thread-safe. 
 
 The random generator of the cryptographic back-end, is not thread safe and requires
 mutex locks which are setup by @acronym{GnuTLS}.
 Applications can either call @funcref{gnutls_global_init} which will initialize the default
 operating system provided locks (i.e. @code{pthreads} on GNU/Linux and
-@code{CriticalSection} on Windows), or specify manually the locking system using 
+@code{CriticalSection} on Windows), or manually specify the locking system using
 the function @funcref{gnutls_global_set_mutex} before calling @funcref{gnutls_global_init}. 
-Setting manually mutexes is recommended
-only to applications that have full control of the underlying libraries. If this
+Setting mutexes manually is recommended
+only for applications that have full control of the underlying libraries. If this
 is not the case, the use of the operating system defaults is recommended. An example of 
 non-native thread usage is shown below.
 
@@ -237,9 +238,9 @@ to be added to the compiler invocation at compile time are output by
 the @option{--cflags} option to @command{pkg-config gnutls}.  The
 following example shows how it can be used at the command line:
 
-@smallexample
+@example
 gcc -c foo.c `pkg-config gnutls --cflags`
-@end smallexample
+@end example
 
 Adding the output of @samp{pkg-config gnutls --cflags} to the
 compilers command line will ensure that the compiler can find the
@@ -255,16 +256,26 @@ required to link the program with the library (for instance, the
 @samp{-ltasn1} option).  The example shows how to link @file{foo.o}
 with the library to a program @command{foo}.
 
-@smallexample
+@example
 gcc -o foo foo.o `pkg-config gnutls --libs`
-@end smallexample
+@end example
 
 Of course you can also combine both examples to a single command by
 specifying both options to @command{pkg-config}:
 
-@smallexample
+@example
 gcc -o foo foo.c `pkg-config gnutls --cflags --libs`
-@end smallexample
+@end example
+
+When a program uses the GNU autoconf system, then the following
+line or similar can be used to detect the presence of GnuTLS.
+
+@example
+PKG_CHECK_MODULES([LIBGNUTLS], [gnutls >= 3.0.0])
+
+AC_SUBST([LIBGNUTLS_CFLAGS])
+AC_SUBST([LIBGNUTLS_LIBS])
+@end example
 
 @node Session initialization
 @section Session initialization
@@ -305,7 +316,7 @@ current session using @funcref{gnutls_credentials_set}.
 
 When using certificates the server is required to have at least one
 certificate and private key pair. Clients may not hold such
-a pair, but a server could require it. On this section we discuss
+a pair, but a server could require it. In this section we discuss
 general issues applying to both client and server certificates. The next
 section will elaborate on issues arising from client authentication only.
 
@@ -327,6 +338,10 @@ already.
 
 @showfuncD{gnutls_certificate_set_openpgp_key_mem,gnutls_certificate_set_openpgp_key,gnutls_certificate_set_openpgp_key_file,gnutls_certificate_set_key}
 
+If multiple certificates are used with the functions above each
+client's request will be served with the certificate that matches the
+requested name (see @ref{Server name indication}).
+
 As an alternative to loading from files or buffers, a callback may be used for the 
 server or the client to specify the certificate and the key at the handshake time.
 In that case a certificate should be selected according the peer's signature
@@ -335,44 +350,22 @@ algorithm preferences. To get those preferences use
 
 @showfuncB{gnutls_certificate_set_retrieve_function,gnutls_sign_algorithm_get_requested}
 
-Certificate verification is possible by loading the trusted
-authorities into the credentials structure by using
-the following functions, applicable to X.509 and OpenPGP certificates.
+The functions above do not handle the requested server name automatically.
+A server would need to check the name requested by the client
+using @funcref{gnutls_server_name_get}, and serve the appropriate
+certificate.
 
-@showfuncB{gnutls_certificate_set_x509_trust_file,gnutls_certificate_set_openpgp_keyring_file}
-
-Note however that the peer's certificate is not automatically
-verified, you should call @funcref{gnutls_certificate_verify_peers2},
-after a successful handshake or during if @funcref{gnutls_certificate_set_verify_function}
-has been used, to verify the certificate's signature.
-An alternative way, which reports a more detailed
-verification output, is to use @funcref{gnutls_certificate_get_peers} to
-obtain the raw certificate of the peer and verify it using the
-functions discussed in @ref{X.509 certificates}.
-
-@showfuncdesc{gnutls_certificate_verify_peers2}
-
-In a handshake, the negotiated cipher suite also depends on the
+In a handshake, the negotiated cipher suite depends on the
 certificate's parameters, so some key exchange methods might not be
-available with some certificates. @acronym{GnuTLS} will disable
+available with all certificates. @acronym{GnuTLS} will disable
 ciphersuites that are not compatible with the key, or the enabled
 authentication methods.  For example keys marked as sign-only, will
 not be able to access the plain RSA ciphersuites, that require
 decryption. It is not recommended to use RSA keys for both
 signing and encryption. If possible use a different key for the
-@code{DHE_RSA} which uses signing and @code{RSA} that requires decryption.
+@code{DHE-RSA} which uses signing and @code{RSA} that requires decryption.
 All the key exchange methods shown in @ref{tab:key-exchange} are
 available in certificate authentication.
-
-@showfuncdesc{gnutls_certificate_set_verify_function}
-
-Note that the DHE key exchange methods are generally
-slower@footnote{It depends on the group used.  Primes with
-lesser bits are always faster, but also easier to break.  See @ref{Selecting cryptographic key sizes}
-for the acceptable security levels.} than the elliptic curves counterpart
-(ECDHE). Moreover the plain Diffie-Hellman key exchange
-requires parameters to be generated and associated with a credentials
-structure by the server (see @ref{Parameter generation}). 
 
 
 @subsubheading Client certificate authentication
@@ -390,6 +383,31 @@ signed by server's acceptable signers.
 @showfuncdesc{gnutls_certificate_server_set_request}
 
 @showfuncdesc{gnutls_certificate_send_x509_rdn_sequence}
+
+
+@subsubheading Client or server certificate verification
+
+Certificate verification is possible by loading the trusted
+authorities into the credentials structure by using
+the following functions, applicable to X.509 and OpenPGP certificates.
+
+@showfuncB{gnutls_certificate_set_x509_trust_file,gnutls_certificate_set_openpgp_keyring_file}
+
+The peer's certificate is not automatically verified and one 
+should call @funcref{gnutls_certificate_verify_peers2}
+after a successful handshake to verify the certificate's signature.
+Alternative the verification can occur during the handshake
+by using @funcref{gnutls_certificate_set_verify_function}.
+
+In order to report a detailed verification output, an alternative
+way has to be used. For that, one should call @funcref{gnutls_certificate_get_peers} 
+to obtain the raw certificate of the peer and verify it using the
+functions discussed in @ref{X.509 certificates}.
+
+@showfuncdesc{gnutls_certificate_verify_peers2}
+
+@showfuncdesc{gnutls_certificate_set_verify_function}
+
 
 
 @node SRP credentials
@@ -617,7 +635,7 @@ fatal for the protocol or can be ignored.
 
 @showfuncdesc{gnutls_error_is_fatal}
 
-In DTLS it is adviceable to use the extended receive
+In DTLS it is advisable to use the extended receive
 function shown below, because it allows the extraction
 of the sequence number. This is required in DTLS because
 messages may arrive out of order.
@@ -642,6 +660,24 @@ A session can be deinitialized with the @funcref{gnutls_deinit} function.
 
 @showfuncdesc{gnutls_bye}
 @showfuncdesc{gnutls_deinit}
+
+@node Handling alerts
+@section Handling alerts
+During a TLS connection alert messages may be exchanged by the
+two peers. Those messages may be fatal, meaning the connection
+must be terminated afterwards, or warning when something needs
+to be reported to the peer, but without interrupting the session.
+The error codes @code{GNUTLS_E_WARNING_ALERT_RECEIVED}
+or @code{GNUTLS_E_FATAL_ALERT_RECEIVED} signal those alerts
+when received, and may be returned by all GnuTLS functions that receive 
+data from the peer, being @funcref{gnutls_handshake} and @funcref{gnutls_record_recv}.
+Alerts messages may be sent to the peer using @funcref{gnutls_alert_send}.
+
+@showfuncdesc{gnutls_alert_get}
+
+@showfuncdesc{gnutls_alert_send}
+
+@showfuncB{gnutls_error_to_alert,gnutls_alert_get_name}
 
 
 @node Priority Strings
@@ -670,12 +706,14 @@ included as a fallback only.  The ciphers are sorted by security
 margin.
 
 @item SECURE128 @tab
-Means all "secure" ciphersuites of security level 128-bit
-or more.
+Means all "secure" ciphersuites that offer a 
+security level 128-bit or more and a message authenticity
+security level of 80 bits or more.
 
 @item SECURE192 @tab
-Means all "secure" ciphersuites of security level 192-bit
-or more.
+Means all "secure" ciphersuites that offer a 
+security level 192-bit or more and a message authenticity
+security level of 128 bits or more.
 
 @item SECURE256 @tab
 Currently alias for SECURE192.
@@ -707,8 +745,16 @@ compression NULL; for certificate types X.509.
 In key exchange algorithms when in NORMAL or SECURE levels the
 perfect forward secrecy algorithms take precedence of the other
 protocols.  In all cases all the supported key exchange algorithms
- are enabled (except for the RSA-EXPORT which is only enabled in
-EXPORT level).
+are enabled@footnote{Except for the RSA-EXPORT which is only enabled in
+EXPORT level.}.
+
+Note that the SECURE levels distinguish between overall security level and
+message authenticity security level. That is because the message
+authenticity security level requires the adversary to break
+the algorithms at real-time during the protocol run, whilst 
+the overall security level refers to off-line adversaries 
+(e.g. adversaries breaking the ciphertext years after it was captured).
+
 The NONE keyword, if used, must followed by the algorithms to be enabled,
 and is used to provide the exact list of requested algorithms@footnote{To avoid collisions in order to specify a compression algorithm in
 this string you have to prefix it with "COMP-", protocol versions
@@ -750,7 +796,7 @@ COMP-NULL, COMP-DEFLATE. Catch all is COMP-ALL.
 
 @item TLS versions @tab
 VERS-SSL3.0, VERS-TLS1.0, VERS-TLS1.1,
-VERS-TLS1.2. Catch all is VERS-TLS-ALL.
+VERS-TLS1.2, VERS-DTLS1.0. Catch all is VERS-TLS-ALL.
 
 @item Signature algorithms @tab
 SIGN-RSA-SHA1, SIGN-RSA-SHA224, 
@@ -759,13 +805,19 @@ SIGN-DSA-SHA224, SIGN-DSA-SHA256, SIGN-RSA-MD5. Catch all
 is SIGN-ALL. This is only valid for TLS 1.2 and later.
 
 @item Elliptic curves @tab
-CURVE-SECP224R1, CURVE-SECP256R1, CURVE-SECP384R1, CURVE-SECP521R1. Catch all is CURVE-ALL.
+CURVE-SECP192R1, CURVE-SECP224R1, CURVE-SECP256R1, CURVE-SECP384R1, CURVE-SECP521R1. Catch all is CURVE-ALL.
 
 @end multitable
 @caption{The supported algorithm keywords in priority strings.}
 @end float
 
-
+Note that the DHE key exchange methods are generally
+slower@footnote{It depends on the group used.  Primes with
+lesser bits are always faster, but also easier to break.  See @ref{Selecting cryptographic key sizes}
+for the acceptable security levels.} than their elliptic curves counterpart
+(ECDHE). Moreover the plain Diffie-Hellman key exchange
+requires parameters to be generated and associated with a credentials
+structure by the server (see @ref{Parameter generation}). 
 
 @float Table,tab:prio-special
 @multitable @columnfractions .45 .45
@@ -849,32 +901,35 @@ will allow V1 CAs in chains.
 @subsubheading Client side
 
 To reduce time and roundtrips spent in a handshake the client can   
-utilize session resumption. This requires the client to retrieve and store
-the session parameters. On new sessions to the same server the parameters must
-be re-associated with sessions using @funcref{gnutls_session_set_data}.
+request session resumption from a server that previously shared
+a session with. For that the client has to retrieve and store
+the session parameters. Before establishing a new session to the same 
+server the parameters must be re-associated with the GnuTLS session
+using @funcref{gnutls_session_set_data}.
 
 @showfuncC{gnutls_session_get_data,gnutls_session_get_id,gnutls_session_set_data}
 
-Keep in mind that sessions might be expired after some time, 
-and it may be normal for a server not to resume a session
-even it was requested.  That is to prevent temporal session keys
-from becoming long-term keys. Also note that as a client you must enable, using the
-priority functions, at least the algorithms used in the last session.
+Keep in mind that sessions will be expired after some time, depending
+on the server, and a server may choose not to resume a session
+even when requested to.  The expiration is to prevent temporal session keys
+from becoming long-term keys. Also note that as a client you must enable, 
+using the priority functions, at least the algorithms used in the last session.
 
-It is highly recommended clients to enable the session ticket extension using 
+It is highly recommended for clients to enable the session ticket extension using
 @funcref{gnutls_session_ticket_enable_client} in order to allow resumption with 
 servers that do not store any state.
 
 @showfuncA{gnutls_session_ticket_enable_client}
 
+@showfuncdesc{gnutls_session_is_resumed}
 
 @subsubheading Server side
 
-In order to support resumption a server might do it either by storing
+In order to support resumption a server can store
 the session security parameters in a local database or by using session
 tickets (see @ref{Session tickets}) to delegate storage to the client. Because
 session tickets might not be supported by all clients, servers
-might combine the two methods.
+could combine the two methods.
 
 A storing server needs to specify callback functions to store, retrieve and delete session data. These can be
 registered with the functions below. The stored sessions in the database can be checked using @funcref{gnutls_db_check_entry}
@@ -883,13 +938,14 @@ for expiration.
 @showfuncD{gnutls_db_set_retrieve_function,gnutls_db_set_store_function,gnutls_db_set_ptr,gnutls_db_set_remove_function}
 @showfuncA{gnutls_db_check_entry}
 
-A server utilizing tickets should use
-@funcref{gnutls_session_ticket_key_generate} to generate a ticket encryption key and
-call @funcref{gnutls_session_ticket_enable_server} to enable the extension.
+A server utilizing tickets should generate ticket encryption
+and authentication keys using @funcref{gnutls_session_ticket_key_generate}.
+Those keys should be associated with the GnuTLS session using
+@funcref{gnutls_session_ticket_enable_server}.
 
-@showfuncA{gnutls_session_ticket_enable_server}
+@showfuncdesc{gnutls_session_ticket_enable_server}
 @showfuncdesc{gnutls_session_ticket_key_generate}
-
+@showfuncdesc{gnutls_session_resumption_requested}
 
 @node Parameter generation
 @subsection Parameter generation
@@ -913,8 +969,15 @@ of Diffie-Hellman parameters we suggest against performing generation
 of them within an application. The @code{certtool} tool can be used to 
 generate or export known safe values that can be stored in code
 or in a configuration file to provide the ability to replace. We also
-recommend the usage of @funcref{gnutls_sec_param_to_pk_bits} (see @ref{Selecting cryptographic key sizes}) to determine
+recommend the usage of @funcref{gnutls_sec_param_to_pk_bits} 
+(see @ref{Selecting cryptographic key sizes}) to determine
 the bit size of the generated parameters.
+
+Note that the information stored in the generated PKCS #3 structure
+changed with GnuTLS 3.0.9. Since that version the @code{privateValueLength}
+member of the structure is set, allowing the server utilizing the
+parameters to use keys of the size of the security parameter. This
+provides better performance in key exchange.
 
 The ciphersuites that involve the RSA-EXPORT key exchange require
 additional parameters. Those ciphersuites are rarely used today
@@ -948,13 +1011,13 @@ client or server random data first, you can set the
 For example, after establishing a TLS session using
 @funcref{gnutls_handshake}, you can invoke the TLS PRF with this call:
 
-@smallexample
+@example
 #define MYLABEL "EXPORTER-FOO"
 #define MYCONTEXT "some context data"
 char out[32];
 rc = gnutls_prf (session, strlen (MYLABEL), MYLABEL, 0,
                  strlen (MYCONTEXT), MYCONTEXT, 32, out);
-@end smallexample
+@end example
 
 If you don't want to mix in the client/server random, there is a more
 low-level TLS PRF interface called @funcref{gnutls_prf_raw}.
@@ -979,7 +1042,7 @@ the @code{tls-unique} channel binding for TLS defined in
 The following example describes how to print the channel binding data.
 Note that it must be run after a successful TLS handshake.
 
-@smallexample
+@example
 @{
   gnutls_datum_t cb;
   int rc;
@@ -999,7 +1062,7 @@ Note that it must be run after a successful TLS handshake.
       printf ("\n");
     @}
 @}
-@end smallexample
+@end example
 
 @node Interoperability
 @subsection Interoperability

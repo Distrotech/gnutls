@@ -1,5 +1,5 @@
 /* -*- c -*-
- * Copyright (C) 2000-2011 Free Software Foundation, Inc.
+ * Copyright (C) 2000-2012 Free Software Foundation, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *
@@ -562,13 +562,14 @@ extern "C"
     GNUTLS_CRT_PRINT_UNSIGNED_FULL = 2
   } gnutls_certificate_print_formats_t;
 
+#define GNUTLS_PK_ECC GNUTLS_PK_EC
 /**
  * gnutls_pk_algorithm_t:
  * @GNUTLS_PK_UNKNOWN: Unknown public-key algorithm.
  * @GNUTLS_PK_RSA: RSA public-key algorithm.
  * @GNUTLS_PK_DSA: DSA public-key algorithm.
  * @GNUTLS_PK_DH: Diffie-Hellman algorithm. Used to generate parameters.
- * @GNUTLS_PK_ECC: Elliptic curve algorithm. Used to generate parameters.
+ * @GNUTLS_PK_EC: Elliptic curve algorithm. Used to generate parameters.
  *
  * Enumeration of different public-key algorithms.
  */
@@ -578,7 +579,7 @@ extern "C"
     GNUTLS_PK_RSA = 1,
     GNUTLS_PK_DSA = 2,
     GNUTLS_PK_DH = 3,
-    GNUTLS_PK_ECC = 4,
+    GNUTLS_PK_EC = 4,
   } gnutls_pk_algorithm_t;
 
   const char *gnutls_pk_algorithm_get_name (gnutls_pk_algorithm_t algorithm);
@@ -958,6 +959,7 @@ gnutls_ecc_curve_t gnutls_ecc_curve_get(gnutls_session_t session);
 /* checks if this session is a resumed one 
  */
   int gnutls_session_is_resumed (gnutls_session_t session);
+  int gnutls_session_resumption_requested (gnutls_session_t session);
 
   typedef int (*gnutls_db_store_func) (void *, gnutls_datum_t key,
                                        gnutls_datum_t data);
@@ -1268,13 +1270,21 @@ gnutls_ecc_curve_t gnutls_ecc_curve_get(gnutls_session_t session);
   void gnutls_openpgp_send_cert (gnutls_session_t session,
                                  gnutls_openpgp_crt_status_t status);
 
-/* fingerprint 
- * Actually this function returns the hash of the given data.
+/* This function returns the hash of the given data.
  */
   int gnutls_fingerprint (gnutls_digest_algorithm_t algo,
                           const gnutls_datum_t * data, void *result,
                           size_t * result_size);
 
+  typedef enum gnutls_random_art
+  {
+    GNUTLS_RANDOM_ART_OPENSSH=1,
+  } gnutls_random_art_t;
+
+  int gnutls_random_art (gnutls_random_art_t type, 
+                         const char* key_name, unsigned int key_size,
+                         void * fpr, size_t fpr_size,
+                         gnutls_datum_t* art);
 
 /* SRP 
  */

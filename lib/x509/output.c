@@ -29,6 +29,7 @@
 #include <x509_int.h>
 #include <gnutls_num.h>
 #include <gnutls_errors.h>
+#include <extras/randomart.h>
 
 /* I18n of error codes. */
 #include "gettext.h"
@@ -965,7 +966,7 @@ print_extensions (gnutls_buffer_st * str, const char *prefix, int type,
       else if (strcmp (oid, "1.3.6.1.5.5.7.1.1") == 0)
         {
           addf (str, _("%s\t\tAuthority Information "
-		       "Access Information (%s):\n"), prefix,
+		       "Access (%s):\n"), prefix,
                 critical ? _("critical") : _("not critical"));
 
           if (type == TYPE_CRT)
@@ -1216,7 +1217,7 @@ print_cert (gnutls_buffer_st * str, gnutls_x509_crt_t cert, int notsigned)
             }
             break;
 
-          case GNUTLS_PK_ECC:
+          case GNUTLS_PK_EC:
             {
               gnutls_datum_t x, y;
               gnutls_ecc_curve_t curve;
@@ -1348,7 +1349,7 @@ print_fingerprint (gnutls_buffer_st * str, gnutls_x509_crt_t cert,
   int err;
   char buffer[MAX_HASH_SIZE];
   size_t size = sizeof (buffer);
-
+  
   err = gnutls_x509_crt_get_fingerprint (cert, algo, buffer, &size);
   if (err < 0)
     {
@@ -1370,6 +1371,9 @@ print_keyid (gnutls_buffer_st * str, gnutls_x509_crt_t cert)
   int err;
   char buffer[32];
   size_t size = sizeof(buffer);
+  const char* name;
+  char* p;
+  unsigned int bits;
 
   err = gnutls_x509_crt_get_key_id (cert, 0, buffer, &size);
   if (err < 0)
@@ -1381,6 +1385,24 @@ print_keyid (gnutls_buffer_st * str, gnutls_x509_crt_t cert)
   adds (str, _("\tPublic Key Id:\n\t\t"));
   _gnutls_buffer_hexprint (str, buffer, size);
   adds (str, "\n");
+
+  err = gnutls_x509_crt_get_pk_algorithm (cert, &bits);
+  if (err < 0)
+    return;
+    
+  name = gnutls_pk_get_name(err);
+  if (name == NULL)
+    return;
+
+  p = _gnutls_key_fingerprint_randomart(buffer, size, name, bits, "\t\t");
+  if (p == NULL)
+    return;
+  
+  adds (str, _("\tPublic key's random art:\n"));
+  adds (str, p);
+  adds (str, "\n");
+
+  gnutls_free(p);
 }
 
 static void
@@ -1388,7 +1410,6 @@ print_other (gnutls_buffer_st * str, gnutls_x509_crt_t cert, int notsigned)
 {
   if (!notsigned)
     {
-      print_fingerprint (str, cert, GNUTLS_DIG_MD5);
       print_fingerprint (str, cert, GNUTLS_DIG_SHA1);
     }
   print_keyid (str, cert);

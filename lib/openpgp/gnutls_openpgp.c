@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011
- * Free Software Foundation, Inc.
+ * Copyright (C) 2002-2011 Free Software Foundation, Inc.
  *
  * Author: Timo Schulz, Nikos Mavrogiannopoulos
  *
@@ -45,6 +44,8 @@ _gnutls_map_cdk_rc (int rc)
     {
     case CDK_Success:
       return 0;
+    case CDK_EOF:
+      return GNUTLS_E_PARSING_ERROR;
     case CDK_Too_Short:
       return GNUTLS_E_SHORT_MEMORY_BUFFER;
     case CDK_General_Error:
@@ -499,7 +500,7 @@ gnutls_openpgp_count_key_names (const gnutls_datum_t * cert)
       return 0;
     }
 
-  if (cdk_kbnode_read_from_mem (&knode, cert->data, cert->size))
+  if (cdk_kbnode_read_from_mem (&knode, 0, cert->data, cert->size))
     {
       gnutls_assert ();
       return 0;
