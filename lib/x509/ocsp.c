@@ -919,6 +919,7 @@ gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t req,
   if (ret != GNUTLS_E_SHORT_MEMORY_BUFFER)
     {
       gnutls_assert ();
+      gnutls_free (tmp.data);
       return ret;
     }
 
@@ -926,11 +927,13 @@ gnutls_ocsp_req_get_nonce (gnutls_ocsp_req_t req,
   if (nonce->data == NULL)
     {
       gnutls_assert ();
+      gnutls_free (tmp.data);
       return GNUTLS_E_MEMORY_ERROR;
     }
 
   ret = _gnutls_x509_decode_octet_string (NULL, tmp.data, (size_t) tmp.size,
 					  nonce->data, &l);
+  gnutls_free (tmp.data);
   if (ret != GNUTLS_E_SUCCESS)
     {
       gnutls_assert ();
