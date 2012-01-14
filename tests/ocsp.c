@@ -1464,10 +1464,8 @@ doit (void)
       exit (1);
     }
 
-#if 0
   gnutls_global_set_log_function (tls_log_func);
-  gnutls_global_set_log_level (4711);
-#endif
+  gnutls_global_set_log_level (0);
 
   ocsp_invalid_calls ();
   req_parse ();
