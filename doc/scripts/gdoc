@@ -151,10 +151,10 @@ $type_env = "(\\\$[A-Za-z0-9_]+)";
 		     $type_param, '" <tt><b>$1</b></tt>"' );
 $blankline_html = "<p>";
 
-%highlights_texinfo = ( $type_param, '" \@code{$1}"',
-			$type_constant, '"\@code{$1}"',
-			$type_func, '"\@code{$1}"',
-			$type_struct, '"\@code{$1}"',
+%highlights_texinfo = ( $type_param, '" \@code{$1} "',
+			$type_constant, '"\@code{$1} "',
+			$type_func, '"\@code{$1} "',
+			$type_struct, '"\@code{$1} "',
 			 );
 $blankline_texinfo = "";
 
@@ -376,9 +376,8 @@ sub output_enum_texinfo {
     my $check;
     my $type;
 
-    print "\n\n\@float Table,$name\n";
-
-    print "\n\@itemize\n";
+    print "\n\@c $name\n";
+    print "\@table \@code\n";
 
     $check=0;
     foreach $parameter (@{$args{'parameterlist'}}) {
@@ -394,8 +393,7 @@ sub output_enum_texinfo {
 	chomp $out;
 	print $out . "\n";
     }
-    print "\@end itemize\n";
-    print "\@end float\n";
+    print "\@end table\n";
 }
 
 # output in html

@@ -50,16 +50,17 @@ compar (const void *_n1, const void *_n2)
 
 static const char headers[] = "\\tablefirsthead{%\n"
 	"\\hline\n"
-	"\\multicolumn{1}{|c}{Error code} &\n"
+	"\\multicolumn{1}{|c}{Code} &\n"
+	"\\multicolumn{1}{c}{Name} &\n"
 	"\\multicolumn{1}{c|}{Description} \\\\\n"
 	"\\hline}\n"
 	"\\tablehead{%\n"
 	"\\hline\n"
-	"\\multicolumn{2}{|l|}{\\small\\sl continued from previous page}\\\\\n"
+	"\\multicolumn{3}{|l|}{\\small\\sl continued from previous page}\\\\\n"
 	"\\hline}\n"
 	"\\tabletail{%\n"
 	"\\hline\n"
-	"\\multicolumn{2}{|r|}{\\small\\sl continued on next page}\\\\\n"
+	"\\multicolumn{3}{|r|}{\\small\\sl continued on next page}\\\\\n"
 	"\\hline}\n"
 	"\\tablelasttail{\\hline}\n"
 	"\\bottomcaption{The error codes table}\n\n";
@@ -75,14 +76,37 @@ main (int argc, char *argv[])
   return 0;
 }
 
+static char* escape_texi_string( const char* str, char* buffer, int buffer_size)
+{
+int i = 0, j = 0;
+
+
+while( str[i] != 0 && j <buffer_size - 1) {
+   if (str[i]=='_') {
+      buffer[j++] = '_';
+      buffer[j++] = '@';
+      buffer[j++] = '-';
+   } else {
+      buffer[j++] = str[i];
+   }
+   i++;
+};
+
+buffer[j] = 0;
+
+return buffer;
+
+}
+
 static int main_texinfo (void)
 {
   int i, j;
   const char *desc;
   const char *_name;
+  char buffer[500];
   error_name names_to_sort[MAX_CODES];        /* up to MAX_CODES names  */
 
-  printf ("@table @code\n");
+  printf ("@multitable @columnfractions .15 .40 .37\n");
 
   memset (names_to_sort, 0, sizeof (names_to_sort));
   j = 0;
@@ -92,24 +116,16 @@ static int main_texinfo (void)
       if (_name == NULL)
         continue;
 
+      desc = gnutls_strerror (i);
+
+      printf ("@item %d @tab %s @tab %s\n", i, escape_texi_string(_name, buffer,sizeof(buffer)), desc);
+
       strcpy (names_to_sort[j].name, _name);
       names_to_sort[j].error_index = i;
       j++;
     }
 
-  qsort (names_to_sort, j, sizeof (error_name), compar);
-
-  for (i = 0; i < j; i++)
-    {
-      _name = names_to_sort[i].name;
-      desc = gnutls_strerror (names_to_sort[i].error_index);
-      if (desc == NULL || _name == NULL)
-        continue;
-
-      printf ("@item %s:\n%s\n\n", _name, desc);
-    }
-
-  printf ("@end table\n");
+  printf ("@end multitable\n");
 
   return 0;
 }
@@ -123,6 +139,8 @@ while( str[i] != 0 && j <buffer_size - 1) {
    if (str[i]=='_') {
       buffer[j++] = '\\';
       buffer[j++] = '_';
+      buffer[j++] = '\\';
+      buffer[j++] = '-';
    } else if (str[i]=='#') {
       buffer[j++] = '\\';
       buffer[j++] = '#';
@@ -149,7 +167,7 @@ error_name names_to_sort[MAX_CODES]; /* up to MAX_CODES names  */
 
 puts( headers);
 
-printf("\\begin{supertabular}{|p{.52\\linewidth}|p{.40\\linewidth}|}\n");
+printf("\\begin{supertabular}{|p{.05\\linewidth}|p{.40\\linewidth}|p{.45\\linewidth}|}\n");
 
 memset( names_to_sort, 0, sizeof(names_to_sort));
 j=0;
@@ -163,7 +181,7 @@ for (i=0;i>-MAX_CODES;i--)
    j++;
 }
 
-qsort( names_to_sort, j, sizeof(error_name), compar);
+//qsort( names_to_sort, j, sizeof(error_name), compar);
 
 for (i=0;i<j;i++)
 {
@@ -171,7 +189,7 @@ for (i=0;i<j;i++)
    desc = gnutls_strerror( names_to_sort[i].error_index);
    if (desc == NULL || _name == NULL) continue;
 
-   printf( "{\\scriptsize{%s}} & %s", escape_string(_name, buffer1, sizeof(buffer1)), escape_string(desc, buffer2, sizeof(buffer2)));
+   printf( "%d & {\\scriptsize{%s}} & %s", names_to_sort[i].error_index, escape_string(_name, buffer1, sizeof(buffer1)), escape_string(desc, buffer2, sizeof(buffer2)));
    printf( "\\\\\n");
 }
 
