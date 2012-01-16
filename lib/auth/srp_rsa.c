@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007, 2010 Free Software
- * Foundation, Inc.
+ * Copyright (C) 2001-2012 Free Software Foundation, Inc.
  *
  * Author: Nikos Mavrogiannopoulos
  *

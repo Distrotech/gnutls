@@ -1,6 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008,
-# 2009, 2010, 2011 Free Software Foundation, Inc.
+# Copyright (C) 2000-2012 Free Software Foundation, Inc.
 #
 # Author: Nikos Mavrogiannopoulos
 #
@@ -30,8 +29,8 @@ SUBDIRS += reference
 endif
 
 info_TEXINFOS = gnutls.texi gnutls-guile.texi
-gnutls_TEXINFOS = gnutls.texi fdl-1.3.texi lgpl-2.1.texi gpl-3.0.texi	\
-	cha-bib.texi cha-cert-auth.texi	cha-cert-auth2.texi	\
+gnutls_TEXINFOS = gnutls.texi fdl-1.3.texi				\
+	cha-bib.texi cha-cert-auth.texi	cha-cert-auth2.texi		\
 	cha-ciphersuites.texi cha-copying.texi cha-functions.texi	\
 	cha-gtls-app.texi cha-internals.texi cha-intro-tls.texi		\
 	cha-library.texi cha-preface.texi cha-programs.texi		\
