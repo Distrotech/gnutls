@@ -786,7 +786,7 @@ doit:
 			-pkg-name "$(PACKAGE_NAME)" \
 			-include "gnutls/ocsp.h" \
 			-seeinfo $(PACKAGE) -verbatimcopying \
-			-copyright "2011 Free Software Foundation" \
+			-copyright "2012 Free Software Foundation" \
 			-function $$i \
 			$(top_srcdir)/lib/*.c $(top_srcdir)/lib/*/*.c > $$i.3 2>/dev/null && \
 		echo -n "."; \
