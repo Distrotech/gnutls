@@ -914,6 +914,17 @@ gnutls_ecc_curve_t gnutls_ecc_curve_get(gnutls_session_t session);
 
   int gnutls_key_generate (gnutls_datum_t * key, unsigned int key_size);
 
+  /* OCSP status request extension, RFC 6066 */
+  typedef int (*gnutls_status_request_ocsp_func)
+  (gnutls_session_t session, void *ptr, gnutls_datum_t *ocsp_response);
+  int gnutls_status_request_ocsp_server (gnutls_session_t session,
+				 gnutls_status_request_ocsp_func ocsp_func,
+					 void *ptr);
+  int gnutls_status_request_ocsp_client (gnutls_session_t session,
+					 gnutls_datum_t *responder_id,
+					 size_t responder_id_size,
+					 gnutls_datum_t *request_extensions);
+
 /* if you just want some defaults, use the following.
  */
   int gnutls_priority_init (gnutls_priority_t * priority_cache,
@@ -1889,6 +1900,8 @@ gnutls_ecc_curve_t gnutls_ecc_curve_get(gnutls_session_t session);
 #define GNUTLS_E_NO_PRIORITIES_WERE_SET -326
 #define GNUTLS_E_X509_UNSUPPORTED_EXTENSION -327
 #define GNUTLS_E_SESSION_EOF -328
+
+#define GNUTLS_E_NO_CERTIFICATE_STATUS -329
 
 #define GNUTLS_E_UNIMPLEMENTED_FEATURE -1250
 

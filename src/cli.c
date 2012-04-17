@@ -68,6 +68,7 @@ int resume, starttls, insecure, rehandshake, udp, mtu;
 const char *hostname = NULL;
 const char *service = NULL;
 int record_max_size;
+int status_request_ocsp;
 int fingerprint;
 int crlf;
 unsigned int verbose = 0;
@@ -711,6 +712,16 @@ init_tls_session (const char *hostname)
         }
     }
 
+  /* OCSP status-request TLS extension */
+  if (status_request_ocsp > 0 && disable_extensions == 0)
+    {
+      if (gnutls_status_request_ocsp_client (session, NULL, 0, NULL) < 0)
+        {
+          fprintf (stderr, "Cannot set OCSP status request information.\n");
+          exit (1);
+        }
+    }
+
 #ifdef ENABLE_SESSION_TICKET
   if (disable_extensions == 0 && !HAVE_OPT(NOTICKET)t)
     gnutls_session_ticket_enable_client (session);
@@ -1169,6 +1180,7 @@ const char* rest = NULL;
     }
 
   record_max_size = OPT_VALUE_RECORDSIZE;
+  status_request_ocsp = HAVE_OPT(STATUS_REQUEST_OCSP);
   fingerprint = HAVE_OPT(FINGERPRINT);
 
   if (HAVE_OPT(X509FMTDER))
