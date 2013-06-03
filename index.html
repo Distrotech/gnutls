@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Gnutls by Distrotech</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Gnutls</h1>
+          <h2>Mirror of git://git.savannah.gnu.org/gnutls.git</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/Distrotech/gnutls/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/Distrotech/gnutls/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/Distrotech/gnutls" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p>GnuTLS README -- Important introductory notes.
+Copyright (C) 2000-2012 Free Software Foundation, Inc.
+See the end of this document for copying conditions.</p>
+
+<p>GnuTLS implements the TLS/SSL (Transport Layer Security aka Secure
+Sockets Layer) protocol.  GnuTLS is a GNU project.  Additional
+information can be found at <a href="http://www.gnu.org/software/gnutls/">http://www.gnu.org/software/gnutls/</a>
+and <a href="http://www.gnutls.org/">http://www.gnutls.org/</a>.</p>
+
+<h2>
+<a name="readme" class="anchor" href="#readme"><span class="octicon octicon-link"></span></a>README</h2>
+
+<p>This README is targeted for users of the library who build from
+sources but do not necessarily develop.  If you are interested
+in developing and contributing to the GnuTLS project, please
+see README-alpha and visit
+<a href="http://www.gnu.org/software/gnutls/manual/html_node/Contributing.html">http://www.gnu.org/software/gnutls/manual/html_node/Contributing.html</a>.</p>
+
+<h2>
+<a name="compilation" class="anchor" href="#compilation"><span class="octicon octicon-link"></span></a>COMPILATION</h2>
+
+<p>A typical command sequence for building the library is shown below.
+A complete list of options available for configure can be found
+by running './configure --help'.</p>
+
+<pre><code>cd gnutls-&lt;version&gt;
+./configure --prefix=/usr
+make
+sudo make install
+</code></pre>
+
+<p>The commands above build and install the static archive (libgnutls.a),
+the shared object (libgnutls.so), and additional binaries such as certtool 
+and gnutls-cli.</p>
+
+<p>The library depends on libnettle. Optionally it may use the 
+following libraries:</p>
+
+<ul>
+<li>p11-kit: for smart card support
+ <a href="http://p11-glue.freedesktop.org/p11-kit.html">http://p11-glue.freedesktop.org/p11-kit.html</a>
+</li>
+<li>libtspi: for Trusted Platform Module (TPM) support, 
+ <a href="http://trousers.sourceforge.net/">http://trousers.sourceforge.net/</a>
+</li>
+<li>libunbound: For DNSSEC/DANE support,
+ <a href="http://unbound.net/">http://unbound.net/</a>
+</li>
+<li>libz: For compression support.
+ <a href="http://www.zlib.net/">http://www.zlib.net/</a>
+</li>
+<li>libtasn1: For ASN.1 parsing (a copy is included, if not found)
+ <a href="http://www.gnu.org/software/libtasn1/">http://www.gnu.org/software/libtasn1/</a>
+</li>
+</ul><p>Versions 2.10.3 and prior used libgcrypt as the default cryptographic library.
+Nettle can be found at <a href="http://www.gnu.org/software/nettle/">http://www.gnu.org/software/nettle/</a>, while
+p11-kit can be found at <a href="http://p11-glue.freedesktop.org/p11-kit.html">http://p11-glue.freedesktop.org/p11-kit.html</a>.</p>
+
+<p>To configure libnettle for installation and use by GnuTLS, a typical
+command sequence would be:</p>
+
+<pre><code>cd nettle-&lt;version&gt;
+./configure --prefix=/usr --disable-openssl --enable-shared
+make
+sudo make install
+</code></pre>
+
+<p>For the Nettle project, --enable-shared will instruct automake and
+friends to build and install both the static archive (libnettle.a)
+and the shared object (libnettle.so).</p>
+
+<p>In case you are compiling for an embedded system, you can disable
+unneeded features of GnuTLS.  In general, it is usually best not to
+disable anything (for future mailing list questions and possible bugs).</p>
+
+<p>Depending on your installation, additional libraries, such as libtasn1
+and zlib, may be required.</p>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>DOCUMENTATION</h2>
+
+<p>See the documentation in doc/ and online at
+<a href="http://www.gnu.org/software/gnutls/manual">http://www.gnu.org/software/gnutls/manual</a>.</p>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>EXAMPLES</h2>
+
+<p>See the examples in doc/examples/ and online at 'How To Use GnuTLS in
+Applications' at <a href="http://www.gnu.org/software/gnutls/manual">http://www.gnu.org/software/gnutls/manual</a>.</p>
+
+<h2>
+<a name="security-advisories" class="anchor" href="#security-advisories"><span class="octicon octicon-link"></span></a>SECURITY ADVISORIES</h2>
+
+<p>The project collects and publishes information on past security
+incidents and vulnerabilities.  Open information exchange, including
+information which is [sometimes] suppressed in non-open or non-free
+projects, is one of the goals of the GnuTLS project.  Please visit
+<a href="http://www.gnu.org/software/gnutls/security.html">http://www.gnu.org/software/gnutls/security.html</a>.</p>
+
+<h2>
+<a name="mailing-lists" class="anchor" href="#mailing-lists"><span class="octicon octicon-link"></span></a>MAILING LISTS</h2>
+
+<p>The GnuTLS project maintains mailing lists for users, developers, and
+commits.  Please see <a href="http://www.gnu.org/software/gnutls/lists.html">http://www.gnu.org/software/gnutls/lists.html</a>.</p>
+
+<h2>
+<a name="licensing" class="anchor" href="#licensing"><span class="octicon octicon-link"></span></a>LICENSING</h2>
+
+<p>Since GnuTLS version 3.0.0, the core library has been released under
+the GNU Lesser General Public License (LGPL) version 3 or later.</p>
+
+<p>The GNU LGPL applies to the main GnuTLS library, while the
+included applications as well as gnutls-openssl 
+library are under the GNU GPL version 3.  The gnutls library is 
+located in the lib/ directory, while the applications in src/ and
+gnutls-openssl library is at extra/.</p>
+
+<p>For any copyright year range specified as YYYY-ZZZZ in this package
+note that the range specifies every single year in that closed interval.</p>
+
+<h2>
+<a name="bugs" class="anchor" href="#bugs"><span class="octicon octicon-link"></span></a>BUGS</h2>
+
+<p>Thorough testing is very important and expensive.  Often, the 
+developers do not have access to a particular piece of hardware or 
+configuration to reproduce a scenario.  Notifying the developers about a 
+possible bug will greatly help the project.  </p>
+
+<p>If you believe you have found a bug, please report it to <a href="mailto:bug-gnutls@gnu.org">bug-gnutls@gnu.org</a>
+together with any applicable information.  A web interface for the system
+is available at <a href="http://savannah.gnu.org/support/?group=gnutls">http://savannah.gnu.org/support/?group=gnutls</a>.</p>
+
+<p>Applicable information would include why the issue is a GnuTLS bug (if
+not readily apparent), output from 'uname -a', the version of the library or
+tool being used, a stack trace if available ('bt full' if under gdb or
+valgrind output), and perhaps a network trace.  Vague queries or piecemeal 
+messages are difficult to act upon and don't help the development effort.</p>
+
+<p>Additional information can be found at the project's manual.</p>
+
+<h2>
+<a name="patches" class="anchor" href="#patches"><span class="octicon octicon-link"></span></a>PATCHES</h2>
+
+<p>Patches are welcome and encouraged. Patches can be submitted through the 
+bug tracking system or the mailing list.  When submitting patches, please 
+be sure to use sources from the git repository, and preferrably from the 
+master branch.  To create a patch for the project from a local git repository, 
+please use the following commands. 'gnutls' should be the local directory 
+of a previous git clone.</p>
+
+<pre><code>cd gnutls
+git add the-file-you-modified.c another-file.c
+git commit the-file-you-modified.c another-file.c
+git format-patch
+</code></pre>
+
+<p>For more information on use of Git, visit <a href="http://git-scm.com/">http://git-scm.com/</a></p>
+
+<hr><p>Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.</p>
+        </section>
+
+        <footer>
+          Gnutls is maintained by <a href="https://github.com/Distrotech">Distrotech</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
