@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-session-ticket">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-session-ticket.top_of_page">session_ticket</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>session_ticket</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-session-ticket.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>extern extension_entry_st <link linkend="ext-mod-session-ticket">ext_mod_session_ticket</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-session-ticket.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-session-ticket.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ext-mod-session-ticket" role="variable">
+<title>ext_mod_session_ticket</title>
+<indexterm zone="ext-mod-session-ticket"><primary>ext_mod_session_ticket</primary></indexterm>
+<programlisting>extern extension_entry_st ext_mod_session_ticket;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

@@ -1,0 +1,506 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutlsxx">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutlsxx.top_of_page">gnutlsxx</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutlsxx</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutlsxx.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="bye">bye</link>                                 (<parameter><link linkend="gnutls-close-request-t"><type>gnutls_close_request_t</type></link> how</parameter>);
+<link linkend="size-t"><returnvalue>size_t</returnvalue></link>              <link linkend="check-pending">check_pending</link>                       ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="clear-credentials">clear_credentials</link>                   ();
+<link linkend="bool"><returnvalue>bool</returnvalue></link>                <link linkend="db-check-entry">db_check_entry</link>                      ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="db-remove">db_remove</link>                           ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="export-pkcs1">export_pkcs1</link>                        (<parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *params_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *params_data_size</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="export-pkcs3">export_pkcs3</link>                        (<parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *params_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *params_data_size</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="export-raw">export_raw</link>                          ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="free-ca-names">free_ca_names</link>                       ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="free-cas">free_cas</link>                            ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="free-crls">free_crls</link>                           ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="free-keys">free_keys</link>                           ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="generate">generate</link>                            (<parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>);
+<link linkend="gnutls-alert-description-t"><returnvalue>gnutls_alert_description_t</returnvalue></link> <link linkend="get-alert">get_alert</link>                    ();
+<link linkend="gnutls-credentials-type-t"><returnvalue>gnutls_credentials_type_t</returnvalue></link> <link linkend="get-auth-type">get_auth_type</link>                 ();
+<link linkend="gnutls-cipher-algorithm-t"><returnvalue>gnutls_cipher_algorithm_t</returnvalue></link> <link linkend="get-cipher">get_cipher</link>                    ();
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="get-code">get_code</link>                            ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="get-data">get_data</link>                            (<parameter><link linkend="void"><type>void</type></link> *session_data</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="get-dh-secret-bits">get_dh_secret_bits</link>                  ();
+<link linkend="gnutls-handshake-description-t"><returnvalue>gnutls_handshake_description_t</returnvalue></link> <link linkend="get-handshake-last-out">get_handshake_last_out</link>   ();
+<link linkend="gnutls-dh-params-t"><returnvalue>gnutls_dh_params_t</returnvalue></link>  <link linkend="get-params-t">get_params_t</link>                        ();
+<link linkend="gnutls-protocol-t"><returnvalue>gnutls_protocol_t</returnvalue></link>   <link linkend="get-protocol-version">get_protocol_version</link>                ();
+<link linkend="bool"><returnvalue>bool</returnvalue></link>                <link linkend="get-record-direction">get_record_direction</link>                ();
+<link linkend="bool"><returnvalue>bool</returnvalue></link>                <link linkend="get-request-status">get_request_status</link>                  ();
+<link linkend="gnutls-transport-ptr-t"><returnvalue>gnutls_transport_ptr_t</returnvalue></link> <link linkend="get-transport-ptr">get_transport_ptr</link>                ();
+<link linkend="gnutls-credentials-type-t"><returnvalue>gnutls_credentials_type_t</returnvalue></link> <link linkend="get-type">get_type</link>                      ();
+<link linkend="void"><returnvalue>void</returnvalue></link> *              <link linkend="get-user-ptr">get_user_ptr</link>                        ();
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="handshake">handshake</link>                           ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="import-pkcs1">import_pkcs1</link>                        ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="import-pkcs3">import_pkcs3</link>                        ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="import-raw">import_raw</link>                          ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="prf-raw">prf_raw</link>                             (<parameter><link linkend="size-t"><type>size_t</type></link> label_size</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *label</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> seed_size</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *seed</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> outsize</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> *out</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link> *              <link linkend="ptr">ptr</link>                                 ();
+<link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             <link linkend="recv">recv</link>                                (<parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> sizeofdata</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="send-appropriate-alert">send_appropriate_alert</link>              (<parameter><link linkend="int"><type>int</type></link> err</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-certificate-request">set_certificate_request</link>             (<parameter><link linkend="gnutls-certificate-request-t"><type>gnutls_certificate_request_t</type></link> Param1</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-credentials">set_credentials</link>                     ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-credentials-file">set_credentials_file</link>                (<parameter>const <link linkend="char"><type>char</type></link> *password_file</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password_conf_file</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-credentials-function">set_credentials_function</link>            (<parameter><link linkend="gnutls-srp-server-credentials-function"><type>gnutls_srp_server_credentials_function</type></link> *func</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-db">set_db</link>                              ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-dh-params">set_dh_params</link>                       ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-params-function">set_params_function</link>                 (<parameter><link linkend="gnutls-params-function"><type>gnutls_params_function</type></link> *func</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-priority">set_priority</link>                        (<parameter>const <link linkend="char"><type>char</type></link> *prio</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> **err_pos</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-retrieve-function">set_retrieve_function</link>               (<parameter><link linkend="gnutls-certificate-retrieve-function"><type>gnutls_certificate_retrieve_function</type></link> *func</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-rsa-export-params">set_rsa_export_params</link>               ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-server-name">set_server_name</link>                     (<parameter><link linkend="gnutls-server-name-type-t"><type>gnutls_server_name_type_t</type></link> type</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *name</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> name_length</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-simple-pkcs12-file">set_simple_pkcs12_file</link>              (<parameter>const <link linkend="char"><type>char</type></link> *pkcs12file</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-transport-ptr">set_transport_ptr</link>                   (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-transport-pull-function">set_transport_pull_function</link>         (<parameter><link linkend="gnutls-pull-func"><type>gnutls_pull_func</type></link> pull_func</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-transport-push-function">set_transport_push_function</link>         (<parameter><link linkend="gnutls-push-func"><type>gnutls_push_func</type></link> push_func</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-transport-vec-push-function">set_transport_vec_push_function</link>     (<parameter><link linkend="gnutls-vec-push-func"><type>gnutls_vec_push_func</type></link> vec_push_func</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-user-ptr">set_user_ptr</link>                        (<parameter><link linkend="void"><type>void</type></link> *ptr</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-verify-flags">set_verify_flags</link>                    (<parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-verify-limits">set_verify_limits</link>                   (<parameter>unsigned <link linkend="int"><type>int</type></link> max_bits</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> max_depth</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-x509-crl">set_x509_crl</link>                        ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-x509-crl-file">set_x509_crl_file</link>                   (<parameter>const <link linkend="char"><type>char</type></link> *crlfile</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-x509-key">set_x509_key</link>                        ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-x509-key-file">set_x509_key_file</link>                   (<parameter>const <link linkend="char"><type>char</type></link> *certfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *KEYFILE</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-x509-trust">set_x509_trust</link>                      ();
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="set-x509-trust-file">set_x509_trust_file</link>                 (<parameter>const <link linkend="char"><type>char</type></link> *cafile</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>);
+const <link linkend="char"><returnvalue>char</returnvalue></link> *        <link linkend="what">what</link>                                ();
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutlsxx.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutlsxx.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="bye" role="function">
+<title>bye ()</title>
+<indexterm zone="bye"><primary>bye</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 bye                                 (<parameter><link linkend="gnutls-close-request-t"><type>gnutls_close_request_t</type></link> how</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="check-pending" role="function">
+<title>check_pending ()</title>
+<indexterm zone="check-pending"><primary>check_pending</primary></indexterm>
+<programlisting><link linkend="size-t"><returnvalue>size_t</returnvalue></link>              check_pending                       ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="clear-credentials" role="function">
+<title>clear_credentials ()</title>
+<indexterm zone="clear-credentials"><primary>clear_credentials</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                clear_credentials                   ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="db-check-entry" role="function">
+<title>db_check_entry ()</title>
+<indexterm zone="db-check-entry"><primary>db_check_entry</primary></indexterm>
+<programlisting><link linkend="bool"><returnvalue>bool</returnvalue></link>                db_check_entry                      ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="db-remove" role="function">
+<title>db_remove ()</title>
+<indexterm zone="db-remove"><primary>db_remove</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                db_remove                           ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="export-pkcs1" role="function">
+<title>export_pkcs1 ()</title>
+<indexterm zone="export-pkcs1"><primary>export_pkcs1</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                export_pkcs1                        (<parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *params_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *params_data_size</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="export-pkcs3" role="function">
+<title>export_pkcs3 ()</title>
+<indexterm zone="export-pkcs3"><primary>export_pkcs3</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                export_pkcs3                        (<parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *params_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *params_data_size</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="export-raw" role="function">
+<title>export_raw ()</title>
+<indexterm zone="export-raw"><primary>export_raw</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                export_raw                          ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="free-ca-names" role="function">
+<title>free_ca_names ()</title>
+<indexterm zone="free-ca-names"><primary>free_ca_names</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                free_ca_names                       ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="free-cas" role="function">
+<title>free_cas ()</title>
+<indexterm zone="free-cas"><primary>free_cas</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                free_cas                            ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="free-crls" role="function">
+<title>free_crls ()</title>
+<indexterm zone="free-crls"><primary>free_crls</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                free_crls                           ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="free-keys" role="function">
+<title>free_keys ()</title>
+<indexterm zone="free-keys"><primary>free_keys</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                free_keys                           ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="generate" role="function">
+<title>generate ()</title>
+<indexterm zone="generate"><primary>generate</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                generate                            (<parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-alert" role="function">
+<title>get_alert ()</title>
+<indexterm zone="get-alert"><primary>get_alert</primary></indexterm>
+<programlisting><link linkend="gnutls-alert-description-t"><returnvalue>gnutls_alert_description_t</returnvalue></link> get_alert                    ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-auth-type" role="function">
+<title>get_auth_type ()</title>
+<indexterm zone="get-auth-type"><primary>get_auth_type</primary></indexterm>
+<programlisting><link linkend="gnutls-credentials-type-t"><returnvalue>gnutls_credentials_type_t</returnvalue></link> get_auth_type                 ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-cipher" role="function">
+<title>get_cipher ()</title>
+<indexterm zone="get-cipher"><primary>get_cipher</primary></indexterm>
+<programlisting><link linkend="gnutls-cipher-algorithm-t"><returnvalue>gnutls_cipher_algorithm_t</returnvalue></link> get_cipher                    ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-code" role="function">
+<title>get_code ()</title>
+<indexterm zone="get-code"><primary>get_code</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 get_code                            ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-data" role="function">
+<title>get_data ()</title>
+<indexterm zone="get-data"><primary>get_data</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                get_data                            (<parameter><link linkend="void"><type>void</type></link> *session_data</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-dh-secret-bits" role="function">
+<title>get_dh_secret_bits ()</title>
+<indexterm zone="get-dh-secret-bits"><primary>get_dh_secret_bits</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        get_dh_secret_bits                  ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-handshake-last-out" role="function">
+<title>get_handshake_last_out ()</title>
+<indexterm zone="get-handshake-last-out"><primary>get_handshake_last_out</primary></indexterm>
+<programlisting><link linkend="gnutls-handshake-description-t"><returnvalue>gnutls_handshake_description_t</returnvalue></link> get_handshake_last_out   ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-params-t" role="function">
+<title>get_params_t ()</title>
+<indexterm zone="get-params-t"><primary>get_params_t</primary></indexterm>
+<programlisting><link linkend="gnutls-dh-params-t"><returnvalue>gnutls_dh_params_t</returnvalue></link>  get_params_t                        ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-protocol-version" role="function">
+<title>get_protocol_version ()</title>
+<indexterm zone="get-protocol-version"><primary>get_protocol_version</primary></indexterm>
+<programlisting><link linkend="gnutls-protocol-t"><returnvalue>gnutls_protocol_t</returnvalue></link>   get_protocol_version                ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-record-direction" role="function">
+<title>get_record_direction ()</title>
+<indexterm zone="get-record-direction"><primary>get_record_direction</primary></indexterm>
+<programlisting><link linkend="bool"><returnvalue>bool</returnvalue></link>                get_record_direction                ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-request-status" role="function">
+<title>get_request_status ()</title>
+<indexterm zone="get-request-status"><primary>get_request_status</primary></indexterm>
+<programlisting><link linkend="bool"><returnvalue>bool</returnvalue></link>                get_request_status                  ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-transport-ptr" role="function">
+<title>get_transport_ptr ()</title>
+<indexterm zone="get-transport-ptr"><primary>get_transport_ptr</primary></indexterm>
+<programlisting><link linkend="gnutls-transport-ptr-t"><returnvalue>gnutls_transport_ptr_t</returnvalue></link> get_transport_ptr                ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-type" role="function">
+<title>get_type ()</title>
+<indexterm zone="get-type"><primary>get_type</primary></indexterm>
+<programlisting><link linkend="gnutls-credentials-type-t"><returnvalue>gnutls_credentials_type_t</returnvalue></link> get_type                      ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-user-ptr" role="function">
+<title>get_user_ptr ()</title>
+<indexterm zone="get-user-ptr"><primary>get_user_ptr</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link> *              get_user_ptr                        ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="handshake" role="function">
+<title>handshake ()</title>
+<indexterm zone="handshake"><primary>handshake</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 handshake                           ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="import-pkcs1" role="function">
+<title>import_pkcs1 ()</title>
+<indexterm zone="import-pkcs1"><primary>import_pkcs1</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                import_pkcs1                        ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="import-pkcs3" role="function">
+<title>import_pkcs3 ()</title>
+<indexterm zone="import-pkcs3"><primary>import_pkcs3</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                import_pkcs3                        ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="import-raw" role="function">
+<title>import_raw ()</title>
+<indexterm zone="import-raw"><primary>import_raw</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                import_raw                          ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="prf-raw" role="function">
+<title>prf_raw ()</title>
+<indexterm zone="prf-raw"><primary>prf_raw</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                prf_raw                             (<parameter><link linkend="size-t"><type>size_t</type></link> label_size</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *label</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> seed_size</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *seed</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> outsize</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> *out</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ptr" role="function">
+<title>ptr ()</title>
+<indexterm zone="ptr"><primary>ptr</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link> *              ptr                                 ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="recv" role="function">
+<title>recv ()</title>
+<indexterm zone="recv"><primary>recv</primary></indexterm>
+<programlisting><link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             recv                                (<parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> sizeofdata</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="send-appropriate-alert" role="function">
+<title>send_appropriate_alert ()</title>
+<indexterm zone="send-appropriate-alert"><primary>send_appropriate_alert</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 send_appropriate_alert              (<parameter><link linkend="int"><type>int</type></link> err</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-certificate-request" role="function">
+<title>set_certificate_request ()</title>
+<indexterm zone="set-certificate-request"><primary>set_certificate_request</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_certificate_request             (<parameter><link linkend="gnutls-certificate-request-t"><type>gnutls_certificate_request_t</type></link> Param1</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-credentials" role="function">
+<title>set_credentials ()</title>
+<indexterm zone="set-credentials"><primary>set_credentials</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_credentials                     ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-credentials-file" role="function">
+<title>set_credentials_file ()</title>
+<indexterm zone="set-credentials-file"><primary>set_credentials_file</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_credentials_file                (<parameter>const <link linkend="char"><type>char</type></link> *password_file</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password_conf_file</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-credentials-function" role="function">
+<title>set_credentials_function ()</title>
+<indexterm zone="set-credentials-function"><primary>set_credentials_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_credentials_function            (<parameter><link linkend="gnutls-srp-server-credentials-function"><type>gnutls_srp_server_credentials_function</type></link> *func</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-db" role="function">
+<title>set_db ()</title>
+<indexterm zone="set-db"><primary>set_db</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_db                              ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-dh-params" role="function">
+<title>set_dh_params ()</title>
+<indexterm zone="set-dh-params"><primary>set_dh_params</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_dh_params                       ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-params-function" role="function">
+<title>set_params_function ()</title>
+<indexterm zone="set-params-function"><primary>set_params_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_params_function                 (<parameter><link linkend="gnutls-params-function"><type>gnutls_params_function</type></link> *func</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-priority" role="function">
+<title>set_priority ()</title>
+<indexterm zone="set-priority"><primary>set_priority</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_priority                        (<parameter>const <link linkend="char"><type>char</type></link> *prio</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> **err_pos</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-retrieve-function" role="function">
+<title>set_retrieve_function ()</title>
+<indexterm zone="set-retrieve-function"><primary>set_retrieve_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_retrieve_function               (<parameter><link linkend="gnutls-certificate-retrieve-function"><type>gnutls_certificate_retrieve_function</type></link> *func</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-rsa-export-params" role="function">
+<title>set_rsa_export_params ()</title>
+<indexterm zone="set-rsa-export-params"><primary>set_rsa_export_params</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_rsa_export_params               ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-server-name" role="function">
+<title>set_server_name ()</title>
+<indexterm zone="set-server-name"><primary>set_server_name</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_server_name                     (<parameter><link linkend="gnutls-server-name-type-t"><type>gnutls_server_name_type_t</type></link> type</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *name</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> name_length</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-simple-pkcs12-file" role="function">
+<title>set_simple_pkcs12_file ()</title>
+<indexterm zone="set-simple-pkcs12-file"><primary>set_simple_pkcs12_file</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_simple_pkcs12_file              (<parameter>const <link linkend="char"><type>char</type></link> *pkcs12file</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-transport-ptr" role="function">
+<title>set_transport_ptr ()</title>
+<indexterm zone="set-transport-ptr"><primary>set_transport_ptr</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_transport_ptr                   (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-transport-pull-function" role="function">
+<title>set_transport_pull_function ()</title>
+<indexterm zone="set-transport-pull-function"><primary>set_transport_pull_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_transport_pull_function         (<parameter><link linkend="gnutls-pull-func"><type>gnutls_pull_func</type></link> pull_func</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-transport-push-function" role="function">
+<title>set_transport_push_function ()</title>
+<indexterm zone="set-transport-push-function"><primary>set_transport_push_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_transport_push_function         (<parameter><link linkend="gnutls-push-func"><type>gnutls_push_func</type></link> push_func</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-transport-vec-push-function" role="function">
+<title>set_transport_vec_push_function ()</title>
+<indexterm zone="set-transport-vec-push-function"><primary>set_transport_vec_push_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_transport_vec_push_function     (<parameter><link linkend="gnutls-vec-push-func"><type>gnutls_vec_push_func</type></link> vec_push_func</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-user-ptr" role="function">
+<title>set_user_ptr ()</title>
+<indexterm zone="set-user-ptr"><primary>set_user_ptr</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_user_ptr                        (<parameter><link linkend="void"><type>void</type></link> *ptr</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-verify-flags" role="function">
+<title>set_verify_flags ()</title>
+<indexterm zone="set-verify-flags"><primary>set_verify_flags</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_verify_flags                    (<parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-verify-limits" role="function">
+<title>set_verify_limits ()</title>
+<indexterm zone="set-verify-limits"><primary>set_verify_limits</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_verify_limits                   (<parameter>unsigned <link linkend="int"><type>int</type></link> max_bits</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> max_depth</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-x509-crl" role="function">
+<title>set_x509_crl ()</title>
+<indexterm zone="set-x509-crl"><primary>set_x509_crl</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_x509_crl                        ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-x509-crl-file" role="function">
+<title>set_x509_crl_file ()</title>
+<indexterm zone="set-x509-crl-file"><primary>set_x509_crl_file</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_x509_crl_file                   (<parameter>const <link linkend="char"><type>char</type></link> *crlfile</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-x509-key" role="function">
+<title>set_x509_key ()</title>
+<indexterm zone="set-x509-key"><primary>set_x509_key</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_x509_key                        ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-x509-key-file" role="function">
+<title>set_x509_key_file ()</title>
+<indexterm zone="set-x509-key-file"><primary>set_x509_key_file</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_x509_key_file                   (<parameter>const <link linkend="char"><type>char</type></link> *certfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *KEYFILE</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-x509-trust" role="function">
+<title>set_x509_trust ()</title>
+<indexterm zone="set-x509-trust"><primary>set_x509_trust</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_x509_trust                      ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-x509-trust-file" role="function">
+<title>set_x509_trust_file ()</title>
+<indexterm zone="set-x509-trust-file"><primary>set_x509_trust_file</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                set_x509_trust_file                 (<parameter>const <link linkend="char"><type>char</type></link> *cafile</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> type</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="what" role="function">
+<title>what ()</title>
+<indexterm zone="what"><primary>what</primary></indexterm>
+<programlisting>const <link linkend="char"><returnvalue>char</returnvalue></link> *        what                                ();</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

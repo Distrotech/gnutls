@@ -1,0 +1,23 @@
+
+
+
+
+@deftypefun {int} {gnutls_x509_crq_get_attribute_by_oid} (gnutls_x509_crq_t @var{crq}, const char * @var{oid}, int @var{indx}, void * @var{buf}, size_t * @var{sizeof_buf})
+@var{crq}: should contain a @code{gnutls_x509_crq_t}  structure
+
+@var{oid}: holds an Object Identified in (0)-terminated string
+
+@var{indx}: In case multiple same OIDs exist in the attribute list, this
+specifies which to send, use (0) to get the first one
+
+@var{buf}: a pointer to a structure to hold the attribute data (may be @code{NULL} )
+
+@var{sizeof_buf}: initially holds the size of  @code{buf} 
+
+This function will return the attribute in the certificate request
+specified by the given Object ID.  The attribute will be DER
+encoded.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+@end deftypefun

@@ -1,0 +1,19 @@
+
+
+
+
+@deftypefun {int} {gnutls_x509_crt_set_serial} (gnutls_x509_crt_t @var{cert}, const void * @var{serial}, size_t @var{serial_size})
+@var{cert}: a certificate of type @code{gnutls_x509_crt_t} 
+
+@var{serial}: The serial number
+
+@var{serial_size}: Holds the size of the serial field.
+
+This function will set the X.509 certificate's serial number.
+Serial is not always a 32 or 64bit number.  Some CAs use large
+serial numbers, thus it may be wise to handle it as something
+uint8_t.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+@end deftypefun

@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-sha-padlock">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-sha-padlock.top_of_page">sha-padlock</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>sha-padlock</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-sha-padlock.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha1-blocks">padlock_sha1_blocks</link>                 (<parameter>unsigned <link linkend="int"><type>int</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha1-oneshot">padlock_sha1_oneshot</link>                (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha1-update">padlock_sha1_update</link>                 (<parameter><type>struct sha1_ctx</type> *ctx</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> length</parameter>,
+                                                         <parameter>const <link linkend="uint8-t"><type>uint8_t</type></link> *data</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha256-blocks">padlock_sha256_blocks</link>               (<parameter>unsigned <link linkend="int"><type>int</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha256-oneshot">padlock_sha256_oneshot</link>              (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha256-update">padlock_sha256_update</link>               (<parameter><type>struct sha256_ctx</type> *ctx</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> length</parameter>,
+                                                         <parameter>const <link linkend="uint8-t"><type>uint8_t</type></link> *data</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha512-blocks">padlock_sha512_blocks</link>               (<parameter>unsigned <link linkend="int"><type>int</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-sha512-update">padlock_sha512_update</link>               (<parameter><type>struct sha512_ctx</type> *ctx</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> length</parameter>,
+                                                         <parameter>const <link linkend="uint8-t"><type>uint8_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="wrap-padlock-hash-fast">wrap_padlock_hash_fast</link>              (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algo</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> text_size</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-sha-padlock.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-sha-padlock.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="padlock-sha1-blocks" role="function">
+<title>padlock_sha1_blocks ()</title>
+<indexterm zone="padlock-sha1-blocks"><primary>padlock_sha1_blocks</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha1_blocks                 (<parameter>unsigned <link linkend="int"><type>int</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-sha1-oneshot" role="function">
+<title>padlock_sha1_oneshot ()</title>
+<indexterm zone="padlock-sha1-oneshot"><primary>padlock_sha1_oneshot</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha1_oneshot                (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-sha1-update" role="function">
+<title>padlock_sha1_update ()</title>
+<indexterm zone="padlock-sha1-update"><primary>padlock_sha1_update</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha1_update                 (<parameter><type>struct sha1_ctx</type> *ctx</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> length</parameter>,
+                                                         <parameter>const <link linkend="uint8-t"><type>uint8_t</type></link> *data</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-sha256-blocks" role="function">
+<title>padlock_sha256_blocks ()</title>
+<indexterm zone="padlock-sha256-blocks"><primary>padlock_sha256_blocks</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha256_blocks               (<parameter>unsigned <link linkend="int"><type>int</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-sha256-oneshot" role="function">
+<title>padlock_sha256_oneshot ()</title>
+<indexterm zone="padlock-sha256-oneshot"><primary>padlock_sha256_oneshot</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha256_oneshot              (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-sha256-update" role="function">
+<title>padlock_sha256_update ()</title>
+<indexterm zone="padlock-sha256-update"><primary>padlock_sha256_update</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha256_update               (<parameter><type>struct sha256_ctx</type> *ctx</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> length</parameter>,
+                                                         <parameter>const <link linkend="uint8-t"><type>uint8_t</type></link> *data</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-sha512-blocks" role="function">
+<title>padlock_sha512_blocks ()</title>
+<indexterm zone="padlock-sha512-blocks"><primary>padlock_sha512_blocks</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha512_blocks               (<parameter>unsigned <link linkend="int"><type>int</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-sha512-update" role="function">
+<title>padlock_sha512_update ()</title>
+<indexterm zone="padlock-sha512-update"><primary>padlock_sha512_update</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_sha512_update               (<parameter><type>struct sha512_ctx</type> *ctx</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> length</parameter>,
+                                                         <parameter>const <link linkend="uint8-t"><type>uint8_t</type></link> *data</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="wrap-padlock-hash-fast" role="function">
+<title>wrap_padlock_hash_fast ()</title>
+<indexterm zone="wrap-padlock-hash-fast"><primary>wrap_padlock_hash_fast</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 wrap_padlock_hash_fast              (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algo</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> text_size</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

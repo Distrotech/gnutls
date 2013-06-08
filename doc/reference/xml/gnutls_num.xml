@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-num">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-num.top_of_page">gnutls_num</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_num</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-num.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="UINT64DATA:CAPS">UINT64DATA</link>                          (x)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-num.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-num.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="UINT64DATA:CAPS" role="macro">
+<title>UINT64DATA()</title>
+<indexterm zone="UINT64DATA:CAPS"><primary>UINT64DATA</primary></indexterm>
+<programlisting># define UINT64DATA(x) ((x).i)
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-heartbeat">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-heartbeat.top_of_page">heartbeat</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>heartbeat</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-heartbeat.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="HEARTBEAT-DEFAULT-POLICY:CAPS">HEARTBEAT_DEFAULT_POLICY</link>
+#define             <link linkend="HEARTBEAT-REQUEST:CAPS">HEARTBEAT_REQUEST</link>
+#define             <link linkend="HEARTBEAT-RESPONSE:CAPS">HEARTBEAT_RESPONSE</link>
+#define             <link linkend="LOCAL-ALLOWED-TO-SEND:CAPS">LOCAL_ALLOWED_TO_SEND</link>
+#define             <link linkend="LOCAL-NOT-ALLOWED-TO-SEND:CAPS">LOCAL_NOT_ALLOWED_TO_SEND</link>
+#define             <link linkend="MAX-HEARTBEAT-LENGTH:CAPS">MAX_HEARTBEAT_LENGTH</link>
+extern extension_entry_st <link linkend="ext-mod-heartbeat">ext_mod_heartbeat</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-heartbeat-timeout">gnutls_heartbeat_timeout</link>            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> check_only</parameter>);
+typedef             <link linkend="heartbeat-policy-t">heartbeat_policy_t</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-heartbeat.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-heartbeat.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="HEARTBEAT-DEFAULT-POLICY:CAPS" role="macro">
+<title>HEARTBEAT_DEFAULT_POLICY</title>
+<indexterm zone="HEARTBEAT-DEFAULT-POLICY:CAPS"><primary>HEARTBEAT_DEFAULT_POLICY</primary></indexterm>
+<programlisting>#define HEARTBEAT_DEFAULT_POLICY PEER_NOT_ALLOWED_TO_SEND
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HEARTBEAT-REQUEST:CAPS" role="macro">
+<title>HEARTBEAT_REQUEST</title>
+<indexterm zone="HEARTBEAT-REQUEST:CAPS"><primary>HEARTBEAT_REQUEST</primary></indexterm>
+<programlisting>#define HEARTBEAT_REQUEST 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HEARTBEAT-RESPONSE:CAPS" role="macro">
+<title>HEARTBEAT_RESPONSE</title>
+<indexterm zone="HEARTBEAT-RESPONSE:CAPS"><primary>HEARTBEAT_RESPONSE</primary></indexterm>
+<programlisting>#define HEARTBEAT_RESPONSE 2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LOCAL-ALLOWED-TO-SEND:CAPS" role="macro">
+<title>LOCAL_ALLOWED_TO_SEND</title>
+<indexterm zone="LOCAL-ALLOWED-TO-SEND:CAPS"><primary>LOCAL_ALLOWED_TO_SEND</primary></indexterm>
+<programlisting>#define LOCAL_ALLOWED_TO_SEND (1&lt;&lt;2)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LOCAL-NOT-ALLOWED-TO-SEND:CAPS" role="macro">
+<title>LOCAL_NOT_ALLOWED_TO_SEND</title>
+<indexterm zone="LOCAL-NOT-ALLOWED-TO-SEND:CAPS"><primary>LOCAL_NOT_ALLOWED_TO_SEND</primary></indexterm>
+<programlisting>#define LOCAL_NOT_ALLOWED_TO_SEND (1&lt;&lt;3)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-HEARTBEAT-LENGTH:CAPS" role="macro">
+<title>MAX_HEARTBEAT_LENGTH</title>
+<indexterm zone="MAX-HEARTBEAT-LENGTH:CAPS"><primary>MAX_HEARTBEAT_LENGTH</primary></indexterm>
+<programlisting>#define MAX_HEARTBEAT_LENGTH DEFAULT_MAX_RECORD_SIZE
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ext-mod-heartbeat" role="variable">
+<title>ext_mod_heartbeat</title>
+<indexterm zone="ext-mod-heartbeat"><primary>ext_mod_heartbeat</primary></indexterm>
+<programlisting>extern extension_entry_st ext_mod_heartbeat;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-heartbeat-timeout" role="function">
+<title>gnutls_heartbeat_timeout ()</title>
+<indexterm zone="gnutls-heartbeat-timeout"><primary>gnutls_heartbeat_timeout</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_heartbeat_timeout            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> check_only</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="heartbeat-policy-t" role="typedef">
+<title>heartbeat_policy_t</title>
+<indexterm zone="heartbeat-policy-t"><primary>heartbeat_policy_t</primary></indexterm>
+<programlisting>typedef uint8_t heartbeat_policy_t;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

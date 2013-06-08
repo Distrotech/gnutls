@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-algorithms">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-algorithms.top_of_page">algorithms</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>algorithms</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-algorithms.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-DISTINCT-PK-ALGORITHMS:CAPS">GNUTLS_DISTINCT_PK_ALGORITHMS</link>
+#define             <link linkend="GNUTLS-RENEGO-PROTECTION-REQUEST-MAJOR:CAPS">GNUTLS_RENEGO_PROTECTION_REQUEST_MAJOR</link>
+#define             <link linkend="GNUTLS-RENEGO-PROTECTION-REQUEST-MINOR:CAPS">GNUTLS_RENEGO_PROTECTION_REQUEST_MINOR</link>
+#define             <link linkend="MAX-CIPHERSUITE-SIZE:CAPS">MAX_CIPHERSUITE_SIZE</link>
+#define             <link linkend="MAX-ECC-CURVE-SIZE:CAPS">MAX_ECC_CURVE_SIZE</link>
+typedef             <link linkend="gnutls-ecc-curve-entry-st">gnutls_ecc_curve_entry_st</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-algorithms.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-algorithms.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-DISTINCT-PK-ALGORITHMS:CAPS" role="macro">
+<title>GNUTLS_DISTINCT_PK_ALGORITHMS</title>
+<indexterm zone="GNUTLS-DISTINCT-PK-ALGORITHMS:CAPS"><primary>GNUTLS_DISTINCT_PK_ALGORITHMS</primary></indexterm>
+<programlisting>#define GNUTLS_DISTINCT_PK_ALGORITHMS 3
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-RENEGO-PROTECTION-REQUEST-MAJOR:CAPS" role="macro">
+<title>GNUTLS_RENEGO_PROTECTION_REQUEST_MAJOR</title>
+<indexterm zone="GNUTLS-RENEGO-PROTECTION-REQUEST-MAJOR:CAPS"><primary>GNUTLS_RENEGO_PROTECTION_REQUEST_MAJOR</primary></indexterm>
+<programlisting>#define GNUTLS_RENEGO_PROTECTION_REQUEST_MAJOR 0x00
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-RENEGO-PROTECTION-REQUEST-MINOR:CAPS" role="macro">
+<title>GNUTLS_RENEGO_PROTECTION_REQUEST_MINOR</title>
+<indexterm zone="GNUTLS-RENEGO-PROTECTION-REQUEST-MINOR:CAPS"><primary>GNUTLS_RENEGO_PROTECTION_REQUEST_MINOR</primary></indexterm>
+<programlisting>#define GNUTLS_RENEGO_PROTECTION_REQUEST_MINOR 0xFF
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-CIPHERSUITE-SIZE:CAPS" role="macro">
+<title>MAX_CIPHERSUITE_SIZE</title>
+<indexterm zone="MAX-CIPHERSUITE-SIZE:CAPS"><primary>MAX_CIPHERSUITE_SIZE</primary></indexterm>
+<programlisting>#define MAX_CIPHERSUITE_SIZE 512
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-ECC-CURVE-SIZE:CAPS" role="macro">
+<title>MAX_ECC_CURVE_SIZE</title>
+<indexterm zone="MAX-ECC-CURVE-SIZE:CAPS"><primary>MAX_ECC_CURVE_SIZE</primary></indexterm>
+<programlisting>#define MAX_ECC_CURVE_SIZE 66
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ecc-curve-entry-st" role="typedef">
+<title>gnutls_ecc_curve_entry_st</title>
+<indexterm zone="gnutls-ecc-curve-entry-st"><primary>gnutls_ecc_curve_entry_st</primary></indexterm>
+<programlisting>typedef struct gnutls_ecc_curve_entry_st gnutls_ecc_curve_entry_st;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

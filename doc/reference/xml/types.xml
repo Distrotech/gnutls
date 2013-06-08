@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-types">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-types.top_of_page">types</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>types</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-types.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="DIM:CAPS">DIM</link>                                 (v)
+#define             <link linkend="DIMof">DIMof</link>                               (type,
+                                                         member)
+#define             <link linkend="HAVE-BYTE-TYPEDEF:CAPS">HAVE_BYTE_TYPEDEF</link>
+#define             <link linkend="HAVE-U16-TYPEDEF:CAPS">HAVE_U16_TYPEDEF</link>
+#define             <link linkend="HAVE-U32-TYPEDEF:CAPS">HAVE_U32_TYPEDEF</link>
+typedef             <link linkend="byte">byte</link>;
+typedef             <link linkend="u16">u16</link>;
+typedef             <link linkend="u32">u32</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-types.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-types.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="DIM:CAPS" role="macro">
+<title>DIM()</title>
+<indexterm zone="DIM:CAPS"><primary>DIM</primary></indexterm>
+<programlisting>#define DIM(v) (sizeof (v)/sizeof ((v)[0]))
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DIMof" role="macro">
+<title>DIMof()</title>
+<indexterm zone="DIMof"><primary>DIMof</primary></indexterm>
+<programlisting>#define DIMof(type, member)   DIM(((type *)0)-&gt;member)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HAVE-BYTE-TYPEDEF:CAPS" role="macro">
+<title>HAVE_BYTE_TYPEDEF</title>
+<indexterm zone="HAVE-BYTE-TYPEDEF:CAPS"><primary>HAVE_BYTE_TYPEDEF</primary></indexterm>
+<programlisting>#define HAVE_BYTE_TYPEDEF
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HAVE-U16-TYPEDEF:CAPS" role="macro">
+<title>HAVE_U16_TYPEDEF</title>
+<indexterm zone="HAVE-U16-TYPEDEF:CAPS"><primary>HAVE_U16_TYPEDEF</primary></indexterm>
+<programlisting>#define HAVE_U16_TYPEDEF
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HAVE-U32-TYPEDEF:CAPS" role="macro">
+<title>HAVE_U32_TYPEDEF</title>
+<indexterm zone="HAVE-U32-TYPEDEF:CAPS"><primary>HAVE_U32_TYPEDEF</primary></indexterm>
+<programlisting>#define HAVE_U32_TYPEDEF
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="byte" role="typedef">
+<title>byte</title>
+<indexterm zone="byte"><primary>byte</primary></indexterm>
+<programlisting>typedef unsigned char byte;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="u16" role="typedef">
+<title>u16</title>
+<indexterm zone="u16"><primary>u16</primary></indexterm>
+<programlisting>typedef unsigned short u16;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="u32" role="typedef">
+<title>u32</title>
+<indexterm zone="u32"><primary>u32</primary></indexterm>
+<programlisting>typedef unsigned int u32;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

@@ -1,0 +1,486 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-ecc">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-ecc.top_of_page">ecc</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>ecc</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-ecc.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="ECC-BUF-SIZE:CAPS">ECC_BUF_SIZE</link>
+#define             <link linkend="ECC-MAXSIZE:CAPS">ECC_MAXSIZE</link>
+#define             <link linkend="ECC-SECP-CURVES-ONLY:CAPS">ECC_SECP_CURVES_ONLY</link>
+#define             <link linkend="PK-PRIVATE:CAPS">PK_PRIVATE</link>
+#define             <link linkend="PK-PUBLIC:CAPS">PK_PUBLIC</link>
+#define             <link linkend="WMNAF-PRECOMPUTED-LENGTH:CAPS">WMNAF_PRECOMPUTED_LENGTH</link>
+#define             <link linkend="WMNAF-WINSIZE:CAPS">WMNAF_WINSIZE</link>
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="ecc-del-point">ecc_del_point</link>                       (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *p</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="ecc-free">ecc_free</link>                            (<parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-get-size">ecc_get_size</link>                        (<parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>);
+                    <link linkend="ecc-key">ecc_key</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-make-key">ecc_make_key</link>                        (<parameter><link linkend="void"><type>void</type></link> *random_ctx</parameter>,
+                                                         <parameter><link linkend="nettle-random-func"><type>nettle_random_func</type></link> random</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter>const <link linkend="ecc-set-type"><type>ecc_set_type</type></link> *dp</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-make-key-ex">ecc_make_key_ex</link>                     (<parameter><link linkend="void"><type>void</type></link> *random_ctx</parameter>,
+                                                         <parameter><link linkend="nettle-random-func"><type>nettle_random_func</type></link> random</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> prime</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> order</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> A</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> B</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> Gx</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> Gy</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> timing_res</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-map">ecc_map</link>                             (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-mulmod">ecc_mulmod</link>                          (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *G</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-mulmod-cached">ecc_mulmod_cached</link>                   (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-mulmod-cached-lookup">ecc_mulmod_cached_lookup</link>            (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *G</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-mulmod-cached-timing">ecc_mulmod_cached_timing</link>            (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);
+<link linkend="ecc-point"><returnvalue>ecc_point</returnvalue></link> *         <link linkend="ecc-new-point">ecc_new_point</link>                       (<parameter><type>void</type></parameter>);
+                    <link linkend="ecc-point">ecc_point</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-projective-add-point">ecc_projective_add_point</link>            (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *Q</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> A</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-projective-check-point">ecc_projective_check_point</link>          (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> b</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-projective-dbl-point">ecc_projective_dbl_point</link>            (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-projective-isneutral">ecc_projective_isneutral</link>            (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-projective-madd">ecc_projective_madd</link>                 (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *Q</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-projective-negate-point">ecc_projective_negate_point</link>         (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);
+                    <link linkend="ecc-set-type">ecc_set_type</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-shared-secret">ecc_shared_secret</link>                   (<parameter><link linkend="ecc-key"><type>ecc_key</type></link> *private_key</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *public_key</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *outlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-sign-hash">ecc_sign_hash</link>                       (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter><type>unsigned long </type> inlen</parameter>,
+                                                         <parameter><type>struct dsa_signature</type> *signature</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *random_ctx</parameter>,
+                                                         <parameter><link linkend="nettle-random-func"><type>nettle_random_func</type></link> random</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="ecc-sizes">ecc_sizes</link>                           (<parameter><link linkend="int"><type>int</type></link> *low</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> *high</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-verify-hash">ecc_verify_hash</link>                     (<parameter><type>struct dsa_signature</type> *signature</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *hash</parameter>,
+                                                         <parameter><type>unsigned long </type> hashlen</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> *stat</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>);
+signed <link linkend="char"><returnvalue>char</returnvalue></link> *       <link linkend="ecc-wMNAF">ecc_wMNAF</link>                           (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> x</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *ret_len</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="ecc-wmnaf-cache-free">ecc_wmnaf_cache_free</link>                (<parameter><type>void</type></parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="ecc-wmnaf-cache-init">ecc_wmnaf_cache_init</link>                (<parameter><type>void</type></parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="mp-clear-multi">mp_clear_multi</link>                      (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> *a</parameter>,
+                                                         <parameter>...</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="mp-init-multi">mp_init_multi</link>                       (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> *a</parameter>,
+                                                         <parameter>...</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-ecc.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-ecc.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ECC-BUF-SIZE:CAPS" role="macro">
+<title>ECC_BUF_SIZE</title>
+<indexterm zone="ECC-BUF-SIZE:CAPS"><primary>ECC_BUF_SIZE</primary></indexterm>
+<programlisting>#define ECC_BUF_SIZE 512
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-MAXSIZE:CAPS" role="macro">
+<title>ECC_MAXSIZE</title>
+<indexterm zone="ECC-MAXSIZE:CAPS"><primary>ECC_MAXSIZE</primary></indexterm>
+<programlisting>#define ECC_MAXSIZE  66
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-SECP-CURVES-ONLY:CAPS" role="macro">
+<title>ECC_SECP_CURVES_ONLY</title>
+<indexterm zone="ECC-SECP-CURVES-ONLY:CAPS"><primary>ECC_SECP_CURVES_ONLY</primary></indexterm>
+<programlisting>#define ECC_SECP_CURVES_ONLY
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PK-PRIVATE:CAPS" role="macro">
+<title>PK_PRIVATE</title>
+<indexterm zone="PK-PRIVATE:CAPS"><primary>PK_PRIVATE</primary></indexterm>
+<programlisting>#define PK_PRIVATE 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PK-PUBLIC:CAPS" role="macro">
+<title>PK_PUBLIC</title>
+<indexterm zone="PK-PUBLIC:CAPS"><primary>PK_PUBLIC</primary></indexterm>
+<programlisting>#define PK_PUBLIC 2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="WMNAF-PRECOMPUTED-LENGTH:CAPS" role="macro">
+<title>WMNAF_PRECOMPUTED_LENGTH</title>
+<indexterm zone="WMNAF-PRECOMPUTED-LENGTH:CAPS"><primary>WMNAF_PRECOMPUTED_LENGTH</primary></indexterm>
+<programlisting>#define WMNAF_PRECOMPUTED_LENGTH (1 &lt;&lt; (WMNAF_WINSIZE - 1))
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="WMNAF-WINSIZE:CAPS" role="macro">
+<title>WMNAF_WINSIZE</title>
+<indexterm zone="WMNAF-WINSIZE:CAPS"><primary>WMNAF_WINSIZE</primary></indexterm>
+<programlisting>#define WMNAF_WINSIZE 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-del-point" role="function">
+<title>ecc_del_point ()</title>
+<indexterm zone="ecc-del-point"><primary>ecc_del_point</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                ecc_del_point                       (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *p</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-free" role="function">
+<title>ecc_free ()</title>
+<indexterm zone="ecc-free"><primary>ecc_free</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                ecc_free                            (<parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-get-size" role="function">
+<title>ecc_get_size ()</title>
+<indexterm zone="ecc-get-size"><primary>ecc_get_size</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_get_size                        (<parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-key" role="struct">
+<title>ecc_key</title>
+<indexterm zone="ecc-key"><primary>ecc_key</primary></indexterm>
+<programlisting>typedef struct {
+    /** Type of key, PK_PRIVATE or PK_PUBLIC */
+    int type;
+
+    mpz_t prime;
+    mpz_t order;
+    mpz_t A;
+    mpz_t B;
+    mpz_t Gx;
+    mpz_t Gy;
+
+    /** The public key */
+    ecc_point pubkey;
+
+    /** The private key */
+    mpz_t k;
+} ecc_key;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-make-key" role="function">
+<title>ecc_make_key ()</title>
+<indexterm zone="ecc-make-key"><primary>ecc_make_key</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_make_key                        (<parameter><link linkend="void"><type>void</type></link> *random_ctx</parameter>,
+                                                         <parameter><link linkend="nettle-random-func"><type>nettle_random_func</type></link> random</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter>const <link linkend="ecc-set-type"><type>ecc_set_type</type></link> *dp</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-make-key-ex" role="function">
+<title>ecc_make_key_ex ()</title>
+<indexterm zone="ecc-make-key-ex"><primary>ecc_make_key_ex</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_make_key_ex                     (<parameter><link linkend="void"><type>void</type></link> *random_ctx</parameter>,
+                                                         <parameter><link linkend="nettle-random-func"><type>nettle_random_func</type></link> random</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> prime</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> order</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> A</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> B</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> Gx</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> Gy</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> timing_res</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-map" role="function">
+<title>ecc_map ()</title>
+<indexterm zone="ecc-map"><primary>ecc_map</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_map                             (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-mulmod" role="function">
+<title>ecc_mulmod ()</title>
+<indexterm zone="ecc-mulmod"><primary>ecc_mulmod</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_mulmod                          (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *G</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-mulmod-cached" role="function">
+<title>ecc_mulmod_cached ()</title>
+<indexterm zone="ecc-mulmod-cached"><primary>ecc_mulmod_cached</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_mulmod_cached                   (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-mulmod-cached-lookup" role="function">
+<title>ecc_mulmod_cached_lookup ()</title>
+<indexterm zone="ecc-mulmod-cached-lookup"><primary>ecc_mulmod_cached_lookup</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_mulmod_cached_lookup            (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *G</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-mulmod-cached-timing" role="function">
+<title>ecc_mulmod_cached_timing ()</title>
+<indexterm zone="ecc-mulmod-cached-timing"><primary>ecc_mulmod_cached_timing</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_mulmod_cached_timing            (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> k</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> map</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-new-point" role="function">
+<title>ecc_new_point ()</title>
+<indexterm zone="ecc-new-point"><primary>ecc_new_point</primary></indexterm>
+<programlisting><link linkend="ecc-point"><returnvalue>ecc_point</returnvalue></link> *         ecc_new_point                       (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-point" role="struct">
+<title>ecc_point</title>
+<indexterm zone="ecc-point"><primary>ecc_point</primary></indexterm>
+<programlisting>typedef struct {
+    /** The x co-ordinate */
+    mpz_t x;
+
+    /** The y co-ordinate */
+    mpz_t y;
+
+    /** The z co-ordinate */
+    mpz_t z;
+} ecc_point;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-projective-add-point" role="function">
+<title>ecc_projective_add_point ()</title>
+<indexterm zone="ecc-projective-add-point"><primary>ecc_projective_add_point</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_projective_add_point            (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *Q</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> A</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-projective-check-point" role="function">
+<title>ecc_projective_check_point ()</title>
+<indexterm zone="ecc-projective-check-point"><primary>ecc_projective_check_point</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_projective_check_point          (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> b</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-projective-dbl-point" role="function">
+<title>ecc_projective_dbl_point ()</title>
+<indexterm zone="ecc-projective-dbl-point"><primary>ecc_projective_dbl_point</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_projective_dbl_point            (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-projective-isneutral" role="function">
+<title>ecc_projective_isneutral ()</title>
+<indexterm zone="ecc-projective-isneutral"><primary>ecc_projective_isneutral</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_projective_isneutral            (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-projective-madd" role="function">
+<title>ecc_projective_madd ()</title>
+<indexterm zone="ecc-projective-madd"><primary>ecc_projective_madd</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_projective_madd                 (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *Q</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-projective-negate-point" role="function">
+<title>ecc_projective_negate_point ()</title>
+<indexterm zone="ecc-projective-negate-point"><primary>ecc_projective_negate_point</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_projective_negate_point         (<parameter><link linkend="ecc-point"><type>ecc_point</type></link> *P</parameter>,
+                                                         <parameter><link linkend="ecc-point"><type>ecc_point</type></link> *R</parameter>,
+                                                         <parameter><link linkend="mpz-t"><type>mpz_t</type></link> modulus</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-set-type" role="struct">
+<title>ecc_set_type</title>
+<indexterm zone="ecc-set-type"><primary>ecc_set_type</primary></indexterm>
+<programlisting>typedef struct {
+   /** The size of the curve in octets */
+   int size;
+
+   /** name of curve */
+   const char *name; 
+
+   /** The prime that defines the field the curve is in (encoded in hex) */
+   const char *prime;
+
+   /** The fields A param (hex) */
+   const char *A;
+
+   /** The fields B param (hex) */
+   const char *B;
+
+   /** The order of the curve (hex) */
+   const char *order;
+
+   /** The x co-ordinate of the base point on the curve (hex) */
+   const char *Gx;
+
+   /** The y co-ordinate of the base point on the curve (hex) */
+   const char *Gy;
+} ecc_set_type;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-shared-secret" role="function">
+<title>ecc_shared_secret ()</title>
+<indexterm zone="ecc-shared-secret"><primary>ecc_shared_secret</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_shared_secret                   (<parameter><link linkend="ecc-key"><type>ecc_key</type></link> *private_key</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *public_key</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *outlen</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-sign-hash" role="function">
+<title>ecc_sign_hash ()</title>
+<indexterm zone="ecc-sign-hash"><primary>ecc_sign_hash</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_sign_hash                       (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter><type>unsigned long </type> inlen</parameter>,
+                                                         <parameter><type>struct dsa_signature</type> *signature</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *random_ctx</parameter>,
+                                                         <parameter><link linkend="nettle-random-func"><type>nettle_random_func</type></link> random</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-sizes" role="function">
+<title>ecc_sizes ()</title>
+<indexterm zone="ecc-sizes"><primary>ecc_sizes</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                ecc_sizes                           (<parameter><link linkend="int"><type>int</type></link> *low</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> *high</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-verify-hash" role="function">
+<title>ecc_verify_hash ()</title>
+<indexterm zone="ecc-verify-hash"><primary>ecc_verify_hash</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_verify_hash                     (<parameter><type>struct dsa_signature</type> *signature</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *hash</parameter>,
+                                                         <parameter><type>unsigned long </type> hashlen</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> *stat</parameter>,
+                                                         <parameter><link linkend="ecc-key"><type>ecc_key</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> id</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-wMNAF" role="function">
+<title>ecc_wMNAF ()</title>
+<indexterm zone="ecc-wMNAF"><primary>ecc_wMNAF</primary></indexterm>
+<programlisting>signed <link linkend="char"><returnvalue>char</returnvalue></link> *       ecc_wMNAF                           (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> x</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *ret_len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-wmnaf-cache-free" role="function">
+<title>ecc_wmnaf_cache_free ()</title>
+<indexterm zone="ecc-wmnaf-cache-free"><primary>ecc_wmnaf_cache_free</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                ecc_wmnaf_cache_free                (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ecc-wmnaf-cache-init" role="function">
+<title>ecc_wmnaf_cache_init ()</title>
+<indexterm zone="ecc-wmnaf-cache-init"><primary>ecc_wmnaf_cache_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 ecc_wmnaf_cache_init                (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="mp-clear-multi" role="function">
+<title>mp_clear_multi ()</title>
+<indexterm zone="mp-clear-multi"><primary>mp_clear_multi</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                mp_clear_multi                      (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> *a</parameter>,
+                                                         <parameter>...</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="mp-init-multi" role="function">
+<title>mp_init_multi ()</title>
+<indexterm zone="mp-init-multi"><primary>mp_init_multi</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 mp_init_multi                       (<parameter><link linkend="mpz-t"><type>mpz_t</type></link> *a</parameter>,
+                                                         <parameter>...</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

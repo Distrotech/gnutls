@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-stream">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-stream.top_of_page">stream</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>stream</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-stream.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="STREAM-BUFSIZE:CAPS">STREAM_BUFSIZE</link>
+<link linkend="cdk-error-t"><returnvalue>cdk_error_t</returnvalue></link>         (<link linkend="filter-fnct-t">*filter_fnct_t</link>)                    (<parameter><link linkend="void"><type>void</type></link> *uint8_t</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> ctl</parameter>,
+                                                         <parameter><link linkend="FILE:CAPS"><type>FILE</type></link> *in</parameter>,
+                                                         <parameter><link linkend="FILE:CAPS"><type>FILE</type></link> *out</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-stream.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-stream.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="STREAM-BUFSIZE:CAPS" role="macro">
+<title>STREAM_BUFSIZE</title>
+<indexterm zone="STREAM-BUFSIZE:CAPS"><primary>STREAM_BUFSIZE</primary></indexterm>
+<programlisting>#define STREAM_BUFSIZE 8192
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="filter-fnct-t" role="function">
+<title>filter_fnct_t ()</title>
+<indexterm zone="filter-fnct-t"><primary>filter_fnct_t</primary></indexterm>
+<programlisting><link linkend="cdk-error-t"><returnvalue>cdk_error_t</returnvalue></link>         (*filter_fnct_t)                    (<parameter><link linkend="void"><type>void</type></link> *uint8_t</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> ctl</parameter>,
+                                                         <parameter><link linkend="FILE:CAPS"><type>FILE</type></link> *in</parameter>,
+                                                         <parameter><link linkend="FILE:CAPS"><type>FILE</type></link> *out</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

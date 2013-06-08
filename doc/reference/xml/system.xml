@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-system">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-system.top_of_page">system</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>system</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-system.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="HAVE-NO-LOCKS:CAPS">HAVE_NO_LOCKS</link>
+#define             <link linkend="HAVE-PTHREAD-LOCKS:CAPS">HAVE_PTHREAD_LOCKS</link>
+#define             <link linkend="HAVE-WIN32-LOCKS:CAPS">HAVE_WIN32_LOCKS</link>
+#define             <link linkend="HAVE-WRITEV:CAPS">HAVE_WRITEV</link>
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-system-global-deinit">gnutls_system_global_deinit</link>         (<parameter><type>void</type></parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-system-global-init">gnutls_system_global_init</link>           (<parameter><type>void</type></parameter>);
+extern gnutls_time_func <link linkend="gnutls-time">gnutls_time</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="system-errno">system_errno</link>                        (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> Param1</parameter>);
+<link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             <link linkend="system-read">system_read</link>                         (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> data_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="system-recv-timeout">system_recv_timeout</link>                 (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> ms</parameter>);
+<link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             <link linkend="system-write">system_write</link>                        (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> data_size</parameter>);
+<link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             <link linkend="system-writev">system_writev</link>                       (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter>const <link linkend="giovec-t"><type>giovec_t</type></link> *iovec</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> iovec_cnt</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-system.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-system.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="HAVE-NO-LOCKS:CAPS" role="macro">
+<title>HAVE_NO_LOCKS</title>
+<indexterm zone="HAVE-NO-LOCKS:CAPS"><primary>HAVE_NO_LOCKS</primary></indexterm>
+<programlisting>#define HAVE_NO_LOCKS
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HAVE-PTHREAD-LOCKS:CAPS" role="macro">
+<title>HAVE_PTHREAD_LOCKS</title>
+<indexterm zone="HAVE-PTHREAD-LOCKS:CAPS"><primary>HAVE_PTHREAD_LOCKS</primary></indexterm>
+<programlisting>#define HAVE_PTHREAD_LOCKS
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HAVE-WIN32-LOCKS:CAPS" role="macro">
+<title>HAVE_WIN32_LOCKS</title>
+<indexterm zone="HAVE-WIN32-LOCKS:CAPS"><primary>HAVE_WIN32_LOCKS</primary></indexterm>
+<programlisting>#define HAVE_WIN32_LOCKS
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HAVE-WRITEV:CAPS" role="macro">
+<title>HAVE_WRITEV</title>
+<indexterm zone="HAVE-WRITEV:CAPS"><primary>HAVE_WRITEV</primary></indexterm>
+<programlisting>#define HAVE_WRITEV
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-system-global-deinit" role="function">
+<title>gnutls_system_global_deinit ()</title>
+<indexterm zone="gnutls-system-global-deinit"><primary>gnutls_system_global_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_system_global_deinit         (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-system-global-init" role="function">
+<title>gnutls_system_global_init ()</title>
+<indexterm zone="gnutls-system-global-init"><primary>gnutls_system_global_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_system_global_init           (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-time" role="variable">
+<title>gnutls_time</title>
+<indexterm zone="gnutls-time"><primary>gnutls_time</primary></indexterm>
+<programlisting>extern gnutls_time_func gnutls_time;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="system-errno" role="function">
+<title>system_errno ()</title>
+<indexterm zone="system-errno"><primary>system_errno</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 system_errno                        (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> Param1</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="system-read" role="function">
+<title>system_read ()</title>
+<indexterm zone="system-read"><primary>system_read</primary></indexterm>
+<programlisting><link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             system_read                         (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> data_size</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="system-recv-timeout" role="function">
+<title>system_recv_timeout ()</title>
+<indexterm zone="system-recv-timeout"><primary>system_recv_timeout</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 system_recv_timeout                 (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> ms</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="system-write" role="function">
+<title>system_write ()</title>
+<indexterm zone="system-write"><primary>system_write</primary></indexterm>
+<programlisting><link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             system_write                        (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> data_size</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="system-writev" role="function">
+<title>system_writev ()</title>
+<indexterm zone="system-writev"><primary>system_writev</primary></indexterm>
+<programlisting><link linkend="ssize-t"><returnvalue>ssize_t</returnvalue></link>             system_writev                       (<parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter>const <link linkend="giovec-t"><type>giovec_t</type></link> *iovec</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> iovec_cnt</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

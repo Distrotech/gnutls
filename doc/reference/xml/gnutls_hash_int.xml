@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-hash-int">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-hash-int.top_of_page">gnutls_hash_int</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_hash_int</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-hash-int.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>extern int          <link linkend="crypto-digest-prio">crypto_digest_prio</link>;
+extern int          <link linkend="crypto-mac-prio">crypto_mac_prio</link>;
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="deinit-func">*deinit_func</link>)                      (<parameter><link linkend="void"><type>void</type></link> *handle</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="hash-func">*hash_func</link>)                        (<parameter><link linkend="void"><type>void</type></link> *handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="output-func">*output_func</link>)                      (<parameter><link linkend="void"><type>void</type></link> *src_ctx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> digestsize</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="reset-func">*reset_func</link>)                       (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-hash-int.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-hash-int.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="crypto-digest-prio" role="variable">
+<title>crypto_digest_prio</title>
+<indexterm zone="crypto-digest-prio"><primary>crypto_digest_prio</primary></indexterm>
+<programlisting>extern int crypto_digest_prio;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="crypto-mac-prio" role="variable">
+<title>crypto_mac_prio</title>
+<indexterm zone="crypto-mac-prio"><primary>crypto_mac_prio</primary></indexterm>
+<programlisting>extern int crypto_mac_prio;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="deinit-func" role="function">
+<title>deinit_func ()</title>
+<indexterm zone="deinit-func"><primary>deinit_func</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*deinit_func)                      (<parameter><link linkend="void"><type>void</type></link> *handle</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="hash-func" role="function">
+<title>hash_func ()</title>
+<indexterm zone="hash-func"><primary>hash_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*hash_func)                        (<parameter><link linkend="void"><type>void</type></link> *handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> size</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="output-func" role="function">
+<title>output_func ()</title>
+<indexterm zone="output-func"><primary>output_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*output_func)                      (<parameter><link linkend="void"><type>void</type></link> *src_ctx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> digestsize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="reset-func" role="function">
+<title>reset_func ()</title>
+<indexterm zone="reset-func"><primary>reset_func</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*reset_func)                       (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

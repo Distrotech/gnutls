@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-pubkey-export2"><link linkend="gnutls-pubkey-export2">gnutls_pubkey_export2</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-import-openpgp-raw"><link linkend="gnutls-pubkey-import-openpgp-raw">gnutls_pubkey_import_openpgp_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-import-x509-raw"><link linkend="gnutls-pubkey-import-x509-raw">gnutls_pubkey_import_x509_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

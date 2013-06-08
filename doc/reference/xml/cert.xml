@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-cert">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-cert.top_of_page">cert</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>cert</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-cert.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>typedef             <link linkend="cert-auth-info-st">cert_auth_info_st</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="certificate-credential-append-crt-list">certificate_credential_append_crt_list</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter><link linkend="gnutls-str-array-t"><type>gnutls_str_array_t</type></link> names</parameter>,
+                                                         <parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *crt</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> nr</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="certificate-credentials-append-pkey">certificate_credentials_append_pkey</link> (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>);
+                    <link linkend="certs-st">certs_st</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-cert.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-cert.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="cert-auth-info-st" role="typedef">
+<title>cert_auth_info_st</title>
+<indexterm zone="cert-auth-info-st"><primary>cert_auth_info_st</primary></indexterm>
+<programlisting>typedef struct cert_auth_info_st cert_auth_info_st;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="certificate-credential-append-crt-list" role="function">
+<title>certificate_credential_append_crt_list ()</title>
+<indexterm zone="certificate-credential-append-crt-list"><primary>certificate_credential_append_crt_list</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 certificate_credential_append_crt_list
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter><link linkend="gnutls-str-array-t"><type>gnutls_str_array_t</type></link> names</parameter>,
+                                                         <parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *crt</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> nr</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="certificate-credentials-append-pkey" role="function">
+<title>certificate_credentials_append_pkey ()</title>
+<indexterm zone="certificate-credentials-append-pkey"><primary>certificate_credentials_append_pkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 certificate_credentials_append_pkey (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="certs-st" role="struct">
+<title>certs_st</title>
+<indexterm zone="certs-st"><primary>certs_st</primary></indexterm>
+<programlisting>typedef struct {
+  gnutls_pcert_st * cert_list; /* a certificate chain */
+  unsigned int cert_list_length; /* its length */
+  gnutls_str_array_t names; /* the names in the first certificate */
+} certs_st;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

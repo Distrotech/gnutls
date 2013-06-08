@@ -1,0 +1,666 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-pkcs12">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-pkcs12.top_of_page">pkcs12</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>pkcs12</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-pkcs12.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-PKCS12-SP-INCLUDE-SELF-SIGNED:CAPS">GNUTLS_PKCS12_SP_INCLUDE_SELF_SIGNED</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-decrypt">gnutls_pkcs12_bag_decrypt</link>           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-pkcs12-bag-deinit">gnutls_pkcs12_bag_deinit</link>            (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-encrypt">gnutls_pkcs12_bag_encrypt</link>           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-get-count">gnutls_pkcs12_bag_get_count</link>         (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-get-data">gnutls_pkcs12_bag_get_data</link>          (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-get-friendly-name">gnutls_pkcs12_bag_get_friendly_name</link> (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> **name</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-get-key-id">gnutls_pkcs12_bag_get_key_id</link>        (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *id</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-init">gnutls_pkcs12_bag_init</link>              (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> *bag</parameter>);
+struct              <link linkend="gnutls-pkcs12-bag-int">gnutls_pkcs12_bag_int</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-set-crl">gnutls_pkcs12_bag_set_crl</link>           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crl-t"><type>gnutls_x509_crl_t</type></link> crl</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-set-crt">gnutls_pkcs12_bag_set_crt</link>           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-set-data">gnutls_pkcs12_bag_set_data</link>          (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs12-bag-type-t"><type>gnutls_pkcs12_bag_type_t</type></link> type</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-set-friendly-name">gnutls_pkcs12_bag_set_friendly_name</link> (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *name</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-bag-set-key-id">gnutls_pkcs12_bag_set_key_id</link>        (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *id</parameter>);
+typedef             <link linkend="gnutls-pkcs12-bag-t">gnutls_pkcs12_bag_t</link>;
+enum                <link linkend="gnutls-pkcs12-bag-type-t">gnutls_pkcs12_bag_type_t</link>;
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-pkcs12-deinit">gnutls_pkcs12_deinit</link>                (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-export">gnutls_pkcs12_export</link>                (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-export2">gnutls_pkcs12_export2</link>               (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-generate-mac">gnutls_pkcs12_generate_mac</link>          (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-get-bag">gnutls_pkcs12_get_bag</link>               (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-import">gnutls_pkcs12_import</link>                (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-init">gnutls_pkcs12_init</link>                  (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> *pkcs12</parameter>);
+struct              <link linkend="gnutls-pkcs12-int">gnutls_pkcs12_int</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-set-bag">gnutls_pkcs12_set_bag</link>               (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-simple-parse">gnutls_pkcs12_simple_parse</link>          (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> p12</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-privkey-t"><type>gnutls_x509_privkey_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> **chain</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *chain_len</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> **extra_certs</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *extra_certs_len</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crl-t"><type>gnutls_x509_crl_t</type></link> *crl</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+typedef             <link linkend="gnutls-pkcs12-t">gnutls_pkcs12_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pkcs12-verify-mac">gnutls_pkcs12_verify_mac</link>            (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-pkcs12.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-pkcs12.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-PKCS12-SP-INCLUDE-SELF-SIGNED:CAPS" role="macro">
+<title>GNUTLS_PKCS12_SP_INCLUDE_SELF_SIGNED</title>
+<indexterm zone="GNUTLS-PKCS12-SP-INCLUDE-SELF-SIGNED:CAPS"><primary>GNUTLS_PKCS12_SP_INCLUDE_SELF_SIGNED</primary></indexterm>
+<programlisting>#define GNUTLS_PKCS12_SP_INCLUDE_SELF_SIGNED 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-decrypt" role="function">
+<title>gnutls_pkcs12_bag_decrypt ()</title>
+<indexterm zone="gnutls-pkcs12-bag-decrypt"><primary>gnutls_pkcs12_bag_decrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_decrypt           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>);</programlisting>
+<para>
+This function will decrypt the given encrypted bag and return 0 on
+success.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pass</parameter>&#160;:</term>
+<listitem><simpara>The password used for encryption, must be ASCII.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned,
+otherwise a negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-deinit" role="function">
+<title>gnutls_pkcs12_bag_deinit ()</title>
+<indexterm zone="gnutls-pkcs12-bag-deinit"><primary>gnutls_pkcs12_bag_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_pkcs12_bag_deinit            (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);</programlisting>
+<para>
+This function will deinitialize a PKCS12 Bag structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-encrypt" role="function">
+<title>gnutls_pkcs12_bag_encrypt ()</title>
+<indexterm zone="gnutls-pkcs12-bag-encrypt"><primary>gnutls_pkcs12_bag_encrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_encrypt           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will encrypt the given bag.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pass</parameter>&#160;:</term>
+<listitem><simpara>The password used for encryption, must be ASCII</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be one of <link linkend="gnutls-pkcs-encrypt-flags-t"><type>gnutls_pkcs_encrypt_flags_t</type></link> elements bitwise or'd</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned,
+otherwise a negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-get-count" role="function">
+<title>gnutls_pkcs12_bag_get_count ()</title>
+<indexterm zone="gnutls-pkcs12-bag-get-count"><primary>gnutls_pkcs12_bag_get_count</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_get_count         (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);</programlisting>
+<para>
+This function will return the number of the elements withing the bag.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Number of elements in bag, or an negative error code on
+error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-get-data" role="function">
+<title>gnutls_pkcs12_bag_get_data ()</title>
+<indexterm zone="gnutls-pkcs12-bag-get-data"><primary>gnutls_pkcs12_bag_get_data</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_get_data          (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will return the bag's data. The data is a constant
+that is stored into the bag.  Should not be accessed after the bag
+is deleted.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>The element of the bag to get the data from</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>where the bag's data will be. Should be treated as constant.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-get-friendly-name" role="function">
+<title>gnutls_pkcs12_bag_get_friendly_name ()</title>
+<indexterm zone="gnutls-pkcs12-bag-get-friendly-name"><primary>gnutls_pkcs12_bag_get_friendly_name</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_get_friendly_name (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> **name</parameter>);</programlisting>
+<para>
+This function will return the friendly name, of the specified bag
+element.  The key ID is usually used to distinguish the local
+private key and the certificate pair.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>The bag's element to add the id</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&#160;:</term>
+<listitem><simpara>will hold a pointer to the name (to be treated as const)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value. or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-get-key-id" role="function">
+<title>gnutls_pkcs12_bag_get_key_id ()</title>
+<indexterm zone="gnutls-pkcs12-bag-get-key-id"><primary>gnutls_pkcs12_bag_get_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_get_key_id        (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *id</parameter>);</programlisting>
+<para>
+This function will return the key ID, of the specified bag element.
+The key ID is usually used to distinguish the local private key and
+the certificate pair.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>The bag's element to add the id</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>id</parameter>&#160;:</term>
+<listitem><simpara>where the ID will be copied (to be treated as const)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value. or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-init" role="function">
+<title>gnutls_pkcs12_bag_init ()</title>
+<indexterm zone="gnutls-pkcs12-bag-init"><primary>gnutls_pkcs12_bag_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_init              (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> *bag</parameter>);</programlisting>
+<para>
+This function will initialize a PKCS12 bag structure. PKCS12 Bags
+usually contain private keys, lists of X.509 Certificates and X.509
+Certificate revocation lists.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-int" role="struct">
+<title>struct gnutls_pkcs12_bag_int</title>
+<indexterm zone="gnutls-pkcs12-bag-int"><primary>gnutls_pkcs12_bag_int</primary></indexterm>
+<programlisting>struct gnutls_pkcs12_bag_int;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-set-crl" role="function">
+<title>gnutls_pkcs12_bag_set_crl ()</title>
+<indexterm zone="gnutls-pkcs12-bag-set-crl"><primary>gnutls_pkcs12_bag_set_crl</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_set_crl           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crl-t"><type>gnutls_x509_crl_t</type></link> crl</parameter>);</programlisting>
+<para>
+This function will insert the given CRL into the
+bag. This is just a wrapper over <link linkend="gnutls-pkcs12-bag-set-data"><function>gnutls_pkcs12_bag_set_data()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crl</parameter>&#160;:</term>
+<listitem><simpara>the CRL to be copied.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the index of the added bag on success, or a negative error code
+on failure.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-set-crt" role="function">
+<title>gnutls_pkcs12_bag_set_crt ()</title>
+<indexterm zone="gnutls-pkcs12-bag-set-crt"><primary>gnutls_pkcs12_bag_set_crt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_set_crt           (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>);</programlisting>
+<para>
+This function will insert the given certificate into the
+bag. This is just a wrapper over <link linkend="gnutls-pkcs12-bag-set-data"><function>gnutls_pkcs12_bag_set_data()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>the certificate to be copied.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the index of the added bag on success, or a negative
+value on failure.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-set-data" role="function">
+<title>gnutls_pkcs12_bag_set_data ()</title>
+<indexterm zone="gnutls-pkcs12-bag-set-data"><primary>gnutls_pkcs12_bag_set_data</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_set_data          (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs12-bag-type-t"><type>gnutls_pkcs12_bag_type_t</type></link> type</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will insert the given data of the given type into
+the bag.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type</parameter>&#160;:</term>
+<listitem><simpara>The data's type</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>the data to be copied.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the index of the added bag on success, or a negative
+value on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-set-friendly-name" role="function">
+<title>gnutls_pkcs12_bag_set_friendly_name ()</title>
+<indexterm zone="gnutls-pkcs12-bag-set-friendly-name"><primary>gnutls_pkcs12_bag_set_friendly_name</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_set_friendly_name (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *name</parameter>);</programlisting>
+<para>
+This function will add the given key friendly name, to the
+specified, by the index, bag element. The name will be encoded as
+a 'Friendly name' bag attribute, which is usually used to set a
+user name to the local private key and the certificate pair.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>The bag's element to add the id</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>name</parameter>&#160;:</term>
+<listitem><simpara>the name</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value. or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-set-key-id" role="function">
+<title>gnutls_pkcs12_bag_set_key_id ()</title>
+<indexterm zone="gnutls-pkcs12-bag-set-key-id"><primary>gnutls_pkcs12_bag_set_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_bag_set_key_id        (<parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *id</parameter>);</programlisting>
+<para>
+This function will add the given key ID, to the specified, by the
+index, bag element. The key ID will be encoded as a 'Local key
+identifier' bag attribute, which is usually used to distinguish
+the local private key and the certificate pair.
+</para><variablelist role="params">
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>The bag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>The bag's element to add the id</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>id</parameter>&#160;:</term>
+<listitem><simpara>the ID</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value. or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-t" role="typedef">
+<title>gnutls_pkcs12_bag_t</title>
+<indexterm zone="gnutls-pkcs12-bag-t"><primary>gnutls_pkcs12_bag_t</primary></indexterm>
+<programlisting>  typedef struct gnutls_pkcs12_bag_int *gnutls_pkcs12_bag_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pkcs12-bag-type-t" role="enum">
+<title>enum gnutls_pkcs12_bag_type_t</title>
+<indexterm zone="gnutls-pkcs12-bag-type-t"><primary>gnutls_pkcs12_bag_type_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_BAG_EMPTY = 0,
+    GNUTLS_BAG_PKCS8_ENCRYPTED_KEY = 1,
+    GNUTLS_BAG_PKCS8_KEY = 2,
+    GNUTLS_BAG_CERTIFICATE = 3,
+    GNUTLS_BAG_CRL = 4,
+    GNUTLS_BAG_SECRET = 5,      /* Secret data. Underspecified in pkcs-12,
+                                 * gnutls extension. We use the PKCS-9
+                                 * random nonce ID 1.2.840.113549.1.9.25.3
+                                 * to store randomly generated keys.
+                                 */
+    GNUTLS_BAG_ENCRYPTED = 10,
+    GNUTLS_BAG_UNKNOWN = 20
+} gnutls_pkcs12_bag_type_t;
+</programlisting>
+<para>
+Enumeration of different PKCS 12 bag types.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-BAG-EMPTY:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_EMPTY</literal></term>
+<listitem><simpara>Empty PKCS-12 bag.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-BAG-PKCS8-ENCRYPTED-KEY:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_PKCS8_ENCRYPTED_KEY</literal></term>
+<listitem><simpara>PKCS-12 bag with PKCS-8 encrypted key.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-BAG-PKCS8-KEY:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_PKCS8_KEY</literal></term>
+<listitem><simpara>PKCS-12 bag with PKCS-8 key.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-BAG-CERTIFICATE:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_CERTIFICATE</literal></term>
+<listitem><simpara>PKCS-12 bag with certificate.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-BAG-CRL:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_CRL</literal></term>
+<listitem><simpara>PKCS-12 bag with CRL.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-BAG-SECRET:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_SECRET</literal></term>
+<listitem><simpara>PKCS-12 bag with secret PKCS-9 keys.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-BAG-ENCRYPTED:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_ENCRYPTED</literal></term>
+<listitem><simpara>Encrypted PKCS-12 bag.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-BAG-UNKNOWN:CAPS" role="constant">
+<term><literal>GNUTLS_BAG_UNKNOWN</literal></term>
+<listitem><simpara>Unknown PKCS-12 bag.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-deinit" role="function">
+<title>gnutls_pkcs12_deinit ()</title>
+<indexterm zone="gnutls-pkcs12-deinit"><primary>gnutls_pkcs12_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_pkcs12_deinit                (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>);</programlisting>
+<para>
+This function will deinitialize a PKCS12 structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-export" role="function">
+<title>gnutls_pkcs12_export ()</title>
+<indexterm zone="gnutls-pkcs12-export"><primary>gnutls_pkcs12_export</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_export                (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);</programlisting>
+<para>
+This function will export the pkcs12 structure to DER or PEM format.
+</para>
+<para>
+If the buffer provided is not long enough to hold the output, then
+*output_data_size will be updated and GNUTLS_E_SHORT_MEMORY_BUFFER
+will be returned.
+</para>
+<para>
+If the structure is PEM encoded, it will have a header
+of "BEGIN PKCS12".
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>Holds the pkcs12 structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of output params. One of PEM or DER.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data</parameter>&#160;:</term>
+<listitem><simpara>will contain a structure PEM or DER encoded</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of output_data (and will be
+replaced by the actual size of parameters)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-export2" role="function" condition="since:3.1">
+<title>gnutls_pkcs12_export2 ()</title>
+<indexterm zone="gnutls-pkcs12-export2" role="3.1"><primary>gnutls_pkcs12_export2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_export2               (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);</programlisting>
+<para>
+This function will export the pkcs12 structure to DER or PEM format.
+</para>
+<para>
+The output buffer is allocated using <link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link>.
+</para>
+<para>
+If the structure is PEM encoded, it will have a header
+of "BEGIN PKCS12".
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>Holds the pkcs12 structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of output params. One of PEM or DER.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>out</parameter>&#160;:</term>
+<listitem><simpara>will contain a structure PEM or DER encoded</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1</para></refsect2>
+<refsect2 id="gnutls-pkcs12-generate-mac" role="function">
+<title>gnutls_pkcs12_generate_mac ()</title>
+<indexterm zone="gnutls-pkcs12-generate-mac"><primary>gnutls_pkcs12_generate_mac</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_generate_mac          (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>);</programlisting>
+<para>
+This function will generate a MAC for the PKCS12 structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>should contain a gnutls_pkcs12_t structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pass</parameter>&#160;:</term>
+<listitem><simpara>The password for the MAC</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-get-bag" role="function">
+<title>gnutls_pkcs12_get_bag ()</title>
+<indexterm zone="gnutls-pkcs12-get-bag"><primary>gnutls_pkcs12_get_bag</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_get_bag               (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);</programlisting>
+<para>
+This function will return a Bag from the PKCS12 structure.
+</para>
+<para>
+After the last Bag has been read
+<link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link> will be returned.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>should contain a gnutls_pkcs12_t structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>contains the index of the bag to extract</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>An initialized bag, where the contents of the bag will be copied</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-import" role="function">
+<title>gnutls_pkcs12_import ()</title>
+<indexterm zone="gnutls-pkcs12-import"><primary>gnutls_pkcs12_import</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_import                (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will convert the given DER or PEM encoded PKCS12
+to the native gnutls_pkcs12_t format. The output will be stored in 'pkcs12'.
+</para>
+<para>
+If the PKCS12 is PEM encoded it should have a header of "PKCS12".
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed PKCS12.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The DER or PEM encoded PKCS12.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of DER or PEM</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>an ORed sequence of gnutls_privkey_pkcs8_flags</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-init" role="function">
+<title>gnutls_pkcs12_init ()</title>
+<indexterm zone="gnutls-pkcs12-init"><primary>gnutls_pkcs12_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_init                  (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> *pkcs12</parameter>);</programlisting>
+<para>
+This function will initialize a PKCS12 structure. PKCS12 structures
+usually contain lists of X.509 Certificates and X.509 Certificate
+revocation lists.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-int" role="struct">
+<title>struct gnutls_pkcs12_int</title>
+<indexterm zone="gnutls-pkcs12-int"><primary>gnutls_pkcs12_int</primary></indexterm>
+<programlisting>struct gnutls_pkcs12_int;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pkcs12-set-bag" role="function">
+<title>gnutls_pkcs12_set_bag ()</title>
+<indexterm zone="gnutls-pkcs12-set-bag"><primary>gnutls_pkcs12_set_bag</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_set_bag               (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs12-bag-t"><type>gnutls_pkcs12_bag_t</type></link> bag</parameter>);</programlisting>
+<para>
+This function will insert a Bag into the PKCS12 structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>should contain a gnutls_pkcs12_t structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bag</parameter>&#160;:</term>
+<listitem><simpara>An initialized bag</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pkcs12-simple-parse" role="function" condition="since:3.1">
+<title>gnutls_pkcs12_simple_parse ()</title>
+<indexterm zone="gnutls-pkcs12-simple-parse" role="3.1"><primary>gnutls_pkcs12_simple_parse</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_simple_parse          (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> p12</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-privkey-t"><type>gnutls_x509_privkey_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> **chain</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *chain_len</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> **extra_certs</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *extra_certs_len</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crl-t"><type>gnutls_x509_crl_t</type></link> *crl</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function parses a PKCS<link linkend="12:CAPS"><type>12</type></link> blob in <parameter>p12blob</parameter> and extracts the
+private key, the corresponding certificate chain, and any additional
+certificates and a CRL.
+</para>
+<para>
+The <parameter>extra_certs_ret</parameter> and <parameter>extra_certs_ret_len</parameter> parameters are optional
+and both may be set to <link linkend="NULL:CAPS"><literal>NULL</literal></link>. If either is non-<link linkend="NULL:CAPS"><literal>NULL</literal></link>, then both must
+be.
+</para>
+<para>
+Encrypted PKCS<link linkend="12:CAPS"><type>12</type></link> bags and PKCS#8 private keys are supported.  However,
+only password based security, and the same password for all
+operations, are supported.
+</para>
+<para>
+PKCS<link linkend="12:CAPS"><type>12</type></link> file may contain many keys and/or certificates, and there
+is no way to identify which key/certificate pair you want.  You
+should make sure the PKCS<link linkend="12:CAPS"><type>12</type></link> file only contain one key/certificate
+pair and/or one CRL.
+</para>
+<para>
+It is believed that the limitations of this function is acceptable
+for most usage, and that any more flexibility would introduce
+complexity that would make it harder to use this functionality at
+all.
+</para>
+<para>
+If the provided structure has encrypted fields but no password
+is provided then this function returns <link linkend="GNUTLS-E-DECRYPTION-FAILED:CAPS"><literal>GNUTLS_E_DECRYPTION_FAILED</literal></link>.
+</para>
+<para>
+Note that normally the chain constructed does not include self signed
+certificates, to comply with TLS' requirements. If, however, the flag 
+<link linkend="GNUTLS-PKCS12-SP-INCLUDE-SELF-SIGNED:CAPS"><literal>GNUTLS_PKCS12_SP_INCLUDE_SELF_SIGNED</literal></link> is specified then
+self signed certificates will be included in the chain.
+</para><variablelist role="params">
+<varlistentry><term><parameter>p12</parameter>&#160;:</term>
+<listitem><simpara>the PKCS<link linkend="12:CAPS"><type>12</type></link> blob.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>password</parameter>&#160;:</term>
+<listitem><simpara>optional password used to decrypt PKCS<link linkend="12:CAPS"><type>12</type></link> blob, bags and keys.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>a structure to store the parsed private key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>chain</parameter>&#160;:</term>
+<listitem><simpara>the corresponding to key certificate chain</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>chain_len</parameter>&#160;:</term>
+<listitem><simpara>will be updated with the number of additional</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>extra_certs</parameter>&#160;:</term>
+<listitem><simpara>optional pointer to receive an array of additional
+certificates found in the PKCS<link linkend="12:CAPS"><type>12</type></link> blob.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>extra_certs_len</parameter>&#160;:</term>
+<listitem><simpara>will be updated with the number of additional
+certs.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crl</parameter>&#160;:</term>
+<listitem><simpara>an optional structure to store the parsed CRL.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero or one of GNUTLS_PKCS12_SP_*</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1</para></refsect2>
+<refsect2 id="gnutls-pkcs12-t" role="typedef">
+<title>gnutls_pkcs12_t</title>
+<indexterm zone="gnutls-pkcs12-t"><primary>gnutls_pkcs12_t</primary></indexterm>
+<programlisting>  typedef struct gnutls_pkcs12_int *gnutls_pkcs12_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pkcs12-verify-mac" role="function">
+<title>gnutls_pkcs12_verify_mac ()</title>
+<indexterm zone="gnutls-pkcs12-verify-mac"><primary>gnutls_pkcs12_verify_mac</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pkcs12_verify_mac            (<parameter><link linkend="gnutls-pkcs12-t"><type>gnutls_pkcs12_t</type></link> pkcs12</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *pass</parameter>);</programlisting>
+<para>
+This function will verify the MAC for the PKCS12 structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkcs12</parameter>&#160;:</term>
+<listitem><simpara>should contain a gnutls_pkcs12_t structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pass</parameter>&#160;:</term>
+<listitem><simpara>The password for the MAC</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+</refentry>

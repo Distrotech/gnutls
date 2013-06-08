@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-handshake">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-handshake.top_of_page">gnutls_handshake</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_handshake</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-handshake.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="AGAIN:CAPS">AGAIN</link>                               (target)
+#define             <link linkend="AGAIN2:CAPS">AGAIN2</link>                              (state,
+                                                         target)
+#define             <link linkend="FAGAIN:CAPS">FAGAIN</link>                              (target)
+#define             <link linkend="FINAL-STATE:CAPS">FINAL_STATE</link>
+#define             <link linkend="STATE:CAPS">STATE</link>
+<link linkend="return"><returnvalue>return</returnvalue></link>              <link linkend="gnutls-assert-val">gnutls_assert_val</link>                   (<parameter><link linkend="GNUTLS-E-MEMORY-ERROR:CAPS"><type>GNUTLS_E_MEMORY_ERROR</type></link> Param1</parameter>);
+time_t              <link linkend="now">now</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-handshake.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-handshake.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="AGAIN:CAPS" role="macro">
+<title>AGAIN()</title>
+<indexterm zone="AGAIN:CAPS"><primary>AGAIN</primary></indexterm>
+<programlisting>#define AGAIN(target) (STATE==target?1:0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="AGAIN2:CAPS" role="macro">
+<title>AGAIN2()</title>
+<indexterm zone="AGAIN2:CAPS"><primary>AGAIN2</primary></indexterm>
+<programlisting>#define AGAIN2(state, target) (state==target?1:0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="FAGAIN:CAPS" role="macro">
+<title>FAGAIN()</title>
+<indexterm zone="FAGAIN:CAPS"><primary>FAGAIN</primary></indexterm>
+<programlisting>#define FAGAIN(target) (FINAL_STATE==target?1:0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="FINAL-STATE:CAPS" role="macro">
+<title>FINAL_STATE</title>
+<indexterm zone="FINAL-STATE:CAPS"><primary>FINAL_STATE</primary></indexterm>
+<programlisting>#define FINAL_STATE session-&gt;internals.handshake_final_state
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="STATE:CAPS" role="macro">
+<title>STATE</title>
+<indexterm zone="STATE:CAPS"><primary>STATE</primary></indexterm>
+<programlisting>#define STATE session-&gt;internals.handshake_state
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-assert-val" role="function">
+<title>gnutls_assert_val ()</title>
+<indexterm zone="gnutls-assert-val"><primary>gnutls_assert_val</primary></indexterm>
+<programlisting><link linkend="return"><returnvalue>return</returnvalue></link>              gnutls_assert_val                   (<parameter><link linkend="GNUTLS-E-MEMORY-ERROR:CAPS"><type>GNUTLS_E_MEMORY_ERROR</type></link> Param1</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="now" role="variable">
+<title>now</title>
+<indexterm zone="now"><primary>now</primary></indexterm>
+<programlisting>      time_t now = gnutls_time(0);
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

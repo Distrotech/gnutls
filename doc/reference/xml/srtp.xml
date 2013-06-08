@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-srtp">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-srtp.top_of_page">srtp</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>srtp</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-srtp.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="MAX-SRTP-PROFILES:CAPS">MAX_SRTP_PROFILES</link>
+extern extension_entry_st <link linkend="ext-mod-srtp">ext_mod_srtp</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-srtp.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-srtp.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="MAX-SRTP-PROFILES:CAPS" role="macro">
+<title>MAX_SRTP_PROFILES</title>
+<indexterm zone="MAX-SRTP-PROFILES:CAPS"><primary>MAX_SRTP_PROFILES</primary></indexterm>
+<programlisting>#define MAX_SRTP_PROFILES 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ext-mod-srtp" role="variable">
+<title>ext_mod_srtp</title>
+<indexterm zone="ext-mod-srtp"><primary>ext_mod_srtp</primary></indexterm>
+<programlisting>extern extension_entry_st ext_mod_srtp;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

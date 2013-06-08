@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-auth">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-auth.top_of_page">gnutls_auth</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_auth</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-auth.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-generate-client-certificate">*gnutls_generate_client_certificate</link>)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-generate-client-crt-vrfy">*gnutls_generate_client_crt_vrfy</link>)  (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-generate-client-kx">*gnutls_generate_client_kx</link>)        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-generate-server-certificate">*gnutls_generate_server_certificate</link>)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-generate-server-crt-request">*gnutls_generate_server_crt_request</link>)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-generate-server-kx">*gnutls_generate_server_kx</link>)        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-process-client-certificate">*gnutls_process_client_certificate</link>)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-process-client-crt-vrfy">*gnutls_process_client_crt_vrfy</link>)   (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-process-client-kx">*gnutls_process_client_kx</link>)         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-process-server-certificate">*gnutls_process_server_certificate</link>)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-process-server-crt-request">*gnutls_process_server_crt_request</link>)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-process-server-kx">*gnutls_process_server_kx</link>)         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-auth.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-auth.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="gnutls-generate-client-certificate" role="function">
+<title>gnutls_generate_client_certificate ()</title>
+<indexterm zone="gnutls-generate-client-certificate"><primary>gnutls_generate_client_certificate</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_generate_client_certificate)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-generate-client-crt-vrfy" role="function">
+<title>gnutls_generate_client_crt_vrfy ()</title>
+<indexterm zone="gnutls-generate-client-crt-vrfy"><primary>gnutls_generate_client_crt_vrfy</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_generate_client_crt_vrfy)  (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-generate-client-kx" role="function">
+<title>gnutls_generate_client_kx ()</title>
+<indexterm zone="gnutls-generate-client-kx"><primary>gnutls_generate_client_kx</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_generate_client_kx)        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-generate-server-certificate" role="function">
+<title>gnutls_generate_server_certificate ()</title>
+<indexterm zone="gnutls-generate-server-certificate"><primary>gnutls_generate_server_certificate</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_generate_server_certificate)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-generate-server-crt-request" role="function">
+<title>gnutls_generate_server_crt_request ()</title>
+<indexterm zone="gnutls-generate-server-crt-request"><primary>gnutls_generate_server_crt_request</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_generate_server_crt_request)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-generate-server-kx" role="function">
+<title>gnutls_generate_server_kx ()</title>
+<indexterm zone="gnutls-generate-server-kx"><primary>gnutls_generate_server_kx</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_generate_server_kx)        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *Param2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-process-client-certificate" role="function">
+<title>gnutls_process_client_certificate ()</title>
+<indexterm zone="gnutls-process-client-certificate"><primary>gnutls_process_client_certificate</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_process_client_certificate)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-process-client-crt-vrfy" role="function">
+<title>gnutls_process_client_crt_vrfy ()</title>
+<indexterm zone="gnutls-process-client-crt-vrfy"><primary>gnutls_process_client_crt_vrfy</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_process_client_crt_vrfy)   (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-process-client-kx" role="function">
+<title>gnutls_process_client_kx ()</title>
+<indexterm zone="gnutls-process-client-kx"><primary>gnutls_process_client_kx</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_process_client_kx)         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-process-server-certificate" role="function">
+<title>gnutls_process_server_certificate ()</title>
+<indexterm zone="gnutls-process-server-certificate"><primary>gnutls_process_server_certificate</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_process_server_certificate)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-process-server-crt-request" role="function">
+<title>gnutls_process_server_crt_request ()</title>
+<indexterm zone="gnutls-process-server-crt-request"><primary>gnutls_process_server_crt_request</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_process_server_crt_request)
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-process-server-kx" role="function">
+<title>gnutls_process_server_kx ()</title>
+<indexterm zone="gnutls-process-server-kx"><primary>gnutls_process_server_kx</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_process_server_kx)         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *Param2</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

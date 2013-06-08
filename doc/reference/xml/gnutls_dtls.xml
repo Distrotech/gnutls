@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-dtls">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-dtls.top_of_page">gnutls_dtls</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_dtls</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-dtls.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="MAX-DTLS-TIMEOUT:CAPS">MAX_DTLS_TIMEOUT</link>
+#define             <link linkend="RETURN-DTLS-EAGAIN-OR-TIMEOUT:CAPS">RETURN_DTLS_EAGAIN_OR_TIMEOUT</link>       (session,
+                                                         r)
+time_t              <link linkend="now">now</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-dtls.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-dtls.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="MAX-DTLS-TIMEOUT:CAPS" role="macro">
+<title>MAX_DTLS_TIMEOUT</title>
+<indexterm zone="MAX-DTLS-TIMEOUT:CAPS"><primary>MAX_DTLS_TIMEOUT</primary></indexterm>
+<programlisting>#define MAX_DTLS_TIMEOUT 60000
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RETURN-DTLS-EAGAIN-OR-TIMEOUT:CAPS" role="macro">
+<title>RETURN_DTLS_EAGAIN_OR_TIMEOUT()</title>
+<indexterm zone="RETURN-DTLS-EAGAIN-OR-TIMEOUT:CAPS"><primary>RETURN_DTLS_EAGAIN_OR_TIMEOUT</primary></indexterm>
+<programlisting>#define             RETURN_DTLS_EAGAIN_OR_TIMEOUT(session, r)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="now" role="variable">
+<title>now</title>
+<indexterm zone="now"><primary>now</primary></indexterm>
+<programlisting>      time_t now = gnutls_time(0);
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

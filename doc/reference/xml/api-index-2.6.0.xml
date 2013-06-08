@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-pk-get-id"><link linkend="gnutls-pk-get-id">gnutls_pk_get_id</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pk-get-name"><link linkend="gnutls-pk-get-name">gnutls_pk_get_name</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pk-list"><link linkend="gnutls-pk-list">gnutls_pk_list</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-srp-set-prime-bits"><link linkend="gnutls-srp-set-prime-bits">gnutls_srp_set_prime_bits</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-strerror-name"><link linkend="gnutls-strerror-name">gnutls_strerror_name</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-set-key-rsa-raw"><link linkend="gnutls-x509-crq-set-key-rsa-raw">gnutls_x509_crq_set_key_rsa_raw</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-set-crl-dist-points2"><link linkend="gnutls-x509-crt-set-crl-dist-points2">gnutls_x509_crt_set_crl_dist_points2</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-set-subject-alt-name"><link linkend="gnutls-x509-crt-set-subject-alt-name">gnutls_x509_crt_set_subject_alt_name</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

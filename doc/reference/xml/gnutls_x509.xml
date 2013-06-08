@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-x509">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-x509.top_of_page">gnutls_x509</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_x509</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-x509.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="PEM-CERT-SEP:CAPS">PEM_CERT_SEP</link>
+#define             <link linkend="PEM-CERT-SEP2:CAPS">PEM_CERT_SEP2</link>
+#define             <link linkend="PEM-CRL-SEP:CAPS">PEM_CRL_SEP</link>
+#define             <link linkend="PEM-KEY-DSA-SEP:CAPS">PEM_KEY_DSA_SEP</link>
+#define             <link linkend="PEM-KEY-RSA-SEP:CAPS">PEM_KEY_RSA_SEP</link>
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-x509.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-x509.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="PEM-CERT-SEP:CAPS" role="macro">
+<title>PEM_CERT_SEP</title>
+<indexterm zone="PEM-CERT-SEP:CAPS"><primary>PEM_CERT_SEP</primary></indexterm>
+<programlisting>#define PEM_CERT_SEP "-----BEGIN CERTIFICATE"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-CERT-SEP2:CAPS" role="macro">
+<title>PEM_CERT_SEP2</title>
+<indexterm zone="PEM-CERT-SEP2:CAPS"><primary>PEM_CERT_SEP2</primary></indexterm>
+<programlisting>#define PEM_CERT_SEP2 "-----BEGIN X509 CERTIFICATE"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-CRL-SEP:CAPS" role="macro">
+<title>PEM_CRL_SEP</title>
+<indexterm zone="PEM-CRL-SEP:CAPS"><primary>PEM_CRL_SEP</primary></indexterm>
+<programlisting>#define PEM_CRL_SEP "-----BEGIN X509 CRL"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-KEY-DSA-SEP:CAPS" role="macro">
+<title>PEM_KEY_DSA_SEP</title>
+<indexterm zone="PEM-KEY-DSA-SEP:CAPS"><primary>PEM_KEY_DSA_SEP</primary></indexterm>
+<programlisting>#define PEM_KEY_DSA_SEP "-----BEGIN DSA"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-KEY-RSA-SEP:CAPS" role="macro">
+<title>PEM_KEY_RSA_SEP</title>
+<indexterm zone="PEM-KEY-RSA-SEP:CAPS"><primary>PEM_KEY_RSA_SEP</primary></indexterm>
+<programlisting>#define PEM_KEY_RSA_SEP "-----BEGIN RSA"
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-compress">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-compress.top_of_page">gnutls_compress</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_compress</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-compress.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-COMP-FAILED:CAPS">GNUTLS_COMP_FAILED</link>
+typedef             <link linkend="gnutls-compression-entry">gnutls_compression_entry</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-compress.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-compress.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-COMP-FAILED:CAPS" role="macro">
+<title>GNUTLS_COMP_FAILED</title>
+<indexterm zone="GNUTLS-COMP-FAILED:CAPS"><primary>GNUTLS_COMP_FAILED</primary></indexterm>
+<programlisting>#define GNUTLS_COMP_FAILED NULL
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-compression-entry" role="typedef">
+<title>gnutls_compression_entry</title>
+<indexterm zone="gnutls-compression-entry"><primary>gnutls_compression_entry</primary></indexterm>
+<programlisting>typedef struct gnutls_compression_entry gnutls_compression_entry;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

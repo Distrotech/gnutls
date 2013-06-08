@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-openpgp">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-openpgp.top_of_page">gnutls_openpgp</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_openpgp</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-openpgp.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-count-key-names">gnutls_openpgp_count_key_names</link>      (<parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-get-key">gnutls_openpgp_get_key</link>              (<parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>,
+                                                         <parameter><link linkend="key-attr-t"><type>key_attr_t</type></link> by</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *pattern</parameter>);
+enum                <link linkend="key-attr-t">key_attr_t</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-openpgp.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-openpgp.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="gnutls-openpgp-count-key-names" role="function">
+<title>gnutls_openpgp_count_key_names ()</title>
+<indexterm zone="gnutls-openpgp-count-key-names"><primary>gnutls_openpgp_count_key_names</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_count_key_names      (<parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-get-key" role="function">
+<title>gnutls_openpgp_get_key ()</title>
+<indexterm zone="gnutls-openpgp-get-key"><primary>gnutls_openpgp_get_key</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_get_key              (<parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>,
+                                                         <parameter><link linkend="key-attr-t"><type>key_attr_t</type></link> by</parameter>,
+                                                         <parameter><link linkend="uint8-t"><type>uint8_t</type></link> *pattern</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="key-attr-t" role="enum">
+<title>enum key_attr_t</title>
+<indexterm zone="key-attr-t"><primary>key_attr_t</primary></indexterm>
+<programlisting>typedef enum {
+  KEY_ATTR_NONE = 0,
+  KEY_ATTR_SHORT_KEYID = 3,
+  KEY_ATTR_KEYID = 4,
+  KEY_ATTR_FPR = 5
+} key_attr_t;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

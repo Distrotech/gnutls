@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-parser-aux">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-parser-aux.top_of_page">parser_aux</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>parser_aux</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-parser-aux.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="DER-LEN:CAPS">DER_LEN</link>
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-parser-aux.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-parser-aux.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="DER-LEN:CAPS" role="macro">
+<title>DER_LEN</title>
+<indexterm zone="DER-LEN:CAPS"><primary>DER_LEN</primary></indexterm>
+<programlisting>#define DER_LEN 16
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-alert-get-strname"><link linkend="gnutls-alert-get-strname">gnutls_alert_get_strname</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-certificate-get-issuer"><link linkend="gnutls-certificate-get-issuer">gnutls_certificate_get_issuer</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-certificate-set-key"><link linkend="gnutls-certificate-set-key">gnutls_certificate_set_key</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-certificate-set-retrieve-function"><link linkend="gnutls-certificate-set-retrieve-function">gnutls_certificate_set_retrieve_function</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-certificate-set-retrieve-function2"><link linkend="gnutls-certificate-set-retrieve-function2">gnutls_certificate_set_retrieve_function2</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-certificate-set-x509-system-trust"><link linkend="gnutls-certificate-set-x509-system-trust">gnutls_certificate_set_x509_system_trust</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-add-auth"><link linkend="gnutls-cipher-add-auth">gnutls_cipher_add_auth</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-set-iv"><link linkend="gnutls-cipher-set-iv">gnutls_cipher_set_iv</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-tag"><link linkend="gnutls-cipher-tag">gnutls_cipher_tag</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-cookie-send"><link linkend="gnutls-dtls-cookie-send">gnutls_dtls_cookie_send</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-cookie-verify"><link linkend="gnutls-dtls-cookie-verify">gnutls_dtls_cookie_verify</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-get-data-mtu"><link linkend="gnutls-dtls-get-data-mtu">gnutls_dtls_get_data_mtu</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-get-mtu"><link linkend="gnutls-dtls-get-mtu">gnutls_dtls_get_mtu</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-get-timeout"><link linkend="gnutls-dtls-get-timeout">gnutls_dtls_get_timeout</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-prestate-set"><link linkend="gnutls-dtls-prestate-set">gnutls_dtls_prestate_set</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-set-mtu"><link linkend="gnutls-dtls-set-mtu">gnutls_dtls_set_mtu</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-dtls-set-timeouts"><link linkend="gnutls-dtls-set-timeouts">gnutls_dtls_set_timeouts</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-ecc-curve-get"><link linkend="gnutls-ecc-curve-get">gnutls_ecc_curve_get</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-ecc-curve-get-name"><link linkend="gnutls-ecc-curve-get-name">gnutls_ecc_curve_get_name</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-ecc-curve-get-size"><link linkend="gnutls-ecc-curve-get-size">gnutls_ecc_curve_get_size</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-global-set-audit-log-function"><link linkend="gnutls-global-set-audit-log-function">gnutls_global_set_audit_log_function</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-key-generate"><link linkend="gnutls-key-generate">gnutls_key_generate</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pcert-deinit"><link linkend="gnutls-pcert-deinit">gnutls_pcert_deinit</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pcert-import-openpgp"><link linkend="gnutls-pcert-import-openpgp">gnutls_pcert_import_openpgp</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pcert-import-openpgp-raw"><link linkend="gnutls-pcert-import-openpgp-raw">gnutls_pcert_import_openpgp_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pcert-import-x509"><link linkend="gnutls-pcert-import-x509">gnutls_pcert_import_x509</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pcert-import-x509-raw"><link linkend="gnutls-pcert-import-x509-raw">gnutls_pcert_import_x509_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pcert-list-import-x509-raw"><link linkend="gnutls-pcert-list-import-x509-raw">gnutls_pcert_list_import_x509_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs11-privkey-generate"><link linkend="gnutls-pkcs11-privkey-generate">gnutls_pkcs11_privkey_generate</link>, function in <link linkend="gnutls-pkcs11">pkcs11</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs11-reinit"><link linkend="gnutls-pkcs11-reinit">gnutls_pkcs11_reinit</link>, function in <link linkend="gnutls-pkcs11">pkcs11</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-priority-certificate-type-list"><link linkend="gnutls-priority-certificate-type-list">gnutls_priority_certificate_type_list</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-priority-compression-list"><link linkend="gnutls-priority-compression-list">gnutls_priority_compression_list</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-priority-ecc-curve-list"><link linkend="gnutls-priority-ecc-curve-list">gnutls_priority_ecc_curve_list</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-priority-protocol-list"><link linkend="gnutls-priority-protocol-list">gnutls_priority_protocol_list</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-priority-sign-list"><link linkend="gnutls-priority-sign-list">gnutls_priority_sign_list</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-ext"><link linkend="gnutls-privkey-import-ext">gnutls_privkey_import_ext</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-encrypt-data"><link linkend="gnutls-pubkey-encrypt-data">gnutls_pubkey_encrypt_data</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-get-openpgp-key-id"><link linkend="gnutls-pubkey-get-openpgp-key-id">gnutls_pubkey_get_openpgp_key_id</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-get-pk-ecc-raw"><link linkend="gnutls-pubkey-get-pk-ecc-raw">gnutls_pubkey_get_pk_ecc_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-get-pk-ecc-x962"><link linkend="gnutls-pubkey-get-pk-ecc-x962">gnutls_pubkey_get_pk_ecc_x962</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-import-ecc-raw"><link linkend="gnutls-pubkey-import-ecc-raw">gnutls_pubkey_import_ecc_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-import-ecc-x962"><link linkend="gnutls-pubkey-import-ecc-x962">gnutls_pubkey_import_ecc_x962</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-verify-data2"><link linkend="gnutls-pubkey-verify-data2">gnutls_pubkey_verify_data2</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-verify-hash2"><link linkend="gnutls-pubkey-verify-hash2">gnutls_pubkey_verify_hash2</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-record-get-discarded"><link linkend="gnutls-record-get-discarded">gnutls_record_get_discarded</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-record-recv-seq"><link linkend="gnutls-record-recv-seq">gnutls_record_recv_seq</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-session-get-random"><link linkend="gnutls-session-get-random">gnutls_session_get_random</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-store-commitment"><link linkend="gnutls-store-commitment">gnutls_store_commitment</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-store-pubkey"><link linkend="gnutls-store-pubkey">gnutls_store_pubkey</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-transport-set-pull-timeout-function"><link linkend="gnutls-transport-set-pull-timeout-function">gnutls_transport_set_pull_timeout_function</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-verify-stored-pubkey"><link linkend="gnutls-verify-stored-pubkey">gnutls_verify_stored_pubkey</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-get-authority-key-gn-serial"><link linkend="gnutls-x509-crl-get-authority-key-gn-serial">gnutls_x509_crl_get_authority_key_gn_serial</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-list-import"><link linkend="gnutls-x509-crl-list-import">gnutls_x509_crl_list_import</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-list-import2"><link linkend="gnutls-x509-crl-list-import2">gnutls_x509_crl_list_import2</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-get-authority-info-access"><link linkend="gnutls-x509-crt-get-authority-info-access">gnutls_x509_crt_get_authority_info_access</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-get-authority-key-gn-serial"><link linkend="gnutls-x509-crt-get-authority-key-gn-serial">gnutls_x509_crt_get_authority_key_gn_serial</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-list-import2"><link linkend="gnutls-x509-crt-list-import2">gnutls_x509_crt_list_import2</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-set-authority-info-access"><link linkend="gnutls-x509-crt-set-authority-info-access">gnutls_x509_crt_set_authority_info_access</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-dn-oid-name"><link linkend="gnutls-x509-dn-oid-name">gnutls_x509_dn_oid_name</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-privkey-export-ecc-raw"><link linkend="gnutls-x509-privkey-export-ecc-raw">gnutls_x509_privkey_export_ecc_raw</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-privkey-import-ecc-raw"><link linkend="gnutls-x509-privkey-import-ecc-raw">gnutls_x509_privkey_import_ecc_raw</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-add-cas"><link linkend="gnutls-x509-trust-list-add-cas">gnutls_x509_trust_list_add_cas</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-add-crls"><link linkend="gnutls-x509-trust-list-add-crls">gnutls_x509_trust_list_add_crls</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-add-named-crt"><link linkend="gnutls-x509-trust-list-add-named-crt">gnutls_x509_trust_list_add_named_crt</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-deinit"><link linkend="gnutls-x509-trust-list-deinit">gnutls_x509_trust_list_deinit</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-get-issuer"><link linkend="gnutls-x509-trust-list-get-issuer">gnutls_x509_trust_list_get_issuer</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-init"><link linkend="gnutls-x509-trust-list-init">gnutls_x509_trust_list_init</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-verify-crt"><link linkend="gnutls-x509-trust-list-verify-crt">gnutls_x509_trust_list_verify_crt</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-verify-named-crt"><link linkend="gnutls-x509-trust-list-verify-named-crt">gnutls_x509_trust_list_verify_named_crt</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

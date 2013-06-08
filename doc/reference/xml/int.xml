@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-int">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-int.top_of_page">int</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>int</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-int.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="ASN1-SMALL-VALUE-SIZE:CAPS">ASN1_SMALL_VALUE_SIZE</link>
+#define             <link linkend="CONST-1-PARAM:CAPS">CONST_1_PARAM</link>
+#define             <link linkend="CONST-APPLICATION:CAPS">CONST_APPLICATION</link>
+#define             <link linkend="CONST-ASSIGN:CAPS">CONST_ASSIGN</link>
+#define             <link linkend="CONST-DEFAULT:CAPS">CONST_DEFAULT</link>
+#define             <link linkend="CONST-DEFINED-BY:CAPS">CONST_DEFINED_BY</link>
+#define             <link linkend="CONST-DOWN:CAPS">CONST_DOWN</link>
+#define             <link linkend="CONST-EXPLICIT:CAPS">CONST_EXPLICIT</link>
+#define             <link linkend="CONST-FALSE:CAPS">CONST_FALSE</link>
+#define             <link linkend="CONST-GENERALIZED:CAPS">CONST_GENERALIZED</link>
+#define             <link linkend="CONST-IMPLICIT:CAPS">CONST_IMPLICIT</link>
+#define             <link linkend="CONST-LIST:CAPS">CONST_LIST</link>
+#define             <link linkend="CONST-MIN-MAX:CAPS">CONST_MIN_MAX</link>
+#define             <link linkend="CONST-NOT-USED:CAPS">CONST_NOT_USED</link>
+#define             <link linkend="CONST-OPTION:CAPS">CONST_OPTION</link>
+#define             <link linkend="CONST-PRIVATE:CAPS">CONST_PRIVATE</link>
+#define             <link linkend="CONST-RIGHT:CAPS">CONST_RIGHT</link>
+#define             <link linkend="CONST-SET:CAPS">CONST_SET</link>
+#define             <link linkend="CONST-SIZE:CAPS">CONST_SIZE</link>
+#define             <link linkend="CONST-TAG:CAPS">CONST_TAG</link>
+#define             <link linkend="CONST-TRUE:CAPS">CONST_TRUE</link>
+#define             <link linkend="CONST-UNIVERSAL:CAPS">CONST_UNIVERSAL</link>
+#define             <link linkend="CONST-UTC:CAPS">CONST_UTC</link>
+#define             <link linkend="DOWN:CAPS">DOWN</link>
+#define             <link linkend="MAX-LOG-SIZE:CAPS">MAX_LOG_SIZE</link>
+#define             <link linkend="RIGHT:CAPS">RIGHT</link>
+#define             <link linkend="TYPE-ANY:CAPS">TYPE_ANY</link>
+#define             <link linkend="TYPE-BIT-STRING:CAPS">TYPE_BIT_STRING</link>
+#define             <link linkend="TYPE-BOOLEAN:CAPS">TYPE_BOOLEAN</link>
+#define             <link linkend="TYPE-CHOICE:CAPS">TYPE_CHOICE</link>
+#define             <link linkend="TYPE-CONSTANT:CAPS">TYPE_CONSTANT</link>
+#define             <link linkend="TYPE-DEFAULT:CAPS">TYPE_DEFAULT</link>
+#define             <link linkend="TYPE-DEFINITIONS:CAPS">TYPE_DEFINITIONS</link>
+#define             <link linkend="TYPE-ENUMERATED:CAPS">TYPE_ENUMERATED</link>
+#define             <link linkend="TYPE-GENERALSTRING:CAPS">TYPE_GENERALSTRING</link>
+#define             <link linkend="TYPE-IDENTIFIER:CAPS">TYPE_IDENTIFIER</link>
+#define             <link linkend="TYPE-IMPORTS:CAPS">TYPE_IMPORTS</link>
+#define             <link linkend="TYPE-INTEGER:CAPS">TYPE_INTEGER</link>
+#define             <link linkend="TYPE-NULL:CAPS">TYPE_NULL</link>
+#define             <link linkend="TYPE-OBJECT-ID:CAPS">TYPE_OBJECT_ID</link>
+#define             <link linkend="TYPE-OCTET-STRING:CAPS">TYPE_OCTET_STRING</link>
+#define             <link linkend="TYPE-SEQUENCE:CAPS">TYPE_SEQUENCE</link>
+#define             <link linkend="TYPE-SEQUENCE-OF:CAPS">TYPE_SEQUENCE_OF</link>
+#define             <link linkend="TYPE-SET:CAPS">TYPE_SET</link>
+#define             <link linkend="TYPE-SET-OF:CAPS">TYPE_SET_OF</link>
+#define             <link linkend="TYPE-SIZE:CAPS">TYPE_SIZE</link>
+#define             <link linkend="TYPE-TAG:CAPS">TYPE_TAG</link>
+#define             <link linkend="TYPE-TIME:CAPS">TYPE_TIME</link>
+#define             <link linkend="UP:CAPS">UP</link>
+#define             <link linkend="type-field">type_field</link>                          (x)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-int.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-int.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ASN1-SMALL-VALUE-SIZE:CAPS" role="macro">
+<title>ASN1_SMALL_VALUE_SIZE</title>
+<indexterm zone="ASN1-SMALL-VALUE-SIZE:CAPS"><primary>ASN1_SMALL_VALUE_SIZE</primary></indexterm>
+<programlisting>#define ASN1_SMALL_VALUE_SIZE 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-1-PARAM:CAPS" role="macro">
+<title>CONST_1_PARAM</title>
+<indexterm zone="CONST-1-PARAM:CAPS"><primary>CONST_1_PARAM</primary></indexterm>
+<programlisting>#define CONST_1_PARAM     (1&lt;&lt;20)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-APPLICATION:CAPS" role="macro">
+<title>CONST_APPLICATION</title>
+<indexterm zone="CONST-APPLICATION:CAPS"><primary>CONST_APPLICATION</primary></indexterm>
+<programlisting>#define CONST_APPLICATION (1&lt;&lt;10)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-ASSIGN:CAPS" role="macro">
+<title>CONST_ASSIGN</title>
+<indexterm zone="CONST-ASSIGN:CAPS"><primary>CONST_ASSIGN</primary></indexterm>
+<programlisting>#define CONST_ASSIGN      (1&lt;&lt;28)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-DEFAULT:CAPS" role="macro">
+<title>CONST_DEFAULT</title>
+<indexterm zone="CONST-DEFAULT:CAPS"><primary>CONST_DEFAULT</primary></indexterm>
+<programlisting>#define CONST_DEFAULT     (1&lt;&lt;15)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-DEFINED-BY:CAPS" role="macro">
+<title>CONST_DEFINED_BY</title>
+<indexterm zone="CONST-DEFINED-BY:CAPS"><primary>CONST_DEFINED_BY</primary></indexterm>
+<programlisting>#define CONST_DEFINED_BY  (1&lt;&lt;22)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-DOWN:CAPS" role="macro">
+<title>CONST_DOWN</title>
+<indexterm zone="CONST-DOWN:CAPS"><primary>CONST_DOWN</primary></indexterm>
+<programlisting>#define CONST_DOWN        (1&lt;&lt;29)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-EXPLICIT:CAPS" role="macro">
+<title>CONST_EXPLICIT</title>
+<indexterm zone="CONST-EXPLICIT:CAPS"><primary>CONST_EXPLICIT</primary></indexterm>
+<programlisting>#define CONST_EXPLICIT    (1&lt;&lt;11)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-FALSE:CAPS" role="macro">
+<title>CONST_FALSE</title>
+<indexterm zone="CONST-FALSE:CAPS"><primary>CONST_FALSE</primary></indexterm>
+<programlisting>#define CONST_FALSE       (1&lt;&lt;17)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-GENERALIZED:CAPS" role="macro">
+<title>CONST_GENERALIZED</title>
+<indexterm zone="CONST-GENERALIZED:CAPS"><primary>CONST_GENERALIZED</primary></indexterm>
+<programlisting>#define CONST_GENERALIZED (1&lt;&lt;23)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-IMPLICIT:CAPS" role="macro">
+<title>CONST_IMPLICIT</title>
+<indexterm zone="CONST-IMPLICIT:CAPS"><primary>CONST_IMPLICIT</primary></indexterm>
+<programlisting>#define CONST_IMPLICIT    (1&lt;&lt;12)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-LIST:CAPS" role="macro">
+<title>CONST_LIST</title>
+<indexterm zone="CONST-LIST:CAPS"><primary>CONST_LIST</primary></indexterm>
+<programlisting>#define CONST_LIST        (1&lt;&lt;18)&#160;/*  Used with TYPE_INTEGER and TYPE_BIT_STRING  */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-MIN-MAX:CAPS" role="macro">
+<title>CONST_MIN_MAX</title>
+<indexterm zone="CONST-MIN-MAX:CAPS"><primary>CONST_MIN_MAX</primary></indexterm>
+<programlisting>#define CONST_MIN_MAX     (1&lt;&lt;19)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-NOT-USED:CAPS" role="macro">
+<title>CONST_NOT_USED</title>
+<indexterm zone="CONST-NOT-USED:CAPS"><primary>CONST_NOT_USED</primary></indexterm>
+<programlisting>#define CONST_NOT_USED    (1&lt;&lt;26)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-OPTION:CAPS" role="macro">
+<title>CONST_OPTION</title>
+<indexterm zone="CONST-OPTION:CAPS"><primary>CONST_OPTION</primary></indexterm>
+<programlisting>#define CONST_OPTION      (1&lt;&lt;14)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-PRIVATE:CAPS" role="macro">
+<title>CONST_PRIVATE</title>
+<indexterm zone="CONST-PRIVATE:CAPS"><primary>CONST_PRIVATE</primary></indexterm>
+<programlisting>#define CONST_PRIVATE     (1&lt;&lt;9)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-RIGHT:CAPS" role="macro">
+<title>CONST_RIGHT</title>
+<indexterm zone="CONST-RIGHT:CAPS"><primary>CONST_RIGHT</primary></indexterm>
+<programlisting>#define CONST_RIGHT       (1&lt;&lt;30)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-SET:CAPS" role="macro">
+<title>CONST_SET</title>
+<indexterm zone="CONST-SET:CAPS"><primary>CONST_SET</primary></indexterm>
+<programlisting>#define CONST_SET         (1&lt;&lt;27)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-SIZE:CAPS" role="macro">
+<title>CONST_SIZE</title>
+<indexterm zone="CONST-SIZE:CAPS"><primary>CONST_SIZE</primary></indexterm>
+<programlisting>#define CONST_SIZE        (1&lt;&lt;21)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-TAG:CAPS" role="macro">
+<title>CONST_TAG</title>
+<indexterm zone="CONST-TAG:CAPS"><primary>CONST_TAG</primary></indexterm>
+<programlisting>#define CONST_TAG         (1&lt;&lt;13)&#160;/*  Used in ASN.1 assignement  */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-TRUE:CAPS" role="macro">
+<title>CONST_TRUE</title>
+<indexterm zone="CONST-TRUE:CAPS"><primary>CONST_TRUE</primary></indexterm>
+<programlisting>#define CONST_TRUE        (1&lt;&lt;16)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-UNIVERSAL:CAPS" role="macro">
+<title>CONST_UNIVERSAL</title>
+<indexterm zone="CONST-UNIVERSAL:CAPS"><primary>CONST_UNIVERSAL</primary></indexterm>
+<programlisting>#define CONST_UNIVERSAL   (1&lt;&lt;8)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="CONST-UTC:CAPS" role="macro">
+<title>CONST_UTC</title>
+<indexterm zone="CONST-UTC:CAPS"><primary>CONST_UTC</primary></indexterm>
+<programlisting>#define CONST_UTC         (1&lt;&lt;24)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DOWN:CAPS" role="macro">
+<title>DOWN</title>
+<indexterm zone="DOWN:CAPS"><primary>DOWN</primary></indexterm>
+<programlisting>#define DOWN   3
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-LOG-SIZE:CAPS" role="macro">
+<title>MAX_LOG_SIZE</title>
+<indexterm zone="MAX-LOG-SIZE:CAPS"><primary>MAX_LOG_SIZE</primary></indexterm>
+<programlisting>#define MAX_LOG_SIZE 1024&#160;/* maximum number of characters of a log message */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RIGHT:CAPS" role="macro">
+<title>RIGHT</title>
+<indexterm zone="RIGHT:CAPS"><primary>RIGHT</primary></indexterm>
+<programlisting>#define RIGHT  2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-ANY:CAPS" role="macro">
+<title>TYPE_ANY</title>
+<indexterm zone="TYPE-ANY:CAPS"><primary>TYPE_ANY</primary></indexterm>
+<programlisting>#define TYPE_ANY           ASN1_ETYPE_ANY
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-BIT-STRING:CAPS" role="macro">
+<title>TYPE_BIT_STRING</title>
+<indexterm zone="TYPE-BIT-STRING:CAPS"><primary>TYPE_BIT_STRING</primary></indexterm>
+<programlisting>#define TYPE_BIT_STRING    ASN1_ETYPE_BIT_STRING
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-BOOLEAN:CAPS" role="macro">
+<title>TYPE_BOOLEAN</title>
+<indexterm zone="TYPE-BOOLEAN:CAPS"><primary>TYPE_BOOLEAN</primary></indexterm>
+<programlisting>#define TYPE_BOOLEAN       ASN1_ETYPE_BOOLEAN
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-CHOICE:CAPS" role="macro">
+<title>TYPE_CHOICE</title>
+<indexterm zone="TYPE-CHOICE:CAPS"><primary>TYPE_CHOICE</primary></indexterm>
+<programlisting>#define TYPE_CHOICE        ASN1_ETYPE_CHOICE
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-CONSTANT:CAPS" role="macro">
+<title>TYPE_CONSTANT</title>
+<indexterm zone="TYPE-CONSTANT:CAPS"><primary>TYPE_CONSTANT</primary></indexterm>
+<programlisting>#define TYPE_CONSTANT      ASN1_ETYPE_CONSTANT
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-DEFAULT:CAPS" role="macro">
+<title>TYPE_DEFAULT</title>
+<indexterm zone="TYPE-DEFAULT:CAPS"><primary>TYPE_DEFAULT</primary></indexterm>
+<programlisting>#define TYPE_DEFAULT       ASN1_ETYPE_DEFAULT
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-DEFINITIONS:CAPS" role="macro">
+<title>TYPE_DEFINITIONS</title>
+<indexterm zone="TYPE-DEFINITIONS:CAPS"><primary>TYPE_DEFINITIONS</primary></indexterm>
+<programlisting>#define TYPE_DEFINITIONS   ASN1_ETYPE_DEFINITIONS
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-ENUMERATED:CAPS" role="macro">
+<title>TYPE_ENUMERATED</title>
+<indexterm zone="TYPE-ENUMERATED:CAPS"><primary>TYPE_ENUMERATED</primary></indexterm>
+<programlisting>#define TYPE_ENUMERATED    ASN1_ETYPE_ENUMERATED
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-GENERALSTRING:CAPS" role="macro">
+<title>TYPE_GENERALSTRING</title>
+<indexterm zone="TYPE-GENERALSTRING:CAPS"><primary>TYPE_GENERALSTRING</primary></indexterm>
+<programlisting>#define TYPE_GENERALSTRING ASN1_ETYPE_GENERALSTRING
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-IDENTIFIER:CAPS" role="macro">
+<title>TYPE_IDENTIFIER</title>
+<indexterm zone="TYPE-IDENTIFIER:CAPS"><primary>TYPE_IDENTIFIER</primary></indexterm>
+<programlisting>#define TYPE_IDENTIFIER    ASN1_ETYPE_IDENTIFIER
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-IMPORTS:CAPS" role="macro">
+<title>TYPE_IMPORTS</title>
+<indexterm zone="TYPE-IMPORTS:CAPS"><primary>TYPE_IMPORTS</primary></indexterm>
+<programlisting>#define TYPE_IMPORTS       ASN1_ETYPE_IMPORTS
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-INTEGER:CAPS" role="macro">
+<title>TYPE_INTEGER</title>
+<indexterm zone="TYPE-INTEGER:CAPS"><primary>TYPE_INTEGER</primary></indexterm>
+<programlisting>#define TYPE_INTEGER       ASN1_ETYPE_INTEGER
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-NULL:CAPS" role="macro">
+<title>TYPE_NULL</title>
+<indexterm zone="TYPE-NULL:CAPS"><primary>TYPE_NULL</primary></indexterm>
+<programlisting>#define TYPE_NULL          ASN1_ETYPE_NULL
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-OBJECT-ID:CAPS" role="macro">
+<title>TYPE_OBJECT_ID</title>
+<indexterm zone="TYPE-OBJECT-ID:CAPS"><primary>TYPE_OBJECT_ID</primary></indexterm>
+<programlisting>#define TYPE_OBJECT_ID     ASN1_ETYPE_OBJECT_ID
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-OCTET-STRING:CAPS" role="macro">
+<title>TYPE_OCTET_STRING</title>
+<indexterm zone="TYPE-OCTET-STRING:CAPS"><primary>TYPE_OCTET_STRING</primary></indexterm>
+<programlisting>#define TYPE_OCTET_STRING  ASN1_ETYPE_OCTET_STRING
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-SEQUENCE:CAPS" role="macro">
+<title>TYPE_SEQUENCE</title>
+<indexterm zone="TYPE-SEQUENCE:CAPS"><primary>TYPE_SEQUENCE</primary></indexterm>
+<programlisting>#define TYPE_SEQUENCE      ASN1_ETYPE_SEQUENCE
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-SEQUENCE-OF:CAPS" role="macro">
+<title>TYPE_SEQUENCE_OF</title>
+<indexterm zone="TYPE-SEQUENCE-OF:CAPS"><primary>TYPE_SEQUENCE_OF</primary></indexterm>
+<programlisting>#define TYPE_SEQUENCE_OF   ASN1_ETYPE_SEQUENCE_OF
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-SET:CAPS" role="macro">
+<title>TYPE_SET</title>
+<indexterm zone="TYPE-SET:CAPS"><primary>TYPE_SET</primary></indexterm>
+<programlisting>#define TYPE_SET           ASN1_ETYPE_SET
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-SET-OF:CAPS" role="macro">
+<title>TYPE_SET_OF</title>
+<indexterm zone="TYPE-SET-OF:CAPS"><primary>TYPE_SET_OF</primary></indexterm>
+<programlisting>#define TYPE_SET_OF        ASN1_ETYPE_SET_OF
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-SIZE:CAPS" role="macro">
+<title>TYPE_SIZE</title>
+<indexterm zone="TYPE-SIZE:CAPS"><primary>TYPE_SIZE</primary></indexterm>
+<programlisting>#define TYPE_SIZE          ASN1_ETYPE_SIZE
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-TAG:CAPS" role="macro">
+<title>TYPE_TAG</title>
+<indexterm zone="TYPE-TAG:CAPS"><primary>TYPE_TAG</primary></indexterm>
+<programlisting>#define TYPE_TAG           ASN1_ETYPE_TAG
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TYPE-TIME:CAPS" role="macro">
+<title>TYPE_TIME</title>
+<indexterm zone="TYPE-TIME:CAPS"><primary>TYPE_TIME</primary></indexterm>
+<programlisting>#define TYPE_TIME          ASN1_ETYPE_TIME
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="UP:CAPS" role="macro">
+<title>UP</title>
+<indexterm zone="UP:CAPS"><primary>UP</primary></indexterm>
+<programlisting>#define UP     1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="type-field" role="macro">
+<title>type_field()</title>
+<indexterm zone="type-field"><primary>type_field</primary></indexterm>
+<programlisting>#define type_field(x)     (x&amp;0xFF)
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

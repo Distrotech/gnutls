@@ -1,0 +1,753 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-int">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-int.top_of_page">gnutls_int</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_int</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-int.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="AEAD-EXPLICIT-DATA-SIZE:CAPS">AEAD_EXPLICIT_DATA_SIZE</link>
+#define             <link linkend="AEAD-IMPLICIT-DATA-SIZE:CAPS">AEAD_IMPLICIT_DATA_SIZE</link>
+#define             <link linkend="DECR-LEN:CAPS">DECR_LEN</link>                            (len,
+                                                         x)
+#define             <link linkend="DECR-LENGTH-COM:CAPS">DECR_LENGTH_COM</link>                     (len,
+                                                         x,
+                                                         COM)
+#define             <link linkend="DECR-LENGTH-RET:CAPS">DECR_LENGTH_RET</link>                     (len,
+                                                         x,
+                                                         RET)
+#define             <link linkend="DEFAULT-EXPIRE-TIME:CAPS">DEFAULT_EXPIRE_TIME</link>
+#define             <link linkend="DEFAULT-MAX-RECORD-SIZE:CAPS">DEFAULT_MAX_RECORD_SIZE</link>
+#define             <link linkend="DEFAULT-MAX-VERIFY-BITS:CAPS">DEFAULT_MAX_VERIFY_BITS</link>
+#define             <link linkend="DEFAULT-MAX-VERIFY-DEPTH:CAPS">DEFAULT_MAX_VERIFY_DEPTH</link>
+#define             <link linkend="DTLS-DEFAULT-MTU:CAPS">DTLS_DEFAULT_MTU</link>
+#define             <link linkend="DTLS-HANDSHAKE-HEADER-SIZE:CAPS">DTLS_HANDSHAKE_HEADER_SIZE</link>
+#define             <link linkend="DTLS-MAX-COOKIE-SIZE:CAPS">DTLS_MAX_COOKIE_SIZE</link>
+#define             <link linkend="DTLS-RECORD-HEADER-SIZE:CAPS">DTLS_RECORD_HEADER_SIZE</link>
+#define             <link linkend="DTLS-RECORD-WINDOW-SIZE:CAPS">DTLS_RECORD_WINDOW_SIZE</link>
+#define             <link linkend="ENABLE-COMPAT:CAPS">ENABLE_COMPAT</link>                       (x)
+#define             <link linkend="EPOCH-NEXT:CAPS">EPOCH_NEXT</link>
+#define             <link linkend="EPOCH-READ-CURRENT:CAPS">EPOCH_READ_CURRENT</link>
+#define             <link linkend="EPOCH-WRITE-CURRENT:CAPS">EPOCH_WRITE_CURRENT</link>
+#define             <link linkend="EXTRA-COMP-SIZE:CAPS">EXTRA_COMP_SIZE</link>
+#define             <link linkend="GNUTLS-INT-TO-POINTER:CAPS">GNUTLS_INT_TO_POINTER</link>               (_)
+#define             <link linkend="GNUTLS-MASTER-SIZE:CAPS">GNUTLS_MASTER_SIZE</link>
+#define             <link linkend="GNUTLS-PK-ANY:CAPS">GNUTLS_PK_ANY</link>
+#define             <link linkend="GNUTLS-PK-NONE:CAPS">GNUTLS_PK_NONE</link>
+#define             <link linkend="GNUTLS-POINTER-TO-INT:CAPS">GNUTLS_POINTER_TO_INT</link>               (_)
+#define             <link linkend="GNUTLS-RANDOM-SIZE:CAPS">GNUTLS_RANDOM_SIZE</link>
+#define             <link linkend="HANDSHAKE-HEADER-SIZE:CAPS">HANDSHAKE_HEADER_SIZE</link>               (session)
+#define             <link linkend="HAVE-SSIZE-T:CAPS">HAVE_SSIZE_T</link>
+#define             <link linkend="IS-DTLS:CAPS">IS_DTLS</link>                             (session)
+#define             <link linkend="MAX-ALGOS:CAPS">MAX_ALGOS</link>
+#define             <link linkend="MAX-CIPHER-BLOCK-SIZE:CAPS">MAX_CIPHER_BLOCK_SIZE</link>
+#define             <link linkend="MAX-CIPHER-KEY-SIZE:CAPS">MAX_CIPHER_KEY_SIZE</link>
+#define             <link linkend="MAX-EPOCH-INDEX:CAPS">MAX_EPOCH_INDEX</link>
+#define             <link linkend="MAX-EXT-TYPES:CAPS">MAX_EXT_TYPES</link>
+#define             <link linkend="MAX-HANDSHAKE-HEADER-SIZE:CAPS">MAX_HANDSHAKE_HEADER_SIZE</link>
+#define             <link linkend="MAX-HANDSHAKE-HELLO-VERIFY-REQUESTS:CAPS">MAX_HANDSHAKE_HELLO_VERIFY_REQUESTS</link>
+#define             <link linkend="MAX-HANDSHAKE-MSGS:CAPS">MAX_HANDSHAKE_MSGS</link>
+#define             <link linkend="MAX-HANDSHAKE-PACKET-SIZE:CAPS">MAX_HANDSHAKE_PACKET_SIZE</link>
+#define             <link linkend="MAX-HASH-SIZE:CAPS">MAX_HASH_SIZE</link>
+#define             <link linkend="MAX-PAD-SIZE:CAPS">MAX_PAD_SIZE</link>
+#define             <link linkend="MAX-RECORD-HEADER-SIZE:CAPS">MAX_RECORD_HEADER_SIZE</link>
+#define             <link linkend="MAX-RECORD-OVERHEAD:CAPS">MAX_RECORD_OVERHEAD</link>
+#define             <link linkend="MAX-RECORD-RECV-SIZE:CAPS">MAX_RECORD_RECV_SIZE</link>                (session)
+#define             <link linkend="MAX-RECORD-SEND-SIZE:CAPS">MAX_RECORD_SEND_SIZE</link>                (session)
+#define             <link linkend="MAX-RECV-SIZE:CAPS">MAX_RECV_SIZE</link>                       (session)
+#define             <link linkend="MAX-SERVER-NAME-SIZE:CAPS">MAX_SERVER_NAME_SIZE</link>
+#define             <link linkend="MAX-SIGNATURE-ALGORITHMS:CAPS">MAX_SIGNATURE_ALGORITHMS</link>
+#define             <link linkend="MAX-SIGN-ALGO-SIZE:CAPS">MAX_SIGN_ALGO_SIZE</link>
+#define             <link linkend="MAX-USERNAME-SIZE:CAPS">MAX_USERNAME_SIZE</link>
+#define             <link linkend="MAX-VERIFY-DATA-SIZE:CAPS">MAX_VERIFY_DATA_SIZE</link>
+#define             <link linkend="MAX-VERIFY-DEPTH:CAPS">MAX_VERIFY_DEPTH</link>
+#define             <link linkend="MEMSUB:CAPS">MEMSUB</link>                              (x,
+                                                         y)
+#define             <link linkend="RECORD-HEADER-SIZE:CAPS">RECORD_HEADER_SIZE</link>                  (session)
+#define             <link linkend="RESUME-FALSE:CAPS">RESUME_FALSE</link>
+#define             <link linkend="RESUME-TRUE:CAPS">RESUME_TRUE</link>
+#define             <link linkend="SESSION-TICKET-IV-SIZE:CAPS">SESSION_TICKET_IV_SIZE</link>
+#define             <link linkend="SESSION-TICKET-KEY-NAME-SIZE:CAPS">SESSION_TICKET_KEY_NAME_SIZE</link>
+#define             <link linkend="SESSION-TICKET-KEY-SIZE:CAPS">SESSION_TICKET_KEY_SIZE</link>
+#define             <link linkend="SESSION-TICKET-MAC-SECRET-SIZE:CAPS">SESSION_TICKET_MAC_SECRET_SIZE</link>
+#define             <link linkend="TLS-HANDSHAKE-HEADER-SIZE:CAPS">TLS_HANDSHAKE_HEADER_SIZE</link>
+#define             <link linkend="TLS-MAX-SESSION-ID-SIZE:CAPS">TLS_MAX_SESSION_ID_SIZE</link>
+#define             <link linkend="TLS-RECORD-HEADER-SIZE:CAPS">TLS_RECORD_HEADER_SIZE</link>
+enum                <link linkend="cipher-type-t">cipher_type_t</link>;
+enum                <link linkend="content-type-t">content_type_t</link>;
+enum                <link linkend="extensions-t">extensions_t</link>;
+enum                <link linkend="gnutls-ext-parse-type-t">gnutls_ext_parse_type_t</link>;
+typedef             <link linkend="gnutls-key-st">gnutls_key_st</link>;
+<link linkend="gnutls-protocol-t"><returnvalue>gnutls_protocol_t</returnvalue></link>   <link linkend="gnutls-protocol-get-version">gnutls_protocol_get_version</link>         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);
+enum                <link linkend="handshake-state-t">handshake_state_t</link>;
+enum                <link linkend="heartbeat-state-t">heartbeat_state_t</link>;
+#define             <link linkend="likely">likely</link>                              (x)
+#define             <link linkend="memxor">memxor</link>
+typedef             <link linkend="record-parameters-st">record_parameters_st</link>;
+typedef             <link linkend="record-state-st">record_state_st</link>;
+enum                <link linkend="recv-state-t">recv_state_t</link>;
+enum                <link linkend="safe-renegotiation-t">safe_renegotiation_t</link>;
+#define             <link linkend="set-adv-version">set_adv_version</link>                     (session,
+                                                         major,
+                                                         minor)
+typedef             <link linkend="ssize-t">ssize_t</link>;
+enum                <link linkend="transport-t">transport_t</link>;
+#define             <link linkend="unlikely">unlikely</link>                            (x)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-int.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-int.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="AEAD-EXPLICIT-DATA-SIZE:CAPS" role="macro">
+<title>AEAD_EXPLICIT_DATA_SIZE</title>
+<indexterm zone="AEAD-EXPLICIT-DATA-SIZE:CAPS"><primary>AEAD_EXPLICIT_DATA_SIZE</primary></indexterm>
+<programlisting>#define AEAD_EXPLICIT_DATA_SIZE 8
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="AEAD-IMPLICIT-DATA-SIZE:CAPS" role="macro">
+<title>AEAD_IMPLICIT_DATA_SIZE</title>
+<indexterm zone="AEAD-IMPLICIT-DATA-SIZE:CAPS"><primary>AEAD_IMPLICIT_DATA_SIZE</primary></indexterm>
+<programlisting>#define AEAD_IMPLICIT_DATA_SIZE 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DECR-LEN:CAPS" role="macro">
+<title>DECR_LEN()</title>
+<indexterm zone="DECR-LEN:CAPS"><primary>DECR_LEN</primary></indexterm>
+<programlisting>#define DECR_LEN(len, x) do { len-=x; if (len&lt;0) {gnutls_assert(); return GNUTLS_E_UNEXPECTED_PACKET_LENGTH;} } while (0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DECR-LENGTH-COM:CAPS" role="macro">
+<title>DECR_LENGTH_COM()</title>
+<indexterm zone="DECR-LENGTH-COM:CAPS"><primary>DECR_LENGTH_COM</primary></indexterm>
+<programlisting>#define DECR_LENGTH_COM(len, x, COM) do { len-=x; if (len&lt;0) {gnutls_assert(); COM;} } while (0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DECR-LENGTH-RET:CAPS" role="macro">
+<title>DECR_LENGTH_RET()</title>
+<indexterm zone="DECR-LENGTH-RET:CAPS"><primary>DECR_LENGTH_RET</primary></indexterm>
+<programlisting>#define DECR_LENGTH_RET(len, x, RET) do { len-=x; if (len&lt;0) {gnutls_assert(); return RET;} } while (0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DEFAULT-EXPIRE-TIME:CAPS" role="macro">
+<title>DEFAULT_EXPIRE_TIME</title>
+<indexterm zone="DEFAULT-EXPIRE-TIME:CAPS"><primary>DEFAULT_EXPIRE_TIME</primary></indexterm>
+<programlisting>#define DEFAULT_EXPIRE_TIME 3600
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DEFAULT-MAX-RECORD-SIZE:CAPS" role="macro">
+<title>DEFAULT_MAX_RECORD_SIZE</title>
+<indexterm zone="DEFAULT-MAX-RECORD-SIZE:CAPS"><primary>DEFAULT_MAX_RECORD_SIZE</primary></indexterm>
+<programlisting>#define DEFAULT_MAX_RECORD_SIZE 16384
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DEFAULT-MAX-VERIFY-BITS:CAPS" role="macro">
+<title>DEFAULT_MAX_VERIFY_BITS</title>
+<indexterm zone="DEFAULT-MAX-VERIFY-BITS:CAPS"><primary>DEFAULT_MAX_VERIFY_BITS</primary></indexterm>
+<programlisting>#define DEFAULT_MAX_VERIFY_BITS 16*1024
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DEFAULT-MAX-VERIFY-DEPTH:CAPS" role="macro">
+<title>DEFAULT_MAX_VERIFY_DEPTH</title>
+<indexterm zone="DEFAULT-MAX-VERIFY-DEPTH:CAPS"><primary>DEFAULT_MAX_VERIFY_DEPTH</primary></indexterm>
+<programlisting>#define DEFAULT_MAX_VERIFY_DEPTH 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DTLS-DEFAULT-MTU:CAPS" role="macro">
+<title>DTLS_DEFAULT_MTU</title>
+<indexterm zone="DTLS-DEFAULT-MTU:CAPS"><primary>DTLS_DEFAULT_MTU</primary></indexterm>
+<programlisting>#define DTLS_DEFAULT_MTU 1200
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DTLS-HANDSHAKE-HEADER-SIZE:CAPS" role="macro">
+<title>DTLS_HANDSHAKE_HEADER_SIZE</title>
+<indexterm zone="DTLS-HANDSHAKE-HEADER-SIZE:CAPS"><primary>DTLS_HANDSHAKE_HEADER_SIZE</primary></indexterm>
+<programlisting>#define DTLS_HANDSHAKE_HEADER_SIZE (TLS_HANDSHAKE_HEADER_SIZE+8)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DTLS-MAX-COOKIE-SIZE:CAPS" role="macro">
+<title>DTLS_MAX_COOKIE_SIZE</title>
+<indexterm zone="DTLS-MAX-COOKIE-SIZE:CAPS"><primary>DTLS_MAX_COOKIE_SIZE</primary></indexterm>
+<programlisting>#define DTLS_MAX_COOKIE_SIZE 32
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DTLS-RECORD-HEADER-SIZE:CAPS" role="macro">
+<title>DTLS_RECORD_HEADER_SIZE</title>
+<indexterm zone="DTLS-RECORD-HEADER-SIZE:CAPS"><primary>DTLS_RECORD_HEADER_SIZE</primary></indexterm>
+<programlisting>#define DTLS_RECORD_HEADER_SIZE (TLS_RECORD_HEADER_SIZE+8)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DTLS-RECORD-WINDOW-SIZE:CAPS" role="macro">
+<title>DTLS_RECORD_WINDOW_SIZE</title>
+<indexterm zone="DTLS-RECORD-WINDOW-SIZE:CAPS"><primary>DTLS_RECORD_WINDOW_SIZE</primary></indexterm>
+<programlisting>#define DTLS_RECORD_WINDOW_SIZE 64
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ENABLE-COMPAT:CAPS" role="macro">
+<title>ENABLE_COMPAT()</title>
+<indexterm zone="ENABLE-COMPAT:CAPS"><primary>ENABLE_COMPAT</primary></indexterm>
+<programlisting>#define             ENABLE_COMPAT(x)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="EPOCH-NEXT:CAPS" role="macro">
+<title>EPOCH_NEXT</title>
+<indexterm zone="EPOCH-NEXT:CAPS"><primary>EPOCH_NEXT</primary></indexterm>
+<programlisting>#define EPOCH_NEXT          70002
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="EPOCH-READ-CURRENT:CAPS" role="macro">
+<title>EPOCH_READ_CURRENT</title>
+<indexterm zone="EPOCH-READ-CURRENT:CAPS"><primary>EPOCH_READ_CURRENT</primary></indexterm>
+<programlisting>#define EPOCH_READ_CURRENT  70000
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="EPOCH-WRITE-CURRENT:CAPS" role="macro">
+<title>EPOCH_WRITE_CURRENT</title>
+<indexterm zone="EPOCH-WRITE-CURRENT:CAPS"><primary>EPOCH_WRITE_CURRENT</primary></indexterm>
+<programlisting>#define EPOCH_WRITE_CURRENT 70001
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="EXTRA-COMP-SIZE:CAPS" role="macro">
+<title>EXTRA_COMP_SIZE</title>
+<indexterm zone="EXTRA-COMP-SIZE:CAPS"><primary>EXTRA_COMP_SIZE</primary></indexterm>
+<programlisting>#define EXTRA_COMP_SIZE 2048
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-INT-TO-POINTER:CAPS" role="macro">
+<title>GNUTLS_INT_TO_POINTER()</title>
+<indexterm zone="GNUTLS-INT-TO-POINTER:CAPS"><primary>GNUTLS_INT_TO_POINTER</primary></indexterm>
+<programlisting>#define GNUTLS_INT_TO_POINTER(_) ((void*) GNUTLS_POINTER_TO_INT_CAST (_))
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-MASTER-SIZE:CAPS" role="macro">
+<title>GNUTLS_MASTER_SIZE</title>
+<indexterm zone="GNUTLS-MASTER-SIZE:CAPS"><primary>GNUTLS_MASTER_SIZE</primary></indexterm>
+<programlisting>#define GNUTLS_MASTER_SIZE 48
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-PK-ANY:CAPS" role="macro">
+<title>GNUTLS_PK_ANY</title>
+<indexterm zone="GNUTLS-PK-ANY:CAPS"><primary>GNUTLS_PK_ANY</primary></indexterm>
+<programlisting>#define GNUTLS_PK_ANY (gnutls_pk_algorithm_t)-1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-PK-NONE:CAPS" role="macro">
+<title>GNUTLS_PK_NONE</title>
+<indexterm zone="GNUTLS-PK-NONE:CAPS"><primary>GNUTLS_PK_NONE</primary></indexterm>
+<programlisting>#define GNUTLS_PK_NONE (gnutls_pk_algorithm_t)-2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-POINTER-TO-INT:CAPS" role="macro">
+<title>GNUTLS_POINTER_TO_INT()</title>
+<indexterm zone="GNUTLS-POINTER-TO-INT:CAPS"><primary>GNUTLS_POINTER_TO_INT</primary></indexterm>
+<programlisting>#define GNUTLS_POINTER_TO_INT(_) ((int) GNUTLS_POINTER_TO_INT_CAST (_))
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-RANDOM-SIZE:CAPS" role="macro">
+<title>GNUTLS_RANDOM_SIZE</title>
+<indexterm zone="GNUTLS-RANDOM-SIZE:CAPS"><primary>GNUTLS_RANDOM_SIZE</primary></indexterm>
+<programlisting>#define GNUTLS_RANDOM_SIZE 32
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HANDSHAKE-HEADER-SIZE:CAPS" role="macro">
+<title>HANDSHAKE_HEADER_SIZE()</title>
+<indexterm zone="HANDSHAKE-HEADER-SIZE:CAPS"><primary>HANDSHAKE_HEADER_SIZE</primary></indexterm>
+<programlisting>#define HANDSHAKE_HEADER_SIZE(session) (IS_DTLS(session) ? DTLS_HANDSHAKE_HEADER_SIZE : TLS_HANDSHAKE_HEADER_SIZE)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="HAVE-SSIZE-T:CAPS" role="macro">
+<title>HAVE_SSIZE_T</title>
+<indexterm zone="HAVE-SSIZE-T:CAPS"><primary>HAVE_SSIZE_T</primary></indexterm>
+<programlisting>#define             HAVE_SSIZE_T</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="IS-DTLS:CAPS" role="macro">
+<title>IS_DTLS()</title>
+<indexterm zone="IS-DTLS:CAPS"><primary>IS_DTLS</primary></indexterm>
+<programlisting>#define IS_DTLS(session) (session-&gt;internals.transport == GNUTLS_DGRAM)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-ALGOS:CAPS" role="macro">
+<title>MAX_ALGOS</title>
+<indexterm zone="MAX-ALGOS:CAPS"><primary>MAX_ALGOS</primary></indexterm>
+<programlisting>#define MAX_ALGOS GNUTLS_MAX_ALGORITHM_NUM
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-CIPHER-BLOCK-SIZE:CAPS" role="macro">
+<title>MAX_CIPHER_BLOCK_SIZE</title>
+<indexterm zone="MAX-CIPHER-BLOCK-SIZE:CAPS"><primary>MAX_CIPHER_BLOCK_SIZE</primary></indexterm>
+<programlisting>#define MAX_CIPHER_BLOCK_SIZE 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-CIPHER-KEY-SIZE:CAPS" role="macro">
+<title>MAX_CIPHER_KEY_SIZE</title>
+<indexterm zone="MAX-CIPHER-KEY-SIZE:CAPS"><primary>MAX_CIPHER_KEY_SIZE</primary></indexterm>
+<programlisting>#define MAX_CIPHER_KEY_SIZE 32
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-EPOCH-INDEX:CAPS" role="macro">
+<title>MAX_EPOCH_INDEX</title>
+<indexterm zone="MAX-EPOCH-INDEX:CAPS"><primary>MAX_EPOCH_INDEX</primary></indexterm>
+<programlisting>#define MAX_EPOCH_INDEX 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-EXT-TYPES:CAPS" role="macro">
+<title>MAX_EXT_TYPES</title>
+<indexterm zone="MAX-EXT-TYPES:CAPS"><primary>MAX_EXT_TYPES</primary></indexterm>
+<programlisting>#define MAX_EXT_TYPES 32
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-HANDSHAKE-HEADER-SIZE:CAPS" role="macro">
+<title>MAX_HANDSHAKE_HEADER_SIZE</title>
+<indexterm zone="MAX-HANDSHAKE-HEADER-SIZE:CAPS"><primary>MAX_HANDSHAKE_HEADER_SIZE</primary></indexterm>
+<programlisting>#define MAX_HANDSHAKE_HEADER_SIZE DTLS_HANDSHAKE_HEADER_SIZE
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-HANDSHAKE-HELLO-VERIFY-REQUESTS:CAPS" role="macro">
+<title>MAX_HANDSHAKE_HELLO_VERIFY_REQUESTS</title>
+<indexterm zone="MAX-HANDSHAKE-HELLO-VERIFY-REQUESTS:CAPS"><primary>MAX_HANDSHAKE_HELLO_VERIFY_REQUESTS</primary></indexterm>
+<programlisting>#define MAX_HANDSHAKE_HELLO_VERIFY_REQUESTS 5
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-HANDSHAKE-MSGS:CAPS" role="macro">
+<title>MAX_HANDSHAKE_MSGS</title>
+<indexterm zone="MAX-HANDSHAKE-MSGS:CAPS"><primary>MAX_HANDSHAKE_MSGS</primary></indexterm>
+<programlisting>#define MAX_HANDSHAKE_MSGS 6
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-HANDSHAKE-PACKET-SIZE:CAPS" role="macro">
+<title>MAX_HANDSHAKE_PACKET_SIZE</title>
+<indexterm zone="MAX-HANDSHAKE-PACKET-SIZE:CAPS"><primary>MAX_HANDSHAKE_PACKET_SIZE</primary></indexterm>
+<programlisting>#define MAX_HANDSHAKE_PACKET_SIZE 48*1024
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-HASH-SIZE:CAPS" role="macro">
+<title>MAX_HASH_SIZE</title>
+<indexterm zone="MAX-HASH-SIZE:CAPS"><primary>MAX_HASH_SIZE</primary></indexterm>
+<programlisting>#define MAX_HASH_SIZE 64
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-PAD-SIZE:CAPS" role="macro">
+<title>MAX_PAD_SIZE</title>
+<indexterm zone="MAX-PAD-SIZE:CAPS"><primary>MAX_PAD_SIZE</primary></indexterm>
+<programlisting>#define MAX_PAD_SIZE 255
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-RECORD-HEADER-SIZE:CAPS" role="macro">
+<title>MAX_RECORD_HEADER_SIZE</title>
+<indexterm zone="MAX-RECORD-HEADER-SIZE:CAPS"><primary>MAX_RECORD_HEADER_SIZE</primary></indexterm>
+<programlisting>#define MAX_RECORD_HEADER_SIZE DTLS_RECORD_HEADER_SIZE
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-RECORD-OVERHEAD:CAPS" role="macro">
+<title>MAX_RECORD_OVERHEAD</title>
+<indexterm zone="MAX-RECORD-OVERHEAD:CAPS"><primary>MAX_RECORD_OVERHEAD</primary></indexterm>
+<programlisting>#define MAX_RECORD_OVERHEAD (MAX_CIPHER_BLOCK_SIZE/*iv*/+MAX_PAD_SIZE+EXTRA_COMP_SIZE+MAX_HASH_SIZE/*MAC*/)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-RECORD-RECV-SIZE:CAPS" role="macro">
+<title>MAX_RECORD_RECV_SIZE()</title>
+<indexterm zone="MAX-RECORD-RECV-SIZE:CAPS"><primary>MAX_RECORD_RECV_SIZE</primary></indexterm>
+<programlisting>#define MAX_RECORD_RECV_SIZE(session) ((size_t)session-&gt;security_parameters.max_record_recv_size)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-RECORD-SEND-SIZE:CAPS" role="macro">
+<title>MAX_RECORD_SEND_SIZE()</title>
+<indexterm zone="MAX-RECORD-SEND-SIZE:CAPS"><primary>MAX_RECORD_SEND_SIZE</primary></indexterm>
+<programlisting>#define MAX_RECORD_SEND_SIZE(session) (IS_DTLS(session)?((size_t)gnutls_dtls_get_data_mtu(session)):(size_t)session-&gt;security_parameters.max_record_send_size)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-RECV-SIZE:CAPS" role="macro">
+<title>MAX_RECV_SIZE()</title>
+<indexterm zone="MAX-RECV-SIZE:CAPS"><primary>MAX_RECV_SIZE</primary></indexterm>
+<programlisting>#define MAX_RECV_SIZE(session) (MAX_RECORD_OVERHEAD+MAX_RECORD_RECV_SIZE(session)+RECORD_HEADER_SIZE(session))
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-SERVER-NAME-SIZE:CAPS" role="macro">
+<title>MAX_SERVER_NAME_SIZE</title>
+<indexterm zone="MAX-SERVER-NAME-SIZE:CAPS"><primary>MAX_SERVER_NAME_SIZE</primary></indexterm>
+<programlisting>#define MAX_SERVER_NAME_SIZE 128
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-SIGNATURE-ALGORITHMS:CAPS" role="macro">
+<title>MAX_SIGNATURE_ALGORITHMS</title>
+<indexterm zone="MAX-SIGNATURE-ALGORITHMS:CAPS"><primary>MAX_SIGNATURE_ALGORITHMS</primary></indexterm>
+<programlisting>#define MAX_SIGNATURE_ALGORITHMS 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-SIGN-ALGO-SIZE:CAPS" role="macro">
+<title>MAX_SIGN_ALGO_SIZE</title>
+<indexterm zone="MAX-SIGN-ALGO-SIZE:CAPS"><primary>MAX_SIGN_ALGO_SIZE</primary></indexterm>
+<programlisting>#define MAX_SIGN_ALGO_SIZE (2 + MAX_SIGNATURE_ALGORITHMS * 2)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-USERNAME-SIZE:CAPS" role="macro">
+<title>MAX_USERNAME_SIZE</title>
+<indexterm zone="MAX-USERNAME-SIZE:CAPS"><primary>MAX_USERNAME_SIZE</primary></indexterm>
+<programlisting>#define MAX_USERNAME_SIZE 128
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-VERIFY-DATA-SIZE:CAPS" role="macro">
+<title>MAX_VERIFY_DATA_SIZE</title>
+<indexterm zone="MAX-VERIFY-DATA-SIZE:CAPS"><primary>MAX_VERIFY_DATA_SIZE</primary></indexterm>
+<programlisting>#define MAX_VERIFY_DATA_SIZE 36 /* in SSL 3.0, 12 in TLS 1.0 */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-VERIFY-DEPTH:CAPS" role="macro">
+<title>MAX_VERIFY_DEPTH</title>
+<indexterm zone="MAX-VERIFY-DEPTH:CAPS"><primary>MAX_VERIFY_DEPTH</primary></indexterm>
+<programlisting>#define MAX_VERIFY_DEPTH 4096
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MEMSUB:CAPS" role="macro">
+<title>MEMSUB()</title>
+<indexterm zone="MEMSUB:CAPS"><primary>MEMSUB</primary></indexterm>
+<programlisting>#define MEMSUB(x,y) ((ssize_t)((ptrdiff_t)x-(ptrdiff_t)y))
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RECORD-HEADER-SIZE:CAPS" role="macro">
+<title>RECORD_HEADER_SIZE()</title>
+<indexterm zone="RECORD-HEADER-SIZE:CAPS"><primary>RECORD_HEADER_SIZE</primary></indexterm>
+<programlisting>#define RECORD_HEADER_SIZE(session) (IS_DTLS(session) ? DTLS_RECORD_HEADER_SIZE : TLS_RECORD_HEADER_SIZE)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RESUME-FALSE:CAPS" role="macro">
+<title>RESUME_FALSE</title>
+<indexterm zone="RESUME-FALSE:CAPS"><primary>RESUME_FALSE</primary></indexterm>
+<programlisting>#define RESUME_FALSE 0
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RESUME-TRUE:CAPS" role="macro">
+<title>RESUME_TRUE</title>
+<indexterm zone="RESUME-TRUE:CAPS"><primary>RESUME_TRUE</primary></indexterm>
+<programlisting>#define RESUME_TRUE 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SESSION-TICKET-IV-SIZE:CAPS" role="macro">
+<title>SESSION_TICKET_IV_SIZE</title>
+<indexterm zone="SESSION-TICKET-IV-SIZE:CAPS"><primary>SESSION_TICKET_IV_SIZE</primary></indexterm>
+<programlisting>#define SESSION_TICKET_IV_SIZE 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SESSION-TICKET-KEY-NAME-SIZE:CAPS" role="macro">
+<title>SESSION_TICKET_KEY_NAME_SIZE</title>
+<indexterm zone="SESSION-TICKET-KEY-NAME-SIZE:CAPS"><primary>SESSION_TICKET_KEY_NAME_SIZE</primary></indexterm>
+<programlisting>#define SESSION_TICKET_KEY_NAME_SIZE 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SESSION-TICKET-KEY-SIZE:CAPS" role="macro">
+<title>SESSION_TICKET_KEY_SIZE</title>
+<indexterm zone="SESSION-TICKET-KEY-SIZE:CAPS"><primary>SESSION_TICKET_KEY_SIZE</primary></indexterm>
+<programlisting>#define SESSION_TICKET_KEY_SIZE 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SESSION-TICKET-MAC-SECRET-SIZE:CAPS" role="macro">
+<title>SESSION_TICKET_MAC_SECRET_SIZE</title>
+<indexterm zone="SESSION-TICKET-MAC-SECRET-SIZE:CAPS"><primary>SESSION_TICKET_MAC_SECRET_SIZE</primary></indexterm>
+<programlisting>#define SESSION_TICKET_MAC_SECRET_SIZE 32
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TLS-HANDSHAKE-HEADER-SIZE:CAPS" role="macro">
+<title>TLS_HANDSHAKE_HEADER_SIZE</title>
+<indexterm zone="TLS-HANDSHAKE-HEADER-SIZE:CAPS"><primary>TLS_HANDSHAKE_HEADER_SIZE</primary></indexterm>
+<programlisting>#define TLS_HANDSHAKE_HEADER_SIZE 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TLS-MAX-SESSION-ID-SIZE:CAPS" role="macro">
+<title>TLS_MAX_SESSION_ID_SIZE</title>
+<indexterm zone="TLS-MAX-SESSION-ID-SIZE:CAPS"><primary>TLS_MAX_SESSION_ID_SIZE</primary></indexterm>
+<programlisting>#define TLS_MAX_SESSION_ID_SIZE 32
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="TLS-RECORD-HEADER-SIZE:CAPS" role="macro">
+<title>TLS_RECORD_HEADER_SIZE</title>
+<indexterm zone="TLS-RECORD-HEADER-SIZE:CAPS"><primary>TLS_RECORD_HEADER_SIZE</primary></indexterm>
+<programlisting>#define TLS_RECORD_HEADER_SIZE 5
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cipher-type-t" role="enum">
+<title>enum cipher_type_t</title>
+<indexterm zone="cipher-type-t"><primary>cipher_type_t</primary></indexterm>
+<programlisting>typedef enum {
+ CIPHER_STREAM, CIPHER_BLOCK 
+} cipher_type_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="content-type-t" role="enum">
+<title>enum content_type_t</title>
+<indexterm zone="content-type-t"><primary>content_type_t</primary></indexterm>
+<programlisting>typedef enum {
+  GNUTLS_CHANGE_CIPHER_SPEC = 20, GNUTLS_ALERT,
+  GNUTLS_HANDSHAKE, GNUTLS_APPLICATION_DATA,
+  GNUTLS_HEARTBEAT
+} content_type_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="extensions-t" role="enum">
+<title>enum extensions_t</title>
+<indexterm zone="extensions-t"><primary>extensions_t</primary></indexterm>
+<programlisting>typedef enum {
+  GNUTLS_EXTENSION_SERVER_NAME = 0,
+  GNUTLS_EXTENSION_MAX_RECORD_SIZE = 1,
+  GNUTLS_EXTENSION_STATUS_REQUEST = 5,
+  GNUTLS_EXTENSION_CERT_TYPE = 9,
+  GNUTLS_EXTENSION_SUPPORTED_ECC = 10,
+  GNUTLS_EXTENSION_SUPPORTED_ECC_PF = 11,
+  GNUTLS_EXTENSION_SRP = 12,
+  GNUTLS_EXTENSION_SIGNATURE_ALGORITHMS = 13,
+  GNUTLS_EXTENSION_SRTP = 14,
+  GNUTLS_EXTENSION_HEARTBEAT = 15,
+  GNUTLS_EXTENSION_SESSION_TICKET = 35,
+  GNUTLS_EXTENSION_SAFE_RENEGOTIATION = 65281   /* aka: 0xff01 */
+} extensions_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ext-parse-type-t" role="enum">
+<title>enum gnutls_ext_parse_type_t</title>
+<indexterm zone="gnutls-ext-parse-type-t"><primary>gnutls_ext_parse_type_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_EXT_ANY = 0,
+    GNUTLS_EXT_APPLICATION = 1,
+    GNUTLS_EXT_TLS = 2,
+    GNUTLS_EXT_MANDATORY = 3,
+    GNUTLS_EXT_NONE = 4
+} gnutls_ext_parse_type_t;
+</programlisting>
+<para>
+Enumeration of different TLS extension types.  This flag
+indicates for an extension whether it is useful to application
+level or TLS level only.  This is (only) used to parse the
+application level extensions before the "client_hello" callback
+is called.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-EXT-ANY:CAPS" role="constant">
+<term><literal>GNUTLS_EXT_ANY</literal></term>
+<listitem><simpara>Any extension type.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-EXT-APPLICATION:CAPS" role="constant">
+<term><literal>GNUTLS_EXT_APPLICATION</literal></term>
+<listitem><simpara>Application extension.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-EXT-TLS:CAPS" role="constant">
+<term><literal>GNUTLS_EXT_TLS</literal></term>
+<listitem><simpara>TLS-internal extension.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-EXT-MANDATORY:CAPS" role="constant">
+<term><literal>GNUTLS_EXT_MANDATORY</literal></term>
+<listitem><simpara>Extension parsed even if resuming (or extensions are disabled).
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-EXT-NONE:CAPS" role="constant">
+<term><literal>GNUTLS_EXT_NONE</literal></term>
+<listitem><simpara>Never parsed
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-key-st" role="typedef">
+<title>gnutls_key_st</title>
+<indexterm zone="gnutls-key-st"><primary>gnutls_key_st</primary></indexterm>
+<programlisting>typedef struct gnutls_key_st gnutls_key_st;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-protocol-get-version" role="function">
+<title>gnutls_protocol_get_version ()</title>
+<indexterm zone="gnutls-protocol-get-version"><primary>gnutls_protocol_get_version</primary></indexterm>
+<programlisting><link linkend="gnutls-protocol-t"><returnvalue>gnutls_protocol_t</returnvalue></link>   gnutls_protocol_get_version         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);</programlisting>
+<para>
+Get TLS version, a <link linkend="gnutls-protocol-t"><type>gnutls_protocol_t</type></link> value.
+</para></refsect2>
+<refsect2 id="handshake-state-t" role="enum">
+<title>enum handshake_state_t</title>
+<indexterm zone="handshake-state-t"><primary>handshake_state_t</primary></indexterm>
+<programlisting>typedef enum {
+ STATE0 = 0, STATE1, STATE2,
+  STATE3, STATE4, STATE5, STATE6, STATE7, STATE8, 
+  STATE9, STATE10, STATE11, STATE12, STATE13, STATE14,
+  STATE15, STATE16, STATE17,
+  STATE20 = 20, STATE21, STATE22,
+  STATE30 = 30, STATE31, STATE40 = 40, STATE41, STATE50 = 50,
+  STATE60 = 60, STATE61, STATE62, STATE70, STATE71
+} handshake_state_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="heartbeat-state-t" role="enum">
+<title>enum heartbeat_state_t</title>
+<indexterm zone="heartbeat-state-t"><primary>heartbeat_state_t</primary></indexterm>
+<programlisting>typedef enum {
+  SHB_SEND1 = 0, 
+  SHB_SEND2, 
+  SHB_RECV, 
+} heartbeat_state_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="likely" role="macro">
+<title>likely()</title>
+<indexterm zone="likely"><primary>likely</primary></indexterm>
+<programlisting>#  define likely(x)      __builtin_expect((x), 1)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="memxor" role="macro">
+<title>memxor</title>
+<indexterm zone="memxor"><primary>memxor</primary></indexterm>
+<programlisting># define memxor gl_memxor
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="record-parameters-st" role="typedef">
+<title>record_parameters_st</title>
+<indexterm zone="record-parameters-st"><primary>record_parameters_st</primary></indexterm>
+<programlisting>typedef struct record_parameters_st record_parameters_st;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="record-state-st" role="typedef">
+<title>record_state_st</title>
+<indexterm zone="record-state-st"><primary>record_state_st</primary></indexterm>
+<programlisting>typedef struct record_state_st record_state_st;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="recv-state-t" role="enum">
+<title>enum recv_state_t</title>
+<indexterm zone="recv-state-t"><primary>recv_state_t</primary></indexterm>
+<programlisting>typedef enum {
+  RECV_STATE_0 = 0, 
+  RECV_STATE_DTLS_RETRANSMIT,
+} recv_state_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="safe-renegotiation-t" role="enum">
+<title>enum safe_renegotiation_t</title>
+<indexterm zone="safe-renegotiation-t"><primary>safe_renegotiation_t</primary></indexterm>
+<programlisting>typedef enum {
+  SR_DISABLED,
+  SR_UNSAFE,
+  SR_PARTIAL,
+  SR_SAFE
+} safe_renegotiation_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-adv-version" role="macro">
+<title>set_adv_version()</title>
+<indexterm zone="set-adv-version"><primary>set_adv_version</primary></indexterm>
+<programlisting>#define             set_adv_version( session, major, minor)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ssize-t" role="typedef">
+<title>ssize_t</title>
+<indexterm zone="ssize-t"><primary>ssize_t</primary></indexterm>
+<programlisting>typedef int ssize_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="transport-t" role="enum">
+<title>enum transport_t</title>
+<indexterm zone="transport-t"><primary>transport_t</primary></indexterm>
+<programlisting>typedef enum {
+  GNUTLS_STREAM,
+  GNUTLS_DGRAM
+} transport_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="unlikely" role="macro">
+<title>unlikely()</title>
+<indexterm zone="unlikely"><primary>unlikely</primary></indexterm>
+<programlisting>#  define unlikely(x)    __builtin_expect((x), 0)
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

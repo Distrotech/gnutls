@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-dtls-set-data-mtu"><link linkend="gnutls-dtls-set-data-mtu">gnutls_dtls_set_data_mtu</link>, function in <link linkend="gnutls-dtls">dtls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-openpgp-privkey-export2"><link linkend="gnutls-openpgp-privkey-export2">gnutls_openpgp_privkey_export2</link>, function in <link linkend="gnutls-openpgp">openpgp</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs11-obj-export2"><link linkend="gnutls-pkcs11-obj-export2">gnutls_pkcs11_obj_export2</link>, function in <link linkend="gnutls-pkcs11">pkcs11</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs12-export2"><link linkend="gnutls-pkcs12-export2">gnutls_pkcs12_export2</link>, function in <link linkend="gnutls-pkcs12">pkcs12</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs12-simple-parse"><link linkend="gnutls-pkcs12-simple-parse">gnutls_pkcs12_simple_parse</link>, function in <link linkend="gnutls-pkcs12">pkcs12</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-ext2"><link linkend="gnutls-privkey-import-ext2">gnutls_privkey_import_ext2</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-export2"><link linkend="gnutls-x509-crt-export2">gnutls_x509_crt_export2</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-add-system-trust"><link linkend="gnutls-x509-trust-list-add-system-trust">gnutls_x509_trust_list_add_system_trust</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-add-trust-file"><link linkend="gnutls-x509-trust-list-add-trust-file">gnutls_x509_trust_list_add_trust_file</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-trust-list-add-trust-mem"><link linkend="gnutls-x509-trust-list-add-trust-mem">gnutls_x509_trust_list_add_trust_mem</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

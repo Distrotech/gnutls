@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-str">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-str.top_of_page">gnutls_str</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_str</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-str.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="BUFFER-APPEND:CAPS">BUFFER_APPEND</link>                       (b,
+                                                         x,
+                                                         s)
+#define             <link linkend="BUFFER-APPEND-NUM:CAPS">BUFFER_APPEND_NUM</link>                   (b,
+                                                         s)
+#define             <link linkend="BUFFER-APPEND-PFX1:CAPS">BUFFER_APPEND_PFX1</link>                  (b,
+                                                         x,
+                                                         s)
+#define             <link linkend="BUFFER-APPEND-PFX2:CAPS">BUFFER_APPEND_PFX2</link>                  (b,
+                                                         x,
+                                                         s)
+#define             <link linkend="BUFFER-APPEND-PFX3:CAPS">BUFFER_APPEND_PFX3</link>                  (b,
+                                                         x,
+                                                         s)
+#define             <link linkend="BUFFER-APPEND-PFX4:CAPS">BUFFER_APPEND_PFX4</link>                  (b,
+                                                         x,
+                                                         s)
+#define             <link linkend="BUFFER-POP:CAPS">BUFFER_POP</link>                          (b,
+                                                         x,
+                                                         s)
+#define             <link linkend="BUFFER-POP-DATUM:CAPS">BUFFER_POP_DATUM</link>                    (b,
+                                                         o)
+#define             <link linkend="BUFFER-POP-NUM:CAPS">BUFFER_POP_NUM</link>                      (b,
+                                                         o)
+#define             <link linkend="MAX-CN:CAPS">MAX_CN</link>
+#define             <link linkend="MAX-DN:CAPS">MAX_DN</link>
+#define             <link linkend="gettext-macro">_</link>                                   (String)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-str.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-str.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="BUFFER-APPEND:CAPS" role="macro">
+<title>BUFFER_APPEND()</title>
+<indexterm zone="BUFFER-APPEND:CAPS"><primary>BUFFER_APPEND</primary></indexterm>
+<programlisting>#define             BUFFER_APPEND(b, x, s)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-APPEND-NUM:CAPS" role="macro">
+<title>BUFFER_APPEND_NUM()</title>
+<indexterm zone="BUFFER-APPEND-NUM:CAPS"><primary>BUFFER_APPEND_NUM</primary></indexterm>
+<programlisting>#define             BUFFER_APPEND_NUM(b, s)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-APPEND-PFX1:CAPS" role="macro">
+<title>BUFFER_APPEND_PFX1()</title>
+<indexterm zone="BUFFER-APPEND-PFX1:CAPS"><primary>BUFFER_APPEND_PFX1</primary></indexterm>
+<programlisting>#define             BUFFER_APPEND_PFX1(b, x, s)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-APPEND-PFX2:CAPS" role="macro">
+<title>BUFFER_APPEND_PFX2()</title>
+<indexterm zone="BUFFER-APPEND-PFX2:CAPS"><primary>BUFFER_APPEND_PFX2</primary></indexterm>
+<programlisting>#define             BUFFER_APPEND_PFX2(b, x, s)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-APPEND-PFX3:CAPS" role="macro">
+<title>BUFFER_APPEND_PFX3()</title>
+<indexterm zone="BUFFER-APPEND-PFX3:CAPS"><primary>BUFFER_APPEND_PFX3</primary></indexterm>
+<programlisting>#define             BUFFER_APPEND_PFX3(b, x, s)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-APPEND-PFX4:CAPS" role="macro">
+<title>BUFFER_APPEND_PFX4()</title>
+<indexterm zone="BUFFER-APPEND-PFX4:CAPS"><primary>BUFFER_APPEND_PFX4</primary></indexterm>
+<programlisting>#define             BUFFER_APPEND_PFX4(b, x, s)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-POP:CAPS" role="macro">
+<title>BUFFER_POP()</title>
+<indexterm zone="BUFFER-POP:CAPS"><primary>BUFFER_POP</primary></indexterm>
+<programlisting>#define             BUFFER_POP(b, x, s)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-POP-DATUM:CAPS" role="macro">
+<title>BUFFER_POP_DATUM()</title>
+<indexterm zone="BUFFER-POP-DATUM:CAPS"><primary>BUFFER_POP_DATUM</primary></indexterm>
+<programlisting>#define             BUFFER_POP_DATUM(b, o)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="BUFFER-POP-NUM:CAPS" role="macro">
+<title>BUFFER_POP_NUM()</title>
+<indexterm zone="BUFFER-POP-NUM:CAPS"><primary>BUFFER_POP_NUM</primary></indexterm>
+<programlisting>#define             BUFFER_POP_NUM(b, o)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-CN:CAPS" role="macro">
+<title>MAX_CN</title>
+<indexterm zone="MAX-CN:CAPS"><primary>MAX_CN</primary></indexterm>
+<programlisting>#define MAX_CN 256
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-DN:CAPS" role="macro">
+<title>MAX_DN</title>
+<indexterm zone="MAX-DN:CAPS"><primary>MAX_DN</primary></indexterm>
+<programlisting>#define MAX_DN 1024
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gettext-macro" role="macro">
+<title>_()</title>
+<indexterm zone="gettext-macro"><primary>_</primary></indexterm>
+<programlisting>#define _(String) dgettext (PACKAGE, String)
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

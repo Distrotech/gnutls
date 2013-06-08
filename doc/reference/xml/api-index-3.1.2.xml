@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-heartbeat-allowed"><link linkend="gnutls-heartbeat-allowed">gnutls_heartbeat_allowed</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-heartbeat-enable"><link linkend="gnutls-heartbeat-enable">gnutls_heartbeat_enable</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-heartbeat-get-timeout"><link linkend="gnutls-heartbeat-get-timeout">gnutls_heartbeat_get_timeout</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-heartbeat-ping"><link linkend="gnutls-heartbeat-ping">gnutls_heartbeat_ping</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-heartbeat-pong"><link linkend="gnutls-heartbeat-pong">gnutls_heartbeat_pong</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-heartbeat-set-timeouts"><link linkend="gnutls-heartbeat-set-timeouts">gnutls_heartbeat_set_timeouts</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

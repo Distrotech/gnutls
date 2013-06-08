@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-tpm">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-tpm.top_of_page">tpm</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>tpm</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-tpm.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-TPM-KEY-SIGNING:CAPS">GNUTLS_TPM_KEY_SIGNING</link>
+#define             <link linkend="GNUTLS-TPM-KEY-USER:CAPS">GNUTLS_TPM_KEY_USER</link>
+#define             <link linkend="GNUTLS-TPM-REGISTER-KEY:CAPS">GNUTLS_TPM_REGISTER_KEY</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-tpm-get-registered">gnutls_tpm_get_registered</link>           (<parameter><link linkend="gnutls-tpm-key-list-t"><type>gnutls_tpm_key_list_t</type></link> *list</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-tpm-key-list-deinit">gnutls_tpm_key_list_deinit</link>          (<parameter><link linkend="gnutls-tpm-key-list-t"><type>gnutls_tpm_key_list_t</type></link> list</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-tpm-key-list-get-url">gnutls_tpm_key_list_get_url</link>         (<parameter><link linkend="gnutls-tpm-key-list-t"><type>gnutls_tpm_key_list_t</type></link> list</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> **url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+typedef             <link linkend="gnutls-tpm-key-list-t">gnutls_tpm_key_list_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-tpm-privkey-delete">gnutls_tpm_privkey_delete</link>           (<parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-tpm-privkey-generate">gnutls_tpm_privkey_generate</link>         (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *key_password</parameter>,
+                                                         <parameter><link linkend="gnutls-tpmkey-fmt-t"><type>gnutls_tpmkey_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> pub_format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *privkey</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *pubkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+enum                <link linkend="gnutls-tpmkey-fmt-t">gnutls_tpmkey_fmt_t</link>;
+struct              <link linkend="tpm-key-list-st">tpm_key_list_st</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-tpm.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-tpm.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-TPM-KEY-SIGNING:CAPS" role="macro">
+<title>GNUTLS_TPM_KEY_SIGNING</title>
+<indexterm zone="GNUTLS-TPM-KEY-SIGNING:CAPS"><primary>GNUTLS_TPM_KEY_SIGNING</primary></indexterm>
+<programlisting>#define GNUTLS_TPM_KEY_SIGNING (1&lt;&lt;1)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-TPM-KEY-USER:CAPS" role="macro">
+<title>GNUTLS_TPM_KEY_USER</title>
+<indexterm zone="GNUTLS-TPM-KEY-USER:CAPS"><primary>GNUTLS_TPM_KEY_USER</primary></indexterm>
+<programlisting>#define GNUTLS_TPM_KEY_USER (1&lt;&lt;3)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-TPM-REGISTER-KEY:CAPS" role="macro">
+<title>GNUTLS_TPM_REGISTER_KEY</title>
+<indexterm zone="GNUTLS-TPM-REGISTER-KEY:CAPS"><primary>GNUTLS_TPM_REGISTER_KEY</primary></indexterm>
+<programlisting>#define GNUTLS_TPM_REGISTER_KEY (1&lt;&lt;2)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-tpm-get-registered" role="function" condition="since:3.1.0">
+<title>gnutls_tpm_get_registered ()</title>
+<indexterm zone="gnutls-tpm-get-registered" role="3.1.0"><primary>gnutls_tpm_get_registered</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_tpm_get_registered           (<parameter><link linkend="gnutls-tpm-key-list-t"><type>gnutls_tpm_key_list_t</type></link> *list</parameter>);</programlisting>
+<para>
+This function will get a list of stored keys in the TPM. The uuid
+of those keys
+</para><variablelist role="params">
+<varlistentry><term><parameter>list</parameter>&#160;:</term>
+<listitem><simpara>a list to store the keys</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-tpm-key-list-deinit" role="function" condition="since:3.1.0">
+<title>gnutls_tpm_key_list_deinit ()</title>
+<indexterm zone="gnutls-tpm-key-list-deinit" role="3.1.0"><primary>gnutls_tpm_key_list_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_tpm_key_list_deinit          (<parameter><link linkend="gnutls-tpm-key-list-t"><type>gnutls_tpm_key_list_t</type></link> list</parameter>);</programlisting>
+<para>
+This function will deinitialize the list of stored keys in the TPM.
+</para><variablelist role="params">
+<varlistentry><term><parameter>list</parameter>&#160;:</term>
+<listitem><simpara>a list of the keys</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-tpm-key-list-get-url" role="function" condition="since:3.1.0">
+<title>gnutls_tpm_key_list_get_url ()</title>
+<indexterm zone="gnutls-tpm-key-list-get-url" role="3.1.0"><primary>gnutls_tpm_key_list_get_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_tpm_key_list_get_url         (<parameter><link linkend="gnutls-tpm-key-list-t"><type>gnutls_tpm_key_list_t</type></link> list</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> **url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will return for each given index a URL of
+the corresponding key.
+If the provided index is out of bounds then <link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link>
+is returned.
+</para><variablelist role="params">
+<varlistentry><term><parameter>list</parameter>&#160;:</term>
+<listitem><simpara>a list of the keys</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>The index of the key (starting from zero)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>The URL to be returned</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-tpm-key-list-t" role="typedef">
+<title>gnutls_tpm_key_list_t</title>
+<indexterm zone="gnutls-tpm-key-list-t"><primary>gnutls_tpm_key_list_t</primary></indexterm>
+<programlisting>typedef struct tpm_key_list_st *gnutls_tpm_key_list_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-tpm-privkey-delete" role="function" condition="since:3.1.0">
+<title>gnutls_tpm_privkey_delete ()</title>
+<indexterm zone="gnutls-tpm-privkey-delete" role="3.1.0"><primary>gnutls_tpm_privkey_delete</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_tpm_privkey_delete           (<parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>);</programlisting>
+<para>
+This function will unregister the private key from the TPM
+chip.
+</para><variablelist role="params">
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>the URL describing the key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srk_password</parameter>&#160;:</term>
+<listitem><simpara>a password for the SRK key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-tpm-privkey-generate" role="function" condition="since:3.1.0">
+<title>gnutls_tpm_privkey_generate ()</title>
+<indexterm zone="gnutls-tpm-privkey-generate" role="3.1.0"><primary>gnutls_tpm_privkey_generate</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_tpm_privkey_generate         (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *key_password</parameter>,
+                                                         <parameter><link linkend="gnutls-tpmkey-fmt-t"><type>gnutls_tpmkey_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> pub_format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *privkey</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *pubkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will generate a private key in the TPM
+chip. The private key will be generated within the chip
+and will be exported in a wrapped with TPM's master key
+form. Furthermore the wrapped key can be protected with
+the provided <parameter>password</parameter>.
+</para>
+<para>
+Note that bits in TPM is quantized value. If the input value
+is not one of the allowed values, then it will be quantized to
+one of 512, 1024, 2048, 4096, 8192 and 16384.
+</para>
+<para>
+Allowed flags are:
+</para>
+<para>
+<link linkend="GNUTLS-TPM-KEY-SIGNING:CAPS"><literal>GNUTLS_TPM_KEY_SIGNING</literal></link>: Generate a signing key instead of a legacy,
+</para>
+<para>
+<link linkend="GNUTLS-TPM-REGISTER-KEY:CAPS"><literal>GNUTLS_TPM_REGISTER_KEY</literal></link>: Register the generate key in TPM. In that
+case <parameter>privkey</parameter> would contain a URL with the UUID.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pk</parameter>&#160;:</term>
+<listitem><simpara>the public key algorithm</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bits</parameter>&#160;:</term>
+<listitem><simpara>the security bits</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srk_password</parameter>&#160;:</term>
+<listitem><simpara>a password to protect the exported key (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key_password</parameter>&#160;:</term>
+<listitem><simpara>the password for the TPM (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of the private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pub_format</parameter>&#160;:</term>
+<listitem><simpara>the format of the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>privkey</parameter>&#160;:</term>
+<listitem><simpara>the generated key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pubkey</parameter>&#160;:</term>
+<listitem><simpara>the corresponding public key (may be null)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be a list of GNUTLS_TPM_* flags</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-tpmkey-fmt-t" role="enum">
+<title>enum gnutls_tpmkey_fmt_t</title>
+<indexterm zone="gnutls-tpmkey-fmt-t"><primary>gnutls_tpmkey_fmt_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_TPMKEY_FMT_DER = 0,
+    GNUTLS_TPMKEY_FMT_CTK_PEM = 1
+} gnutls_tpmkey_fmt_t;
+</programlisting>
+<para>
+Enumeration of different certificate encoding formats.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-TPMKEY-FMT-DER:CAPS" role="constant">
+<term><literal>GNUTLS_TPMKEY_FMT_DER</literal></term>
+<listitem><simpara>The portable data format.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-TPMKEY-FMT-CTK-PEM:CAPS" role="constant">
+<term><literal>GNUTLS_TPMKEY_FMT_CTK_PEM</literal></term>
+<listitem><simpara>A custom data format used by some TPM tools.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="tpm-key-list-st" role="struct">
+<title>struct tpm_key_list_st</title>
+<indexterm zone="tpm-key-list-st"><primary>tpm_key_list_st</primary></indexterm>
+<programlisting>struct tpm_key_list_st;</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

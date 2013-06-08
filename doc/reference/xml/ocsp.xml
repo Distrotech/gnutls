@@ -1,0 +1,1146 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-ocsp">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-ocsp.top_of_page">ocsp</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>ocsp</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-ocsp.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-OCSP-NONCE:CAPS">GNUTLS_OCSP_NONCE</link>
+enum                <link linkend="gnutls-ocsp-cert-status-t">gnutls_ocsp_cert_status_t</link>;
+enum                <link linkend="gnutls-ocsp-print-formats-t">gnutls_ocsp_print_formats_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-add-cert">gnutls_ocsp_req_add_cert</link>            (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> digest</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> cert</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-add-cert-id">gnutls_ocsp_req_add_cert_id</link>         (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> digest</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_name_hash</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_key_hash</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *serial_number</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-ocsp-req-deinit">gnutls_ocsp_req_deinit</link>              (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-export">gnutls_ocsp_req_export</link>              (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-get-cert-id">gnutls_ocsp_req_get_cert_id</link>         (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_name_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_key_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *serial_number</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-get-extension">gnutls_ocsp_req_get_extension</link>       (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *oid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-get-nonce">gnutls_ocsp_req_get_nonce</link>           (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *nonce</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-get-version">gnutls_ocsp_req_get_version</link>         (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-import">gnutls_ocsp_req_import</link>              (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-init">gnutls_ocsp_req_init</link>                (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> *req</parameter>);
+struct              <link linkend="gnutls-ocsp-req-int">gnutls_ocsp_req_int</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-print">gnutls_ocsp_req_print</link>               (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-ocsp-print-formats-t"><type>gnutls_ocsp_print_formats_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-randomize-nonce">gnutls_ocsp_req_randomize_nonce</link>     (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-set-extension">gnutls_ocsp_req_set_extension</link>       (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *oid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> critical</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-req-set-nonce">gnutls_ocsp_req_set_nonce</link>           (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> critical</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *nonce</parameter>);
+typedef             <link linkend="gnutls-ocsp-req-t">gnutls_ocsp_req_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-check-crt">gnutls_ocsp_resp_check_crt</link>          (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-ocsp-resp-deinit">gnutls_ocsp_resp_deinit</link>             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-export">gnutls_ocsp_resp_export</link>             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-certs">gnutls_ocsp_resp_get_certs</link>          (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> **certs</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *ncerts</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-extension">gnutls_ocsp_resp_get_extension</link>      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *oid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-nonce">gnutls_ocsp_resp_get_nonce</link>          (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *nonce</parameter>);
+<link linkend="time-t"><returnvalue>time_t</returnvalue></link>              <link linkend="gnutls-ocsp-resp-get-produced">gnutls_ocsp_resp_get_produced</link>       (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-responder">gnutls_ocsp_resp_get_responder</link>      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *dn</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-response">gnutls_ocsp_resp_get_response</link>       (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *response_type_oid</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *response</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-signature">gnutls_ocsp_resp_get_signature</link>      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *sig</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-signature-algorithm">gnutls_ocsp_resp_get_signature_algorithm</link>
+                                                        (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-single">gnutls_ocsp_resp_get_single</link>         (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_name_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_key_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *serial_number</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *cert_status</parameter>,
+                                                         <parameter><link linkend="time-t"><type>time_t</type></link> *this_update</parameter>,
+                                                         <parameter><link linkend="time-t"><type>time_t</type></link> *next_update</parameter>,
+                                                         <parameter><link linkend="time-t"><type>time_t</type></link> *revocation_time</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *revocation_reason</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-status">gnutls_ocsp_resp_get_status</link>         (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-get-version">gnutls_ocsp_resp_get_version</link>        (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-import">gnutls_ocsp_resp_import</link>             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-init">gnutls_ocsp_resp_init</link>               (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> *resp</parameter>);
+struct              <link linkend="gnutls-ocsp-resp-int">gnutls_ocsp_resp_int</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-print">gnutls_ocsp_resp_print</link>              (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-ocsp-print-formats-t"><type>gnutls_ocsp_print_formats_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);
+enum                <link linkend="gnutls-ocsp-resp-status-t">gnutls_ocsp_resp_status_t</link>;
+typedef             <link linkend="gnutls-ocsp-resp-t">gnutls_ocsp_resp_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-verify">gnutls_ocsp_resp_verify</link>             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-trust-list-t"><type>gnutls_x509_trust_list_t</type></link> trustlist</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-ocsp-resp-verify-direct">gnutls_ocsp_resp_verify_direct</link>      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+enum                <link linkend="gnutls-ocsp-verify-reason-t">gnutls_ocsp_verify_reason_t</link>;
+enum                <link linkend="gnutls-x509-crl-reason-t">gnutls_x509_crl_reason_t</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-ocsp.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-ocsp.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-OCSP-NONCE:CAPS" role="macro">
+<title>GNUTLS_OCSP_NONCE</title>
+<indexterm zone="GNUTLS-OCSP-NONCE:CAPS"><primary>GNUTLS_OCSP_NONCE</primary></indexterm>
+<programlisting>#define GNUTLS_OCSP_NONCE "1.3.6.1.5.5.7.48.1.2"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ocsp-cert-status-t" role="enum">
+<title>enum gnutls_ocsp_cert_status_t</title>
+<indexterm zone="gnutls-ocsp-cert-status-t"><primary>gnutls_ocsp_cert_status_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_OCSP_CERT_GOOD = 0,
+    GNUTLS_OCSP_CERT_REVOKED = 1,
+    GNUTLS_OCSP_CERT_UNKNOWN = 2
+} gnutls_ocsp_cert_status_t;
+</programlisting>
+<para>
+Enumeration of different OCSP response certificate status codes.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-OCSP-CERT-GOOD:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_CERT_GOOD</literal></term>
+<listitem><simpara>Positive response to status inquiry.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-CERT-REVOKED:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_CERT_REVOKED</literal></term>
+<listitem><simpara>Certificate has been revoked.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-CERT-UNKNOWN:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_CERT_UNKNOWN</literal></term>
+<listitem><simpara>The responder doesn't know about the
+  certificate.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-print-formats-t" role="enum">
+<title>enum gnutls_ocsp_print_formats_t</title>
+<indexterm zone="gnutls-ocsp-print-formats-t"><primary>gnutls_ocsp_print_formats_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_OCSP_PRINT_FULL = 0,
+    GNUTLS_OCSP_PRINT_COMPACT = 1,
+} gnutls_ocsp_print_formats_t;
+</programlisting>
+<para>
+Enumeration of different OCSP printing variants.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-OCSP-PRINT-FULL:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_PRINT_FULL</literal></term>
+<listitem><simpara>Full information about OCSP request/response.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-PRINT-COMPACT:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_PRINT_COMPACT</literal></term>
+<listitem><simpara>More compact information about OCSP request/response.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-add-cert" role="function">
+<title>gnutls_ocsp_req_add_cert ()</title>
+<indexterm zone="gnutls-ocsp-req-add-cert"><primary>gnutls_ocsp_req_add_cert</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_add_cert            (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> digest</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> cert</parameter>);</programlisting>
+<para>
+This function will add another request to the OCSP request for a
+particular certificate.  The issuer name hash, issuer key hash, and
+serial number fields is populated as follows.  The issuer name and
+the serial number is taken from <parameter>cert</parameter>.  The issuer key is taken
+from <parameter>issuer</parameter>.  The hashed values will be hashed using the <parameter>digest</parameter>
+algorithm, normally <link linkend="GNUTLS-DIG-SHA1:CAPS"><literal>GNUTLS_DIG_SHA1</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>hash algorithm, a <link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> value</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer</parameter>&#160;:</term>
+<listitem><simpara>issuer of <parameter>subject</parameter> certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cert</parameter>&#160;:</term>
+<listitem><simpara>certificate to request status for</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-add-cert-id" role="function">
+<title>gnutls_ocsp_req_add_cert_id ()</title>
+<indexterm zone="gnutls-ocsp-req-add-cert-id"><primary>gnutls_ocsp_req_add_cert_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_add_cert_id         (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> digest</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_name_hash</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_key_hash</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *serial_number</parameter>);</programlisting>
+<para>
+This function will add another request to the OCSP request for a
+particular certificate having the issuer name hash of
+<parameter>issuer_name_hash</parameter> and issuer key hash of <parameter>issuer_key_hash</parameter> (both
+hashed using <parameter>digest</parameter>) and serial number <parameter>serial_number</parameter>.
+</para>
+<para>
+The information needed corresponds to the CertID structure:
+</para>
+<para>
+<informalexample><programlisting>
+   CertID          ::=     SEQUENCE {
+       hashAlgorithm       AlgorithmIdentifier,
+       issuerNameHash      OCTET STRING, -- Hash of Issuer's DN
+       issuerKeyHash       OCTET STRING, -- Hash of Issuers public key
+       serialNumber        CertificateSerialNumber }
+</programlisting></informalexample>
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>hash algorithm, a <link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> value</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_name_hash</parameter>&#160;:</term>
+<listitem><simpara>hash of issuer's DN</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_key_hash</parameter>&#160;:</term>
+<listitem><simpara>hash of issuer's public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>serial_number</parameter>&#160;:</term>
+<listitem><simpara>serial number of certificate to check</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-deinit" role="function">
+<title>gnutls_ocsp_req_deinit ()</title>
+<indexterm zone="gnutls-ocsp-req-deinit"><primary>gnutls_ocsp_req_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_ocsp_req_deinit              (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>);</programlisting>
+<para>
+This function will deinitialize a OCSP request structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>The structure to be deinitialized</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-export" role="function">
+<title>gnutls_ocsp_req_export ()</title>
+<indexterm zone="gnutls-ocsp-req-export"><primary>gnutls_ocsp_req_export</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_export              (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will export the OCSP request to DER format.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>Holds the OCSP request</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>newly allocate buffer holding DER encoded OCSP request</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-get-cert-id" role="function">
+<title>gnutls_ocsp_req_get_cert_id ()</title>
+<indexterm zone="gnutls-ocsp-req-get-cert-id"><primary>gnutls_ocsp_req_get_cert_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_get_cert_id         (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_name_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_key_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *serial_number</parameter>);</programlisting>
+<para>
+This function will return the certificate information of the
+<parameter>indx</parameter>'ed request in the OCSP request.  The information returned
+corresponds to the CertID structure:
+</para>
+<para>
+<informalexample><programlisting>
+   CertID          ::=     SEQUENCE {
+       hashAlgorithm       AlgorithmIdentifier,
+       issuerNameHash      OCTET STRING, -- Hash of Issuer's DN
+       issuerKeyHash       OCTET STRING, -- Hash of Issuers public key
+       serialNumber        CertificateSerialNumber }
+</programlisting></informalexample>
+</para>
+<para>
+Each of the pointers to output variables may be NULL to indicate
+that the caller is not interested in that value.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>Specifies which extension OID to get. Use (0) to get the first one.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>output variable with <link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash algorithm</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_name_hash</parameter>&#160;:</term>
+<listitem><simpara>output buffer with hash of issuer's DN</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_key_hash</parameter>&#160;:</term>
+<listitem><simpara>output buffer with hash of issuer's public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>serial_number</parameter>&#160;:</term>
+<listitem><simpara>output buffer with serial number of certificate to check</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.  If you have reached the last
+CertID available <link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link> will be
+returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-get-extension" role="function">
+<title>gnutls_ocsp_req_get_extension ()</title>
+<indexterm zone="gnutls-ocsp-req-get-extension"><primary>gnutls_ocsp_req_get_extension</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_get_extension       (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *oid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will return all information about the requested
+extension in the OCSP request.  The information returned is the
+OID, the critical flag, and the data itself.  The extension OID
+will be stored as a string.  Any of <parameter>oid</parameter>, <parameter>critical</parameter>, and <parameter>data</parameter> may
+be NULL which means that the caller is not interested in getting
+that information back.
+</para>
+<para>
+The caller needs to deallocate memory by calling <link linkend="gnutls-free"><function>gnutls_free()</function></link> on
+<parameter>oid->data</parameter> and <parameter>data->data</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>Specifies which extension OID to get. Use (0) to get the first one.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>oid</parameter>&#160;:</term>
+<listitem><simpara>will hold newly allocated buffer with OID of extension, may be NULL</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>critical</parameter>&#160;:</term>
+<listitem><simpara>output variable with critical flag, may be NULL.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>will hold newly allocated buffer with extension data, may be NULL</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.  If you have reached the last
+extension available <link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link> will
+be returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-get-nonce" role="function">
+<title>gnutls_ocsp_req_get_nonce ()</title>
+<indexterm zone="gnutls-ocsp-req-get-nonce"><primary>gnutls_ocsp_req_get_nonce</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_get_nonce           (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *nonce</parameter>);</programlisting>
+<para>
+This function will return the OCSP request nonce extension data.
+</para>
+<para>
+The caller needs to deallocate memory by calling <link linkend="gnutls-free"><function>gnutls_free()</function></link> on
+<parameter>nonce->data</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>critical</parameter>&#160;:</term>
+<listitem><simpara>whether nonce extension is marked critical, or NULL</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>nonce</parameter>&#160;:</term>
+<listitem><simpara>will hold newly allocated buffer with nonce data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-get-version" role="function">
+<title>gnutls_ocsp_req_get_version ()</title>
+<indexterm zone="gnutls-ocsp-req-get-version"><primary>gnutls_ocsp_req_get_version</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_get_version         (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>);</programlisting>
+<para>
+This function will return the version of the OCSP request.
+Typically this is always 1 indicating version 1.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>version of OCSP request, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-import" role="function">
+<title>gnutls_ocsp_req_import ()</title>
+<indexterm zone="gnutls-ocsp-req-import"><primary>gnutls_ocsp_req_import</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_import              (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will convert the given DER encoded OCSP request to
+the native <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> format. The output will be stored in
+<parameter>req</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed request.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>DER encoded OCSP request.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-init" role="function">
+<title>gnutls_ocsp_req_init ()</title>
+<indexterm zone="gnutls-ocsp-req-init"><primary>gnutls_ocsp_req_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_init                (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> *req</parameter>);</programlisting>
+<para>
+This function will initialize an OCSP request structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-int" role="struct">
+<title>struct gnutls_ocsp_req_int</title>
+<indexterm zone="gnutls-ocsp-req-int"><primary>gnutls_ocsp_req_int</primary></indexterm>
+<programlisting>struct gnutls_ocsp_req_int;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ocsp-req-print" role="function">
+<title>gnutls_ocsp_req_print ()</title>
+<indexterm zone="gnutls-ocsp-req-print"><primary>gnutls_ocsp_req_print</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_print               (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter><link linkend="gnutls-ocsp-print-formats-t"><type>gnutls_ocsp_print_formats_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);</programlisting>
+<para>
+This function will pretty print a OCSP request, suitable for
+display to a human.
+</para>
+<para>
+If the format is <link linkend="GNUTLS-OCSP-PRINT-FULL:CAPS"><literal>GNUTLS_OCSP_PRINT_FULL</literal></link> then all fields of the
+request will be output, on multiple lines.
+</para>
+<para>
+The output <parameter>out->data</parameter> needs to be deallocate using <link linkend="gnutls-free"><function>gnutls_free()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>The structure to be printed</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>Indicate the format to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>out</parameter>&#160;:</term>
+<listitem><simpara>Newly allocated datum with (0) terminated string.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-randomize-nonce" role="function">
+<title>gnutls_ocsp_req_randomize_nonce ()</title>
+<indexterm zone="gnutls-ocsp-req-randomize-nonce"><primary>gnutls_ocsp_req_randomize_nonce</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_randomize_nonce     (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>);</programlisting>
+<para>
+This function will add or update an nonce extension to the OCSP
+request with a newly generated random value.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-set-extension" role="function">
+<title>gnutls_ocsp_req_set_extension ()</title>
+<indexterm zone="gnutls-ocsp-req-set-extension"><primary>gnutls_ocsp_req_set_extension</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_set_extension       (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *oid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> critical</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will add an extension to the OCSP request.  Calling
+this function multiple times for the same OID will overwrite values
+from earlier calls.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>oid</parameter>&#160;:</term>
+<listitem><simpara>buffer with OID of extension as a string.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>critical</parameter>&#160;:</term>
+<listitem><simpara>critical flag, normally false.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>the extension data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-set-nonce" role="function">
+<title>gnutls_ocsp_req_set_nonce ()</title>
+<indexterm zone="gnutls-ocsp-req-set-nonce"><primary>gnutls_ocsp_req_set_nonce</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_req_set_nonce           (<parameter><link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> req</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> critical</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *nonce</parameter>);</programlisting>
+<para>
+This function will add an nonce extension to the OCSP request.
+Calling this function multiple times will overwrite values from
+earlier calls.
+</para><variablelist role="params">
+<varlistentry><term><parameter>req</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-req-t"><type>gnutls_ocsp_req_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>critical</parameter>&#160;:</term>
+<listitem><simpara>critical flag, normally false.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>nonce</parameter>&#160;:</term>
+<listitem><simpara>the nonce data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-req-t" role="typedef">
+<title>gnutls_ocsp_req_t</title>
+<indexterm zone="gnutls-ocsp-req-t"><primary>gnutls_ocsp_req_t</primary></indexterm>
+<programlisting>  typedef struct gnutls_ocsp_req_int *gnutls_ocsp_req_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ocsp-resp-check-crt" role="function">
+<title>gnutls_ocsp_resp_check_crt ()</title>
+<indexterm zone="gnutls-ocsp-resp-check-crt"><primary>gnutls_ocsp_resp_check_crt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_check_crt          (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>);</programlisting>
+<para>
+This function will check whether the OCSP response
+is about the provided certificate.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>Specifies response number to get. Use (0) to get the first one.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>The certificate to check</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-deinit" role="function">
+<title>gnutls_ocsp_resp_deinit ()</title>
+<indexterm zone="gnutls-ocsp-resp-deinit"><primary>gnutls_ocsp_resp_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_ocsp_resp_deinit             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);</programlisting>
+<para>
+This function will deinitialize a OCSP response structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>The structure to be deinitialized</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-export" role="function">
+<title>gnutls_ocsp_resp_export ()</title>
+<indexterm zone="gnutls-ocsp-resp-export"><primary>gnutls_ocsp_resp_export</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_export             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will export the OCSP response to DER format.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>Holds the OCSP response</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>newly allocate buffer holding DER encoded OCSP response</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-certs" role="function">
+<title>gnutls_ocsp_resp_get_certs ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-certs"><primary>gnutls_ocsp_resp_get_certs</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_certs          (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> **certs</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *ncerts</parameter>);</programlisting>
+<para>
+This function will extract the X.509 certificates found in the
+Basic OCSP Response.  The <parameter>certs</parameter> output variable will hold a newly
+allocated zero-terminated array with X.509 certificates.
+</para>
+<para>
+Every certificate in the array needs to be de-allocated with
+<link linkend="gnutls-x509-crt-deinit"><function>gnutls_x509_crt_deinit()</function></link> and the array itself must be freed using
+<link linkend="gnutls-free"><function>gnutls_free()</function></link>.
+</para>
+<para>
+Both the <parameter>certs</parameter> and <parameter>ncerts</parameter> variables may be NULL.  Then the
+function will work as normal but will not return the NULL:d
+information.  This can be used to get the number of certificates
+only, or to just get the certificate array without its size.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>certs</parameter>&#160;:</term>
+<listitem><simpara>newly allocated array with <link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> certificates</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ncerts</parameter>&#160;:</term>
+<listitem><simpara>output variable with number of allocated certs.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-extension" role="function">
+<title>gnutls_ocsp_resp_get_extension ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-extension"><primary>gnutls_ocsp_resp_get_extension</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_extension      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *oid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will return all information about the requested
+extension in the OCSP response.  The information returned is the
+OID, the critical flag, and the data itself.  The extension OID
+will be stored as a string.  Any of <parameter>oid</parameter>, <parameter>critical</parameter>, and <parameter>data</parameter> may
+be NULL which means that the caller is not interested in getting
+that information back.
+</para>
+<para>
+The caller needs to deallocate memory by calling <link linkend="gnutls-free"><function>gnutls_free()</function></link> on
+<parameter>oid->data</parameter> and <parameter>data->data</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>Specifies which extension OID to get. Use (0) to get the first one.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>oid</parameter>&#160;:</term>
+<listitem><simpara>will hold newly allocated buffer with OID of extension, may be NULL</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>critical</parameter>&#160;:</term>
+<listitem><simpara>output variable with critical flag, may be NULL.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>will hold newly allocated buffer with extension data, may be NULL</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.  If you have reached the last
+extension available <link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link> will
+be returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-nonce" role="function">
+<title>gnutls_ocsp_resp_get_nonce ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-nonce"><primary>gnutls_ocsp_resp_get_nonce</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_nonce          (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *critical</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *nonce</parameter>);</programlisting>
+<para>
+This function will return the Basic OCSP Response nonce extension
+data.
+</para>
+<para>
+The caller needs to deallocate memory by calling <link linkend="gnutls-free"><function>gnutls_free()</function></link> on
+<parameter>nonce->data</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>critical</parameter>&#160;:</term>
+<listitem><simpara>whether nonce extension is marked critical</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>nonce</parameter>&#160;:</term>
+<listitem><simpara>will hold newly allocated buffer with nonce data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-produced" role="function">
+<title>gnutls_ocsp_resp_get_produced ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-produced"><primary>gnutls_ocsp_resp_get_produced</primary></indexterm>
+<programlisting><link linkend="time-t"><returnvalue>time_t</returnvalue></link>              gnutls_ocsp_resp_get_produced       (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);</programlisting>
+<para>
+This function will return the time when the OCSP response was
+signed.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>signing time, or (time_t)-1 on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-responder" role="function">
+<title>gnutls_ocsp_resp_get_responder ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-responder"><primary>gnutls_ocsp_resp_get_responder</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_responder      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *dn</parameter>);</programlisting>
+<para>
+This function will extract the name of the Basic OCSP Response in
+the provided buffer. The name will be in the form
+"C=xxxx,O=yyyy,CN=zzzz" as described in RFC2253. The output string
+will be ASCII or UTF-8 encoded, depending on the certificate data.
+</para>
+<para>
+The caller needs to deallocate memory by calling <link linkend="gnutls-free"><function>gnutls_free()</function></link> on
+<parameter>dn->data</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dn</parameter>&#160;:</term>
+<listitem><simpara>newly allocated buffer with name</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-response" role="function">
+<title>gnutls_ocsp_resp_get_response ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-response"><primary>gnutls_ocsp_resp_get_response</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_response       (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *response_type_oid</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *response</parameter>);</programlisting>
+<para>
+This function will extract the response type OID in and the
+response data from an OCSP response.  Normally the
+<parameter>response_type_oid</parameter> is always "1.3.6.1.5.5.7.48.1.1" which means the
+<parameter>response</parameter> should be decoded as a Basic OCSP Response, but
+technically other response types could be used.
+</para>
+<para>
+This function is typically only useful when you want to extract the
+response type OID of an response for diagnostic purposes.
+Otherwise <link linkend="gnutls-ocsp-resp-import"><function>gnutls_ocsp_resp_import()</function></link> will decode the basic OCSP
+response part and the caller need not worry about that aspect.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>response_type_oid</parameter>&#160;:</term>
+<listitem><simpara>newly allocated output buffer with response type OID</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>response</parameter>&#160;:</term>
+<listitem><simpara>newly allocated output buffer with DER encoded response</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-signature" role="function">
+<title>gnutls_ocsp_resp_get_signature ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-signature"><primary>gnutls_ocsp_resp_get_signature</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_signature      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *sig</parameter>);</programlisting>
+<para>
+This function will extract the signature field of a OCSP response.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sig</parameter>&#160;:</term>
+<listitem><simpara>newly allocated output buffer with signature data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-signature-algorithm" role="function">
+<title>gnutls_ocsp_resp_get_signature_algorithm ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-signature-algorithm"><primary>gnutls_ocsp_resp_get_signature_algorithm</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_signature_algorithm
+                                                        (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);</programlisting>
+<para>
+This function will return a value of the <link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link>
+enumeration that is the signature algorithm that has been used to
+sign the OCSP response.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>a <link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link> value, or a negative error code
+on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-single" role="function">
+<title>gnutls_ocsp_resp_get_single ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-single"><primary>gnutls_ocsp_resp_get_single</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_single         (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="unsigned"><type>unsigned </type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_name_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *issuer_key_hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *serial_number</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *cert_status</parameter>,
+                                                         <parameter><link linkend="time-t"><type>time_t</type></link> *this_update</parameter>,
+                                                         <parameter><link linkend="time-t"><type>time_t</type></link> *next_update</parameter>,
+                                                         <parameter><link linkend="time-t"><type>time_t</type></link> *revocation_time</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *revocation_reason</parameter>);</programlisting>
+<para>
+This function will return the certificate information of the
+<parameter>indx</parameter>'ed response in the Basic OCSP Response <parameter>resp</parameter>.  The
+information returned corresponds to the OCSP SingleResponse structure
+except the final singleExtensions.
+</para>
+<para>
+Each of the pointers to output variables may be NULL to indicate
+that the caller is not interested in that value.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>indx</parameter>&#160;:</term>
+<listitem><simpara>Specifies response number to get. Use (0) to get the first one.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>output variable with <link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash algorithm</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_name_hash</parameter>&#160;:</term>
+<listitem><simpara>output buffer with hash of issuer's DN</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_key_hash</parameter>&#160;:</term>
+<listitem><simpara>output buffer with hash of issuer's public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>serial_number</parameter>&#160;:</term>
+<listitem><simpara>output buffer with serial number of certificate to check</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cert_status</parameter>&#160;:</term>
+<listitem><simpara>a certificate status, a <link linkend="gnutls-ocsp-cert-status-t"><type>gnutls_ocsp_cert_status_t</type></link> enum.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>this_update</parameter>&#160;:</term>
+<listitem><simpara>time at which the status is known to be correct.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>next_update</parameter>&#160;:</term>
+<listitem><simpara>when newer information will be available, or (time_t)-1 if unspecified</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>revocation_time</parameter>&#160;:</term>
+<listitem><simpara>when <parameter>cert_status</parameter> is <link linkend="GNUTLS-OCSP-CERT-REVOKED:CAPS"><literal>GNUTLS_OCSP_CERT_REVOKED</literal></link>, holds time of revocation.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>revocation_reason</parameter>&#160;:</term>
+<listitem><simpara>revocation reason, a <link linkend="gnutls-x509-crl-reason-t"><type>gnutls_x509_crl_reason_t</type></link> enum.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error code is returned.  If you have reached the last
+CertID available <link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link> will be
+returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-status" role="function">
+<title>gnutls_ocsp_resp_get_status ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-status"><primary>gnutls_ocsp_resp_get_status</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_status         (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);</programlisting>
+<para>
+This function will return the status of a OCSP response, an
+<link linkend="gnutls-ocsp-resp-status-t"><type>gnutls_ocsp_resp_status_t</type></link> enumeration.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>status of OCSP request as a <link linkend="gnutls-ocsp-resp-status-t"><type>gnutls_ocsp_resp_status_t</type></link>, or
+a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-get-version" role="function">
+<title>gnutls_ocsp_resp_get_version ()</title>
+<indexterm zone="gnutls-ocsp-resp-get-version"><primary>gnutls_ocsp_resp_get_version</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_get_version        (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>);</programlisting>
+<para>
+This function will return the version of the Basic OCSP Response.
+Typically this is always 1 indicating version 1.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>version of Basic OCSP response, or a negative error code
+on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-import" role="function">
+<title>gnutls_ocsp_resp_import ()</title>
+<indexterm zone="gnutls-ocsp-resp-import"><primary>gnutls_ocsp_resp_import</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_import             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will convert the given DER encoded OCSP response to
+the native <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> format.  It also decodes the Basic
+OCSP Response part, if any.  The output will be stored in <parameter>resp</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed response.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>DER encoded OCSP response.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-init" role="function">
+<title>gnutls_ocsp_resp_init ()</title>
+<indexterm zone="gnutls-ocsp-resp-init"><primary>gnutls_ocsp_resp_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_init               (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> *resp</parameter>);</programlisting>
+<para>
+This function will initialize an OCSP response structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-int" role="struct">
+<title>struct gnutls_ocsp_resp_int</title>
+<indexterm zone="gnutls-ocsp-resp-int"><primary>gnutls_ocsp_resp_int</primary></indexterm>
+<programlisting>struct gnutls_ocsp_resp_int;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ocsp-resp-print" role="function">
+<title>gnutls_ocsp_resp_print ()</title>
+<indexterm zone="gnutls-ocsp-resp-print"><primary>gnutls_ocsp_resp_print</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_print              (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-ocsp-print-formats-t"><type>gnutls_ocsp_print_formats_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);</programlisting>
+<para>
+This function will pretty print a OCSP response, suitable for
+display to a human.
+</para>
+<para>
+If the format is <link linkend="GNUTLS-OCSP-PRINT-FULL:CAPS"><literal>GNUTLS_OCSP_PRINT_FULL</literal></link> then all fields of the
+response will be output, on multiple lines.
+</para>
+<para>
+The output <parameter>out->data</parameter> needs to be deallocate using <link linkend="gnutls-free"><function>gnutls_free()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>The structure to be printed</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>Indicate the format to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>out</parameter>&#160;:</term>
+<listitem><simpara>Newly allocated datum with (0) terminated string.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-status-t" role="enum">
+<title>enum gnutls_ocsp_resp_status_t</title>
+<indexterm zone="gnutls-ocsp-resp-status-t"><primary>gnutls_ocsp_resp_status_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_OCSP_RESP_SUCCESSFUL = 0,
+    GNUTLS_OCSP_RESP_MALFORMEDREQUEST = 1,
+    GNUTLS_OCSP_RESP_INTERNALERROR = 2,
+    GNUTLS_OCSP_RESP_TRYLATER = 3,
+    GNUTLS_OCSP_RESP_SIGREQUIRED = 5,
+    GNUTLS_OCSP_RESP_UNAUTHORIZED = 6
+} gnutls_ocsp_resp_status_t;
+</programlisting>
+<para>
+Enumeration of different OCSP response status codes.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-OCSP-RESP-SUCCESSFUL:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_RESP_SUCCESSFUL</literal></term>
+<listitem><simpara>Response has valid confirmations.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-RESP-MALFORMEDREQUEST:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_RESP_MALFORMEDREQUEST</literal></term>
+<listitem><simpara>Illegal confirmation request
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-RESP-INTERNALERROR:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_RESP_INTERNALERROR</literal></term>
+<listitem><simpara>Internal error in issuer
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-RESP-TRYLATER:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_RESP_TRYLATER</literal></term>
+<listitem><simpara>Try again later
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-RESP-SIGREQUIRED:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_RESP_SIGREQUIRED</literal></term>
+<listitem><simpara>Must sign the request
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-RESP-UNAUTHORIZED:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_RESP_UNAUTHORIZED</literal></term>
+<listitem><simpara>Request unauthorized
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-t" role="typedef">
+<title>gnutls_ocsp_resp_t</title>
+<indexterm zone="gnutls-ocsp-resp-t"><primary>gnutls_ocsp_resp_t</primary></indexterm>
+<programlisting>  typedef struct gnutls_ocsp_resp_int *gnutls_ocsp_resp_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ocsp-resp-verify" role="function">
+<title>gnutls_ocsp_resp_verify ()</title>
+<indexterm zone="gnutls-ocsp-resp-verify"><primary>gnutls_ocsp_resp_verify</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_verify             (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-trust-list-t"><type>gnutls_x509_trust_list_t</type></link> trustlist</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+Verify signature of the Basic OCSP Response against the public key
+in the certificate of a trusted signer.  The <parameter>trustlist</parameter> should be
+populated with trust anchors.  The function will extract the signer
+certificate from the Basic OCSP Response and will verify it against
+the <parameter>trustlist</parameter>.  A trusted signer is a certificate that is either
+in <parameter>trustlist</parameter>, or it is signed directly by a certificate in
+<parameter>trustlist</parameter> and has the id-ad-ocspSigning Extended Key Usage bit
+set.
+</para>
+<para>
+The output <parameter>verify</parameter> variable will hold verification status codes
+(e.g., <link linkend="GNUTLS-OCSP-VERIFY-SIGNER-NOT-FOUND:CAPS"><literal>GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND</literal></link>,
+<link linkend="GNUTLS-OCSP-VERIFY-INSECURE-ALGORITHM:CAPS"><literal>GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM</literal></link>) which are only valid if the
+function returned <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link>.
+</para>
+<para>
+Note that the function returns <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> even when
+verification failed.  The caller must always inspect the <parameter>verify</parameter>
+variable to find out the verification status.
+</para>
+<para>
+The <parameter>flags</parameter> variable should be 0 for now.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>trustlist</parameter>&#160;:</term>
+<listitem><simpara>trust anchors as a <link linkend="gnutls-x509-trust-list-t"><type>gnutls_x509_trust_list_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>verify</parameter>&#160;:</term>
+<listitem><simpara>output variable with verification status, an <link linkend="gnutls-ocsp-cert-status-t"><type>gnutls_ocsp_cert_status_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>verification flags, 0 for now.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-resp-verify-direct" role="function">
+<title>gnutls_ocsp_resp_verify_direct ()</title>
+<indexterm zone="gnutls-ocsp-resp-verify-direct"><primary>gnutls_ocsp_resp_verify_direct</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_ocsp_resp_verify_direct      (<parameter><link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> resp</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+Verify signature of the Basic OCSP Response against the public key
+in the <parameter>issuer</parameter> certificate.
+</para>
+<para>
+The output <parameter>verify</parameter> variable will hold verification status codes
+(e.g., <link linkend="GNUTLS-OCSP-VERIFY-SIGNER-NOT-FOUND:CAPS"><literal>GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND</literal></link>,
+<link linkend="GNUTLS-OCSP-VERIFY-INSECURE-ALGORITHM:CAPS"><literal>GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM</literal></link>) which are only valid if the
+function returned <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link>.
+</para>
+<para>
+Note that the function returns <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> even when
+verification failed.  The caller must always inspect the <parameter>verify</parameter>
+variable to find out the verification status.
+</para>
+<para>
+The <parameter>flags</parameter> variable should be 0 for now.
+</para><variablelist role="params">
+<varlistentry><term><parameter>resp</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-ocsp-resp-t"><type>gnutls_ocsp_resp_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer</parameter>&#160;:</term>
+<listitem><simpara>certificate believed to have signed the response</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>verify</parameter>&#160;:</term>
+<listitem><simpara>output variable with verification status, an <link linkend="gnutls-ocsp-cert-status-t"><type>gnutls_ocsp_cert_status_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>verification flags, 0 for now.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-ocsp-verify-reason-t" role="enum">
+<title>enum gnutls_ocsp_verify_reason_t</title>
+<indexterm zone="gnutls-ocsp-verify-reason-t"><primary>gnutls_ocsp_verify_reason_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND = 1,
+    GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR = 2,
+    GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER = 4,
+    GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM = 8,
+    GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE = 16,
+    GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED = 32,
+    GNUTLS_OCSP_VERIFY_CERT_EXPIRED = 64
+} gnutls_ocsp_verify_reason_t;
+</programlisting>
+<para>
+Enumeration of OCSP verify status codes, used by
+<link linkend="gnutls-ocsp-resp-verify"><function>gnutls_ocsp_resp_verify()</function></link> and <link linkend="gnutls-ocsp-resp-verify-direct"><function>gnutls_ocsp_resp_verify_direct()</function></link>.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-OCSP-VERIFY-SIGNER-NOT-FOUND:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_VERIFY_SIGNER_NOT_FOUND</literal></term>
+<listitem><simpara>Signer cert not found.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-VERIFY-SIGNER-KEYUSAGE-ERROR:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_VERIFY_SIGNER_KEYUSAGE_ERROR</literal></term>
+<listitem><simpara>Signer keyusage bits incorrect.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-VERIFY-UNTRUSTED-SIGNER:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_VERIFY_UNTRUSTED_SIGNER</literal></term>
+<listitem><simpara>Signer is not trusted.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-VERIFY-INSECURE-ALGORITHM:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_VERIFY_INSECURE_ALGORITHM</literal></term>
+<listitem><simpara>Signature using insecure algorithm.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-VERIFY-SIGNATURE-FAILURE:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_VERIFY_SIGNATURE_FAILURE</literal></term>
+<listitem><simpara>Signature mismatch.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-VERIFY-CERT-NOT-ACTIVATED:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_VERIFY_CERT_NOT_ACTIVATED</literal></term>
+<listitem><simpara>Signer cert is not yet activated.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OCSP-VERIFY-CERT-EXPIRED:CAPS" role="constant">
+<term><literal>GNUTLS_OCSP_VERIFY_CERT_EXPIRED</literal></term>
+<listitem><simpara>Signer cert has expired.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-x509-crl-reason-t" role="enum">
+<title>enum gnutls_x509_crl_reason_t</title>
+<indexterm zone="gnutls-x509-crl-reason-t"><primary>gnutls_x509_crl_reason_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_X509_CRLREASON_UNSPECIFIED = 0,
+    GNUTLS_X509_CRLREASON_KEYCOMPROMISE = 1,
+    GNUTLS_X509_CRLREASON_CACOMPROMISE = 2,
+    GNUTLS_X509_CRLREASON_AFFILIATIONCHANGED = 3,
+    GNUTLS_X509_CRLREASON_SUPERSEDED = 4,
+    GNUTLS_X509_CRLREASON_CESSATIONOFOPERATION = 5,
+    GNUTLS_X509_CRLREASON_CERTIFICATEHOLD = 6,
+    GNUTLS_X509_CRLREASON_REMOVEFROMCRL = 8,
+    GNUTLS_X509_CRLREASON_PRIVILEGEWITHDRAWN = 9,
+    GNUTLS_X509_CRLREASON_AACOMPROMISE = 10
+} gnutls_x509_crl_reason_t;
+</programlisting>
+<para>
+Enumeration of different reason codes.  Note that this
+corresponds to the CRLReason ASN.1 enumeration type, and not the
+ReasonFlags ASN.1 bit string.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-X509-CRLREASON-UNSPECIFIED:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_UNSPECIFIED</literal></term>
+<listitem><simpara>Unspecified reason.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-KEYCOMPROMISE:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_KEYCOMPROMISE</literal></term>
+<listitem><simpara>Private key compromised.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-CACOMPROMISE:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_CACOMPROMISE</literal></term>
+<listitem><simpara>CA compromised.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-AFFILIATIONCHANGED:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_AFFILIATIONCHANGED</literal></term>
+<listitem><simpara>Affiliation has changed.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-SUPERSEDED:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_SUPERSEDED</literal></term>
+<listitem><simpara>Certificate superseded.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-CESSATIONOFOPERATION:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_CESSATIONOFOPERATION</literal></term>
+<listitem><simpara>Operation has ceased.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-CERTIFICATEHOLD:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_CERTIFICATEHOLD</literal></term>
+<listitem><simpara>Certificate is on hold.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-REMOVEFROMCRL:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_REMOVEFROMCRL</literal></term>
+<listitem><simpara>Will be removed from delta CRL.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-PRIVILEGEWITHDRAWN:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_PRIVILEGEWITHDRAWN</literal></term>
+<listitem><simpara>Privilege withdrawn.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-X509-CRLREASON-AACOMPROMISE:CAPS" role="constant">
+<term><literal>GNUTLS_X509_CRLREASON_AACOMPROMISE</literal></term>
+<listitem><simpara>AA compromised.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+</refentry>

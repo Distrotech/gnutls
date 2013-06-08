@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-aes-padlock">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-aes-padlock.top_of_page">aes-padlock</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>aes-padlock</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-aes-padlock.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>extern const gnutls_crypto_cipher_st <link linkend="aes-gcm-padlock-struct">aes_gcm_padlock_struct</link>;
+extern const gnutls_crypto_mac_st <link linkend="hmac-sha-padlock-nano-struct">hmac_sha_padlock_nano_struct</link>;
+extern const gnutls_crypto_mac_st <link linkend="hmac-sha-padlock-struct">hmac_sha_padlock_struct</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="padlock-aes-cipher-setkey">padlock_aes_cipher_setkey</link>           (<parameter><link linkend="void"><type>void</type></link> *_ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *userkey</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keysize</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="padlock-capability">padlock_capability</link>                  (<parameter><type>void</type></parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="padlock-cbc-encrypt">padlock_cbc_encrypt</link>                 (<parameter><link linkend="void"><type>void</type></link> *out</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><type>struct padlock_cipher_data</type> *ctx</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="padlock-ecb-encrypt">padlock_ecb_encrypt</link>                 (<parameter><link linkend="void"><type>void</type></link> *out</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><type>struct padlock_cipher_data</type> *ctx</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="padlock-reload-key">padlock_reload_key</link>                  (<parameter><type>void</type></parameter>);
+extern const gnutls_crypto_digest_st <link linkend="sha-padlock-nano-struct">sha_padlock_nano_struct</link>;
+extern const gnutls_crypto_digest_st <link linkend="sha-padlock-struct">sha_padlock_struct</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-aes-padlock.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-aes-padlock.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="aes-gcm-padlock-struct" role="variable">
+<title>aes_gcm_padlock_struct</title>
+<indexterm zone="aes-gcm-padlock-struct"><primary>aes_gcm_padlock_struct</primary></indexterm>
+<programlisting>extern const gnutls_crypto_cipher_st aes_gcm_padlock_struct;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="hmac-sha-padlock-nano-struct" role="variable">
+<title>hmac_sha_padlock_nano_struct</title>
+<indexterm zone="hmac-sha-padlock-nano-struct"><primary>hmac_sha_padlock_nano_struct</primary></indexterm>
+<programlisting>extern const gnutls_crypto_mac_st hmac_sha_padlock_nano_struct;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="hmac-sha-padlock-struct" role="variable">
+<title>hmac_sha_padlock_struct</title>
+<indexterm zone="hmac-sha-padlock-struct"><primary>hmac_sha_padlock_struct</primary></indexterm>
+<programlisting>extern const gnutls_crypto_mac_st hmac_sha_padlock_struct;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-aes-cipher-setkey" role="function">
+<title>padlock_aes_cipher_setkey ()</title>
+<indexterm zone="padlock-aes-cipher-setkey"><primary>padlock_aes_cipher_setkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 padlock_aes_cipher_setkey           (<parameter><link linkend="void"><type>void</type></link> *_ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *userkey</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keysize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-capability" role="function">
+<title>padlock_capability ()</title>
+<indexterm zone="padlock-capability"><primary>padlock_capability</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        padlock_capability                  (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-cbc-encrypt" role="function">
+<title>padlock_cbc_encrypt ()</title>
+<indexterm zone="padlock-cbc-encrypt"><primary>padlock_cbc_encrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 padlock_cbc_encrypt                 (<parameter><link linkend="void"><type>void</type></link> *out</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><type>struct padlock_cipher_data</type> *ctx</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-ecb-encrypt" role="function">
+<title>padlock_ecb_encrypt ()</title>
+<indexterm zone="padlock-ecb-encrypt"><primary>padlock_ecb_encrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 padlock_ecb_encrypt                 (<parameter><link linkend="void"><type>void</type></link> *out</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *inp</parameter>,
+                                                         <parameter><type>struct padlock_cipher_data</type> *ctx</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="padlock-reload-key" role="function">
+<title>padlock_reload_key ()</title>
+<indexterm zone="padlock-reload-key"><primary>padlock_reload_key</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                padlock_reload_key                  (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="sha-padlock-nano-struct" role="variable">
+<title>sha_padlock_nano_struct</title>
+<indexterm zone="sha-padlock-nano-struct"><primary>sha_padlock_nano_struct</primary></indexterm>
+<programlisting>extern const gnutls_crypto_digest_st sha_padlock_nano_struct;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="sha-padlock-struct" role="variable">
+<title>sha_padlock_struct</title>
+<indexterm zone="sha-padlock-struct"><primary>sha_padlock_struct</primary></indexterm>
+<programlisting>extern const gnutls_crypto_digest_st sha_padlock_struct;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

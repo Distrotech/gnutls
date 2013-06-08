@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-pkcs11-get-pin-function"><link linkend="gnutls-pkcs11-get-pin-function">gnutls_pkcs11_get_pin_function</link>, function in <link linkend="gnutls-pkcs11">pkcs11</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs11-obj-list-import-url2"><link linkend="gnutls-pkcs11-obj-list-import-url2">gnutls_pkcs11_obj_list_import_url2</link>, function in <link linkend="gnutls-pkcs11">pkcs11</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs11-obj-set-pin-function"><link linkend="gnutls-pkcs11-obj-set-pin-function">gnutls_pkcs11_obj_set_pin_function</link>, function in <link linkend="gnutls-pkcs11">pkcs11</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pkcs11-privkey-set-pin-function"><link linkend="gnutls-pkcs11-privkey-set-pin-function">gnutls_pkcs11_privkey_set_pin_function</link>, function in <link linkend="gnutls-pkcs11">pkcs11</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-openpgp-raw"><link linkend="gnutls-privkey-import-openpgp-raw">gnutls_privkey_import_openpgp_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-pkcs11-url"><link linkend="gnutls-privkey-import-pkcs11-url">gnutls_privkey_import_pkcs11_url</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-tpm-raw"><link linkend="gnutls-privkey-import-tpm-raw">gnutls_privkey_import_tpm_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-tpm-url"><link linkend="gnutls-privkey-import-tpm-url">gnutls_privkey_import_tpm_url</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-url"><link linkend="gnutls-privkey-import-url">gnutls_privkey_import_url</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-import-x509-raw"><link linkend="gnutls-privkey-import-x509-raw">gnutls_privkey_import_x509_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-privkey-set-pin-function"><link linkend="gnutls-privkey-set-pin-function">gnutls_privkey_set_pin_function</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-import-tpm-raw"><link linkend="gnutls-pubkey-import-tpm-raw">gnutls_pubkey_import_tpm_raw</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-import-tpm-url"><link linkend="gnutls-pubkey-import-tpm-url">gnutls_pubkey_import_tpm_url</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-import-url"><link linkend="gnutls-pubkey-import-url">gnutls_pubkey_import_url</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-pubkey-set-pin-function"><link linkend="gnutls-pubkey-set-pin-function">gnutls_pubkey_set_pin_function</link>, function in <link linkend="gnutls-abstract">abstract</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-tpm-get-registered"><link linkend="gnutls-tpm-get-registered">gnutls_tpm_get_registered</link>, function in <link linkend="gnutls-tpm">tpm</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-tpm-key-list-deinit"><link linkend="gnutls-tpm-key-list-deinit">gnutls_tpm_key_list_deinit</link>, function in <link linkend="gnutls-tpm">tpm</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-tpm-key-list-get-url"><link linkend="gnutls-tpm-key-list-get-url">gnutls_tpm_key_list_get_url</link>, function in <link linkend="gnutls-tpm">tpm</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-tpm-privkey-delete"><link linkend="gnutls-tpm-privkey-delete">gnutls_tpm_privkey_delete</link>, function in <link linkend="gnutls-tpm">tpm</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-tpm-privkey-generate"><link linkend="gnutls-tpm-privkey-generate">gnutls_tpm_privkey_generate</link>, function in <link linkend="gnutls-tpm">tpm</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-url-is-supported"><link linkend="gnutls-url-is-supported">gnutls_url_is_supported</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-set-pin-function"><link linkend="gnutls-x509-crt-set-pin-function">gnutls_x509_crt_set_pin_function</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

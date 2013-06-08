@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-crypto">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-crypto.top_of_page">crypto</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>crypto</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-crypto.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-add-auth">gnutls_cipher_add_auth</link>              (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> text_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-decrypt">gnutls_cipher_decrypt</link>               (<parameter>const <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ciphertextlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-decrypt2">gnutls_cipher_decrypt2</link>              (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ciphertextlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-cipher-deinit">gnutls_cipher_deinit</link>                (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-encrypt">gnutls_cipher_encrypt</link>               (<parameter>const <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-encrypt2">gnutls_cipher_encrypt2</link>              (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ciphertextlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-get-block-size">gnutls_cipher_get_block_size</link>        (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> algorithm</parameter>);
+typedef             <link linkend="gnutls-cipher-hd-t">gnutls_cipher_hd_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-init">gnutls_cipher_init</link>                  (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> *handle</parameter>,
+                                                         <parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> cipher</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *iv</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-cipher-set-iv">gnutls_cipher_set_iv</link>                (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *iv</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ivlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-cipher-tag">gnutls_cipher_tag</link>                   (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *tag</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> tag_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hash">gnutls_hash</link>                         (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-hash-deinit">gnutls_hash_deinit</link>                  (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hash-fast">gnutls_hash_fast</link>                    (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hash-get-len">gnutls_hash_get_len</link>                 (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>);
+typedef             <link linkend="gnutls-hash-hd-t">gnutls_hash_hd_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hash-init">gnutls_hash_init</link>                    (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> *dig</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-hash-output">gnutls_hash_output</link>                  (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hmac">gnutls_hmac</link>                         (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-hmac-deinit">gnutls_hmac_deinit</link>                  (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hmac-fast">gnutls_hmac_fast</link>                    (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keylen</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hmac-get-len">gnutls_hmac_get_len</link>                 (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>);
+typedef             <link linkend="gnutls-hmac-hd-t">gnutls_hmac_hd_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-hmac-init">gnutls_hmac_init</link>                    (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> *dig</parameter>,
+                                                         <parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keylen</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-hmac-output">gnutls_hmac_output</link>                  (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-rnd">gnutls_rnd</link>                          (<parameter><link linkend="gnutls-rnd-level-t"><type>gnutls_rnd_level_t</type></link> level</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);
+enum                <link linkend="gnutls-rnd-level-t">gnutls_rnd_level_t</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-crypto.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-crypto.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="gnutls-cipher-add-auth" role="function" condition="since:3.0">
+<title>gnutls_cipher_add_auth ()</title>
+<indexterm zone="gnutls-cipher-add-auth" role="3.0"><primary>gnutls_cipher_add_auth</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_add_auth              (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> text_size</parameter>);</programlisting>
+<para>
+This function operates on authenticated encryption with
+associated data (AEAD) ciphers and authenticate the
+input data. This function can only be called once
+and before any encryption operations.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the data to be authenticated</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text_size</parameter>&#160;:</term>
+<listitem><simpara>The length of the data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-cipher-decrypt" role="function" condition="since:2.10.0">
+<title>gnutls_cipher_decrypt ()</title>
+<indexterm zone="gnutls-cipher-decrypt" role="2.10.0"><primary>gnutls_cipher_decrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_decrypt               (<parameter>const <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ciphertextlen</parameter>);</programlisting>
+<para>
+This function will decrypt the given data using the algorithm
+specified by the context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertext</parameter>&#160;:</term>
+<listitem><simpara>the data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertextlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-cipher-decrypt2" role="function" condition="since:2.12.0">
+<title>gnutls_cipher_decrypt2 ()</title>
+<indexterm zone="gnutls-cipher-decrypt2" role="2.12.0"><primary>gnutls_cipher_decrypt2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_decrypt2              (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ciphertextlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);</programlisting>
+<para>
+This function will decrypt the given data using the algorithm
+specified by the context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertext</parameter>&#160;:</term>
+<listitem><simpara>the data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertextlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the decrypted data</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>textlen</parameter>&#160;:</term>
+<listitem><simpara>The available length for decrypted data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-cipher-deinit" role="function" condition="since:2.10.0">
+<title>gnutls_cipher_deinit ()</title>
+<indexterm zone="gnutls-cipher-deinit" role="2.10.0"><primary>gnutls_cipher_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_cipher_deinit                (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>);</programlisting>
+<para>
+This function will deinitialize all resources occupied by the given
+encryption context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-cipher-encrypt" role="function" condition="since:2.10.0">
+<title>gnutls_cipher_encrypt ()</title>
+<indexterm zone="gnutls-cipher-encrypt" role="2.10.0"><primary>gnutls_cipher_encrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_encrypt               (<parameter>const <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);</programlisting>
+<para>
+This function will encrypt the given data using the algorithm
+specified by the context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>textlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-cipher-encrypt2" role="function" condition="since:2.12.0">
+<title>gnutls_cipher_encrypt2 ()</title>
+<indexterm zone="gnutls-cipher-encrypt2" role="2.12.0"><primary>gnutls_cipher_encrypt2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_encrypt2              (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ciphertextlen</parameter>);</programlisting>
+<para>
+This function will encrypt the given data using the algorithm
+specified by the context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>textlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to encrypt</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertext</parameter>&#160;:</term>
+<listitem><simpara>the encrypted data</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertextlen</parameter>&#160;:</term>
+<listitem><simpara>The available length for encrypted data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-cipher-get-block-size" role="function" condition="since:2.10.0">
+<title>gnutls_cipher_get_block_size ()</title>
+<indexterm zone="gnutls-cipher-get-block-size" role="2.10.0"><primary>gnutls_cipher_get_block_size</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_get_block_size        (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> algorithm</parameter>);</programlisting>
+<para>
+Get block size for encryption algorithm.
+</para><variablelist role="params">
+<varlistentry><term><parameter>algorithm</parameter>&#160;:</term>
+<listitem><simpara>is an encryption algorithm</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>block size for encryption algorithm.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-cipher-hd-t" role="typedef">
+<title>gnutls_cipher_hd_t</title>
+<indexterm zone="gnutls-cipher-hd-t"><primary>gnutls_cipher_hd_t</primary></indexterm>
+<programlisting>  typedef struct api_cipher_hd_st *gnutls_cipher_hd_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-cipher-init" role="function" condition="since:2.10.0">
+<title>gnutls_cipher_init ()</title>
+<indexterm zone="gnutls-cipher-init" role="2.10.0"><primary>gnutls_cipher_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_init                  (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> *handle</parameter>,
+                                                         <parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> cipher</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *iv</parameter>);</programlisting>
+<para>
+This function will initialize an context that can be used for
+encryption/decryption of data. This will effectively use the
+current crypto backend in use by gnutls or the cryptographic
+accelerator in use.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cipher</parameter>&#160;:</term>
+<listitem><simpara>the encryption algorithm to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The key to be used for encryption</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>iv</parameter>&#160;:</term>
+<listitem><simpara>The IV to use (if not applicable set NULL)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-cipher-set-iv" role="function" condition="since:3.0">
+<title>gnutls_cipher_set_iv ()</title>
+<indexterm zone="gnutls-cipher-set-iv" role="3.0"><primary>gnutls_cipher_set_iv</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_cipher_set_iv                (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *iv</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ivlen</parameter>);</programlisting>
+<para>
+This function will set the IV to be used for the next
+encryption block.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>iv</parameter>&#160;:</term>
+<listitem><simpara>the IV to set</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ivlen</parameter>&#160;:</term>
+<listitem><simpara>The length of the IV</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-cipher-tag" role="function" condition="since:3.0">
+<title>gnutls_cipher_tag ()</title>
+<indexterm zone="gnutls-cipher-tag" role="3.0"><primary>gnutls_cipher_tag</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_cipher_tag                   (<parameter><link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *tag</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> tag_size</parameter>);</programlisting>
+<para>
+This function operates on authenticated encryption with
+associated data (AEAD) ciphers and will return the
+output tag.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>tag</parameter>&#160;:</term>
+<listitem><simpara>will hold the tag</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>tag_size</parameter>&#160;:</term>
+<listitem><simpara>The length of the tag to return</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-hash" role="function" condition="since:2.10.0">
+<title>gnutls_hash ()</title>
+<indexterm zone="gnutls-hash" role="2.10.0"><primary>gnutls_hash</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hash                         (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);</programlisting>
+<para>
+This function will hash the given data using the algorithm
+specified by the context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>textlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hash-deinit" role="function" condition="since:2.10.0">
+<title>gnutls_hash_deinit ()</title>
+<indexterm zone="gnutls-hash-deinit" role="2.10.0"><primary>gnutls_hash_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_hash_deinit                  (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+This function will deinitialize all resources occupied by
+the given hash context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>is the output value of the hash</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hash-fast" role="function" condition="since:2.10.0">
+<title>gnutls_hash_fast ()</title>
+<indexterm zone="gnutls-hash-fast" role="2.10.0"><primary>gnutls_hash_fast</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hash_fast                    (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+This convenience function will hash the given data and return output
+on a single call.
+</para><variablelist role="params">
+<varlistentry><term><parameter>algorithm</parameter>&#160;:</term>
+<listitem><simpara>the hash algorithm to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>textlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>is the output value of the hash</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hash-get-len" role="function" condition="since:2.10.0">
+<title>gnutls_hash_get_len ()</title>
+<indexterm zone="gnutls-hash-get-len" role="2.10.0"><primary>gnutls_hash_get_len</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hash_get_len                 (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>);</programlisting>
+<para>
+This function will return the length of the output data
+of the given hash algorithm.
+</para><variablelist role="params">
+<varlistentry><term><parameter>algorithm</parameter>&#160;:</term>
+<listitem><simpara>the hash algorithm to use</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>The length or zero on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hash-hd-t" role="typedef">
+<title>gnutls_hash_hd_t</title>
+<indexterm zone="gnutls-hash-hd-t"><primary>gnutls_hash_hd_t</primary></indexterm>
+<programlisting>  typedef struct hash_hd_st *gnutls_hash_hd_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-hash-init" role="function" condition="since:2.10.0">
+<title>gnutls_hash_init ()</title>
+<indexterm zone="gnutls-hash-init" role="2.10.0"><primary>gnutls_hash_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hash_init                    (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> *dig</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>);</programlisting>
+<para>
+This function will initialize an context that can be used to
+produce a Message Digest of data.  This will effectively use the
+current crypto backend in use by gnutls or the cryptographic
+accelerator in use.
+</para><variablelist role="params">
+<varlistentry><term><parameter>dig</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>algorithm</parameter>&#160;:</term>
+<listitem><simpara>the hash algorithm to use</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hash-output" role="function" condition="since:2.10.0">
+<title>gnutls_hash_output ()</title>
+<indexterm zone="gnutls-hash-output" role="2.10.0"><primary>gnutls_hash_output</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_hash_output                  (<parameter><link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+This function will output the current hash value.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-hash-hd-t"><type>gnutls_hash_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>is the output value of the hash</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hmac" role="function" condition="since:2.10.0">
+<title>gnutls_hmac ()</title>
+<indexterm zone="gnutls-hmac" role="2.10.0"><primary>gnutls_hmac</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hmac                         (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> handle</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>);</programlisting>
+<para>
+This function will hash the given data using the algorithm
+specified by the context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-cipher-hd-t"><type>gnutls_cipher_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>textlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hmac-deinit" role="function" condition="since:2.10.0">
+<title>gnutls_hmac_deinit ()</title>
+<indexterm zone="gnutls-hmac-deinit" role="2.10.0"><primary>gnutls_hmac_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_hmac_deinit                  (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+This function will deinitialize all resources occupied by
+the given hmac context.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>is the output value of the MAC</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hmac-fast" role="function" condition="since:2.10.0">
+<title>gnutls_hmac_fast ()</title>
+<indexterm zone="gnutls-hmac-fast" role="2.10.0"><primary>gnutls_hmac_fast</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hmac_fast                    (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keylen</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textlen</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+This convenience function will hash the given data and return output
+on a single call.
+</para><variablelist role="params">
+<varlistentry><term><parameter>algorithm</parameter>&#160;:</term>
+<listitem><simpara>the hash algorithm to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the key to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keylen</parameter>&#160;:</term>
+<listitem><simpara>The length of the key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>text</parameter>&#160;:</term>
+<listitem><simpara>the data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>textlen</parameter>&#160;:</term>
+<listitem><simpara>The length of data to hash</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>is the output value of the hash</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hmac-get-len" role="function" condition="since:2.10.0">
+<title>gnutls_hmac_get_len ()</title>
+<indexterm zone="gnutls-hmac-get-len" role="2.10.0"><primary>gnutls_hmac_get_len</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hmac_get_len                 (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>);</programlisting>
+<para>
+This function will return the length of the output data
+of the given hmac algorithm.
+</para><variablelist role="params">
+<varlistentry><term><parameter>algorithm</parameter>&#160;:</term>
+<listitem><simpara>the hmac algorithm to use</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>The length or zero on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hmac-hd-t" role="typedef">
+<title>gnutls_hmac_hd_t</title>
+<indexterm zone="gnutls-hmac-hd-t"><primary>gnutls_hmac_hd_t</primary></indexterm>
+<programlisting>  typedef struct hmac_hd_st *gnutls_hmac_hd_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-hmac-init" role="function" condition="since:2.10.0">
+<title>gnutls_hmac_init ()</title>
+<indexterm zone="gnutls-hmac-init" role="2.10.0"><primary>gnutls_hmac_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_hmac_init                    (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> *dig</parameter>,
+                                                         <parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keylen</parameter>);</programlisting>
+<para>
+This function will initialize an context that can be used to
+produce a Message Authentication Code (MAC) of data.  This will
+effectively use the current crypto backend in use by gnutls or the
+cryptographic accelerator in use.
+</para><variablelist role="params">
+<varlistentry><term><parameter>dig</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>algorithm</parameter>&#160;:</term>
+<listitem><simpara>the HMAC algorithm to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The key to be used for encryption</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keylen</parameter>&#160;:</term>
+<listitem><simpara>The length of the key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-hmac-output" role="function" condition="since:2.10.0">
+<title>gnutls_hmac_output ()</title>
+<indexterm zone="gnutls-hmac-output" role="2.10.0"><primary>gnutls_hmac_output</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_hmac_output                  (<parameter><link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> handle</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+This function will output the current MAC value.
+</para><variablelist role="params">
+<varlistentry><term><parameter>handle</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-hmac-hd-t"><type>gnutls_hmac_hd_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>digest</parameter>&#160;:</term>
+<listitem><simpara>is the output value of the MAC</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.10.0</para></refsect2>
+<refsect2 id="gnutls-rnd" role="function" condition="since:2.12.0">
+<title>gnutls_rnd ()</title>
+<indexterm zone="gnutls-rnd" role="2.12.0"><primary>gnutls_rnd</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_rnd                          (<parameter><link linkend="gnutls-rnd-level-t"><type>gnutls_rnd_level_t</type></link> level</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);</programlisting>
+<para>
+This function will generate random data and store it to output
+buffer.
+</para><variablelist role="params">
+<varlistentry><term><parameter>level</parameter>&#160;:</term>
+<listitem><simpara>a security level</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>place to store random bytes</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>len</parameter>&#160;:</term>
+<listitem><simpara>The requested size</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>Zero or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-rnd-level-t" role="enum">
+<title>enum gnutls_rnd_level_t</title>
+<indexterm zone="gnutls-rnd-level-t"><primary>gnutls_rnd_level_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_RND_NONCE = 0,
+    GNUTLS_RND_RANDOM = 1,
+    GNUTLS_RND_KEY = 2
+} gnutls_rnd_level_t;
+</programlisting>
+<para>
+Enumeration of random quality levels.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-RND-NONCE:CAPS" role="constant">
+<term><literal>GNUTLS_RND_NONCE</literal></term>
+<listitem><simpara>Non-predictable random number.  Fatal in parts
+  of session if broken, i.e., vulnerable to statistical analysis.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-RND-RANDOM:CAPS" role="constant">
+<term><literal>GNUTLS_RND_RANDOM</literal></term>
+<listitem><simpara>Pseudo-random cryptographic random number.
+  Fatal in session if broken.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-RND-KEY:CAPS" role="constant">
+<term><literal>GNUTLS_RND_KEY</literal></term>
+<listitem><simpara>Fatal in many sessions if broken.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+</refentry>

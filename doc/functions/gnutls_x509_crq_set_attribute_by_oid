@@ -1,0 +1,20 @@
+
+
+
+
+@deftypefun {int} {gnutls_x509_crq_set_attribute_by_oid} (gnutls_x509_crq_t @var{crq}, const char * @var{oid}, void * @var{buf}, size_t @var{sizeof_buf})
+@var{crq}: should contain a @code{gnutls_x509_crq_t}  structure
+
+@var{oid}: holds an Object Identified in (0)-terminated string
+
+@var{buf}: a pointer to a structure that holds the attribute data
+
+@var{sizeof_buf}: holds the size of  @code{buf} 
+
+This function will set the attribute in the certificate request
+specified by the given Object ID.  The attribute must be be DER
+encoded.
+
+@strong{Returns:} On success, @code{GNUTLS_E_SUCCESS}  (0) is returned, otherwise a
+negative error value.
+@end deftypefun

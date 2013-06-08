@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-x86">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-x86.top_of_page">x86</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>x86</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-x86.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-cpuid">gnutls_cpuid</link>                        (<parameter>unsigned <link linkend="int"><type>int</type></link> func</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *ax</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *cx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *dx</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="gnutls-have-cpuid">gnutls_have_cpuid</link>                   (<parameter><type>void</type></parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-x86.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-x86.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="gnutls-cpuid" role="function">
+<title>gnutls_cpuid ()</title>
+<indexterm zone="gnutls-cpuid"><primary>gnutls_cpuid</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_cpuid                        (<parameter>unsigned <link linkend="int"><type>int</type></link> func</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *ax</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *cx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *dx</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-have-cpuid" role="function">
+<title>gnutls_have_cpuid ()</title>
+<indexterm zone="gnutls-have-cpuid"><primary>gnutls_have_cpuid</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        gnutls_have_cpuid                   (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

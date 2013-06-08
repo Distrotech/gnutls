@@ -1,0 +1,409 @@
+<!-- ##### SECTION Title ##### -->
+ecc
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### MACRO ECC_BUF_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO ECC_MAXSIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO ECC_SECP_CURVES_ONLY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PK_PRIVATE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO PK_PUBLIC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO WMNAF_PRECOMPUTED_LENGTH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO WMNAF_WINSIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION ecc_del_point ##### -->
+<para>
+
+</para>
+
+@p: 
+
+
+<!-- ##### FUNCTION ecc_free ##### -->
+<para>
+
+</para>
+
+@key: 
+
+
+<!-- ##### FUNCTION ecc_get_size ##### -->
+<para>
+
+</para>
+
+@key: 
+@Returns: 
+
+
+<!-- ##### STRUCT ecc_key ##### -->
+<para>
+
+</para>
+
+@type: 
+@prime: 
+@order: 
+@A: 
+@B: 
+@Gx: 
+@Gy: 
+@pubkey: 
+@k: 
+
+<!-- ##### FUNCTION ecc_make_key ##### -->
+<para>
+
+</para>
+
+@random_ctx: 
+@random: 
+@key: 
+@dp: 
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_make_key_ex ##### -->
+<para>
+
+</para>
+
+@random_ctx: 
+@random: 
+@key: 
+@prime: 
+@order: 
+@A: 
+@B: 
+@Gx: 
+@Gy: 
+@id: 
+@timing_res: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_map ##### -->
+<para>
+
+</para>
+
+@P: 
+@modulus: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_mulmod ##### -->
+<para>
+
+</para>
+
+@k: 
+@G: 
+@R: 
+@a: 
+@modulus: 
+@map: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_mulmod_cached ##### -->
+<para>
+
+</para>
+
+@k: 
+@id: 
+@R: 
+@a: 
+@modulus: 
+@map: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_mulmod_cached_lookup ##### -->
+<para>
+
+</para>
+
+@k: 
+@G: 
+@R: 
+@a: 
+@modulus: 
+@map: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_mulmod_cached_timing ##### -->
+<para>
+
+</para>
+
+@k: 
+@id: 
+@R: 
+@a: 
+@modulus: 
+@map: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_new_point ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### STRUCT ecc_point ##### -->
+<para>
+
+</para>
+
+@x: 
+@y: 
+@z: 
+
+<!-- ##### FUNCTION ecc_projective_add_point ##### -->
+<para>
+
+</para>
+
+@P: 
+@Q: 
+@R: 
+@A: 
+@modulus: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_projective_check_point ##### -->
+<para>
+
+</para>
+
+@P: 
+@b: 
+@modulus: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_projective_dbl_point ##### -->
+<para>
+
+</para>
+
+@P: 
+@R: 
+@a: 
+@modulus: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_projective_isneutral ##### -->
+<para>
+
+</para>
+
+@P: 
+@modulus: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_projective_madd ##### -->
+<para>
+
+</para>
+
+@P: 
+@Q: 
+@R: 
+@a: 
+@modulus: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_projective_negate_point ##### -->
+<para>
+
+</para>
+
+@P: 
+@R: 
+@modulus: 
+@Returns: 
+
+
+<!-- ##### STRUCT ecc_set_type ##### -->
+<para>
+
+</para>
+
+@size: 
+@name: 
+@prime: 
+@A: 
+@B: 
+@order: 
+@Gx: 
+@Gy: 
+
+<!-- ##### FUNCTION ecc_shared_secret ##### -->
+<para>
+
+</para>
+
+@private_key: 
+@public_key: 
+@out: 
+@outlen: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_sign_hash ##### -->
+<para>
+
+</para>
+
+@in: 
+@inlen: 
+@signature: 
+@random_ctx: 
+@random: 
+@key: 
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_sizes ##### -->
+<para>
+
+</para>
+
+@low: 
+@high: 
+
+
+<!-- ##### FUNCTION ecc_verify_hash ##### -->
+<para>
+
+</para>
+
+@signature: 
+@hash: 
+@hashlen: 
+@stat: 
+@key: 
+@id: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_wMNAF ##### -->
+<para>
+
+</para>
+
+@x: 
+@ret_len: 
+@Returns: 
+
+
+<!-- ##### FUNCTION ecc_wmnaf_cache_free ##### -->
+<para>
+
+</para>
+
+@void: 
+
+
+<!-- ##### FUNCTION ecc_wmnaf_cache_init ##### -->
+<para>
+
+</para>
+
+@void: 
+@Returns: 
+
+
+<!-- ##### FUNCTION mp_clear_multi ##### -->
+<para>
+
+</para>
+
+@a: 
+@...: 
+
+
+<!-- ##### FUNCTION mp_init_multi ##### -->
+<para>
+
+</para>
+
+@a: 
+@...: 
+@Returns: 
+
+

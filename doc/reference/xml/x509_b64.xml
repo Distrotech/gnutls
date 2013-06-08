@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-x509-b64">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-x509-b64.top_of_page">x509_b64</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>x509_b64</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-x509-b64.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="B64FSIZE:CAPS">B64FSIZE</link>                            (hsize,
+                                                         dsize)
+#define             <link linkend="B64SIZE:CAPS">B64SIZE</link>                             (data_size)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-x509-b64.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-x509-b64.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="B64FSIZE:CAPS" role="macro">
+<title>B64FSIZE()</title>
+<indexterm zone="B64FSIZE:CAPS"><primary>B64FSIZE</primary></indexterm>
+<programlisting>#define             B64FSIZE( hsize, dsize)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="B64SIZE:CAPS" role="macro">
+<title>B64SIZE()</title>
+<indexterm zone="B64SIZE:CAPS"><primary>B64SIZE</primary></indexterm>
+<programlisting>#define B64SIZE( data_size) ((data_size%3==0)?((data_size*4)/3):(4+((data_size/3)*4)))
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

@@ -1,0 +1,364 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-compat">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-compat.top_of_page">compat</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>compat</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-compat.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-A-MISSING-SRP-USERNAME:CAPS">GNUTLS_A_MISSING_SRP_USERNAME</link>
+#define             <link linkend="GNUTLS-A-UNKNOWN-SRP-USERNAME:CAPS">GNUTLS_A_UNKNOWN_SRP_USERNAME</link>
+#define             <link linkend="GNUTLS-OPENPGP-KEY:CAPS">GNUTLS_OPENPGP_KEY</link>
+#define             <link linkend="GNUTLS-OPENPGP-KEY-FINGERPRINT:CAPS">GNUTLS_OPENPGP_KEY_FINGERPRINT</link>
+#define             <link linkend="GNUTLS-X509-CRT-FULL:CAPS">GNUTLS_X509_CRT_FULL</link>
+#define             <link linkend="GNUTLS-X509-CRT-ONELINE:CAPS">GNUTLS_X509_CRT_ONELINE</link>
+#define             <link linkend="GNUTLS-X509-CRT-UNSIGNED-FULL:CAPS">GNUTLS_X509_CRT_UNSIGNED_FULL</link>
+#define             <link linkend="LIBGNUTLS-EXTRA-VERSION:CAPS">LIBGNUTLS_EXTRA_VERSION</link>
+#define             <link linkend="LIBGNUTLS-VERSION:CAPS">LIBGNUTLS_VERSION</link>
+#define             <link linkend="LIBGNUTLS-VERSION-MAJOR:CAPS">LIBGNUTLS_VERSION_MAJOR</link>
+#define             <link linkend="LIBGNUTLS-VERSION-MINOR:CAPS">LIBGNUTLS_VERSION_MINOR</link>
+#define             <link linkend="LIBGNUTLS-VERSION-NUMBER:CAPS">LIBGNUTLS_VERSION_NUMBER</link>
+#define             <link linkend="LIBGNUTLS-VERSION-PATCH:CAPS">LIBGNUTLS_VERSION_PATCH</link>
+typedef             <link linkend="GNUTLS-GCC-ATTR-DEPRECATED:CAPS">_GNUTLS_GCC_ATTR_DEPRECATED</link>;
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-certificate-client-set-retrieve-function">gnutls_certificate_client_set_retrieve_function</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> cred</parameter>);
+#define             <link linkend="gnutls-openpgp-crt-get-id">gnutls_openpgp_crt_get_id</link>
+#define             <link linkend="gnutls-openpgp-key-check-hostname">gnutls_openpgp_key_check_hostname</link>
+#define             <link linkend="gnutls-openpgp-key-deinit">gnutls_openpgp_key_deinit</link>
+#define             <link linkend="gnutls-openpgp-key-export">gnutls_openpgp_key_export</link>
+#define             <link linkend="gnutls-openpgp-key-get-creation-time">gnutls_openpgp_key_get_creation_time</link>
+#define             <link linkend="gnutls-openpgp-key-get-expiration-time">gnutls_openpgp_key_get_expiration_time</link>
+#define             <link linkend="gnutls-openpgp-key-get-fingerprint">gnutls_openpgp_key_get_fingerprint</link>
+#define             <link linkend="gnutls-openpgp-key-get-id">gnutls_openpgp_key_get_id</link>
+#define             <link linkend="gnutls-openpgp-key-get-key-usage">gnutls_openpgp_key_get_key_usage</link>
+#define             <link linkend="gnutls-openpgp-key-get-name">gnutls_openpgp_key_get_name</link>
+#define             <link linkend="gnutls-openpgp-key-get-pk-algorithm">gnutls_openpgp_key_get_pk_algorithm</link>
+#define             <link linkend="gnutls-openpgp-key-get-version">gnutls_openpgp_key_get_version</link>
+#define             <link linkend="gnutls-openpgp-key-import">gnutls_openpgp_key_import</link>
+#define             <link linkend="gnutls-openpgp-key-init">gnutls_openpgp_key_init</link>
+#define             <link linkend="gnutls-openpgp-send-key">gnutls_openpgp_send_key</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-rsa-params-generate2">gnutls_rsa_params_generate2</link>         (<parameter><link linkend="gnutls-rsa-params-t"><type>gnutls_rsa_params_t</type></link> params</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-sign-callback-set">gnutls_sign_callback_set</link>            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-func"><type>gnutls_sign_func</type></link> sign_func</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-compat.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-compat.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-A-MISSING-SRP-USERNAME:CAPS" role="macro">
+<title>GNUTLS_A_MISSING_SRP_USERNAME</title>
+<indexterm zone="GNUTLS-A-MISSING-SRP-USERNAME:CAPS"><primary>GNUTLS_A_MISSING_SRP_USERNAME</primary></indexterm>
+<programlisting>#define GNUTLS_A_MISSING_SRP_USERNAME GNUTLS_A_UNKNOWN_PSK_IDENTITY
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-A-UNKNOWN-SRP-USERNAME:CAPS" role="macro">
+<title>GNUTLS_A_UNKNOWN_SRP_USERNAME</title>
+<indexterm zone="GNUTLS-A-UNKNOWN-SRP-USERNAME:CAPS"><primary>GNUTLS_A_UNKNOWN_SRP_USERNAME</primary></indexterm>
+<programlisting>#define GNUTLS_A_UNKNOWN_SRP_USERNAME GNUTLS_A_UNKNOWN_PSK_IDENTITY
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-OPENPGP-KEY:CAPS" role="macro">
+<title>GNUTLS_OPENPGP_KEY</title>
+<indexterm zone="GNUTLS-OPENPGP-KEY:CAPS"><primary>GNUTLS_OPENPGP_KEY</primary></indexterm>
+<programlisting>#define GNUTLS_OPENPGP_KEY GNUTLS_OPENPGP_CERT
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-OPENPGP-KEY-FINGERPRINT:CAPS" role="macro">
+<title>GNUTLS_OPENPGP_KEY_FINGERPRINT</title>
+<indexterm zone="GNUTLS-OPENPGP-KEY-FINGERPRINT:CAPS"><primary>GNUTLS_OPENPGP_KEY_FINGERPRINT</primary></indexterm>
+<programlisting>#define GNUTLS_OPENPGP_KEY_FINGERPRINT GNUTLS_OPENPGP_CERT_FINGERPRINT
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-X509-CRT-FULL:CAPS" role="macro">
+<title>GNUTLS_X509_CRT_FULL</title>
+<indexterm zone="GNUTLS-X509-CRT-FULL:CAPS"><primary>GNUTLS_X509_CRT_FULL</primary></indexterm>
+<programlisting>#define GNUTLS_X509_CRT_FULL GNUTLS_CRT_PRINT_FULL
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-X509-CRT-ONELINE:CAPS" role="macro">
+<title>GNUTLS_X509_CRT_ONELINE</title>
+<indexterm zone="GNUTLS-X509-CRT-ONELINE:CAPS"><primary>GNUTLS_X509_CRT_ONELINE</primary></indexterm>
+<programlisting>#define GNUTLS_X509_CRT_ONELINE GNUTLS_CRT_PRINT_ONELINE
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-X509-CRT-UNSIGNED-FULL:CAPS" role="macro">
+<title>GNUTLS_X509_CRT_UNSIGNED_FULL</title>
+<indexterm zone="GNUTLS-X509-CRT-UNSIGNED-FULL:CAPS"><primary>GNUTLS_X509_CRT_UNSIGNED_FULL</primary></indexterm>
+<programlisting>#define GNUTLS_X509_CRT_UNSIGNED_FULL GNUTLS_CRT_PRINT_UNSIGNED_FULL
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LIBGNUTLS-EXTRA-VERSION:CAPS" role="macro">
+<title>LIBGNUTLS_EXTRA_VERSION</title>
+<indexterm zone="LIBGNUTLS-EXTRA-VERSION:CAPS"><primary>LIBGNUTLS_EXTRA_VERSION</primary></indexterm>
+<programlisting>#define LIBGNUTLS_EXTRA_VERSION GNUTLS_VERSION
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LIBGNUTLS-VERSION:CAPS" role="macro">
+<title>LIBGNUTLS_VERSION</title>
+<indexterm zone="LIBGNUTLS-VERSION:CAPS"><primary>LIBGNUTLS_VERSION</primary></indexterm>
+<programlisting>#define LIBGNUTLS_VERSION GNUTLS_VERSION
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LIBGNUTLS-VERSION-MAJOR:CAPS" role="macro">
+<title>LIBGNUTLS_VERSION_MAJOR</title>
+<indexterm zone="LIBGNUTLS-VERSION-MAJOR:CAPS"><primary>LIBGNUTLS_VERSION_MAJOR</primary></indexterm>
+<programlisting>#define LIBGNUTLS_VERSION_MAJOR GNUTLS_VERSION_MAJOR
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LIBGNUTLS-VERSION-MINOR:CAPS" role="macro">
+<title>LIBGNUTLS_VERSION_MINOR</title>
+<indexterm zone="LIBGNUTLS-VERSION-MINOR:CAPS"><primary>LIBGNUTLS_VERSION_MINOR</primary></indexterm>
+<programlisting>#define LIBGNUTLS_VERSION_MINOR GNUTLS_VERSION_MINOR
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LIBGNUTLS-VERSION-NUMBER:CAPS" role="macro">
+<title>LIBGNUTLS_VERSION_NUMBER</title>
+<indexterm zone="LIBGNUTLS-VERSION-NUMBER:CAPS"><primary>LIBGNUTLS_VERSION_NUMBER</primary></indexterm>
+<programlisting>#define LIBGNUTLS_VERSION_NUMBER GNUTLS_VERSION_NUMBER
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LIBGNUTLS-VERSION-PATCH:CAPS" role="macro">
+<title>LIBGNUTLS_VERSION_PATCH</title>
+<indexterm zone="LIBGNUTLS-VERSION-PATCH:CAPS"><primary>LIBGNUTLS_VERSION_PATCH</primary></indexterm>
+<programlisting>#define LIBGNUTLS_VERSION_PATCH GNUTLS_VERSION_PATCH
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-GCC-ATTR-DEPRECATED:CAPS" role="typedef">
+<title>_GNUTLS_GCC_ATTR_DEPRECATED</title>
+<indexterm zone="GNUTLS-GCC-ATTR-DEPRECATED:CAPS"><primary>_GNUTLS_GCC_ATTR_DEPRECATED</primary></indexterm>
+<programlisting>typedef unsigned int gnutls_connection_end_t _GNUTLS_GCC_ATTR_DEPRECATED;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-certificate-client-set-retrieve-function" role="function">
+<title>gnutls_certificate_client_set_retrieve_function ()</title>
+<indexterm zone="gnutls-certificate-client-set-retrieve-function"><primary>gnutls_certificate_client_set_retrieve_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_certificate_client_set_retrieve_function
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> cred</parameter>);</programlisting>
+<para>
+This function sets a callback to be called in order to retrieve the
+certificate to be used in the handshake.
+You are advised to use <link linkend="gnutls-certificate-set-retrieve-function2"><function>gnutls_certificate_set_retrieve_function2()</function></link> because it
+is much more efficient in the processing it requires from gnutls.
+</para>
+<para>
+The callback's function prototype is:
+int (*callback)(gnutls_session_t, const gnutls_datum_t* req_ca_dn, int nreqs,
+const gnutls_pk_algorithm_t* pk_algos, int pk_algos_length, gnutls_retr_st* st);
+</para>
+<para>
+<parameter>req_ca_cert</parameter> is only used in X.509 certificates.
+Contains a list with the CA names that the server considers trusted.
+Normally we should send a certificate that is signed
+by one of these CAs. These names are DER encoded. To get a more
+meaningful value use the function <link linkend="gnutls-x509-rdn-get"><function>gnutls_x509_rdn_get()</function></link>.
+</para>
+<para>
+<parameter>pk_algos</parameter> contains a list with server's acceptable signature algorithms.
+The certificate returned should support the server's given algorithms.
+</para>
+<para>
+<parameter>st</parameter> should contain the certificates and private keys.
+</para>
+<para>
+If the callback function is provided then gnutls will call it, in the
+handshake, if a certificate is requested by the server (and after the 
+certificate request message has been received).
+</para>
+<para>
+The callback function should set the certificate list to be sent,
+and return 0 on success. If no certificate was selected then the
+number of certificates should be set to zero. The value (-1)
+indicates error and the handshake will be terminated.
+</para><variablelist role="params">
+<varlistentry><term><parameter>cred</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> structure.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-id" role="macro">
+<title>gnutls_openpgp_crt_get_id</title>
+<indexterm zone="gnutls-openpgp-crt-get-id"><primary>gnutls_openpgp_crt_get_id</primary></indexterm>
+<programlisting>#define gnutls_openpgp_crt_get_id gnutls_openpgp_crt_get_key_id
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-check-hostname" role="macro">
+<title>gnutls_openpgp_key_check_hostname</title>
+<indexterm zone="gnutls-openpgp-key-check-hostname"><primary>gnutls_openpgp_key_check_hostname</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_check_hostname gnutls_openpgp_crt_check_hostname
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-deinit" role="macro">
+<title>gnutls_openpgp_key_deinit</title>
+<indexterm zone="gnutls-openpgp-key-deinit"><primary>gnutls_openpgp_key_deinit</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_deinit gnutls_openpgp_crt_deinit
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-export" role="macro">
+<title>gnutls_openpgp_key_export</title>
+<indexterm zone="gnutls-openpgp-key-export"><primary>gnutls_openpgp_key_export</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_export gnutls_openpgp_crt_export
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-creation-time" role="macro">
+<title>gnutls_openpgp_key_get_creation_time</title>
+<indexterm zone="gnutls-openpgp-key-get-creation-time"><primary>gnutls_openpgp_key_get_creation_time</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_creation_time gnutls_openpgp_crt_get_creation_time
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-expiration-time" role="macro">
+<title>gnutls_openpgp_key_get_expiration_time</title>
+<indexterm zone="gnutls-openpgp-key-get-expiration-time"><primary>gnutls_openpgp_key_get_expiration_time</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_expiration_time gnutls_openpgp_crt_get_expiration_time
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-fingerprint" role="macro">
+<title>gnutls_openpgp_key_get_fingerprint</title>
+<indexterm zone="gnutls-openpgp-key-get-fingerprint"><primary>gnutls_openpgp_key_get_fingerprint</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_fingerprint gnutls_openpgp_crt_get_fingerprint
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-id" role="macro">
+<title>gnutls_openpgp_key_get_id</title>
+<indexterm zone="gnutls-openpgp-key-get-id"><primary>gnutls_openpgp_key_get_id</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_id gnutls_openpgp_crt_get_id
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-key-usage" role="macro">
+<title>gnutls_openpgp_key_get_key_usage</title>
+<indexterm zone="gnutls-openpgp-key-get-key-usage"><primary>gnutls_openpgp_key_get_key_usage</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_key_usage gnutls_openpgp_crt_get_key_usage
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-name" role="macro">
+<title>gnutls_openpgp_key_get_name</title>
+<indexterm zone="gnutls-openpgp-key-get-name"><primary>gnutls_openpgp_key_get_name</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_name gnutls_openpgp_crt_get_name
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-pk-algorithm" role="macro">
+<title>gnutls_openpgp_key_get_pk_algorithm</title>
+<indexterm zone="gnutls-openpgp-key-get-pk-algorithm"><primary>gnutls_openpgp_key_get_pk_algorithm</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_pk_algorithm gnutls_openpgp_crt_get_pk_algorithm
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-get-version" role="macro">
+<title>gnutls_openpgp_key_get_version</title>
+<indexterm zone="gnutls-openpgp-key-get-version"><primary>gnutls_openpgp_key_get_version</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_get_version gnutls_openpgp_crt_get_version
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-import" role="macro">
+<title>gnutls_openpgp_key_import</title>
+<indexterm zone="gnutls-openpgp-key-import"><primary>gnutls_openpgp_key_import</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_import gnutls_openpgp_crt_import
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-key-init" role="macro">
+<title>gnutls_openpgp_key_init</title>
+<indexterm zone="gnutls-openpgp-key-init"><primary>gnutls_openpgp_key_init</primary></indexterm>
+<programlisting>#define gnutls_openpgp_key_init gnutls_openpgp_crt_init
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-send-key" role="macro">
+<title>gnutls_openpgp_send_key</title>
+<indexterm zone="gnutls-openpgp-send-key"><primary>gnutls_openpgp_send_key</primary></indexterm>
+<programlisting>#define gnutls_openpgp_send_key gnutls_openpgp_send_cert
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-rsa-params-generate2" role="function">
+<title>gnutls_rsa_params_generate2 ()</title>
+<indexterm zone="gnutls-rsa-params-generate2"><primary>gnutls_rsa_params_generate2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_rsa_params_generate2         (<parameter><link linkend="gnutls-rsa-params-t"><type>gnutls_rsa_params_t</type></link> params</parameter>);</programlisting>
+<para>
+This function will generate new temporary RSA parameters for use in
+RSA-EXPORT ciphersuites.  This function is normally slow.
+</para>
+<para>
+Note that if the parameters are to be used in export cipher suites the
+bits value should be 512 or less.
+Also note that the generation of new RSA parameters is only useful
+to servers. Clients use the parameters sent by the server, thus it's
+no use calling this in client side.
+</para><variablelist role="params">
+<varlistentry><term><parameter>params</parameter>&#160;:</term>
+<listitem><simpara>The structure where the parameters will be stored</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an negative error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-sign-callback-set" role="function" condition="deprecated:Use the PKCS 11 or #gnutls_privkey_t interfacess like gnutls_privkey_import_ext() instead.">
+<title>gnutls_sign_callback_set ()</title>
+<indexterm zone="gnutls-sign-callback-set" role="deprecated"><primary>gnutls_sign_callback_set</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_sign_callback_set            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-func"><type>gnutls_sign_func</type></link> sign_func</parameter>);</programlisting>
+<warning><para><literal>gnutls_sign_callback_set</literal> is deprecated and should not be used in newly-written code. Use the PKCS 11 or <link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> interfacess like <link linkend="gnutls-privkey-import-ext"><function>gnutls_privkey_import_ext()</function></link> instead.</para></warning>
+<para>
+Set the callback function.  The function must have this prototype:
+</para>
+<para>
+typedef int (*gnutls_sign_func) (gnutls_session_t session,
+                                 void *userdata,
+                                 gnutls_certificate_type_t cert_type,
+                                 const gnutls_datum_t * cert,
+                                 const gnutls_datum_t * hash,
+                                 gnutls_datum_t * signature);
+</para>
+<para>
+The <parameter>userdata</parameter> parameter is passed to the <parameter>sign_func</parameter> verbatim, and
+can be used to store application-specific data needed in the
+callback function.  See also <link linkend="gnutls-sign-callback-get"><function>gnutls_sign_callback_get()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a gnutls session</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sign_func</parameter>&#160;:</term>
+<listitem><simpara>function pointer to application's sign callback.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+</refentry>

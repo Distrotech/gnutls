@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-certificate-activation-time-peers"><link linkend="gnutls-certificate-activation-time-peers">gnutls_certificate_activation_time_peers</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-certificate-expiration-time-peers"><link linkend="gnutls-certificate-expiration-time-peers">gnutls_certificate_expiration_time_peers</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-sign-callback-set"><link linkend="gnutls-sign-callback-set">gnutls_sign_callback_set</link>, function in <link linkend="gnutls-compat">compat</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

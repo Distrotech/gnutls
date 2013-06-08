@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-pkcs11-int">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-pkcs11-int.top_of_page">pkcs11_int</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>pkcs11_int</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-pkcs11-int.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="CRYPTOKI-GNU:CAPS">CRYPTOKI_GNU</link>
+#define             <link linkend="PKCS11-ID-SIZE:CAPS">PKCS11_ID_SIZE</link>
+#define             <link linkend="PKCS11-LABEL-SIZE:CAPS">PKCS11_LABEL_SIZE</link>
+#define             <link linkend="SESSION-LOGIN:CAPS">SESSION_LOGIN</link>
+#define             <link linkend="SESSION-SO:CAPS">SESSION_SO</link>
+#define             <link linkend="SESSION-WRITE:CAPS">SESSION_WRITE</link>
+typedef             <link linkend="ck-bool-t">ck_bool_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="find-func-t">*find_func_t</link>)                      (<parameter><type>struct pkcs11_session_info</type> *Param1</parameter>,
+                                                         <parameter><type>struct token_info</type> *tinfo</parameter>,
+                                                         <parameter><type>struct ck_info</type> *Param3</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *input</parameter>);
+<link linkend="else"><returnvalue>else</returnvalue></link>                <link linkend="if">if</link>                                  ();
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-call-token-func">pkcs11_call_token_func</link>              (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter>const unsigned <link linkend="retry"><type>retry</type></link> Param2</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-close-session">pkcs11_close_session</link>                (<parameter><type>struct pkcs11_session_info</type> *Param1</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-create-object">pkcs11_create_object</link>                (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_attribute</type> *templ</parameter>,
+                                                         <parameter><type>unsigned long </type> count</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> *object</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-decrypt">pkcs11_decrypt</link>                      (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *encrypted_data</parameter>,
+                                                         <parameter><type>unsigned long </type> encrypted_data_len</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *data_len</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-decrypt-init">pkcs11_decrypt_init</link>                 (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_mechanism</type> *mechanism</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> key</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-destroy-object">pkcs11_destroy_object</link>               (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> object</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-find-objects">pkcs11_find_objects</link>                 (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> *objects</parameter>,
+                                                         <parameter><type>unsigned long </type> max_object_count</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *object_count</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-find-objects-final">pkcs11_find_objects_final</link>           (<parameter><type>struct pkcs11_session_info</type> *Param1</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-find-objects-init">pkcs11_find_objects_init</link>            (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_attribute</type> *templ</parameter>,
+                                                         <parameter><type>unsigned long </type> count</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-find-slot">pkcs11_find_slot</link>                    (<parameter><type>struct ck_function_list</type> **module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> *slot</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><type>struct token_info</type> *_tinfo</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-get-attribute-value">pkcs11_get_attribute_value</link>          (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> object</parameter>,
+                                                         <parameter><type>struct ck_attribute</type> *templ</parameter>,
+                                                         <parameter><type>unsigned long </type> count</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-get-info">pkcs11_get_info</link>                     (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-obj-info-t"><type>gnutls_pkcs11_obj_info_t</type></link> itype</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_size</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-get-mechanism-list">pkcs11_get_mechanism_list</link>           (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter><link linkend="ck-mechanism-type-t"><type>ck_mechanism_type_t</type></link> *mechanism_list</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *count</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-get-module-info">pkcs11_get_module_info</link>              (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><type>struct ck_info</type> *info</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-get-slot-info">pkcs11_get_slot_info</link>                (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter><type>struct ck_slot_info</type> *info</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-get-slot-list">pkcs11_get_slot_list</link>                (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> token_present</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> *slot_list</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *count</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-get-token-info">pkcs11_get_token_info</link>               (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter><type>struct ck_token_info</type> *info</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-info-to-url">pkcs11_info_to_url</link>                  (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-url-type-t"><type>gnutls_pkcs11_url_type_t</type></link> detailed</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> **url</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-init-pin">pkcs11_init_pin</link>                     (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *pin</parameter>,
+                                                         <parameter><type>unsigned long </type> pin_len</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-init-token">pkcs11_init_token</link>                   (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *pin</parameter>,
+                                                         <parameter><type>unsigned long </type> pin_len</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *label</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-login">pkcs11_login</link>                        (<parameter><type>struct pkcs11_session_info</type> *sinfo</parameter>,
+                                                         <parameter><type>struct pin_info_st</type> *pin_info</parameter>,
+                                                         <parameter>const <type>struct token_info</type> *tokinfo</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> so</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="pkcs11-obj-flags-to-int">pkcs11_obj_flags_to_int</link>             (<parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-open-session">pkcs11_open_session</link>                 (<parameter><type>struct pkcs11_session_info</type> *sinfo</parameter>,
+                                                         <parameter><type>struct pin_info_st</type> *pin_info</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-read-pubkey">pkcs11_read_pubkey</link>                  (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> pks</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> obj</parameter>,
+                                                         <parameter><link linkend="ck-key-type-t"><type>ck_key_type_t</type></link> key_type</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *pubkey</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="pkcs11-rescan-slots">pkcs11_rescan_slots</link>                 (<parameter><type>void</type></parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-rv-to-err">pkcs11_rv_to_err</link>                    (<parameter><link linkend="ck-rv-t"><type>ck_rv_t</type></link> rv</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-set-pin">pkcs11_set_pin</link>                      (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *old_pin</parameter>,
+                                                         <parameter><type>unsigned long </type> old_len</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *new_pin</parameter>,
+                                                         <parameter><type>unsigned long </type> new_len</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-sign">pkcs11_sign</link>                         (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter><type>unsigned long </type> data_len</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *signature</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *signature_len</parameter>);
+<link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             <link linkend="pkcs11-sign-init">pkcs11_sign_init</link>                    (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_mechanism</type> *mechanism</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> key</parameter>);
+const <link linkend="char"><returnvalue>char</returnvalue></link> *        <link linkend="pkcs11-strerror">pkcs11_strerror</link>                     (<parameter><link linkend="ck-rv-t"><type>ck_rv_t</type></link> rv</parameter>);
+<link linkend="ck-object-class-t"><returnvalue>ck_object_class_t</returnvalue></link>   <link linkend="pkcs11-strtype-to-class">pkcs11_strtype_to_class</link>             (<parameter>const <link linkend="char"><type>char</type></link> *type</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-token-matches-info">pkcs11_token_matches_info</link>           (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><type>struct ck_token_info</type> *tinfo</parameter>,
+                                                         <parameter><type>struct ck_info</type> *lib_info</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pkcs11-url-to-info">pkcs11_url_to_info</link>                  (<parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> **info</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-pkcs11-int.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-pkcs11-int.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="CRYPTOKI-GNU:CAPS" role="macro">
+<title>CRYPTOKI_GNU</title>
+<indexterm zone="CRYPTOKI-GNU:CAPS"><primary>CRYPTOKI_GNU</primary></indexterm>
+<programlisting>#define CRYPTOKI_GNU
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PKCS11-ID-SIZE:CAPS" role="macro">
+<title>PKCS11_ID_SIZE</title>
+<indexterm zone="PKCS11-ID-SIZE:CAPS"><primary>PKCS11_ID_SIZE</primary></indexterm>
+<programlisting>#define PKCS11_ID_SIZE 128
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PKCS11-LABEL-SIZE:CAPS" role="macro">
+<title>PKCS11_LABEL_SIZE</title>
+<indexterm zone="PKCS11-LABEL-SIZE:CAPS"><primary>PKCS11_LABEL_SIZE</primary></indexterm>
+<programlisting>#define PKCS11_LABEL_SIZE 128
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SESSION-LOGIN:CAPS" role="macro">
+<title>SESSION_LOGIN</title>
+<indexterm zone="SESSION-LOGIN:CAPS"><primary>SESSION_LOGIN</primary></indexterm>
+<programlisting>#define SESSION_LOGIN (1&lt;&lt;1)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SESSION-SO:CAPS" role="macro">
+<title>SESSION_SO</title>
+<indexterm zone="SESSION-SO:CAPS"><primary>SESSION_SO</primary></indexterm>
+<programlisting>#define SESSION_SO (1&lt;&lt;2)       /* security officer session */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SESSION-WRITE:CAPS" role="macro">
+<title>SESSION_WRITE</title>
+<indexterm zone="SESSION-WRITE:CAPS"><primary>SESSION_WRITE</primary></indexterm>
+<programlisting>#define SESSION_WRITE (1&lt;&lt;0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ck-bool-t" role="typedef">
+<title>ck_bool_t</title>
+<indexterm zone="ck-bool-t"><primary>ck_bool_t</primary></indexterm>
+<programlisting>typedef unsigned char ck_bool_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="find-func-t" role="function">
+<title>find_func_t ()</title>
+<indexterm zone="find-func-t"><primary>find_func_t</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*find_func_t)                      (<parameter><type>struct pkcs11_session_info</type> *Param1</parameter>,
+                                                         <parameter><type>struct token_info</type> *tinfo</parameter>,
+                                                         <parameter><type>struct ck_info</type> *Param3</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *input</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="if" role="function">
+<title>if ()</title>
+<indexterm zone="if"><primary>if</primary></indexterm>
+<programlisting><link linkend="else"><returnvalue>else</returnvalue></link>                if                                  ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-call-token-func" role="function">
+<title>pkcs11_call_token_func ()</title>
+<indexterm zone="pkcs11-call-token-func"><primary>pkcs11_call_token_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_call_token_func              (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter>const unsigned <link linkend="retry"><type>retry</type></link> Param2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-close-session" role="function">
+<title>pkcs11_close_session ()</title>
+<indexterm zone="pkcs11-close-session"><primary>pkcs11_close_session</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_close_session                (<parameter><type>struct pkcs11_session_info</type> *Param1</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-create-object" role="function">
+<title>pkcs11_create_object ()</title>
+<indexterm zone="pkcs11-create-object"><primary>pkcs11_create_object</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_create_object                (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_attribute</type> *templ</parameter>,
+                                                         <parameter><type>unsigned long </type> count</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> *object</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-decrypt" role="function">
+<title>pkcs11_decrypt ()</title>
+<indexterm zone="pkcs11-decrypt"><primary>pkcs11_decrypt</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_decrypt                      (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *encrypted_data</parameter>,
+                                                         <parameter><type>unsigned long </type> encrypted_data_len</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *data_len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-decrypt-init" role="function">
+<title>pkcs11_decrypt_init ()</title>
+<indexterm zone="pkcs11-decrypt-init"><primary>pkcs11_decrypt_init</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_decrypt_init                 (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_mechanism</type> *mechanism</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> key</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-destroy-object" role="function">
+<title>pkcs11_destroy_object ()</title>
+<indexterm zone="pkcs11-destroy-object"><primary>pkcs11_destroy_object</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_destroy_object               (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> object</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-find-objects" role="function">
+<title>pkcs11_find_objects ()</title>
+<indexterm zone="pkcs11-find-objects"><primary>pkcs11_find_objects</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_find_objects                 (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> *objects</parameter>,
+                                                         <parameter><type>unsigned long </type> max_object_count</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *object_count</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-find-objects-final" role="function">
+<title>pkcs11_find_objects_final ()</title>
+<indexterm zone="pkcs11-find-objects-final"><primary>pkcs11_find_objects_final</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_find_objects_final           (<parameter><type>struct pkcs11_session_info</type> *Param1</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-find-objects-init" role="function">
+<title>pkcs11_find_objects_init ()</title>
+<indexterm zone="pkcs11-find-objects-init"><primary>pkcs11_find_objects_init</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_find_objects_init            (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_attribute</type> *templ</parameter>,
+                                                         <parameter><type>unsigned long </type> count</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-find-slot" role="function">
+<title>pkcs11_find_slot ()</title>
+<indexterm zone="pkcs11-find-slot"><primary>pkcs11_find_slot</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_find_slot                    (<parameter><type>struct ck_function_list</type> **module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> *slot</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><type>struct token_info</type> *_tinfo</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-get-attribute-value" role="function">
+<title>pkcs11_get_attribute_value ()</title>
+<indexterm zone="pkcs11-get-attribute-value"><primary>pkcs11_get_attribute_value</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_get_attribute_value          (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> object</parameter>,
+                                                         <parameter><type>struct ck_attribute</type> *templ</parameter>,
+                                                         <parameter><type>unsigned long </type> count</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-get-info" role="function">
+<title>pkcs11_get_info ()</title>
+<indexterm zone="pkcs11-get-info"><primary>pkcs11_get_info</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_get_info                     (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-obj-info-t"><type>gnutls_pkcs11_obj_info_t</type></link> itype</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_size</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-get-mechanism-list" role="function">
+<title>pkcs11_get_mechanism_list ()</title>
+<indexterm zone="pkcs11-get-mechanism-list"><primary>pkcs11_get_mechanism_list</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_get_mechanism_list           (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter><link linkend="ck-mechanism-type-t"><type>ck_mechanism_type_t</type></link> *mechanism_list</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *count</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-get-module-info" role="function">
+<title>pkcs11_get_module_info ()</title>
+<indexterm zone="pkcs11-get-module-info"><primary>pkcs11_get_module_info</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_get_module_info              (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><type>struct ck_info</type> *info</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-get-slot-info" role="function">
+<title>pkcs11_get_slot_info ()</title>
+<indexterm zone="pkcs11-get-slot-info"><primary>pkcs11_get_slot_info</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_get_slot_info                (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter><type>struct ck_slot_info</type> *info</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-get-slot-list" role="function">
+<title>pkcs11_get_slot_list ()</title>
+<indexterm zone="pkcs11-get-slot-list"><primary>pkcs11_get_slot_list</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_get_slot_list                (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> token_present</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> *slot_list</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *count</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-get-token-info" role="function">
+<title>pkcs11_get_token_info ()</title>
+<indexterm zone="pkcs11-get-token-info"><primary>pkcs11_get_token_info</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_get_token_info               (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter><type>struct ck_token_info</type> *info</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-info-to-url" role="function">
+<title>pkcs11_info_to_url ()</title>
+<indexterm zone="pkcs11-info-to-url"><primary>pkcs11_info_to_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_info_to_url                  (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-url-type-t"><type>gnutls_pkcs11_url_type_t</type></link> detailed</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> **url</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-init-pin" role="function">
+<title>pkcs11_init_pin ()</title>
+<indexterm zone="pkcs11-init-pin"><primary>pkcs11_init_pin</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_init_pin                     (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *pin</parameter>,
+                                                         <parameter><type>unsigned long </type> pin_len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-init-token" role="function">
+<title>pkcs11_init_token ()</title>
+<indexterm zone="pkcs11-init-token"><primary>pkcs11_init_token</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_init_token                   (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-slot-id-t"><type>ck_slot_id_t</type></link> slot_id</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *pin</parameter>,
+                                                         <parameter><type>unsigned long </type> pin_len</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *label</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-login" role="function">
+<title>pkcs11_login ()</title>
+<indexterm zone="pkcs11-login"><primary>pkcs11_login</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_login                        (<parameter><type>struct pkcs11_session_info</type> *sinfo</parameter>,
+                                                         <parameter><type>struct pin_info_st</type> *pin_info</parameter>,
+                                                         <parameter>const <type>struct token_info</type> *tokinfo</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> so</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-obj-flags-to-int" role="function">
+<title>pkcs11_obj_flags_to_int ()</title>
+<indexterm zone="pkcs11-obj-flags-to-int"><primary>pkcs11_obj_flags_to_int</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        pkcs11_obj_flags_to_int             (<parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-open-session" role="function">
+<title>pkcs11_open_session ()</title>
+<indexterm zone="pkcs11-open-session"><primary>pkcs11_open_session</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_open_session                 (<parameter><type>struct pkcs11_session_info</type> *sinfo</parameter>,
+                                                         <parameter><type>struct pin_info_st</type> *pin_info</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-read-pubkey" role="function">
+<title>pkcs11_read_pubkey ()</title>
+<indexterm zone="pkcs11-read-pubkey"><primary>pkcs11_read_pubkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_read_pubkey                  (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> pks</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> obj</parameter>,
+                                                         <parameter><link linkend="ck-key-type-t"><type>ck_key_type_t</type></link> key_type</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *pubkey</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-rescan-slots" role="function">
+<title>pkcs11_rescan_slots ()</title>
+<indexterm zone="pkcs11-rescan-slots"><primary>pkcs11_rescan_slots</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                pkcs11_rescan_slots                 (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-rv-to-err" role="function">
+<title>pkcs11_rv_to_err ()</title>
+<indexterm zone="pkcs11-rv-to-err"><primary>pkcs11_rv_to_err</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_rv_to_err                    (<parameter><link linkend="ck-rv-t"><type>ck_rv_t</type></link> rv</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-set-pin" role="function">
+<title>pkcs11_set_pin ()</title>
+<indexterm zone="pkcs11-set-pin"><primary>pkcs11_set_pin</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_set_pin                      (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *old_pin</parameter>,
+                                                         <parameter><type>unsigned long </type> old_len</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *new_pin</parameter>,
+                                                         <parameter><type>unsigned long </type> new_len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-sign" role="function">
+<title>pkcs11_sign ()</title>
+<indexterm zone="pkcs11-sign"><primary>pkcs11_sign</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_sign                         (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter><type>unsigned long </type> data_len</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *signature</parameter>,
+                                                         <parameter>unsigned <link linkend="long"><type>long</type></link> *signature_len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-sign-init" role="function">
+<title>pkcs11_sign_init ()</title>
+<indexterm zone="pkcs11-sign-init"><primary>pkcs11_sign_init</primary></indexterm>
+<programlisting><link linkend="ck-rv-t"><returnvalue>ck_rv_t</returnvalue></link>             pkcs11_sign_init                    (<parameter><type>struct ck_function_list</type> *module</parameter>,
+                                                         <parameter><link linkend="ck-session-handle-t"><type>ck_session_handle_t</type></link> sess</parameter>,
+                                                         <parameter><type>struct ck_mechanism</type> *mechanism</parameter>,
+                                                         <parameter><link linkend="ck-object-handle-t"><type>ck_object_handle_t</type></link> key</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-strerror" role="function">
+<title>pkcs11_strerror ()</title>
+<indexterm zone="pkcs11-strerror"><primary>pkcs11_strerror</primary></indexterm>
+<programlisting>const <link linkend="char"><returnvalue>char</returnvalue></link> *        pkcs11_strerror                     (<parameter><link linkend="ck-rv-t"><type>ck_rv_t</type></link> rv</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-strtype-to-class" role="function">
+<title>pkcs11_strtype_to_class ()</title>
+<indexterm zone="pkcs11-strtype-to-class"><primary>pkcs11_strtype_to_class</primary></indexterm>
+<programlisting><link linkend="ck-object-class-t"><returnvalue>ck_object_class_t</returnvalue></link>   pkcs11_strtype_to_class             (<parameter>const <link linkend="char"><type>char</type></link> *type</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-token-matches-info" role="function">
+<title>pkcs11_token_matches_info ()</title>
+<indexterm zone="pkcs11-token-matches-info"><primary>pkcs11_token_matches_info</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_token_matches_info           (<parameter><type>struct p11_kit_uri</type> *info</parameter>,
+                                                         <parameter><type>struct ck_token_info</type> *tinfo</parameter>,
+                                                         <parameter><type>struct ck_info</type> *lib_info</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pkcs11-url-to-info" role="function">
+<title>pkcs11_url_to_info ()</title>
+<indexterm zone="pkcs11-url-to-info"><primary>pkcs11_url_to_info</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pkcs11_url_to_info                  (<parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter><type>struct p11_kit_uri</type> **info</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

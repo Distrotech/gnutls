@@ -1,0 +1,1955 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-abstract">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-abstract.top_of_page">abstract</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>abstract</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-abstract.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-PCERT-NO-CERT:CAPS">GNUTLS_PCERT_NO_CERT</link>
+#define             <link linkend="GNUTLS-PRIVKEY-DISABLE-CALLBACKS:CAPS">GNUTLS_PRIVKEY_DISABLE_CALLBACKS</link>
+#define             <link linkend="GNUTLS-PRIVKEY-IMPORT-AUTO-RELEASE:CAPS">GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE</link>
+#define             <link linkend="GNUTLS-PRIVKEY-IMPORT-COPY:CAPS">GNUTLS_PRIVKEY_IMPORT_COPY</link>
+#define             <link linkend="GNUTLS-PUBKEY-DISABLE-CALLBACKS:CAPS">GNUTLS_PUBKEY_DISABLE_CALLBACKS</link>
+#define             <link linkend="GNUTLS-PUBKEY-VERIFY-FLAG-TLS-RSA:CAPS">GNUTLS_PUBKEY_VERIFY_FLAG_TLS_RSA</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-key">gnutls_certificate_set_key</link>          (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> **names</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> names_size</parameter>,
+                                                         <parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert_list</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> pcert_list_size</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-certificate-set-retrieve-function2">gnutls_certificate_set_retrieve_function2</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> cred</parameter>,
+                                                         <parameter><link linkend="gnutls-certificate-retrieve-function2"><type>gnutls_certificate_retrieve_function2</type></link> *func</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-pcert-deinit">gnutls_pcert_deinit</link>                 (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pcert-import-openpgp">gnutls_pcert_import_openpgp</link>         (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pcert-import-openpgp-raw">gnutls_pcert_import_openpgp_raw</link>     (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pcert-import-x509">gnutls_pcert_import_x509</link>            (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pcert-import-x509-raw">gnutls_pcert_import_x509_raw</link>        (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pcert-list-import-x509-raw">gnutls_pcert_list_import_x509_raw</link>   (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcerts</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *pcert_max</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-decrypt-data">gnutls_privkey_decrypt_data</link>         (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *plaintext</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-privkey-decrypt-func">*gnutls_privkey_decrypt_func</link>)      (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *plaintext</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-privkey-deinit">gnutls_privkey_deinit</link>               (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="gnutls-privkey-deinit-func">*gnutls_privkey_deinit_func</link>)       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-get-pk-algorithm">gnutls_privkey_get_pk_algorithm</link>     (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-ext">gnutls_privkey_import_ext</link>           (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-sign-func"><type>gnutls_privkey_sign_func</type></link> sign_func</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-decrypt-func"><type>gnutls_privkey_decrypt_func</type></link> decrypt_func</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-ext2">gnutls_privkey_import_ext2</link>          (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-sign-func"><type>gnutls_privkey_sign_func</type></link> sign_func</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-decrypt-func"><type>gnutls_privkey_decrypt_func</type></link> decrypt_func</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-deinit-func"><type>gnutls_privkey_deinit_func</type></link> deinit_func</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-openpgp">gnutls_privkey_import_openpgp</link>       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-openpgp-raw">gnutls_privkey_import_openpgp_raw</link>   (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-pkcs11">gnutls_privkey_import_pkcs11</link>        (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-privkey-t"><type>gnutls_pkcs11_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-pkcs11-url">gnutls_privkey_import_pkcs11_url</link>    (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-tpm-raw">gnutls_privkey_import_tpm_raw</link>       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *fdata</parameter>,
+                                                         <parameter><link linkend="gnutls-tpmkey-fmt-t"><type>gnutls_tpmkey_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *key_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-tpm-url">gnutls_privkey_import_tpm_url</link>       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *key_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-url">gnutls_privkey_import_url</link>           (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-x509">gnutls_privkey_import_x509</link>          (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-privkey-t"><type>gnutls_x509_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-import-x509-raw">gnutls_privkey_import_x509_raw</link>      (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-init">gnutls_privkey_init</link>                 (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> *key</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-privkey-set-pin-function">gnutls_privkey_set_pin_function</link>     (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-pin-callback-t"><type>gnutls_pin_callback_t</type></link> fn</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-sign-data">gnutls_privkey_sign_data</link>            (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> signer</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-privkey-sign-func">*gnutls_privkey_sign_func</link>)         (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *raw_data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-privkey-sign-hash">gnutls_privkey_sign_hash</link>            (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> signer</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash_algo</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *hash_data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);
+struct              <link linkend="gnutls-privkey-st">gnutls_privkey_st</link>;
+typedef             <link linkend="gnutls-privkey-t">gnutls_privkey_t</link>;
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-pubkey-deinit">gnutls_pubkey_deinit</link>                (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-encrypt-data">gnutls_pubkey_encrypt_data</link>          (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *plaintext</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ciphertext</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-export">gnutls_pubkey_export</link>                (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-export2">gnutls_pubkey_export2</link>               (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-key-id">gnutls_pubkey_get_key_id</link>            (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-key-usage">gnutls_pubkey_get_key_usage</link>         (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *usage</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-openpgp-key-id">gnutls_pubkey_get_openpgp_key_id</link>    (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *subkey</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-pk-algorithm">gnutls_pubkey_get_pk_algorithm</link>      (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-pk-dsa-raw">gnutls_pubkey_get_pk_dsa_raw</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-pk-ecc-raw">gnutls_pubkey_get_pk_ecc_raw</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> *curve</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-pk-ecc-x962">gnutls_pubkey_get_pk_ecc_x962</link>       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *parameters</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ecpoint</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-pk-rsa-raw">gnutls_pubkey_get_pk_rsa_raw</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-preferred-hash-algorithm">gnutls_pubkey_get_preferred_hash_algorithm</link>
+                                                        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *hash</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *mand</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-get-verify-algorithm">gnutls_pubkey_get_verify_algorithm</link>  (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *hash</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import">gnutls_pubkey_import</link>                (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-dsa-raw">gnutls_pubkey_import_dsa_raw</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-ecc-raw">gnutls_pubkey_import_ecc_raw</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> curve</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-ecc-x962">gnutls_pubkey_import_ecc_x962</link>       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *parameters</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ecpoint</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-openpgp">gnutls_pubkey_import_openpgp</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-openpgp-raw">gnutls_pubkey_import_openpgp_raw</link>    (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-pkcs11">gnutls_pubkey_import_pkcs11</link>         (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-obj-t"><type>gnutls_pkcs11_obj_t</type></link> obj</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-pkcs11-url">gnutls_pubkey_import_pkcs11_url</link>     (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-privkey">gnutls_pubkey_import_privkey</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> usage</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-rsa-raw">gnutls_pubkey_import_rsa_raw</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-tpm-raw">gnutls_pubkey_import_tpm_raw</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *fdata</parameter>,
+                                                         <parameter><link linkend="gnutls-tpmkey-fmt-t"><type>gnutls_tpmkey_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-tpm-url">gnutls_pubkey_import_tpm_url</link>        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-url">gnutls_pubkey_import_url</link>            (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-x509">gnutls_pubkey_import_x509</link>           (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-x509-crq">gnutls_pubkey_import_x509_crq</link>       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> crq</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-import-x509-raw">gnutls_pubkey_import_x509_raw</link>       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-init">gnutls_pubkey_init</link>                  (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> *key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-set-key-usage">gnutls_pubkey_set_key_usage</link>         (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> usage</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-pubkey-set-pin-function">gnutls_pubkey_set_pin_function</link>      (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-pin-callback-t"><type>gnutls_pin_callback_t</type></link> fn</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>);
+struct              <link linkend="gnutls-pubkey-st">gnutls_pubkey_st</link>;
+typedef             <link linkend="gnutls-pubkey-t">gnutls_pubkey_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-verify-data">gnutls_pubkey_verify_data</link>           (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pubkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-verify-data2">gnutls_pubkey_verify_data2</link>          (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pubkey</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link> algo</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-pubkey-verify-hash2">gnutls_pubkey_verify_hash2</link>          (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link> algo</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *hash</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-x509-crl-privkey-sign">gnutls_x509_crl_privkey_sign</link>        (<parameter><link linkend="gnutls-x509-crl-t"><type>gnutls_x509_crl_t</type></link> crl</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> issuer_key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> dig</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-x509-crq-privkey-sign">gnutls_x509_crq_privkey_sign</link>        (<parameter><link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> crq</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> dig</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-x509-crq-set-pubkey">gnutls_x509_crq_set_pubkey</link>          (<parameter><link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> crq</parameter>,
+                                                         <parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-x509-crt-privkey-sign">gnutls_x509_crt_privkey_sign</link>        (<parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> issuer_key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> dig</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-x509-crt-set-pubkey">gnutls_x509_crt_set_pubkey</link>          (<parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-abstract.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-abstract.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-PCERT-NO-CERT:CAPS" role="macro">
+<title>GNUTLS_PCERT_NO_CERT</title>
+<indexterm zone="GNUTLS-PCERT-NO-CERT:CAPS"><primary>GNUTLS_PCERT_NO_CERT</primary></indexterm>
+<programlisting>#define GNUTLS_PCERT_NO_CERT 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-PRIVKEY-DISABLE-CALLBACKS:CAPS" role="macro">
+<title>GNUTLS_PRIVKEY_DISABLE_CALLBACKS</title>
+<indexterm zone="GNUTLS-PRIVKEY-DISABLE-CALLBACKS:CAPS"><primary>GNUTLS_PRIVKEY_DISABLE_CALLBACKS</primary></indexterm>
+<programlisting>#define GNUTLS_PRIVKEY_DISABLE_CALLBACKS (1&lt;&lt;2)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-PRIVKEY-IMPORT-AUTO-RELEASE:CAPS" role="macro">
+<title>GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE</title>
+<indexterm zone="GNUTLS-PRIVKEY-IMPORT-AUTO-RELEASE:CAPS"><primary>GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE</primary></indexterm>
+<programlisting>#define GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE (1&lt;&lt;0)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-PRIVKEY-IMPORT-COPY:CAPS" role="macro">
+<title>GNUTLS_PRIVKEY_IMPORT_COPY</title>
+<indexterm zone="GNUTLS-PRIVKEY-IMPORT-COPY:CAPS"><primary>GNUTLS_PRIVKEY_IMPORT_COPY</primary></indexterm>
+<programlisting>#define GNUTLS_PRIVKEY_IMPORT_COPY (1&lt;&lt;1)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-PUBKEY-DISABLE-CALLBACKS:CAPS" role="macro">
+<title>GNUTLS_PUBKEY_DISABLE_CALLBACKS</title>
+<indexterm zone="GNUTLS-PUBKEY-DISABLE-CALLBACKS:CAPS"><primary>GNUTLS_PUBKEY_DISABLE_CALLBACKS</primary></indexterm>
+<programlisting>#define GNUTLS_PUBKEY_DISABLE_CALLBACKS (1&lt;&lt;2)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-PUBKEY-VERIFY-FLAG-TLS-RSA:CAPS" role="macro">
+<title>GNUTLS_PUBKEY_VERIFY_FLAG_TLS_RSA</title>
+<indexterm zone="GNUTLS-PUBKEY-VERIFY-FLAG-TLS-RSA:CAPS"><primary>GNUTLS_PUBKEY_VERIFY_FLAG_TLS_RSA</primary></indexterm>
+<programlisting>#define GNUTLS_PUBKEY_VERIFY_FLAG_TLS_RSA 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-certificate-set-key" role="function" condition="since:3.0">
+<title>gnutls_certificate_set_key ()</title>
+<indexterm zone="gnutls-certificate-set-key" role="3.0"><primary>gnutls_certificate_set_key</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_key          (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> **names</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> names_size</parameter>,
+                                                         <parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert_list</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> pcert_list_size</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function sets a certificate/private key pair in the
+gnutls_certificate_credentials_t structure.  This function may be
+called more than once, in case multiple keys/certificates exist for
+the server.  For clients that wants to send more than its own end
+entity certificate (e.g., also an intermediate CA cert) then put
+the certificate chain in <parameter>pcert_list</parameter>. The <parameter>pcert_list</parameter> and <parameter>key</parameter> will
+become part of the credentials structure and must not
+be deallocated. They will be automatically deallocated when <parameter>res</parameter>
+is deinitialized.
+</para><variablelist role="params">
+<varlistentry><term><parameter>res</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>names</parameter>&#160;:</term>
+<listitem><simpara>is an array of DNS name of the certificate (NULL if none)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>names_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of the names list</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pcert_list</parameter>&#160;:</term>
+<listitem><simpara>contains a certificate list (path) for the specified private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pcert_list_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of the certificate list</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) on success, or a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-certificate-set-retrieve-function2" role="function" condition="since:3.0">
+<title>gnutls_certificate_set_retrieve_function2 ()</title>
+<indexterm zone="gnutls-certificate-set-retrieve-function2" role="3.0"><primary>gnutls_certificate_set_retrieve_function2</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_certificate_set_retrieve_function2
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> cred</parameter>,
+                                                         <parameter><link linkend="gnutls-certificate-retrieve-function2"><type>gnutls_certificate_retrieve_function2</type></link> *func</parameter>);</programlisting>
+<para>
+This function sets a callback to be called in order to retrieve the
+certificate to be used in the handshake.
+</para>
+<para>
+The callback's function prototype is:
+int (*callback)(gnutls_session_t, const gnutls_datum_t* req_ca_dn, int nreqs,
+const gnutls_pk_algorithm_t* pk_algos, int pk_algos_length, gnutls_pcert_st** pcert,
+unsigned int *pcert_length, gnutls_privkey_t * pkey);
+</para>
+<para>
+<parameter>req_ca_cert</parameter> is only used in X.509 certificates.
+Contains a list with the CA names that the server considers trusted.
+Normally we should send a certificate that is signed
+by one of these CAs. These names are DER encoded. To get a more
+meaningful value use the function <link linkend="gnutls-x509-rdn-get"><function>gnutls_x509_rdn_get()</function></link>.
+</para>
+<para>
+<parameter>pk_algos</parameter> contains a list with server's acceptable signature algorithms.
+The certificate returned should support the server's given algorithms.
+</para>
+<para>
+<parameter>pcert</parameter> should contain a single certificate and public or a list of them.
+</para>
+<para>
+<parameter>pcert_length</parameter> is the size of the previous list.
+</para>
+<para>
+<parameter>pkey</parameter> is the private key.
+</para>
+<para>
+If the callback function is provided then gnutls will call it, in the
+handshake, after the certificate request message has been received.
+</para>
+<para>
+In server side pk_algos and req_ca_dn are NULL.
+</para>
+<para>
+The callback function should set the certificate list to be sent,
+and return 0 on success. If no certificate was selected then the
+number of certificates should be set to zero. The value (-1)
+indicates error and the handshake will be terminated.
+</para><variablelist role="params">
+<varlistentry><term><parameter>cred</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>func</parameter>&#160;:</term>
+<listitem><simpara>is the callback function</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pcert-deinit" role="function" condition="since:3.0">
+<title>gnutls_pcert_deinit ()</title>
+<indexterm zone="gnutls-pcert-deinit" role="3.0"><primary>gnutls_pcert_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_pcert_deinit                 (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>);</programlisting>
+<para>
+This function will deinitialize a pcert structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pcert</parameter>&#160;:</term>
+<listitem><simpara>The structure to be deinitialized</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pcert-import-openpgp" role="function" condition="since:3.0">
+<title>gnutls_pcert_import_openpgp ()</title>
+<indexterm zone="gnutls-pcert-import-openpgp" role="3.0"><primary>gnutls_pcert_import_openpgp</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pcert_import_openpgp         (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This convenience function will import the given certificate to a
+<link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> structure. The structure must be deinitialized
+afterwards using <link linkend="gnutls-pcert-deinit"><function>gnutls_pcert_deinit()</function></link>;
+</para><variablelist role="params">
+<varlistentry><term><parameter>pcert</parameter>&#160;:</term>
+<listitem><simpara>The pcert structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>The raw certificate to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>zero for now</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pcert-import-openpgp-raw" role="function" condition="since:3.0">
+<title>gnutls_pcert_import_openpgp_raw ()</title>
+<indexterm zone="gnutls-pcert-import-openpgp-raw" role="3.0"><primary>gnutls_pcert_import_openpgp_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pcert_import_openpgp_raw     (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This convenience function will import the given certificate to a
+<link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> structure. The structure must be deinitialized
+afterwards using <link linkend="gnutls-pcert-deinit"><function>gnutls_pcert_deinit()</function></link>;
+</para><variablelist role="params">
+<varlistentry><term><parameter>pcert</parameter>&#160;:</term>
+<listitem><simpara>The pcert structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cert</parameter>&#160;:</term>
+<listitem><simpara>The raw certificate to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>The key ID to use (NULL for the master key)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>zero for now</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pcert-import-x509" role="function" condition="since:3.0">
+<title>gnutls_pcert_import_x509 ()</title>
+<indexterm zone="gnutls-pcert-import-x509" role="3.0"><primary>gnutls_pcert_import_x509</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pcert_import_x509            (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This convenience function will import the given certificate to a
+<link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> structure. The structure must be deinitialized
+afterwards using <link linkend="gnutls-pcert-deinit"><function>gnutls_pcert_deinit()</function></link>;
+</para><variablelist role="params">
+<varlistentry><term><parameter>pcert</parameter>&#160;:</term>
+<listitem><simpara>The pcert structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>The raw certificate to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>zero for now</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pcert-import-x509-raw" role="function" condition="since:3.0">
+<title>gnutls_pcert_import_x509_raw ()</title>
+<indexterm zone="gnutls-pcert-import-x509-raw" role="3.0"><primary>gnutls_pcert_import_x509_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pcert_import_x509_raw        (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This convenience function will import the given certificate to a
+<link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> structure. The structure must be deinitialized
+afterwards using <link linkend="gnutls-pcert-deinit"><function>gnutls_pcert_deinit()</function></link>;
+</para><variablelist role="params">
+<varlistentry><term><parameter>pcert</parameter>&#160;:</term>
+<listitem><simpara>The pcert structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cert</parameter>&#160;:</term>
+<listitem><simpara>The raw certificate to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>zero for now</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pcert-list-import-x509-raw" role="function" condition="since:3.0">
+<title>gnutls_pcert_list_import_x509_raw ()</title>
+<indexterm zone="gnutls-pcert-list-import-x509-raw" role="3.0"><primary>gnutls_pcert_list_import_x509_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pcert_list_import_x509_raw   (<parameter><link linkend="gnutls-pcert-st"><type>gnutls_pcert_st</type></link> *pcerts</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *pcert_max</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will convert the given PEM encoded certificate list
+to the native gnutls_x509_crt_t format. The output will be stored
+in <parameter>certs</parameter>.  They will be automatically initialized.
+</para>
+<para>
+If the Certificate is PEM encoded it should have a header of "X509
+CERTIFICATE", or "CERTIFICATE".
+</para><variablelist role="params">
+<varlistentry><term><parameter>pcerts</parameter>&#160;:</term>
+<listitem><simpara>The structures to store the parsed certificate. Must not be initialized.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pcert_max</parameter>&#160;:</term>
+<listitem><simpara>Initially must hold the maximum number of certs. It will be updated with the number of certs available.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The certificates.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of DER or PEM.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>must be (0) or an OR'd sequence of gnutls_certificate_import_flags.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the number of certificates read or a negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-privkey-decrypt-data" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_decrypt_data ()</title>
+<indexterm zone="gnutls-privkey-decrypt-data" role="2.12.0"><primary>gnutls_privkey_decrypt_data</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_decrypt_data         (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *plaintext</parameter>);</programlisting>
+<para>
+This function will decrypt the given data using the algorithm
+supported by the private key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>zero for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertext</parameter>&#160;:</term>
+<listitem><simpara>holds the data to be decrypted</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>plaintext</parameter>&#160;:</term>
+<listitem><simpara>will contain the decrypted data, allocated with <link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link></simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-decrypt-func" role="function">
+<title>gnutls_privkey_decrypt_func ()</title>
+<indexterm zone="gnutls-privkey-decrypt-func"><primary>gnutls_privkey_decrypt_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_privkey_decrypt_func)      (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *plaintext</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-privkey-deinit" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_deinit ()</title>
+<indexterm zone="gnutls-privkey-deinit" role="2.12.0"><primary>gnutls_privkey_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_privkey_deinit               (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will deinitialize a private key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be deinitialized</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-deinit-func" role="function">
+<title>gnutls_privkey_deinit_func ()</title>
+<indexterm zone="gnutls-privkey-deinit-func"><primary>gnutls_privkey_deinit_func</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*gnutls_privkey_deinit_func)       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-privkey-get-pk-algorithm" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_get_pk_algorithm ()</title>
+<indexterm zone="gnutls-privkey-get-pk-algorithm" role="2.12.0"><primary>gnutls_privkey_get_pk_algorithm</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_get_pk_algorithm     (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);</programlisting>
+<para>
+This function will return the public key algorithm of a private
+key and if possible will return a number of bits that indicates
+the security parameter of the key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bits</parameter>&#160;:</term>
+<listitem><simpara>If set will return the number of bits of the parameters (may be NULL)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>a member of the <link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> enumeration on
+success, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-ext" role="function" condition="since:3.0">
+<title>gnutls_privkey_import_ext ()</title>
+<indexterm zone="gnutls-privkey-import-ext" role="3.0"><primary>gnutls_privkey_import_ext</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_ext           (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-sign-func"><type>gnutls_privkey_sign_func</type></link> sign_func</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-decrypt-func"><type>gnutls_privkey_decrypt_func</type></link> decrypt_func</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will associate the given callbacks with the
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure. At least one of the two callbacks
+must be non-null.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pk</parameter>&#160;:</term>
+<listitem><simpara>The public key algorithm</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>userdata</parameter>&#160;:</term>
+<listitem><simpara>private data to be provided to the callbacks</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sign_func</parameter>&#160;:</term>
+<listitem><simpara>callback for signature operations</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>decrypt_func</parameter>&#160;:</term>
+<listitem><simpara>callback for decryption operations</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>Flags for the import</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-ext2" role="function" condition="since:3.1">
+<title>gnutls_privkey_import_ext2 ()</title>
+<indexterm zone="gnutls-privkey-import-ext2" role="3.1"><primary>gnutls_privkey_import_ext2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_ext2          (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-sign-func"><type>gnutls_privkey_sign_func</type></link> sign_func</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-decrypt-func"><type>gnutls_privkey_decrypt_func</type></link> decrypt_func</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-deinit-func"><type>gnutls_privkey_deinit_func</type></link> deinit_func</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will associate the given callbacks with the
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure. At least one of the two callbacks
+must be non-null. If a deinitialization function is provided
+then flags is assumed to contain <link linkend="GNUTLS-PRIVKEY-IMPORT-AUTO-RELEASE:CAPS"><literal>GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pk</parameter>&#160;:</term>
+<listitem><simpara>The public key algorithm</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>userdata</parameter>&#160;:</term>
+<listitem><simpara>private data to be provided to the callbacks</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sign_func</parameter>&#160;:</term>
+<listitem><simpara>callback for signature operations</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>decrypt_func</parameter>&#160;:</term>
+<listitem><simpara>callback for decryption operations</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>deinit_func</parameter>&#160;:</term>
+<listitem><simpara>a deinitialization function</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>Flags for the import</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1</para></refsect2>
+<refsect2 id="gnutls-privkey-import-openpgp" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_import_openpgp ()</title>
+<indexterm zone="gnutls-privkey-import-openpgp" role="2.12.0"><primary>gnutls_privkey_import_openpgp</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_openpgp       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure.
+</para>
+<para>
+The <link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> object must not be deallocated
+during the lifetime of this structure. The subkey set as
+preferred will be used, or the master key otherwise.
+</para>
+<para>
+<parameter>flags</parameter> might be zero or one of <link linkend="GNUTLS-PRIVKEY-IMPORT-AUTO-RELEASE:CAPS"><literal>GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE</literal></link>
+and <link linkend="GNUTLS-PRIVKEY-IMPORT-COPY:CAPS"><literal>GNUTLS_PRIVKEY_IMPORT_COPY</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The private key to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>Flags for the import</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-openpgp-raw" role="function" condition="since:3.1.0">
+<title>gnutls_privkey_import_openpgp_raw ()</title>
+<indexterm zone="gnutls-privkey-import-openpgp-raw" role="3.1.0"><primary>gnutls_privkey_import_openpgp_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_openpgp_raw   (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The private key data to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>The key id to use (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>password</parameter>&#160;:</term>
+<listitem><simpara>A password (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-pkcs11" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_import_pkcs11 ()</title>
+<indexterm zone="gnutls-privkey-import-pkcs11" role="2.12.0"><primary>gnutls_privkey_import_pkcs11</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_pkcs11        (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-privkey-t"><type>gnutls_pkcs11_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure.
+</para>
+<para>
+The <link linkend="gnutls-pkcs11-privkey-t"><type>gnutls_pkcs11_privkey_t</type></link> object must not be deallocated
+during the lifetime of this structure.
+</para>
+<para>
+<parameter>flags</parameter> might be zero or one of <link linkend="GNUTLS-PRIVKEY-IMPORT-AUTO-RELEASE:CAPS"><literal>GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE</literal></link>
+and <link linkend="GNUTLS-PRIVKEY-IMPORT-COPY:CAPS"><literal>GNUTLS_PRIVKEY_IMPORT_COPY</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The private key to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>Flags for the import</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-pkcs11-url" role="function" condition="since:3.1.0">
+<title>gnutls_privkey_import_pkcs11_url ()</title>
+<indexterm zone="gnutls-privkey-import-pkcs11-url" role="3.1.0"><primary>gnutls_privkey_import_pkcs11_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_pkcs11_url    (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>);</programlisting>
+<para>
+This function will import a PKCS 11 private key to a <link linkend="gnutls-private-key-t"><type>gnutls_private_key_t</type></link>
+structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>A key of type <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>A PKCS 11 url</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-tpm-raw" role="function" condition="since:3.1.0">
+<title>gnutls_privkey_import_tpm_raw ()</title>
+<indexterm zone="gnutls-privkey-import-tpm-raw" role="3.1.0"><primary>gnutls_privkey_import_tpm_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_tpm_raw       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *fdata</parameter>,
+                                                         <parameter><link linkend="gnutls-tpmkey-fmt-t"><type>gnutls_tpmkey_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *key_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure. 
+</para>
+<para>
+With respect to passwords the same as in <link linkend="gnutls-privkey-import-tpm-url"><function>gnutls_privkey_import_tpm_url()</function></link> apply.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fdata</parameter>&#160;:</term>
+<listitem><simpara>The TPM key to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srk_password</parameter>&#160;:</term>
+<listitem><simpara>The password for the SRK key (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key_password</parameter>&#160;:</term>
+<listitem><simpara>A password for the key (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-tpm-url" role="function" condition="since:3.1.0">
+<title>gnutls_privkey_import_tpm_url ()</title>
+<indexterm zone="gnutls-privkey-import-tpm-url" role="3.1.0"><primary>gnutls_privkey_import_tpm_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_tpm_url       (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *key_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure.
+</para>
+<para>
+Note that unless <link linkend="GNUTLS-PRIVKEY-DISABLE-CALLBACKS:CAPS"><literal>GNUTLS_PRIVKEY_DISABLE_CALLBACKS</literal></link>
+is specified, if incorrect (or NULL) passwords are given
+the PKCS11 callback functions will be used to obtain the
+correct passwords. Otherwise if the SRK password is wrong
+<link linkend="GNUTLS-E-TPM-SRK-PASSWORD-ERROR:CAPS"><literal>GNUTLS_E_TPM_SRK_PASSWORD_ERROR</literal></link> is returned and if the key password
+is wrong or not provided then <link linkend="GNUTLS-E-TPM-KEY-PASSWORD-ERROR:CAPS"><literal>GNUTLS_E_TPM_KEY_PASSWORD_ERROR</literal></link>
+is returned.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>The URL of the TPM key to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srk_password</parameter>&#160;:</term>
+<listitem><simpara>The password for the SRK key (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key_password</parameter>&#160;:</term>
+<listitem><simpara>A password for the key (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>One of the GNUTLS_PRIVKEY_* flags</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-url" role="function" condition="since:3.1.0">
+<title>gnutls_privkey_import_url ()</title>
+<indexterm zone="gnutls-privkey-import-url" role="3.1.0"><primary>gnutls_privkey_import_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_url           (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import a PKCS11 or TPM URL as a
+private key. The supported URL types can be checked
+using <link linkend="gnutls-url-is-supported"><function>gnutls_url_is_supported()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>A key of type <link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>A PKCS 11 url</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-x509" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_import_x509 ()</title>
+<indexterm zone="gnutls-privkey-import-x509" role="2.12.0"><primary>gnutls_privkey_import_x509</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_x509          (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-privkey-t"><type>gnutls_x509_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure.
+</para>
+<para>
+The <link linkend="gnutls-x509-privkey-t"><type>gnutls_x509_privkey_t</type></link> object must not be deallocated
+during the lifetime of this structure.
+</para>
+<para>
+<parameter>flags</parameter> might be zero or one of <link linkend="GNUTLS-PRIVKEY-IMPORT-AUTO-RELEASE:CAPS"><literal>GNUTLS_PRIVKEY_IMPORT_AUTO_RELEASE</literal></link>
+and <link linkend="GNUTLS-PRIVKEY-IMPORT-COPY:CAPS"><literal>GNUTLS_PRIVKEY_IMPORT_COPY</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The private key to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>Flags for the import</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-import-x509-raw" role="function" condition="since:3.1.0">
+<title>gnutls_privkey_import_x509_raw ()</title>
+<indexterm zone="gnutls-privkey-import-x509-raw" role="3.1.0"><primary>gnutls_privkey_import_x509_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_import_x509_raw      (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure. 
+</para>
+<para>
+The supported formats are typical X.509, PKCS #8 and the openssl
+format.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The private key data to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>password</parameter>&#160;:</term>
+<listitem><simpara>A password (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>an ORed sequence of gnutls_pkcs_encrypt_flags_t</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-privkey-init" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_init ()</title>
+<indexterm zone="gnutls-privkey-init" role="2.12.0"><primary>gnutls_privkey_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_init                 (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> *key</parameter>);</programlisting>
+<para>
+This function will initialize an private key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-set-pin-function" role="function" condition="since:3.1.0">
+<title>gnutls_privkey_set_pin_function ()</title>
+<indexterm zone="gnutls-privkey-set-pin-function" role="3.1.0"><primary>gnutls_privkey_set_pin_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_privkey_set_pin_function     (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-pin-callback-t"><type>gnutls_pin_callback_t</type></link> fn</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>);</programlisting>
+<para>
+This function will set a callback function to be used when
+required to access the object. This function overrides any other
+global PIN functions.
+</para>
+<para>
+Note that this function must be called right after initialization
+to have effect.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>A key of type <link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fn</parameter>&#160;:</term>
+<listitem><simpara>the callback</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>userdata</parameter>&#160;:</term>
+<listitem><simpara>data associated with the callback</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-privkey-sign-data" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_sign_data ()</title>
+<indexterm zone="gnutls-privkey-sign-data" role="2.12.0"><primary>gnutls_privkey_sign_data</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_sign_data            (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> signer</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);</programlisting>
+<para>
+This function will sign the given data using a signature algorithm
+supported by the private key. Signature algorithms are always used
+together with a hash functions.  Different hash functions may be
+used for the RSA algorithm, but only the SHA family for the DSA keys.
+</para>
+<para>
+You may use <link linkend="gnutls-pubkey-get-preferred-hash-algorithm"><function>gnutls_pubkey_get_preferred_hash_algorithm()</function></link> to determine
+the hash algorithm.
+</para><variablelist role="params">
+<varlistentry><term><parameter>signer</parameter>&#160;:</term>
+<listitem><simpara>Holds the key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>hash</parameter>&#160;:</term>
+<listitem><simpara>should be a digest algorithm</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be 0 for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>holds the data to be signed</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>signature</parameter>&#160;:</term>
+<listitem><simpara>will contain the signature allocate with <link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link></simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-sign-func" role="function">
+<title>gnutls_privkey_sign_func ()</title>
+<indexterm zone="gnutls-privkey-sign-func"><primary>gnutls_privkey_sign_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_privkey_sign_func)         (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *raw_data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-privkey-sign-hash" role="function" condition="since:2.12.0">
+<title>gnutls_privkey_sign_hash ()</title>
+<indexterm zone="gnutls-privkey-sign-hash" role="2.12.0"><primary>gnutls_privkey_sign_hash</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_privkey_sign_hash            (<parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> signer</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash_algo</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *hash_data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);</programlisting>
+<para>
+This function will sign the given hashed data using a signature algorithm
+supported by the private key. Signature algorithms are always used
+together with a hash functions.  Different hash functions may be
+used for the RSA algorithm, but only SHA-XXX for the DSA keys.
+</para>
+<para>
+You may use <link linkend="gnutls-pubkey-get-preferred-hash-algorithm"><function>gnutls_pubkey_get_preferred_hash_algorithm()</function></link> to determine
+the hash algorithm.
+</para><variablelist role="params">
+<varlistentry><term><parameter>signer</parameter>&#160;:</term>
+<listitem><simpara>Holds the signer's key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>hash_algo</parameter>&#160;:</term>
+<listitem><simpara>The hash algorithm used</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>zero for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>hash_data</parameter>&#160;:</term>
+<listitem><simpara>holds the data to be signed</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>signature</parameter>&#160;:</term>
+<listitem><simpara>will contain newly allocated signature</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-privkey-st" role="struct">
+<title>struct gnutls_privkey_st</title>
+<indexterm zone="gnutls-privkey-st"><primary>gnutls_privkey_st</primary></indexterm>
+<programlisting>struct gnutls_privkey_st;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-privkey-t" role="typedef">
+<title>gnutls_privkey_t</title>
+<indexterm zone="gnutls-privkey-t"><primary>gnutls_privkey_t</primary></indexterm>
+<programlisting>typedef struct gnutls_privkey_st *gnutls_privkey_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pubkey-deinit" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_deinit ()</title>
+<indexterm zone="gnutls-pubkey-deinit" role="2.12.0"><primary>gnutls_pubkey_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_pubkey_deinit                (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will deinitialize a public key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be deinitialized</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-encrypt-data" role="function" condition="since:3.0">
+<title>gnutls_pubkey_encrypt_data ()</title>
+<indexterm zone="gnutls-pubkey-encrypt-data" role="3.0"><primary>gnutls_pubkey_encrypt_data</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_encrypt_data          (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *plaintext</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ciphertext</parameter>);</programlisting>
+<para>
+This function will encrypt the given data, using the public
+key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be 0 for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>plaintext</parameter>&#160;:</term>
+<listitem><simpara>The data to be encrypted</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ciphertext</parameter>&#160;:</term>
+<listitem><simpara>contains the encrypted data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-export" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_export ()</title>
+<indexterm zone="gnutls-pubkey-export" role="2.12.0"><primary>gnutls_pubkey_export</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_export                (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);</programlisting>
+<para>
+This function will export the public key to DER or PEM format.
+The contents of the exported data is the SubjectPublicKeyInfo
+X.509 structure.
+</para>
+<para>
+If the buffer provided is not long enough to hold the output, then
+*output_data_size is updated and <link linkend="GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS"><literal>GNUTLS_E_SHORT_MEMORY_BUFFER</literal></link> will
+be returned.
+</para>
+<para>
+If the structure is PEM encoded, it will have a header
+of "BEGIN CERTIFICATE".
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of output params. One of PEM or DER.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data</parameter>&#160;:</term>
+<listitem><simpara>will contain a certificate PEM or DER encoded</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of output_data (and will be
+replaced by the actual size of parameters)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-export2" role="function" condition="since:3.1.3">
+<title>gnutls_pubkey_export2 ()</title>
+<indexterm zone="gnutls-pubkey-export2" role="3.1.3"><primary>gnutls_pubkey_export2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_export2               (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);</programlisting>
+<para>
+This function will export the public key to DER or PEM format.
+The contents of the exported data is the SubjectPublicKeyInfo
+X.509 structure.
+</para>
+<para>
+The output buffer will be allocated using <link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link>.
+</para>
+<para>
+If the structure is PEM encoded, it will have a header
+of "BEGIN CERTIFICATE".
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of output params. One of PEM or DER.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>out</parameter>&#160;:</term>
+<listitem><simpara>will contain a certificate PEM or DER encoded</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.3</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-key-id" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_get_key_id ()</title>
+<indexterm zone="gnutls-pubkey-get-key-id" role="2.12.0"><primary>gnutls_pubkey_get_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_key_id            (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);</programlisting>
+<para>
+This function will return a unique ID that depends on the public
+key parameters. This ID can be used in checking whether a
+certificate corresponds to the given public key.
+</para>
+<para>
+If the buffer provided is not long enough to hold the output, then
+*output_data_size is updated and <link linkend="GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS"><literal>GNUTLS_E_SHORT_MEMORY_BUFFER</literal></link> will
+be returned.  The output will normally be a SHA-1 hash output,
+which is 20 bytes.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be 0 for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data</parameter>&#160;:</term>
+<listitem><simpara>will contain the key ID</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of output_data (and will be
+replaced by the actual size of parameters)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-key-usage" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_get_key_usage ()</title>
+<indexterm zone="gnutls-pubkey-get-key-usage" role="2.12.0"><primary>gnutls_pubkey_get_key_usage</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_key_usage         (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *usage</parameter>);</programlisting>
+<para>
+This function will return the key usage of the public key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>usage</parameter>&#160;:</term>
+<listitem><simpara>If set will return the number of bits of the parameters (may be NULL)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-openpgp-key-id" role="function" condition="since:3.0">
+<title>gnutls_pubkey_get_openpgp_key_id ()</title>
+<indexterm zone="gnutls-pubkey-get-openpgp-key-id" role="3.0"><primary>gnutls_pubkey_get_openpgp_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_openpgp_key_id    (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *subkey</parameter>);</programlisting>
+<para>
+This function returned the OpenPGP key ID of the corresponding key.
+The key is a unique ID that depends on the public
+key parameters. 
+</para>
+<para>
+If the buffer provided is not long enough to hold the output, then
+*output_data_size is updated and <link linkend="GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS"><literal>GNUTLS_E_SHORT_MEMORY_BUFFER</literal></link> will
+be returned.  The output is <link linkend="GNUTLS-OPENPGP-KEYID-SIZE:CAPS"><literal>GNUTLS_OPENPGP_KEYID_SIZE</literal></link> bytes long.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be 0 for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data</parameter>&#160;:</term>
+<listitem><simpara>will contain the key ID</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of output_data (and will be
+replaced by the actual size of parameters)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subkey</parameter>&#160;:</term>
+<listitem><simpara>Will be non zero if the key ID corresponds to a subkey</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of failure a negative error code will be
+returned, and 0 on success.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-pk-algorithm" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_get_pk_algorithm ()</title>
+<indexterm zone="gnutls-pubkey-get-pk-algorithm" role="2.12.0"><primary>gnutls_pubkey_get_pk_algorithm</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_pk_algorithm      (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);</programlisting>
+<para>
+This function will return the public key algorithm of a public
+key and if possible will return a number of bits that indicates
+the security parameter of the key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bits</parameter>&#160;:</term>
+<listitem><simpara>If set will return the number of bits of the parameters (may be NULL)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>a member of the <link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> enumeration on
+success, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-pk-dsa-raw" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_get_pk_dsa_raw ()</title>
+<indexterm zone="gnutls-pubkey-get-pk-dsa-raw" role="2.12.0"><primary>gnutls_pubkey_get_pk_dsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_pk_dsa_raw        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);</programlisting>
+<para>
+This function will export the DSA public key's parameters found in
+the given certificate.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>will hold the p</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>will hold the q</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>g</parameter>&#160;:</term>
+<listitem><simpara>will hold the g</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>will hold the y</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-pk-ecc-raw" role="function" condition="since:3.0">
+<title>gnutls_pubkey_get_pk_ecc_raw ()</title>
+<indexterm zone="gnutls-pubkey-get-pk-ecc-raw" role="3.0"><primary>gnutls_pubkey_get_pk_ecc_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_pk_ecc_raw        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> *curve</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);</programlisting>
+<para>
+This function will export the ECC public key's parameters found in
+the given certificate.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>curve</parameter>&#160;:</term>
+<listitem><simpara>will hold the curve</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>x</parameter>&#160;:</term>
+<listitem><simpara>will hold x</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>will hold y</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-pk-ecc-x962" role="function" condition="since:3.0">
+<title>gnutls_pubkey_get_pk_ecc_x962 ()</title>
+<indexterm zone="gnutls-pubkey-get-pk-ecc-x962" role="3.0"><primary>gnutls_pubkey_get_pk_ecc_x962</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_pk_ecc_x962       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *parameters</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ecpoint</parameter>);</programlisting>
+<para>
+This function will export the ECC public key's parameters found in
+the given certificate.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>parameters</parameter>&#160;:</term>
+<listitem><simpara>DER encoding of an ANSI X9.62 parameters</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ecpoint</parameter>&#160;:</term>
+<listitem><simpara>DER encoding of ANSI X9.62 ECPoint</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-pk-rsa-raw" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_get_pk_rsa_raw ()</title>
+<indexterm zone="gnutls-pubkey-get-pk-rsa-raw" role="2.12.0"><primary>gnutls_pubkey_get_pk_rsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_pk_rsa_raw        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);</programlisting>
+<para>
+This function will export the RSA public key's parameters found in
+the given structure.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>m</parameter>&#160;:</term>
+<listitem><simpara>will hold the modulus</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>e</parameter>&#160;:</term>
+<listitem><simpara>will hold the public exponent</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-preferred-hash-algorithm" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_get_preferred_hash_algorithm ()</title>
+<indexterm zone="gnutls-pubkey-get-preferred-hash-algorithm" role="2.12.0"><primary>gnutls_pubkey_get_preferred_hash_algorithm</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_preferred_hash_algorithm
+                                                        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *hash</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *mand</parameter>);</programlisting>
+<para>
+This function will read the certifcate and return the appropriate digest
+algorithm to use for signing with this certificate. Some certificates (i.e.
+DSA might not be able to sign without the preferred algorithm).
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>hash</parameter>&#160;:</term>
+<listitem><simpara>The result of the call with the hash algorithm used for signature</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>mand</parameter>&#160;:</term>
+<listitem><simpara>If non zero it means that the algorithm MUST use this hash. May be NULL.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the 0 if the hash algorithm is found. A negative error code is
+returned on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-get-verify-algorithm" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_get_verify_algorithm ()</title>
+<indexterm zone="gnutls-pubkey-get-verify-algorithm" role="2.12.0"><primary>gnutls_pubkey_get_verify_algorithm</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_get_verify_algorithm  (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *hash</parameter>);</programlisting>
+<para>
+This function will read the certifcate and the signed data to
+determine the hash algorithm used to generate the signature.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>signature</parameter>&#160;:</term>
+<listitem><simpara>contains the signature</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>hash</parameter>&#160;:</term>
+<listitem><simpara>The result of the call with the hash algorithm used for signature</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import ()</title>
+<indexterm zone="gnutls-pubkey-import" role="2.12.0"><primary>gnutls_pubkey_import</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import                (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+This function will import the provided public key in
+a SubjectPublicKeyInfo X.509 structure to a native
+<link linkend="gnutls-pubkey-t"><literal>gnutls_pubkey_t</literal></link> structure. The output will be stored 
+in <parameter>key</parameter>. If the public key is PEM encoded it should have a header 
+of "PUBLIC KEY".
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The DER or PEM encoded certificate.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of DER or PEM</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-dsa-raw" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import_dsa_raw ()</title>
+<indexterm zone="gnutls-pubkey-import-dsa-raw" role="2.12.0"><primary>gnutls_pubkey_import_dsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_dsa_raw        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);</programlisting>
+<para>
+This function will convert the given DSA raw parameters to the
+native <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> format.  The output will be stored
+in <parameter>key</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>holds the p</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>holds the q</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>g</parameter>&#160;:</term>
+<listitem><simpara>holds the g</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>holds the y</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-ecc-raw" role="function" condition="since:3.0">
+<title>gnutls_pubkey_import_ecc_raw ()</title>
+<indexterm zone="gnutls-pubkey-import-ecc-raw" role="3.0"><primary>gnutls_pubkey_import_ecc_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_ecc_raw        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-ecc-curve-t"><type>gnutls_ecc_curve_t</type></link> curve</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);</programlisting>
+<para>
+This function will convert the given elliptic curve parameters to a
+<link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link>.  The output will be stored in <parameter>key</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>curve</parameter>&#160;:</term>
+<listitem><simpara>holds the curve</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>x</parameter>&#160;:</term>
+<listitem><simpara>holds the x</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>holds the y</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-ecc-x962" role="function" condition="since:3.0">
+<title>gnutls_pubkey_import_ecc_x962 ()</title>
+<indexterm zone="gnutls-pubkey-import-ecc-x962" role="3.0"><primary>gnutls_pubkey_import_ecc_x962</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_ecc_x962       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *parameters</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ecpoint</parameter>);</programlisting>
+<para>
+This function will convert the given elliptic curve parameters to a
+<link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link>.  The output will be stored in <parameter>key</parameter>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>parameters</parameter>&#160;:</term>
+<listitem><simpara>DER encoding of an ANSI X9.62 parameters</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ecpoint</parameter>&#160;:</term>
+<listitem><simpara>DER encoding of ANSI X9.62 ECPoint</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-openpgp" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import_openpgp ()</title>
+<indexterm zone="gnutls-pubkey-import-openpgp" role="2.12.0"><primary>gnutls_pubkey_import_openpgp</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_openpgp        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+Imports a public key from an openpgp key. This function will import
+the given public key to the abstract <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link>
+structure. The subkey set as preferred will be imported or the
+master key otherwise.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>The certificate to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-openpgp-raw" role="function" condition="since:3.1.3">
+<title>gnutls_pubkey_import_openpgp_raw ()</title>
+<indexterm zone="gnutls-pubkey-import-openpgp-raw" role="3.1.3"><primary>gnutls_pubkey_import_openpgp_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_openpgp_raw    (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given public key to the abstract
+<link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The public key data to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>The key id to use (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>Should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.3</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-pkcs11" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import_pkcs11 ()</title>
+<indexterm zone="gnutls-pubkey-import-pkcs11" role="2.12.0"><primary>gnutls_pubkey_import_pkcs11</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_pkcs11         (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-pkcs11-obj-t"><type>gnutls_pkcs11_obj_t</type></link> obj</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+Imports a public key from a pkcs11 key. This function will import
+the given public key to the abstract <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>obj</parameter>&#160;:</term>
+<listitem><simpara>The parameters to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-pkcs11-url" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import_pkcs11_url ()</title>
+<indexterm zone="gnutls-pubkey-import-pkcs11-url" role="2.12.0"><primary>gnutls_pubkey_import_pkcs11_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_pkcs11_url     (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import a PKCS 11 certificate to a <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link>
+structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>A key of type <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>A PKCS 11 url</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>One of GNUTLS_PKCS11_OBJ_* flags</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-privkey" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import_privkey ()</title>
+<indexterm zone="gnutls-pubkey-import-privkey" role="2.12.0"><primary>gnutls_pubkey_import_privkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_privkey        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> usage</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+Imports the public key from a private.  This function will import
+the given public key to the abstract <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>usage</parameter>&#160;:</term>
+<listitem><simpara>GNUTLS_KEY_* key usage flags.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-rsa-raw" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import_rsa_raw ()</title>
+<indexterm zone="gnutls-pubkey-import-rsa-raw" role="2.12.0"><primary>gnutls_pubkey_import_rsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_rsa_raw        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);</programlisting>
+<para>
+This function will replace the parameters in the given structure.
+The new parameters should be stored in the appropriate
+gnutls_datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Is a structure will hold the parameters</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>m</parameter>&#160;:</term>
+<listitem><simpara>holds the modulus</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>e</parameter>&#160;:</term>
+<listitem><simpara>holds the public exponent</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-tpm-raw" role="function" condition="since:3.1.0">
+<title>gnutls_pubkey_import_tpm_raw ()</title>
+<indexterm zone="gnutls-pubkey-import-tpm-raw" role="3.1.0"><primary>gnutls_pubkey_import_tpm_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_tpm_raw        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *fdata</parameter>,
+                                                         <parameter><link linkend="gnutls-tpmkey-fmt-t"><type>gnutls_tpmkey_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the public key from the provided TPM key
+structure.
+</para>
+<para>
+With respect to passwords the same as in
+<link linkend="gnutls-pubkey-import-tpm-url"><function>gnutls_pubkey_import_tpm_url()</function></link> apply.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fdata</parameter>&#160;:</term>
+<listitem><simpara>The TPM key to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srk_password</parameter>&#160;:</term>
+<listitem><simpara>The password for the SRK key (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>One of the GNUTLS_PUBKEY_* flags</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-tpm-url" role="function" condition="since:3.1.0">
+<title>gnutls_pubkey_import_tpm_url ()</title>
+<indexterm zone="gnutls-pubkey-import-tpm-url" role="3.1.0"><primary>gnutls_pubkey_import_tpm_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_tpm_url        (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *srk_password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given private key to the abstract
+<link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> structure. 
+</para>
+<para>
+Note that unless <link linkend="GNUTLS-PUBKEY-DISABLE-CALLBACKS:CAPS"><literal>GNUTLS_PUBKEY_DISABLE_CALLBACKS</literal></link>
+is specified, if incorrect (or NULL) passwords are given
+the PKCS11 callback functions will be used to obtain the
+correct passwords. Otherwise if the SRK password is wrong
+<link linkend="GNUTLS-E-TPM-SRK-PASSWORD-ERROR:CAPS"><literal>GNUTLS_E_TPM_SRK_PASSWORD_ERROR</literal></link> is returned.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>The URL of the TPM key to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>srk_password</parameter>&#160;:</term>
+<listitem><simpara>The password for the SRK key (optional)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-url" role="function" condition="since:3.1.0">
+<title>gnutls_pubkey_import_url ()</title>
+<indexterm zone="gnutls-pubkey-import-url" role="3.1.0"><primary>gnutls_pubkey_import_url</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_url            (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *url</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import a PKCS11 certificate or a TPM key 
+as a public key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>A key of type <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>url</parameter>&#160;:</term>
+<listitem><simpara>A PKCS 11 url</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>One of GNUTLS_PKCS11_OBJ_* flags</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-x509" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_import_x509 ()</title>
+<indexterm zone="gnutls-pubkey-import-x509" role="2.12.0"><primary>gnutls_pubkey_import_x509</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_x509           (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given public key to the abstract
+<link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>The certificate to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-x509-crq" role="function" condition="since:3.1.5">
+<title>gnutls_pubkey_import_x509_crq ()</title>
+<indexterm zone="gnutls-pubkey-import-x509-crq" role="3.1.5"><primary>gnutls_pubkey_import_x509_crq</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_x509_crq       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> crq</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given public key to the abstract
+<link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crq</parameter>&#160;:</term>
+<listitem><simpara>The certificate to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.5</para></refsect2>
+<refsect2 id="gnutls-pubkey-import-x509-raw" role="function" condition="since:3.1.3">
+<title>gnutls_pubkey_import_x509_raw ()</title>
+<indexterm zone="gnutls-pubkey-import-x509-raw" role="3.1.3"><primary>gnutls_pubkey_import_x509_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_import_x509_raw       (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pkey</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-fmt-t"><type>gnutls_x509_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will import the given public key to the abstract
+<link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>The public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The public key data to be imported</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>The format of the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be zero</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.3</para></refsect2>
+<refsect2 id="gnutls-pubkey-init" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_init ()</title>
+<indexterm zone="gnutls-pubkey-init" role="2.12.0"><primary>gnutls_pubkey_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_init                  (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> *key</parameter>);</programlisting>
+<para>
+This function will initialize an public key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-set-key-usage" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_set_key_usage ()</title>
+<indexterm zone="gnutls-pubkey-set-key-usage" role="2.12.0"><primary>gnutls_pubkey_set_key_usage</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_set_key_usage         (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> usage</parameter>);</programlisting>
+<para>
+This function will set the key usage flags of the public key. This
+is only useful if the key is to be exported to a certificate or
+certificate request.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>a certificate of type <link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>usage</parameter>&#160;:</term>
+<listitem><simpara>an ORed sequence of the GNUTLS_KEY_* elements.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-set-pin-function" role="function" condition="since:3.1.0">
+<title>gnutls_pubkey_set_pin_function ()</title>
+<indexterm zone="gnutls-pubkey-set-pin-function" role="3.1.0"><primary>gnutls_pubkey_set_pin_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_pubkey_set_pin_function      (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-pin-callback-t"><type>gnutls_pin_callback_t</type></link> fn</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *userdata</parameter>);</programlisting>
+<para>
+This function will set a callback function to be used when
+required to access the object. This function overrides any other
+global PIN functions.
+</para>
+<para>
+Note that this function must be called right after initialization
+to have effect.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>A key of type <link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fn</parameter>&#160;:</term>
+<listitem><simpara>the callback</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>userdata</parameter>&#160;:</term>
+<listitem><simpara>data associated with the callback</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-st" role="struct">
+<title>struct gnutls_pubkey_st</title>
+<indexterm zone="gnutls-pubkey-st"><primary>gnutls_pubkey_st</primary></indexterm>
+<programlisting>struct gnutls_pubkey_st;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pubkey-t" role="typedef">
+<title>gnutls_pubkey_t</title>
+<indexterm zone="gnutls-pubkey-t"><primary>gnutls_pubkey_t</primary></indexterm>
+<programlisting>typedef struct gnutls_pubkey_st *gnutls_pubkey_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pubkey-verify-data" role="function" condition="since:2.12.0">
+<title>gnutls_pubkey_verify_data ()</title>
+<indexterm zone="gnutls-pubkey-verify-data" role="2.12.0"><primary>gnutls_pubkey_verify_data</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_verify_data           (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pubkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>);</programlisting>
+<para>
+This function will verify the given signed data, using the
+parameters from the certificate.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pubkey</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be 0 for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>holds the signed data</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of a verification failure <link linkend="GNUTLS-E-PK-SIG-VERIFY-FAILED:CAPS"><literal>GNUTLS_E_PK_SIG_VERIFY_FAILED</literal></link>
+is returned, and zero or positive code on success.
+Deprecated. Use <link linkend="gnutls-pubkey-verify-data2"><function>gnutls_pubkey_verify_data2()</function></link> instead of this function.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-verify-data2" role="function" condition="since:3.0">
+<title>gnutls_pubkey_verify_data2 ()</title>
+<indexterm zone="gnutls-pubkey-verify-data2" role="3.0"><primary>gnutls_pubkey_verify_data2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_verify_data2          (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> pubkey</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link> algo</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);</programlisting>
+<para>
+This function will verify the given signed data, using the
+parameters from the certificate.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pubkey</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>algo</parameter>&#160;:</term>
+<listitem><simpara>The signature algorithm used</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be 0 for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>holds the signed data</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>signature</parameter>&#160;:</term>
+<listitem><simpara>contains the signature</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of a verification failure <link linkend="GNUTLS-E-PK-SIG-VERIFY-FAILED:CAPS"><literal>GNUTLS_E_PK_SIG_VERIFY_FAILED</literal></link>
+is returned, and zero or positive code on success.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-pubkey-verify-hash2" role="function" condition="since:3.0">
+<title>gnutls_pubkey_verify_hash2 ()</title>
+<indexterm zone="gnutls-pubkey-verify-hash2" role="3.0"><primary>gnutls_pubkey_verify_hash2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_pubkey_verify_hash2          (<parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link> algo</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *hash</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>);</programlisting>
+<para>
+This function will verify the given signed digest, using the
+parameters from the public key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>algo</parameter>&#160;:</term>
+<listitem><simpara>The signature algorithm used</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be 0 for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>hash</parameter>&#160;:</term>
+<listitem><simpara>holds the hash digest to be verified</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>signature</parameter>&#160;:</term>
+<listitem><simpara>contains the signature</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>In case of a verification failure <link linkend="GNUTLS-E-PK-SIG-VERIFY-FAILED:CAPS"><literal>GNUTLS_E_PK_SIG_VERIFY_FAILED</literal></link>
+is returned, and zero or positive code on success.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-x509-crl-privkey-sign" role="function">
+<title>gnutls_x509_crl_privkey_sign ()</title>
+<indexterm zone="gnutls-x509-crl-privkey-sign"><primary>gnutls_x509_crl_privkey_sign</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_x509_crl_privkey_sign        (<parameter><link linkend="gnutls-x509-crl-t"><type>gnutls_x509_crl_t</type></link> crl</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> issuer_key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> dig</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will sign the CRL with the issuer's private key, and
+will copy the issuer's information into the CRL.
+</para>
+<para>
+This must be the last step in a certificate CRL since all
+the previously set parameters are now signed.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crl</parameter>&#160;:</term>
+<listitem><simpara>should contain a gnutls_x509_crl_t structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer</parameter>&#160;:</term>
+<listitem><simpara>is the certificate of the certificate issuer</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_key</parameter>&#160;:</term>
+<listitem><simpara>holds the issuer's private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dig</parameter>&#160;:</term>
+<listitem><simpara>The message digest to use. GNUTLS_DIG_SHA1 is the safe choice unless you know what you're doing.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>must be 0</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.
+Since 2.12.0</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-x509-crq-privkey-sign" role="function" condition="since:2.12.0">
+<title>gnutls_x509_crq_privkey_sign ()</title>
+<indexterm zone="gnutls-x509-crq-privkey-sign" role="2.12.0"><primary>gnutls_x509_crq_privkey_sign</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_x509_crq_privkey_sign        (<parameter><link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> crq</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> dig</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will sign the certificate request with a private key.
+This must be the same key as the one used in
+<link linkend="gnutls-x509-crt-set-key"><function>gnutls_x509_crt_set_key()</function></link> since a certificate request is self
+signed.
+</para>
+<para>
+This must be the last step in a certificate request generation
+since all the previously set parameters are now signed.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crq</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>holds a private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dig</parameter>&#160;:</term>
+<listitem><simpara>The message digest to use, i.e., <link linkend="GNUTLS-DIG-SHA1:CAPS"><literal>GNUTLS_DIG_SHA1</literal></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>must be 0</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.
+<link linkend="GNUTLS-E-ASN1-VALUE-NOT-FOUND:CAPS"><literal>GNUTLS_E_ASN1_VALUE_NOT_FOUND</literal></link> is returned if you didn't set all
+information in the certificate request (e.g., the version using
+<link linkend="gnutls-x509-crq-set-version"><function>gnutls_x509_crq_set_version()</function></link>).</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-x509-crq-set-pubkey" role="function" condition="since:2.12.0">
+<title>gnutls_x509_crq_set_pubkey ()</title>
+<indexterm zone="gnutls-x509-crq-set-pubkey" role="2.12.0"><primary>gnutls_x509_crq_set_pubkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_x509_crq_set_pubkey          (<parameter><link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> crq</parameter>,
+                                                         <parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will set the public parameters from the given public
+key to the request.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crq</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-x509-crq-t"><type>gnutls_x509_crq_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>holds a public key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-x509-crt-privkey-sign" role="function">
+<title>gnutls_x509_crt_privkey_sign ()</title>
+<indexterm zone="gnutls-x509-crt-privkey-sign"><primary>gnutls_x509_crt_privkey_sign</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_x509_crt_privkey_sign        (<parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> issuer</parameter>,
+                                                         <parameter><link linkend="gnutls-privkey-t"><type>gnutls_privkey_t</type></link> issuer_key</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> dig</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will sign the certificate with the issuer's private key, and
+will copy the issuer's information into the certificate.
+</para>
+<para>
+This must be the last step in a certificate generation since all
+the previously set parameters are now signed.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>a certificate of type <link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer</parameter>&#160;:</term>
+<listitem><simpara>is the certificate of the certificate issuer</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>issuer_key</parameter>&#160;:</term>
+<listitem><simpara>holds the issuer's private key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dig</parameter>&#160;:</term>
+<listitem><simpara>The message digest to use, <link linkend="GNUTLS-DIG-SHA1:CAPS"><literal>GNUTLS_DIG_SHA1</literal></link> is a safe choice</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>must be 0</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-x509-crt-set-pubkey" role="function" condition="since:2.12.0">
+<title>gnutls_x509_crt_set_pubkey ()</title>
+<indexterm zone="gnutls-x509-crt-set-pubkey" role="2.12.0"><primary>gnutls_x509_crt_set_pubkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_x509_crt_set_pubkey          (<parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-pubkey-t"><type>gnutls_pubkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will set the public parameters from the given public
+key to the request.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>holds a public key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+
+</refsect1>
+
+</refentry>

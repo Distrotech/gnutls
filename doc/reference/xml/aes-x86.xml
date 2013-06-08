@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-aes-x86">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-aes-x86.top_of_page">aes-x86</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>aes-x86</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-aes-x86.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="AES-KEY-ALIGN-SIZE:CAPS">AES_KEY_ALIGN_SIZE</link>
+#define             <link linkend="AES-MAXNR:CAPS">AES_MAXNR</link>
+#define             <link linkend="ALIGN16:CAPS">ALIGN16</link>                             (x)
+extern const gnutls_crypto_cipher_st <link linkend="aes-gcm-struct">aes_gcm_struct</link>;
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="aesni-cbc-encrypt">aesni_cbc_encrypt</link>                   (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>,
+                                                         <parameter>const <link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *ivec</parameter>,
+                                                         <parameter>const <link linkend="int"><type>int</type></link> enc</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="aesni-ctr32-encrypt-blocks">aesni_ctr32_encrypt_blocks</link>          (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *ivec</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="aesni-ecb-encrypt">aesni_ecb_encrypt</link>                   (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>,
+                                                         <parameter>const <link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> enc</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="aesni-set-decrypt-key">aesni_set_decrypt_key</link>               (<parameter>const unsigned <link linkend="char"><type>char</type></link> *userKey</parameter>,
+                                                         <parameter>const <link linkend="int"><type>int</type></link> bits</parameter>,
+                                                         <parameter><link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="aesni-set-encrypt-key">aesni_set_encrypt_key</link>               (<parameter>const unsigned <link linkend="char"><type>char</type></link> *userKey</parameter>,
+                                                         <parameter>const <link linkend="int"><type>int</type></link> bits</parameter>,
+                                                         <parameter><link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="register-padlock-crypto">register_padlock_crypto</link>             (<parameter><type>void</type></parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="register-x86-crypto">register_x86_crypto</link>                 (<parameter><type>void</type></parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-aes-x86.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-aes-x86.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="AES-KEY-ALIGN-SIZE:CAPS" role="macro">
+<title>AES_KEY_ALIGN_SIZE</title>
+<indexterm zone="AES-KEY-ALIGN-SIZE:CAPS"><primary>AES_KEY_ALIGN_SIZE</primary></indexterm>
+<programlisting>#define AES_KEY_ALIGN_SIZE 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="AES-MAXNR:CAPS" role="macro">
+<title>AES_MAXNR</title>
+<indexterm zone="AES-MAXNR:CAPS"><primary>AES_MAXNR</primary></indexterm>
+<programlisting>#define AES_MAXNR 14
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ALIGN16:CAPS" role="macro">
+<title>ALIGN16()</title>
+<indexterm zone="ALIGN16:CAPS"><primary>ALIGN16</primary></indexterm>
+<programlisting>#define             ALIGN16(x)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="aes-gcm-struct" role="variable">
+<title>aes_gcm_struct</title>
+<indexterm zone="aes-gcm-struct"><primary>aes_gcm_struct</primary></indexterm>
+<programlisting>extern const gnutls_crypto_cipher_st aes_gcm_struct;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="aesni-cbc-encrypt" role="function">
+<title>aesni_cbc_encrypt ()</title>
+<indexterm zone="aesni-cbc-encrypt"><primary>aesni_cbc_encrypt</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                aesni_cbc_encrypt                   (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>,
+                                                         <parameter>const <link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *ivec</parameter>,
+                                                         <parameter>const <link linkend="int"><type>int</type></link> enc</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="aesni-ctr32-encrypt-blocks" role="function">
+<title>aesni_ctr32_encrypt_blocks ()</title>
+<indexterm zone="aesni-ctr32-encrypt-blocks"><primary>aesni_ctr32_encrypt_blocks</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                aesni_ctr32_encrypt_blocks          (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> blocks</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *ivec</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="aesni-ecb-encrypt" role="function">
+<title>aesni_ecb_encrypt ()</title>
+<indexterm zone="aesni-ecb-encrypt"><primary>aesni_ecb_encrypt</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                aesni_ecb_encrypt                   (<parameter>const unsigned <link linkend="char"><type>char</type></link> *in</parameter>,
+                                                         <parameter>unsigned <link linkend="char"><type>char</type></link> *out</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>,
+                                                         <parameter>const <link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> enc</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="aesni-set-decrypt-key" role="function">
+<title>aesni_set_decrypt_key ()</title>
+<indexterm zone="aesni-set-decrypt-key"><primary>aesni_set_decrypt_key</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 aesni_set_decrypt_key               (<parameter>const unsigned <link linkend="char"><type>char</type></link> *userKey</parameter>,
+                                                         <parameter>const <link linkend="int"><type>int</type></link> bits</parameter>,
+                                                         <parameter><link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="aesni-set-encrypt-key" role="function">
+<title>aesni_set_encrypt_key ()</title>
+<indexterm zone="aesni-set-encrypt-key"><primary>aesni_set_encrypt_key</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 aesni_set_encrypt_key               (<parameter>const unsigned <link linkend="char"><type>char</type></link> *userKey</parameter>,
+                                                         <parameter>const <link linkend="int"><type>int</type></link> bits</parameter>,
+                                                         <parameter><link linkend="AES-KEY:CAPS"><type>AES_KEY</type></link> *key</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="register-padlock-crypto" role="function">
+<title>register_padlock_crypto ()</title>
+<indexterm zone="register-padlock-crypto"><primary>register_padlock_crypto</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                register_padlock_crypto             (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="register-x86-crypto" role="function">
+<title>register_x86_crypto ()</title>
+<indexterm zone="register-x86-crypto"><primary>register_x86_crypto</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                register_x86_crypto                 (<parameter><type>void</type></parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

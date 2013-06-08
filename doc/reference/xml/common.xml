@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-common">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-common.top_of_page">common</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>common</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-common.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="ASN1-NULL:CAPS">ASN1_NULL</link>
+#define             <link linkend="ASN1-NULL-SIZE:CAPS">ASN1_NULL_SIZE</link>
+#define             <link linkend="GNUTLS-XML-SHOW-ALL:CAPS">GNUTLS_XML_SHOW_ALL</link>
+#define             <link linkend="MAX-STRING-LEN:CAPS">MAX_STRING_LEN</link>
+#define             <link linkend="PEM-CRL:CAPS">PEM_CRL</link>
+#define             <link linkend="PEM-PKCS12:CAPS">PEM_PKCS12</link>
+#define             <link linkend="PEM-PKCS7:CAPS">PEM_PKCS7</link>
+#define             <link linkend="PEM-X509-CERT:CAPS">PEM_X509_CERT</link>
+#define             <link linkend="PEM-X509-CERT2:CAPS">PEM_X509_CERT2</link>
+#define             <link linkend="PK-DSA-OID:CAPS">PK_DSA_OID</link>
+#define             <link linkend="PK-GOST-R3410-2001-OID:CAPS">PK_GOST_R3410_2001_OID</link>
+#define             <link linkend="PK-GOST-R3410-94-OID:CAPS">PK_GOST_R3410_94_OID</link>
+#define             <link linkend="PK-PKIX1-RSA-OID:CAPS">PK_PKIX1_RSA_OID</link>
+#define             <link linkend="PK-X509-RSA-OID:CAPS">PK_X509_RSA_OID</link>
+#define             <link linkend="SIG-DSA-SHA1-OID:CAPS">SIG_DSA_SHA1_OID</link>
+#define             <link linkend="SIG-DSA-SHA224-OID:CAPS">SIG_DSA_SHA224_OID</link>
+#define             <link linkend="SIG-DSA-SHA256-OID:CAPS">SIG_DSA_SHA256_OID</link>
+#define             <link linkend="SIG-GOST-R3410-2001-OID:CAPS">SIG_GOST_R3410_2001_OID</link>
+#define             <link linkend="SIG-GOST-R3410-94-OID:CAPS">SIG_GOST_R3410_94_OID</link>
+#define             <link linkend="SIG-RSA-MD2-OID:CAPS">SIG_RSA_MD2_OID</link>
+#define             <link linkend="SIG-RSA-MD5-OID:CAPS">SIG_RSA_MD5_OID</link>
+#define             <link linkend="SIG-RSA-RMD160-OID:CAPS">SIG_RSA_RMD160_OID</link>
+#define             <link linkend="SIG-RSA-SHA1-OID:CAPS">SIG_RSA_SHA1_OID</link>
+#define             <link linkend="SIG-RSA-SHA224-OID:CAPS">SIG_RSA_SHA224_OID</link>
+#define             <link linkend="SIG-RSA-SHA256-OID:CAPS">SIG_RSA_SHA256_OID</link>
+#define             <link linkend="SIG-RSA-SHA384-OID:CAPS">SIG_RSA_SHA384_OID</link>
+#define             <link linkend="SIG-RSA-SHA512-OID:CAPS">SIG_RSA_SHA512_OID</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="check-if-same-cert">check_if_same_cert</link>                  (<parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> cert1</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> cert2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="get-extension">get_extension</link>                       (<parameter><link linkend="ASN1-TYPE:CAPS"><type>ASN1_TYPE</type></link> asn</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *root</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *extension_id</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ret</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *_critical</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="set-extension">set_extension</link>                       (<parameter><link linkend="ASN1-TYPE:CAPS"><type>ASN1_TYPE</type></link> asn</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *root</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *ext_id</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ext_data</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> critical</parameter>);
+enum                <link linkend="x509-string-type">x509_string_type</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-common.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-common.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ASN1-NULL:CAPS" role="macro">
+<title>ASN1_NULL</title>
+<indexterm zone="ASN1-NULL:CAPS"><primary>ASN1_NULL</primary></indexterm>
+<programlisting>#define ASN1_NULL "\x05\x00"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ASN1-NULL-SIZE:CAPS" role="macro">
+<title>ASN1_NULL_SIZE</title>
+<indexterm zone="ASN1-NULL-SIZE:CAPS"><primary>ASN1_NULL_SIZE</primary></indexterm>
+<programlisting>#define ASN1_NULL_SIZE 2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-XML-SHOW-ALL:CAPS" role="macro">
+<title>GNUTLS_XML_SHOW_ALL</title>
+<indexterm zone="GNUTLS-XML-SHOW-ALL:CAPS"><primary>GNUTLS_XML_SHOW_ALL</primary></indexterm>
+<programlisting>#define GNUTLS_XML_SHOW_ALL 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-STRING-LEN:CAPS" role="macro">
+<title>MAX_STRING_LEN</title>
+<indexterm zone="MAX-STRING-LEN:CAPS"><primary>MAX_STRING_LEN</primary></indexterm>
+<programlisting>#define MAX_STRING_LEN 512
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-CRL:CAPS" role="macro">
+<title>PEM_CRL</title>
+<indexterm zone="PEM-CRL:CAPS"><primary>PEM_CRL</primary></indexterm>
+<programlisting>#define PEM_CRL "X509 CRL"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-PKCS12:CAPS" role="macro">
+<title>PEM_PKCS12</title>
+<indexterm zone="PEM-PKCS12:CAPS"><primary>PEM_PKCS12</primary></indexterm>
+<programlisting>#define PEM_PKCS12 "PKCS12"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-PKCS7:CAPS" role="macro">
+<title>PEM_PKCS7</title>
+<indexterm zone="PEM-PKCS7:CAPS"><primary>PEM_PKCS7</primary></indexterm>
+<programlisting>#define PEM_PKCS7 "PKCS7"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-X509-CERT:CAPS" role="macro">
+<title>PEM_X509_CERT</title>
+<indexterm zone="PEM-X509-CERT:CAPS"><primary>PEM_X509_CERT</primary></indexterm>
+<programlisting>#define PEM_X509_CERT "X509 CERTIFICATE"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PEM-X509-CERT2:CAPS" role="macro">
+<title>PEM_X509_CERT2</title>
+<indexterm zone="PEM-X509-CERT2:CAPS"><primary>PEM_X509_CERT2</primary></indexterm>
+<programlisting>#define PEM_X509_CERT2 "CERTIFICATE"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PK-DSA-OID:CAPS" role="macro">
+<title>PK_DSA_OID</title>
+<indexterm zone="PK-DSA-OID:CAPS"><primary>PK_DSA_OID</primary></indexterm>
+<programlisting>#define PK_DSA_OID "1.2.840.10040.4.1"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PK-GOST-R3410-2001-OID:CAPS" role="macro">
+<title>PK_GOST_R3410_2001_OID</title>
+<indexterm zone="PK-GOST-R3410-2001-OID:CAPS"><primary>PK_GOST_R3410_2001_OID</primary></indexterm>
+<programlisting>#define PK_GOST_R3410_2001_OID "1.2.643.2.2.19"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PK-GOST-R3410-94-OID:CAPS" role="macro">
+<title>PK_GOST_R3410_94_OID</title>
+<indexterm zone="PK-GOST-R3410-94-OID:CAPS"><primary>PK_GOST_R3410_94_OID</primary></indexterm>
+<programlisting>#define PK_GOST_R3410_94_OID "1.2.643.2.2.20"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PK-PKIX1-RSA-OID:CAPS" role="macro">
+<title>PK_PKIX1_RSA_OID</title>
+<indexterm zone="PK-PKIX1-RSA-OID:CAPS"><primary>PK_PKIX1_RSA_OID</primary></indexterm>
+<programlisting>#define PK_PKIX1_RSA_OID "1.2.840.113549.1.1.1"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="PK-X509-RSA-OID:CAPS" role="macro">
+<title>PK_X509_RSA_OID</title>
+<indexterm zone="PK-X509-RSA-OID:CAPS"><primary>PK_X509_RSA_OID</primary></indexterm>
+<programlisting>#define PK_X509_RSA_OID "2.5.8.1.1"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-DSA-SHA1-OID:CAPS" role="macro">
+<title>SIG_DSA_SHA1_OID</title>
+<indexterm zone="SIG-DSA-SHA1-OID:CAPS"><primary>SIG_DSA_SHA1_OID</primary></indexterm>
+<programlisting>#define SIG_DSA_SHA1_OID "1.2.840.10040.4.3"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-DSA-SHA224-OID:CAPS" role="macro">
+<title>SIG_DSA_SHA224_OID</title>
+<indexterm zone="SIG-DSA-SHA224-OID:CAPS"><primary>SIG_DSA_SHA224_OID</primary></indexterm>
+<programlisting>#define SIG_DSA_SHA224_OID "2.16.840.1.101.3.4.3.1"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-DSA-SHA256-OID:CAPS" role="macro">
+<title>SIG_DSA_SHA256_OID</title>
+<indexterm zone="SIG-DSA-SHA256-OID:CAPS"><primary>SIG_DSA_SHA256_OID</primary></indexterm>
+<programlisting>#define SIG_DSA_SHA256_OID "2.16.840.1.101.3.4.3.2"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-GOST-R3410-2001-OID:CAPS" role="macro">
+<title>SIG_GOST_R3410_2001_OID</title>
+<indexterm zone="SIG-GOST-R3410-2001-OID:CAPS"><primary>SIG_GOST_R3410_2001_OID</primary></indexterm>
+<programlisting>#define SIG_GOST_R3410_2001_OID "1.2.643.2.2.3"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-GOST-R3410-94-OID:CAPS" role="macro">
+<title>SIG_GOST_R3410_94_OID</title>
+<indexterm zone="SIG-GOST-R3410-94-OID:CAPS"><primary>SIG_GOST_R3410_94_OID</primary></indexterm>
+<programlisting>#define SIG_GOST_R3410_94_OID "1.2.643.2.2.4"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-MD2-OID:CAPS" role="macro">
+<title>SIG_RSA_MD2_OID</title>
+<indexterm zone="SIG-RSA-MD2-OID:CAPS"><primary>SIG_RSA_MD2_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_MD2_OID "1.2.840.113549.1.1.2"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-MD5-OID:CAPS" role="macro">
+<title>SIG_RSA_MD5_OID</title>
+<indexterm zone="SIG-RSA-MD5-OID:CAPS"><primary>SIG_RSA_MD5_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_MD5_OID "1.2.840.113549.1.1.4"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-RMD160-OID:CAPS" role="macro">
+<title>SIG_RSA_RMD160_OID</title>
+<indexterm zone="SIG-RSA-RMD160-OID:CAPS"><primary>SIG_RSA_RMD160_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_RMD160_OID "1.3.36.3.3.1.2"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-SHA1-OID:CAPS" role="macro">
+<title>SIG_RSA_SHA1_OID</title>
+<indexterm zone="SIG-RSA-SHA1-OID:CAPS"><primary>SIG_RSA_SHA1_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_SHA1_OID "1.2.840.113549.1.1.5"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-SHA224-OID:CAPS" role="macro">
+<title>SIG_RSA_SHA224_OID</title>
+<indexterm zone="SIG-RSA-SHA224-OID:CAPS"><primary>SIG_RSA_SHA224_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_SHA224_OID "1.2.840.113549.1.1.14"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-SHA256-OID:CAPS" role="macro">
+<title>SIG_RSA_SHA256_OID</title>
+<indexterm zone="SIG-RSA-SHA256-OID:CAPS"><primary>SIG_RSA_SHA256_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_SHA256_OID "1.2.840.113549.1.1.11"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-SHA384-OID:CAPS" role="macro">
+<title>SIG_RSA_SHA384_OID</title>
+<indexterm zone="SIG-RSA-SHA384-OID:CAPS"><primary>SIG_RSA_SHA384_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_SHA384_OID "1.2.840.113549.1.1.12"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="SIG-RSA-SHA512-OID:CAPS" role="macro">
+<title>SIG_RSA_SHA512_OID</title>
+<indexterm zone="SIG-RSA-SHA512-OID:CAPS"><primary>SIG_RSA_SHA512_OID</primary></indexterm>
+<programlisting>#define SIG_RSA_SHA512_OID "1.2.840.113549.1.1.13"
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="check-if-same-cert" role="function">
+<title>check_if_same_cert ()</title>
+<indexterm zone="check-if-same-cert"><primary>check_if_same_cert</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 check_if_same_cert                  (<parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> cert1</parameter>,
+                                                         <parameter><link linkend="gnutls-x509-crt-t"><type>gnutls_x509_crt_t</type></link> cert2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="get-extension" role="function">
+<title>get_extension ()</title>
+<indexterm zone="get-extension"><primary>get_extension</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 get_extension                       (<parameter><link linkend="ASN1-TYPE:CAPS"><type>ASN1_TYPE</type></link> asn</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *root</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *extension_id</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> indx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ret</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *_critical</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="set-extension" role="function">
+<title>set_extension ()</title>
+<indexterm zone="set-extension"><primary>set_extension</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 set_extension                       (<parameter><link linkend="ASN1-TYPE:CAPS"><type>ASN1_TYPE</type></link> asn</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *root</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *ext_id</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *ext_data</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> critical</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="x509-string-type" role="enum">
+<title>enum x509_string_type</title>
+<indexterm zone="x509-string-type"><primary>x509_string_type</primary></indexterm>
+<programlisting>typedef enum {
+  RV_RAW,
+  RV_OCTET_STRING,
+  RV_BIT_STRING,
+  RV_IA5STRING,
+  RV_UTF8STRING
+} x509_string_type;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

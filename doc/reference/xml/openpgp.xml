@@ -1,0 +1,1757 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-openpgp">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-openpgp.top_of_page">openpgp</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>openpgp</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-openpgp.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-OPENPGP-KEYID-SIZE:CAPS">GNUTLS_OPENPGP_KEYID_SIZE</link>
+#define             <link linkend="GNUTLS-OPENPGP-MASTER-KEYID-IDX:CAPS">GNUTLS_OPENPGP_MASTER_KEYID_IDX</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-openpgp-key">gnutls_certificate_set_openpgp_key</link>  (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-openpgp-key-file">gnutls_certificate_set_openpgp_key_file</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *certfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *keyfile</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-openpgp-key-file2">gnutls_certificate_set_openpgp_key_file2</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *certfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *keyfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *subkey_id</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-openpgp-key-mem">gnutls_certificate_set_openpgp_key_mem</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-openpgp-key-mem2">gnutls_certificate_set_openpgp_key_mem2</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *subkey_id</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-openpgp-keyring-file">gnutls_certificate_set_openpgp_keyring_file</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> c</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *file</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-certificate-set-openpgp-keyring-mem">gnutls_certificate_set_openpgp_keyring_mem</link>
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> c</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> dlen</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-check-hostname">gnutls_openpgp_crt_check_hostname</link>   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *hostname</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-openpgp-crt-deinit">gnutls_openpgp_crt_deinit</link>           (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-export">gnutls_openpgp_crt_export</link>           (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-export2">gnutls_openpgp_crt_export2</link>          (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);
+enum                <link linkend="gnutls-openpgp-crt-fmt-t">gnutls_openpgp_crt_fmt_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-auth-subkey">gnutls_openpgp_crt_get_auth_subkey</link>  (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flag</parameter>);
+<link linkend="time-t"><returnvalue>time_t</returnvalue></link>              <link linkend="gnutls-openpgp-crt-get-creation-time">gnutls_openpgp_crt_get_creation_time</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);
+<link linkend="time-t"><returnvalue>time_t</returnvalue></link>              <link linkend="gnutls-openpgp-crt-get-expiration-time">gnutls_openpgp_crt_get_expiration_time</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-fingerprint">gnutls_openpgp_crt_get_fingerprint</link>  (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-key-id">gnutls_openpgp_crt_get_key_id</link>       (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-key-usage">gnutls_openpgp_crt_get_key_usage</link>    (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *key_usage</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-name">gnutls_openpgp_crt_get_name</link>         (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> *buf</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *sizeof_buf</parameter>);
+<link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> <link linkend="gnutls-openpgp-crt-get-pk-algorithm">gnutls_openpgp_crt_get_pk_algorithm</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-pk-dsa-raw">gnutls_openpgp_crt_get_pk_dsa_raw</link>   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-pk-rsa-raw">gnutls_openpgp_crt_get_pk_rsa_raw</link>   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-preferred-key-id">gnutls_openpgp_crt_get_preferred_key_id</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-revoked-status">gnutls_openpgp_crt_get_revoked_status</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-count">gnutls_openpgp_crt_get_subkey_count</link> (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);
+<link linkend="time-t"><returnvalue>time_t</returnvalue></link>              <link linkend="gnutls-openpgp-crt-get-subkey-creation-time">gnutls_openpgp_crt_get_subkey_creation_time</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);
+<link linkend="time-t"><returnvalue>time_t</returnvalue></link>              <link linkend="gnutls-openpgp-crt-get-subkey-expiration-time">gnutls_openpgp_crt_get_subkey_expiration_time</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-fingerprint">gnutls_openpgp_crt_get_subkey_fingerprint</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-id">gnutls_openpgp_crt_get_subkey_id</link>    (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-idx">gnutls_openpgp_crt_get_subkey_idx</link>   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> <link linkend="gnutls-openpgp-crt-get-subkey-pk-algorithm">gnutls_openpgp_crt_get_subkey_pk_algorithm</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-pk-dsa-raw">gnutls_openpgp_crt_get_subkey_pk_dsa_raw</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-pk-rsa-raw">gnutls_openpgp_crt_get_subkey_pk_rsa_raw</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-revoked-status">gnutls_openpgp_crt_get_subkey_revoked_status</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-subkey-usage">gnutls_openpgp_crt_get_subkey_usage</link> (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *key_usage</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-get-version">gnutls_openpgp_crt_get_version</link>      (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-import">gnutls_openpgp_crt_import</link>           (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-init">gnutls_openpgp_crt_init</link>             (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> *key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-print">gnutls_openpgp_crt_print</link>            (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> cert</parameter>,
+                                                         <parameter><link linkend="gnutls-certificate-print-formats-t"><type>gnutls_certificate_print_formats_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-set-preferred-key-id">gnutls_openpgp_crt_set_preferred_key_id</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-verify-ring">gnutls_openpgp_crt_verify_ring</link>      (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-crt-verify-self">gnutls_openpgp_crt_verify_self</link>      (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>);
+typedef             <link linkend="gnutls-openpgp-keyid-t">gnutls_openpgp_keyid_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-keyring-check-id">gnutls_openpgp_keyring_check_id</link>     (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> ring</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-openpgp-keyring-deinit">gnutls_openpgp_keyring_deinit</link>       (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-keyring-get-crt">gnutls_openpgp_keyring_get_crt</link>      (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> ring</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> *cert</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-keyring-get-crt-count">gnutls_openpgp_keyring_get_crt_count</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> ring</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-keyring-import">gnutls_openpgp_keyring_import</link>       (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-keyring-init">gnutls_openpgp_keyring_init</link>         (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> *keyring</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-openpgp-privkey-deinit">gnutls_openpgp_privkey_deinit</link>       (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-export">gnutls_openpgp_privkey_export</link>       (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-export2">gnutls_openpgp_privkey_export2</link>      (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-export-dsa-raw">gnutls_openpgp_privkey_export_dsa_raw</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-export-rsa-raw">gnutls_openpgp_privkey_export_rsa_raw</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *d</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *u</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-export-subkey-dsa-raw">gnutls_openpgp_privkey_export_subkey_dsa_raw</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-export-subkey-rsa-raw">gnutls_openpgp_privkey_export_subkey_rsa_raw</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *d</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *u</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-fingerprint">gnutls_openpgp_privkey_get_fingerprint</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-key-id">gnutls_openpgp_privkey_get_key_id</link>   (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> <link linkend="gnutls-openpgp-privkey-get-pk-algorithm">gnutls_openpgp_privkey_get_pk_algorithm</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-preferred-key-id">gnutls_openpgp_privkey_get_preferred_key_id</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-revoked-status">gnutls_openpgp_privkey_get_revoked_status</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-subkey-count">gnutls_openpgp_privkey_get_subkey_count</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);
+<link linkend="time-t"><returnvalue>time_t</returnvalue></link>              <link linkend="gnutls-openpgp-privkey-get-subkey-creation-time">gnutls_openpgp_privkey_get_subkey_creation_time</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);
+<link linkend="time-t"><returnvalue>time_t</returnvalue></link>              <link linkend="gnutls-openpgp-privkey-get-subkey-expiration-time">gnutls_openpgp_privkey_get_subkey_expiration_time</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-subkey-fingerprint">gnutls_openpgp_privkey_get_subkey_fingerprint</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-subkey-id">gnutls_openpgp_privkey_get_subkey_id</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-subkey-idx">gnutls_openpgp_privkey_get_subkey_idx</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> <link linkend="gnutls-openpgp-privkey-get-subkey-pk-algorithm">gnutls_openpgp_privkey_get_subkey_pk_algorithm</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-get-subkey-revoked-status">gnutls_openpgp_privkey_get_subkey_revoked_status</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-import">gnutls_openpgp_privkey_import</link>       (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-init">gnutls_openpgp_privkey_init</link>         (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> *key</parameter>);
+<link linkend="gnutls-sec-param-t"><returnvalue>gnutls_sec_param_t</returnvalue></link>  <link linkend="gnutls-openpgp-privkey-sec-param">gnutls_openpgp_privkey_sec_param</link>    (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-openpgp-privkey-set-preferred-key-id">gnutls_openpgp_privkey_set_preferred_key_id</link>
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-openpgp-recv-key-func">*gnutls_openpgp_recv_key_func</link>)     (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *keyfpr</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> keyfpr_length</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-openpgp-set-recv-key-function">gnutls_openpgp_set_recv_key_function</link>
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-recv-key-func"><type>gnutls_openpgp_recv_key_func</type></link> func</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-openpgp.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-openpgp.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-OPENPGP-KEYID-SIZE:CAPS" role="macro">
+<title>GNUTLS_OPENPGP_KEYID_SIZE</title>
+<indexterm zone="GNUTLS-OPENPGP-KEYID-SIZE:CAPS"><primary>GNUTLS_OPENPGP_KEYID_SIZE</primary></indexterm>
+<programlisting>#define GNUTLS_OPENPGP_KEYID_SIZE 8
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-OPENPGP-MASTER-KEYID-IDX:CAPS" role="macro">
+<title>GNUTLS_OPENPGP_MASTER_KEYID_IDX</title>
+<indexterm zone="GNUTLS-OPENPGP-MASTER-KEYID-IDX:CAPS"><primary>GNUTLS_OPENPGP_MASTER_KEYID_IDX</primary></indexterm>
+<programlisting>#define GNUTLS_OPENPGP_MASTER_KEYID_IDX INT_MAX
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-certificate-set-openpgp-key" role="function">
+<title>gnutls_certificate_set_openpgp_key ()</title>
+<indexterm zone="gnutls-certificate-set-openpgp-key"><primary>gnutls_certificate_set_openpgp_key</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_openpgp_key  (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>);</programlisting>
+<para>
+This function sets a certificate/private key pair in the
+gnutls_certificate_credentials_t structure.  This function may be
+called more than once (in case multiple keys/certificates exist
+for the server).
+</para>
+<para>
+Note that this function requires that the preferred key ids have
+been set and be used. See <link linkend="gnutls-openpgp-crt-set-preferred-key-id"><function>gnutls_openpgp_crt_set_preferred_key_id()</function></link>.
+Otherwise the master key will be used.
+</para><variablelist role="params">
+<varlistentry><term><parameter>res</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>contains an openpgp public key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>is an openpgp private key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned,
+otherwise a negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-certificate-set-openpgp-key-file" role="function">
+<title>gnutls_certificate_set_openpgp_key_file ()</title>
+<indexterm zone="gnutls-certificate-set-openpgp-key-file"><primary>gnutls_certificate_set_openpgp_key_file</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_openpgp_key_file
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *certfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *keyfile</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+This funtion is used to load OpenPGP keys into the GnuTLS
+credentials structure. The file should contain at least one valid non encrypted subkey.
+</para><variablelist role="params">
+<varlistentry><term><parameter>res</parameter>&#160;:</term>
+<listitem><simpara>the destination context to save the data.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>certfile</parameter>&#160;:</term>
+<listitem><simpara>the file that contains the public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyfile</parameter>&#160;:</term>
+<listitem><simpara>the file that contains the secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of the keys</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-certificate-set-openpgp-key-file2" role="function" condition="since:2.4.0">
+<title>gnutls_certificate_set_openpgp_key_file2 ()</title>
+<indexterm zone="gnutls-certificate-set-openpgp-key-file2" role="2.4.0"><primary>gnutls_certificate_set_openpgp_key_file2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_openpgp_key_file2
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *certfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *keyfile</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *subkey_id</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+This funtion is used to load OpenPGP keys into the GnuTLS credential 
+structure. The file should contain at least one valid non encrypted subkey.
+</para>
+<para>
+The special keyword "auto" is also accepted as <parameter>subkey_id</parameter>.  In that
+case the <link linkend="gnutls-openpgp-crt-get-auth-subkey"><function>gnutls_openpgp_crt_get_auth_subkey()</function></link> will be used to
+retrieve the subkey.
+</para><variablelist role="params">
+<varlistentry><term><parameter>res</parameter>&#160;:</term>
+<listitem><simpara>the destination context to save the data.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>certfile</parameter>&#160;:</term>
+<listitem><simpara>the file that contains the public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyfile</parameter>&#160;:</term>
+<listitem><simpara>the file that contains the secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subkey_id</parameter>&#160;:</term>
+<listitem><simpara>a hex encoded subkey id</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of the keys</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-certificate-set-openpgp-key-mem" role="function">
+<title>gnutls_certificate_set_openpgp_key_mem ()</title>
+<indexterm zone="gnutls-certificate-set-openpgp-key-mem"><primary>gnutls_certificate_set_openpgp_key_mem</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_openpgp_key_mem
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+This funtion is used to load OpenPGP keys into the GnuTLS credential 
+structure. The datum should contain at least one valid non encrypted subkey.
+</para><variablelist role="params">
+<varlistentry><term><parameter>res</parameter>&#160;:</term>
+<listitem><simpara>the destination context to save the data.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cert</parameter>&#160;:</term>
+<listitem><simpara>the datum that contains the public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the datum that contains the secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of the keys</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-certificate-set-openpgp-key-mem2" role="function" condition="since:2.4.0">
+<title>gnutls_certificate_set_openpgp_key_mem2 ()</title>
+<indexterm zone="gnutls-certificate-set-openpgp-key-mem2" role="2.4.0"><primary>gnutls_certificate_set_openpgp_key_mem2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_openpgp_key_mem2
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> res</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *cert</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *subkey_id</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+This funtion is used to load OpenPGP keys into the GnuTLS
+credentials structure. The datum should contain at least one valid non encrypted subkey.
+</para>
+<para>
+The special keyword "auto" is also accepted as <parameter>subkey_id</parameter>.  In that
+case the <link linkend="gnutls-openpgp-crt-get-auth-subkey"><function>gnutls_openpgp_crt_get_auth_subkey()</function></link> will be used to
+retrieve the subkey.
+</para><variablelist role="params">
+<varlistentry><term><parameter>res</parameter>&#160;:</term>
+<listitem><simpara>the destination context to save the data.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cert</parameter>&#160;:</term>
+<listitem><simpara>the datum that contains the public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the datum that contains the secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>subkey_id</parameter>&#160;:</term>
+<listitem><simpara>a hex encoded subkey id</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of the keys</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-certificate-set-openpgp-keyring-file" role="function">
+<title>gnutls_certificate_set_openpgp_keyring_file ()</title>
+<indexterm zone="gnutls-certificate-set-openpgp-keyring-file"><primary>gnutls_certificate_set_openpgp_keyring_file</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_openpgp_keyring_file
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> c</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *file</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+The function is used to set keyrings that will be used internally
+by various OpenPGP functions. For example to find a key when it
+is needed for an operations. The keyring will also be used at the
+verification functions.
+</para><variablelist role="params">
+<varlistentry><term><parameter>c</parameter>&#160;:</term>
+<listitem><simpara>A certificate credentials structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>file</parameter>&#160;:</term>
+<listitem><simpara>filename of the keyring.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>format of keyring.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-certificate-set-openpgp-keyring-mem" role="function">
+<title>gnutls_certificate_set_openpgp_keyring_mem ()</title>
+<indexterm zone="gnutls-certificate-set-openpgp-keyring-mem"><primary>gnutls_certificate_set_openpgp_keyring_mem</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_certificate_set_openpgp_keyring_mem
+                                                        (<parameter><link linkend="gnutls-certificate-credentials-t"><type>gnutls_certificate_credentials_t</type></link> c</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> dlen</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+The function is used to set keyrings that will be used internally
+by various OpenPGP functions. For example to find a key when it
+is needed for an operations. The keyring will also be used at the
+verification functions.
+</para><variablelist role="params">
+<varlistentry><term><parameter>c</parameter>&#160;:</term>
+<listitem><simpara>A certificate credentials structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>buffer with keyring data.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>dlen</parameter>&#160;:</term>
+<listitem><simpara>length of data buffer.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>the format of the keyring</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned, otherwise a
+negative error value.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-check-hostname" role="function">
+<title>gnutls_openpgp_crt_check_hostname ()</title>
+<indexterm zone="gnutls-openpgp-crt-check-hostname"><primary>gnutls_openpgp_crt_check_hostname</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_check_hostname   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *hostname</parameter>);</programlisting>
+<para>
+This function will check if the given key's owner matches the
+given hostname. This is a basic implementation of the matching
+described in RFC2818 (HTTPS), which takes into account wildcards.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>should contain a <link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>hostname</parameter>&#160;:</term>
+<listitem><simpara>A null terminated string that contains a DNS name</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>non-zero for a successful match, and zero on failure.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-deinit" role="function">
+<title>gnutls_openpgp_crt_deinit ()</title>
+<indexterm zone="gnutls-openpgp-crt-deinit"><primary>gnutls_openpgp_crt_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_openpgp_crt_deinit           (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will deinitialize a key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-export" role="function">
+<title>gnutls_openpgp_crt_export ()</title>
+<indexterm zone="gnutls-openpgp-crt-export"><primary>gnutls_openpgp_crt_export</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_export           (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);</programlisting>
+<para>
+This function will convert the given key to RAW or Base64 format.
+If the buffer provided is not long enough to hold the output, then
+<link linkend="GNUTLS-E-SHORT-MEMORY-BUFFER:CAPS"><literal>GNUTLS_E_SHORT_MEMORY_BUFFER</literal></link> will be returned.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of gnutls_openpgp_crt_fmt_t elements.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data</parameter>&#160;:</term>
+<listitem><simpara>will contain the raw or base64 encoded key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of output_data (and will
+be replaced by the actual size of parameters)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-export2" role="function">
+<title>gnutls_openpgp_crt_export2 ()</title>
+<indexterm zone="gnutls-openpgp-crt-export2"><primary>gnutls_openpgp_crt_export2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_export2          (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);</programlisting>
+<para>
+This function will convert the given key to RAW or Base64 format.
+The output buffer is allocated using <link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of gnutls_openpgp_crt_fmt_t elements.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>out</parameter>&#160;:</term>
+<listitem><simpara>will contain the raw or base64 encoded key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-fmt-t" role="enum">
+<title>enum gnutls_openpgp_crt_fmt_t</title>
+<indexterm zone="gnutls-openpgp-crt-fmt-t"><primary>gnutls_openpgp_crt_fmt_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_OPENPGP_FMT_RAW,
+    GNUTLS_OPENPGP_FMT_BASE64
+} gnutls_openpgp_crt_fmt_t;
+</programlisting>
+<para>
+Enumeration of different OpenPGP key formats.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-OPENPGP-FMT-RAW:CAPS" role="constant">
+<term><literal>GNUTLS_OPENPGP_FMT_RAW</literal></term>
+<listitem><simpara>OpenPGP certificate in raw format.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-OPENPGP-FMT-BASE64:CAPS" role="constant">
+<term><literal>GNUTLS_OPENPGP_FMT_BASE64</literal></term>
+<listitem><simpara>OpenPGP certificate in base64 format.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-auth-subkey" role="function">
+<title>gnutls_openpgp_crt_get_auth_subkey ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-auth-subkey"><primary>gnutls_openpgp_crt_get_auth_subkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_auth_subkey  (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flag</parameter>);</programlisting>
+<para>
+Returns the 64-bit keyID of the first valid OpenPGP subkey marked
+for authentication.  If flag is non-zero and no authentication
+subkey exists, then a valid subkey will be returned even if it is
+not marked for authentication.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the struct to save the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flag</parameter>&#160;:</term>
+<listitem><simpara>Non-zero indicates that a valid subkey is always returned.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-creation-time" role="function">
+<title>gnutls_openpgp_crt_get_creation_time ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-creation-time"><primary>gnutls_openpgp_crt_get_creation_time</primary></indexterm>
+<programlisting><link linkend="time-t"><returnvalue>time_t</returnvalue></link>              gnutls_openpgp_crt_get_creation_time
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);</programlisting>
+<para>
+Get key creation time.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the timestamp when the OpenPGP key was created.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-expiration-time" role="function">
+<title>gnutls_openpgp_crt_get_expiration_time ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-expiration-time"><primary>gnutls_openpgp_crt_get_expiration_time</primary></indexterm>
+<programlisting><link linkend="time-t"><returnvalue>time_t</returnvalue></link>              gnutls_openpgp_crt_get_expiration_time
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);</programlisting>
+<para>
+Get key expiration time.  A value of '0' means that the key doesn't
+expire at all.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the time when the OpenPGP key expires.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-fingerprint" role="function">
+<title>gnutls_openpgp_crt_get_fingerprint ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-fingerprint"><primary>gnutls_openpgp_crt_get_fingerprint</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_fingerprint  (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);</programlisting>
+<para>
+Get key fingerprint.  Depending on the algorithm, the fingerprint
+can be 16 or 20 bytes.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the raw data that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fpr</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the fingerprint, must hold at least 20 bytes.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fprlen</parameter>&#160;:</term>
+<listitem><simpara>the integer to save the length of the fingerprint.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, 0 is returned.  Otherwise, an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-key-id" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_key_id ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-key-id" role="2.4.0"><primary>gnutls_openpgp_crt_get_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_key_id       (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get key id string.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the 64-bit keyID of the OpenPGP key.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-key-usage" role="function">
+<title>gnutls_openpgp_crt_get_key_usage ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-key-usage"><primary>gnutls_openpgp_crt_get_key_usage</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_key_usage    (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *key_usage</parameter>);</programlisting>
+<para>
+This function will return certificate's key usage, by checking the
+key algorithm. The key usage value will ORed values of the:
+<link linkend="GNUTLS-KEY-DIGITAL-SIGNATURE:CAPS"><literal>GNUTLS_KEY_DIGITAL_SIGNATURE</literal></link>, <link linkend="GNUTLS-KEY-KEY-ENCIPHERMENT:CAPS"><literal>GNUTLS_KEY_KEY_ENCIPHERMENT</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>should contain a gnutls_openpgp_crt_t structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key_usage</parameter>&#160;:</term>
+<listitem><simpara>where the key usage bits will be stored</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-name" role="function">
+<title>gnutls_openpgp_crt_get_name ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-name"><primary>gnutls_openpgp_crt_get_name</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_name         (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="char"><type>char</type></link> *buf</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *sizeof_buf</parameter>);</programlisting>
+<para>
+Extracts the userID from the parsed OpenPGP key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the index of the ID to extract</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>buf</parameter>&#160;:</term>
+<listitem><simpara>a pointer to a structure to hold the name, may be <link linkend="NULL:CAPS"><literal>NULL</literal></link>
+to only get the <parameter>sizeof_buf</parameter>.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>sizeof_buf</parameter>&#160;:</term>
+<listitem><simpara>holds the maximum size of <parameter>buf</parameter>, on return hold the
+actual/required size of <parameter>buf</parameter>.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, and if the index of the ID
+does not exist <link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link>, or an
+error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-pk-algorithm" role="function">
+<title>gnutls_openpgp_crt_get_pk_algorithm ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-pk-algorithm"><primary>gnutls_openpgp_crt_get_pk_algorithm</primary></indexterm>
+<programlisting><link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> gnutls_openpgp_crt_get_pk_algorithm
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);</programlisting>
+<para>
+This function will return the public key algorithm of an OpenPGP
+certificate.
+</para>
+<para>
+If bits is non null, it should have enough size to hold the parameters
+size in bits. For RSA the bits returned is the modulus.
+For DSA the bits returned are of the public exponent.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is an OpenPGP key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bits</parameter>&#160;:</term>
+<listitem><simpara>if bits is non null it will hold the size of the parameters' in bits</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>a member of the <link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> enumeration on
+success, or GNUTLS_PK_UNKNOWN on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-pk-dsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_pk_dsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-pk-dsa-raw" role="2.4.0"><primary>gnutls_openpgp_crt_get_pk_dsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_pk_dsa_raw   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);</programlisting>
+<para>
+This function will export the DSA public key's parameters found in
+the given certificate.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>will hold the p</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>will hold the q</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>g</parameter>&#160;:</term>
+<listitem><simpara>will hold the g</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>will hold the y</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-pk-rsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_pk_rsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-pk-rsa-raw" role="2.4.0"><primary>gnutls_openpgp_crt_get_pk_rsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_pk_rsa_raw   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);</programlisting>
+<para>
+This function will export the RSA public key's parameters found in
+the given structure.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>m</parameter>&#160;:</term>
+<listitem><simpara>will hold the modulus</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>e</parameter>&#160;:</term>
+<listitem><simpara>will hold the public exponent</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-preferred-key-id" role="function">
+<title>gnutls_openpgp_crt_get_preferred_key_id ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-preferred-key-id"><primary>gnutls_openpgp_crt_get_preferred_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_preferred_key_id
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get preferred key id.  If it hasn't been set it returns
+<link linkend="GNUTLS-E-INVALID-REQUEST:CAPS"><literal>GNUTLS_E_INVALID_REQUEST</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the struct to save the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the 64-bit preferred keyID of the OpenPGP key.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-revoked-status" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_revoked_status ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-revoked-status" role="2.4.0"><primary>gnutls_openpgp_crt_get_revoked_status</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_revoked_status
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);</programlisting>
+<para>
+Get revocation status of key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>true (1) if the key has been revoked, or false (0) if it
+has not.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-count" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_count ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-count" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_count</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_count (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will return the number of subkeys present in the
+given OpenPGP certificate.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is an OpenPGP key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the number of subkeys, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-creation-time" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_creation_time ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-creation-time" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_creation_time</primary></indexterm>
+<programlisting><link linkend="time-t"><returnvalue>time_t</returnvalue></link>              gnutls_openpgp_crt_get_subkey_creation_time
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);</programlisting>
+<para>
+Get subkey creation time.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the timestamp when the OpenPGP sub-key was created.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-expiration-time" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_expiration_time ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-expiration-time" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_expiration_time</primary></indexterm>
+<programlisting><link linkend="time-t"><returnvalue>time_t</returnvalue></link>              gnutls_openpgp_crt_get_subkey_expiration_time
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);</programlisting>
+<para>
+Get subkey expiration time.  A value of '0' means that the key
+doesn't expire at all.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the time when the OpenPGP key expires.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-fingerprint" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_fingerprint ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-fingerprint" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_fingerprint</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_fingerprint
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);</programlisting>
+<para>
+Get key fingerprint of a subkey.  Depending on the algorithm, the
+fingerprint can be 16 or 20 bytes.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the raw data that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fpr</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the fingerprint, must hold at least 20 bytes.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fprlen</parameter>&#160;:</term>
+<listitem><simpara>the integer to save the length of the fingerprint.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, 0 is returned.  Otherwise, an error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-id" role="function">
+<title>gnutls_openpgp_crt_get_subkey_id ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-id"><primary>gnutls_openpgp_crt_get_subkey_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_id    (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get the subkey's key-id.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the 64-bit keyID of the OpenPGP key.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-idx" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_idx ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-idx" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_idx</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_idx   (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get subkey's index.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the index of the subkey or a negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-pk-algorithm" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_pk_algorithm ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-pk-algorithm" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_pk_algorithm</primary></indexterm>
+<programlisting><link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> gnutls_openpgp_crt_get_subkey_pk_algorithm
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);</programlisting>
+<para>
+This function will return the public key algorithm of a subkey of an OpenPGP
+certificate.
+</para>
+<para>
+If bits is non null, it should have enough size to hold the
+parameters size in bits.  For RSA the bits returned is the modulus.
+For DSA the bits returned are of the public exponent.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is an OpenPGP key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bits</parameter>&#160;:</term>
+<listitem><simpara>if bits is non null it will hold the size of the parameters' in bits</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>a member of the <link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> enumeration on
+success, or GNUTLS_PK_UNKNOWN on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-pk-dsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_pk_dsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-pk-dsa-raw" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_pk_dsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_pk_dsa_raw
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>);</programlisting>
+<para>
+This function will export the DSA public key's parameters found in
+the given certificate.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>Is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>will hold the p</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>will hold the q</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>g</parameter>&#160;:</term>
+<listitem><simpara>will hold the g</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>will hold the y</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-pk-rsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_pk_rsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-pk-rsa-raw" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_pk_rsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_pk_rsa_raw
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> crt</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>);</programlisting>
+<para>
+This function will export the RSA public key's parameters found in
+the given structure.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>crt</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>Is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>m</parameter>&#160;:</term>
+<listitem><simpara>will hold the modulus</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>e</parameter>&#160;:</term>
+<listitem><simpara>will hold the public exponent</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-revoked-status" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_revoked_status ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-revoked-status" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_revoked_status</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_revoked_status
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);</programlisting>
+<para>
+Get subkey revocation status.  A negative error code indicates an error.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>true (1) if the key has been revoked, or false (0) if it
+has not.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-subkey-usage" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_crt_get_subkey_usage ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-subkey-usage" role="2.4.0"><primary>gnutls_openpgp_crt_get_subkey_usage</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_subkey_usage (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *key_usage</parameter>);</programlisting>
+<para>
+This function will return certificate's key usage, by checking the
+key algorithm.  The key usage value will ORed values of
+<link linkend="GNUTLS-KEY-DIGITAL-SIGNATURE:CAPS"><literal>GNUTLS_KEY_DIGITAL_SIGNATURE</literal></link> or <link linkend="GNUTLS-KEY-KEY-ENCIPHERMENT:CAPS"><literal>GNUTLS_KEY_KEY_ENCIPHERMENT</literal></link>.
+</para>
+<para>
+A negative error code may be returned in case of parsing error.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>should contain a gnutls_openpgp_crt_t structure</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key_usage</parameter>&#160;:</term>
+<listitem><simpara>where the key usage bits will be stored</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>key usage value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-crt-get-version" role="function">
+<title>gnutls_openpgp_crt_get_version ()</title>
+<indexterm zone="gnutls-openpgp-crt-get-version"><primary>gnutls_openpgp_crt_get_version</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_get_version      (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>);</programlisting>
+<para>
+Extract the version of the OpenPGP key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the version number is returned, or a negative error code on errors.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-import" role="function">
+<title>gnutls_openpgp_crt_import ()</title>
+<indexterm zone="gnutls-openpgp-crt-import"><primary>gnutls_openpgp_crt_import</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_import           (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+This function will convert the given RAW or Base64 encoded key to
+the native <link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> format. The output will be stored
+in 'key'.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The RAW or BASE64 encoded key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of gnutls_openpgp_crt_fmt_t elements.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-init" role="function">
+<title>gnutls_openpgp_crt_init ()</title>
+<indexterm zone="gnutls-openpgp-crt-init"><primary>gnutls_openpgp_crt_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_init             (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> *key</parameter>);</programlisting>
+<para>
+This function will initialize an OpenPGP key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-print" role="function">
+<title>gnutls_openpgp_crt_print ()</title>
+<indexterm zone="gnutls-openpgp-crt-print"><primary>gnutls_openpgp_crt_print</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_print            (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> cert</parameter>,
+                                                         <parameter><link linkend="gnutls-certificate-print-formats-t"><type>gnutls_certificate_print_formats_t</type></link> format</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);</programlisting>
+<para>
+This function will pretty print an OpenPGP certificate, suitable
+for display to a human.
+</para>
+<para>
+The format should be (0) for future compatibility.
+</para>
+<para>
+The output <parameter>out</parameter> needs to be deallocate using <link linkend="gnutls-free"><function>gnutls_free()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>cert</parameter>&#160;:</term>
+<listitem><simpara>The structure to be printed</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>Indicate the format to use</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>out</parameter>&#160;:</term>
+<listitem><simpara>Newly allocated datum with (0) terminated string.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-set-preferred-key-id" role="function">
+<title>gnutls_openpgp_crt_set_preferred_key_id ()</title>
+<indexterm zone="gnutls-openpgp-crt-set-preferred-key-id"><primary>gnutls_openpgp_crt_set_preferred_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_set_preferred_key_id
+                                                        (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+This allows setting a preferred key id for the given certificate.
+This key will be used by functions that involve key handling.
+</para>
+<para>
+If the provided <parameter>keyid</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link> then the master key is
+set as preferred.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the selected keyid</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned,
+otherwise a negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-verify-ring" role="function">
+<title>gnutls_openpgp_crt_verify_ring ()</title>
+<indexterm zone="gnutls-openpgp-crt-verify-ring"><primary>gnutls_openpgp_crt_verify_ring</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_verify_ring      (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>);</programlisting>
+<para>
+Verify all signatures in the key, using the given set of keys
+(keyring).
+</para>
+<para>
+The key verification output will be put in <parameter>verify</parameter> and will be one
+or more of the <link linkend="gnutls-certificate-status-t"><type>gnutls_certificate_status_t</type></link> enumerated elements
+bitwise or'd.
+</para>
+<para>
+Note that this function does not verify using any "web of trust".
+You may use GnuPG for that purpose, or any other external PGP
+application.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that holds the key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyring</parameter>&#160;:</term>
+<listitem><simpara>holds the keyring to check against</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>unused (should be 0)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>verify</parameter>&#160;:</term>
+<listitem><simpara>will hold the certificate verification output.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-crt-verify-self" role="function">
+<title>gnutls_openpgp_crt_verify_self ()</title>
+<indexterm zone="gnutls-openpgp-crt-verify-self"><primary>gnutls_openpgp_crt_verify_self</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_crt_verify_self      (<parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *verify</parameter>);</programlisting>
+<para>
+Verifies the self signature in the key.  The key verification
+output will be put in <parameter>verify</parameter> and will be one or more of the
+gnutls_certificate_status_t enumerated elements bitwise or'd.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that holds the key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>unused (should be 0)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>verify</parameter>&#160;:</term>
+<listitem><simpara>will hold the key verification output.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-keyid-t" role="typedef">
+<title>gnutls_openpgp_keyid_t</title>
+<indexterm zone="gnutls-openpgp-keyid-t"><primary>gnutls_openpgp_keyid_t</primary></indexterm>
+<programlisting>  typedef unsigned char gnutls_openpgp_keyid_t[GNUTLS_OPENPGP_KEYID_SIZE];
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-openpgp-keyring-check-id" role="function">
+<title>gnutls_openpgp_keyring_check_id ()</title>
+<indexterm zone="gnutls-openpgp-keyring-check-id"><primary>gnutls_openpgp_keyring_check_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_keyring_check_id     (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> ring</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+Check if a given key ID exists in the keyring.
+</para><variablelist role="params">
+<varlistentry><term><parameter>ring</parameter>&#160;:</term>
+<listitem><simpara>holds the keyring to check against</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>will hold the keyid to check for.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>unused (should be 0)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success (if keyid exists) and a
+negative error code on failure.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-keyring-deinit" role="function">
+<title>gnutls_openpgp_keyring_deinit ()</title>
+<indexterm zone="gnutls-openpgp-keyring-deinit"><primary>gnutls_openpgp_keyring_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_openpgp_keyring_deinit       (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>);</programlisting>
+<para>
+This function will deinitialize a keyring structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>keyring</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-keyring-get-crt" role="function">
+<title>gnutls_openpgp_keyring_get_crt ()</title>
+<indexterm zone="gnutls-openpgp-keyring-get-crt"><primary>gnutls_openpgp_keyring_get_crt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_keyring_get_crt      (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> ring</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> *cert</parameter>);</programlisting>
+<para>
+This function will extract an OpenPGP certificate from the given
+keyring.  If the index given is out of range
+<link linkend="GNUTLS-E-REQUESTED-DATA-NOT-AVAILABLE:CAPS"><literal>GNUTLS_E_REQUESTED_DATA_NOT_AVAILABLE</literal></link> will be returned. The
+returned structure needs to be deinited.
+</para><variablelist role="params">
+<varlistentry><term><parameter>ring</parameter>&#160;:</term>
+<listitem><simpara>Holds the keyring.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the index of the certificate to export</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>cert</parameter>&#160;:</term>
+<listitem><simpara>An uninitialized <link linkend="gnutls-openpgp-crt-t"><type>gnutls_openpgp_crt_t</type></link> structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-keyring-get-crt-count" role="function">
+<title>gnutls_openpgp_keyring_get_crt_count ()</title>
+<indexterm zone="gnutls-openpgp-keyring-get-crt-count"><primary>gnutls_openpgp_keyring_get_crt_count</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_keyring_get_crt_count
+                                                        (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> ring</parameter>);</programlisting>
+<para>
+This function will return the number of OpenPGP certificates
+present in the given keyring.
+</para><variablelist role="params">
+<varlistentry><term><parameter>ring</parameter>&#160;:</term>
+<listitem><simpara>is an OpenPGP key ring</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the number of subkeys, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-keyring-import" role="function">
+<title>gnutls_openpgp_keyring_import ()</title>
+<indexterm zone="gnutls-openpgp-keyring-import"><primary>gnutls_openpgp_keyring_import</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_keyring_import       (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> keyring</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>);</programlisting>
+<para>
+This function will convert the given RAW or Base64 encoded keyring
+to the native <link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> format.  The output will be
+stored in 'keyring'.
+</para><variablelist role="params">
+<varlistentry><term><parameter>keyring</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The RAW or BASE64 encoded keyring.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of <link linkend="gnutls-openpgp-keyring-fmt"><type>gnutls_openpgp_keyring_fmt</type></link> elements.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-keyring-init" role="function">
+<title>gnutls_openpgp_keyring_init ()</title>
+<indexterm zone="gnutls-openpgp-keyring-init"><primary>gnutls_openpgp_keyring_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_keyring_init         (<parameter><link linkend="gnutls-openpgp-keyring-t"><type>gnutls_openpgp_keyring_t</type></link> *keyring</parameter>);</programlisting>
+<para>
+This function will initialize an keyring structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>keyring</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-deinit" role="function">
+<title>gnutls_openpgp_privkey_deinit ()</title>
+<indexterm zone="gnutls-openpgp-privkey-deinit"><primary>gnutls_openpgp_privkey_deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_openpgp_privkey_deinit       (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will deinitialize a key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-export" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_export ()</title>
+<indexterm zone="gnutls-openpgp-privkey-export" role="2.4.0"><primary>gnutls_openpgp_privkey_export</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_export       (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *output_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *output_data_size</parameter>);</programlisting>
+<para>
+This function will convert the given key to RAW or Base64 format.
+If the buffer provided is not long enough to hold the output, then
+GNUTLS_E_SHORT_MEMORY_BUFFER will be returned.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of gnutls_openpgp_crt_fmt_t elements.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>password</parameter>&#160;:</term>
+<listitem><simpara>the password that will be used to encrypt the key. (unused for now)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>(0) for future compatibility</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data</parameter>&#160;:</term>
+<listitem><simpara>will contain the key base64 encoded or raw</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>output_data_size</parameter>&#160;:</term>
+<listitem><simpara>holds the size of output_data (and will be
+replaced by the actual size of parameters)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-export2" role="function" condition="since:3.1">
+<title>gnutls_openpgp_privkey_export2 ()</title>
+<indexterm zone="gnutls-openpgp-privkey-export2" role="3.1"><primary>gnutls_openpgp_privkey_export2</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_export2      (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>);</programlisting>
+<para>
+This function will convert the given key to RAW or Base64 format.
+The output buffer is allocated using <link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>Holds the key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of gnutls_openpgp_crt_fmt_t elements.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>password</parameter>&#160;:</term>
+<listitem><simpara>the password that will be used to encrypt the key. (unused for now)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>(0) for future compatibility</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>out</parameter>&#160;:</term>
+<listitem><simpara>will contain the raw or based64 encoded key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-export-dsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_export_dsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-privkey-export-dsa-raw" role="2.4.0"><primary>gnutls_openpgp_privkey_export_dsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_export_dsa_raw
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>);</programlisting>
+<para>
+This function will export the DSA private key's parameters found in
+the given certificate.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>will hold the p</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>will hold the q</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>g</parameter>&#160;:</term>
+<listitem><simpara>will hold the g</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>will hold the y</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>x</parameter>&#160;:</term>
+<listitem><simpara>will hold the x</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-export-rsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_export_rsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-privkey-export-rsa-raw" role="2.4.0"><primary>gnutls_openpgp_privkey_export_rsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_export_rsa_raw
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *d</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *u</parameter>);</programlisting>
+<para>
+This function will export the RSA private key's parameters found in
+the given structure.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>m</parameter>&#160;:</term>
+<listitem><simpara>will hold the modulus</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>e</parameter>&#160;:</term>
+<listitem><simpara>will hold the public exponent</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>d</parameter>&#160;:</term>
+<listitem><simpara>will hold the private exponent</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>will hold the first prime (p)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>will hold the second prime (q)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>u</parameter>&#160;:</term>
+<listitem><simpara>will hold the coefficient</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-export-subkey-dsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_export_subkey_dsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-privkey-export-subkey-dsa-raw" role="2.4.0"><primary>gnutls_openpgp_privkey_export_subkey_dsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_export_subkey_dsa_raw
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *g</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *y</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *x</parameter>);</programlisting>
+<para>
+This function will export the DSA private key's parameters found
+in the given certificate.  The new parameters will be allocated
+using <link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>Is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>will hold the p</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>will hold the q</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>g</parameter>&#160;:</term>
+<listitem><simpara>will hold the g</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>y</parameter>&#160;:</term>
+<listitem><simpara>will hold the y</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>x</parameter>&#160;:</term>
+<listitem><simpara>will hold the x</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-export-subkey-rsa-raw" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_export_subkey_rsa_raw ()</title>
+<indexterm zone="gnutls-openpgp-privkey-export-subkey-rsa-raw" role="2.4.0"><primary>gnutls_openpgp_privkey_export_subkey_rsa_raw</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_export_subkey_rsa_raw
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> pkey</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *m</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *e</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *d</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *p</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *q</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *u</parameter>);</programlisting>
+<para>
+This function will export the RSA private key's parameters found in
+the given structure.  The new parameters will be allocated using
+<link linkend="gnutls-malloc"><function>gnutls_malloc()</function></link> and will be stored in the appropriate datum.
+</para><variablelist role="params">
+<varlistentry><term><parameter>pkey</parameter>&#160;:</term>
+<listitem><simpara>Holds the certificate</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>Is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>m</parameter>&#160;:</term>
+<listitem><simpara>will hold the modulus</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>e</parameter>&#160;:</term>
+<listitem><simpara>will hold the public exponent</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>d</parameter>&#160;:</term>
+<listitem><simpara>will hold the private exponent</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>p</parameter>&#160;:</term>
+<listitem><simpara>will hold the first prime (p)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>q</parameter>&#160;:</term>
+<listitem><simpara>will hold the second prime (q)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>u</parameter>&#160;:</term>
+<listitem><simpara>will hold the coefficient</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, otherwise a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-fingerprint" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_fingerprint ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-fingerprint" role="2.4.0"><primary>gnutls_openpgp_privkey_get_fingerprint</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_fingerprint
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);</programlisting>
+<para>
+Get the fingerprint of the OpenPGP key. Depends on the
+algorithm, the fingerprint can be 16 or 20 bytes.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the raw data that contains the OpenPGP secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fpr</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the fingerprint, must hold at least 20 bytes.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fprlen</parameter>&#160;:</term>
+<listitem><simpara>the integer to save the length of the fingerprint.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, 0 is returned, or an error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-key-id" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_key_id ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-key-id" role="2.4.0"><primary>gnutls_openpgp_privkey_get_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_key_id   (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get key-id.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the 64-bit keyID of the OpenPGP key.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-pk-algorithm" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_pk_algorithm ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-pk-algorithm" role="2.4.0"><primary>gnutls_openpgp_privkey_get_pk_algorithm</primary></indexterm>
+<programlisting><link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> gnutls_openpgp_privkey_get_pk_algorithm
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);</programlisting>
+<para>
+This function will return the public key algorithm of an OpenPGP
+certificate.
+</para>
+<para>
+If bits is non null, it should have enough size to hold the parameters
+size in bits. For RSA the bits returned is the modulus.
+For DSA the bits returned are of the public exponent.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is an OpenPGP key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bits</parameter>&#160;:</term>
+<listitem><simpara>if bits is non null it will hold the size of the parameters' in bits</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>a member of the <link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> enumeration on
+success, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-preferred-key-id" role="function">
+<title>gnutls_openpgp_privkey_get_preferred_key_id ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-preferred-key-id"><primary>gnutls_openpgp_privkey_get_preferred_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_preferred_key_id
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get the preferred key-id for the key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the struct to save the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the 64-bit preferred keyID of the OpenPGP key, or if it
+hasn't been set it returns <link linkend="GNUTLS-E-INVALID-REQUEST:CAPS"><literal>GNUTLS_E_INVALID_REQUEST</literal></link>.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-revoked-status" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_revoked_status ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-revoked-status" role="2.4.0"><primary>gnutls_openpgp_privkey_get_revoked_status</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_revoked_status
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);</programlisting>
+<para>
+Get revocation status of key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP private key.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>true (1) if the key has been revoked, or false (0) if it
+has not, or a negative error code indicates an error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-count" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_count ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-count" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_count</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_subkey_count
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will return the number of subkeys present in the
+given OpenPGP certificate.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is an OpenPGP key</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the number of subkeys, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-creation-time" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_creation_time ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-creation-time" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_creation_time</primary></indexterm>
+<programlisting><link linkend="time-t"><returnvalue>time_t</returnvalue></link>              gnutls_openpgp_privkey_get_subkey_creation_time
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);</programlisting>
+<para>
+Get subkey creation time.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP private key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the timestamp when the OpenPGP key was created.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-expiration-time" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_expiration_time ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-expiration-time" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_expiration_time</primary></indexterm>
+<programlisting><link linkend="time-t"><returnvalue>time_t</returnvalue></link>              gnutls_openpgp_privkey_get_subkey_expiration_time
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);</programlisting>
+<para>
+Get subkey expiration time.  A value of '0' means that the key
+doesn't expire at all.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP private key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the time when the OpenPGP key expires.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-fingerprint" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_fingerprint ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-fingerprint" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_fingerprint</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_subkey_fingerprint
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *fpr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *fprlen</parameter>);</programlisting>
+<para>
+Get the fingerprint of an OpenPGP subkey.  Depends on the
+algorithm, the fingerprint can be 16 or 20 bytes.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the raw data that contains the OpenPGP secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fpr</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the fingerprint, must hold at least 20 bytes.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>fprlen</parameter>&#160;:</term>
+<listitem><simpara>the integer to save the length of the fingerprint.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, 0 is returned, or an error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-id" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_id ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-id" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_subkey_id
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get the key-id for the subkey.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP secret key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the buffer to save the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the 64-bit keyID of the OpenPGP key.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-idx" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_idx ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-idx" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_idx</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_subkey_idx
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+Get index of subkey.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP private key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the keyid.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the index of the subkey or a negative error value.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-pk-algorithm" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_pk_algorithm ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-pk-algorithm" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_pk_algorithm</primary></indexterm>
+<programlisting><link linkend="gnutls-pk-algorithm-t"><returnvalue>gnutls_pk_algorithm_t</returnvalue></link> gnutls_openpgp_privkey_get_subkey_pk_algorithm
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> *bits</parameter>);</programlisting>
+<para>
+This function will return the public key algorithm of a subkey of an OpenPGP
+certificate.
+</para>
+<para>
+If bits is non null, it should have enough size to hold the parameters
+size in bits. For RSA the bits returned is the modulus.
+For DSA the bits returned are of the public exponent.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is an OpenPGP key</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>bits</parameter>&#160;:</term>
+<listitem><simpara>if bits is non null it will hold the size of the parameters' in bits</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>a member of the <link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> enumeration on
+success, or a negative error code on error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-get-subkey-revoked-status" role="function" condition="since:2.4.0">
+<title>gnutls_openpgp_privkey_get_subkey_revoked_status ()</title>
+<indexterm zone="gnutls-openpgp-privkey-get-subkey-revoked-status" role="2.4.0"><primary>gnutls_openpgp_privkey_get_subkey_revoked_status</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_get_subkey_revoked_status
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> idx</parameter>);</programlisting>
+<para>
+Get revocation status of key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP private key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>idx</parameter>&#160;:</term>
+<listitem><simpara>is the subkey index</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>true (1) if the key has been revoked, or false (0) if it
+has not, or a negative error code indicates an error.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.4.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-import" role="function">
+<title>gnutls_openpgp_privkey_import ()</title>
+<indexterm zone="gnutls-openpgp-privkey-import"><primary>gnutls_openpgp_privkey_import</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_import       (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> format</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *password</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> flags</parameter>);</programlisting>
+<para>
+This function will convert the given RAW or Base64 encoded key to
+the native gnutls_openpgp_privkey_t format.  The output will be
+stored in 'key'.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to store the parsed key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara>The RAW or BASE64 encoded key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>format</parameter>&#160;:</term>
+<listitem><simpara>One of <link linkend="gnutls-openpgp-crt-fmt-t"><type>gnutls_openpgp_crt_fmt_t</type></link> elements.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>password</parameter>&#160;:</term>
+<listitem><simpara>not used for now</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>flags</parameter>&#160;:</term>
+<listitem><simpara>should be (0)</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-init" role="function">
+<title>gnutls_openpgp_privkey_init ()</title>
+<indexterm zone="gnutls-openpgp-privkey-init"><primary>gnutls_openpgp_privkey_init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_init         (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> *key</parameter>);</programlisting>
+<para>
+This function will initialize an OpenPGP key structure.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>The structure to be initialized</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> on success, or an error code.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-sec-param" role="function" condition="since:2.12.0">
+<title>gnutls_openpgp_privkey_sec_param ()</title>
+<indexterm zone="gnutls-openpgp-privkey-sec-param" role="2.12.0"><primary>gnutls_openpgp_privkey_sec_param</primary></indexterm>
+<programlisting><link linkend="gnutls-sec-param-t"><returnvalue>gnutls_sec_param_t</returnvalue></link>  gnutls_openpgp_privkey_sec_param    (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>);</programlisting>
+<para>
+This function will return the security parameter appropriate with
+this private key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>a key structure</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, a valid security parameter is returned otherwise
+<link linkend="GNUTLS-SEC-PARAM-UNKNOWN:CAPS"><literal>GNUTLS_SEC_PARAM_UNKNOWN</literal></link> is returned.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 2.12.0</para></refsect2>
+<refsect2 id="gnutls-openpgp-privkey-set-preferred-key-id" role="function">
+<title>gnutls_openpgp_privkey_set_preferred_key_id ()</title>
+<indexterm zone="gnutls-openpgp-privkey-set-preferred-key-id"><primary>gnutls_openpgp_privkey_set_preferred_key_id</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_openpgp_privkey_set_preferred_key_id
+                                                        (<parameter><link linkend="gnutls-openpgp-privkey-t"><type>gnutls_openpgp_privkey_t</type></link> key</parameter>,
+                                                         <parameter>const <link linkend="gnutls-openpgp-keyid-t"><type>gnutls_openpgp_keyid_t</type></link> keyid</parameter>);</programlisting>
+<para>
+This allows setting a preferred key id for the given certificate.
+This key will be used by functions that involve key handling.
+</para>
+<para>
+If the provided <parameter>keyid</parameter> is <link linkend="NULL:CAPS"><literal>NULL</literal></link> then the master key is
+set as preferred.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>the structure that contains the OpenPGP public key.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyid</parameter>&#160;:</term>
+<listitem><simpara>the selected keyid</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) is returned,
+otherwise a negative error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-recv-key-func" role="function">
+<title>gnutls_openpgp_recv_key_func ()</title>
+<indexterm zone="gnutls-openpgp-recv-key-func"><primary>gnutls_openpgp_recv_key_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_openpgp_recv_key_func)     (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *keyfpr</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> keyfpr_length</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>);</programlisting>
+<para>
+A callback of this type is used to retrieve OpenPGP keys.  Only
+useful on the server, and will only be used if the peer send a key
+fingerprint instead of a full key.  See also
+<link linkend="gnutls-openpgp-set-recv-key-function"><function>gnutls_openpgp_set_recv_key_function()</function></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>a TLS session</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyfpr</parameter>&#160;:</term>
+<listitem><simpara>key fingerprint</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>keyfpr_length</parameter>&#160;:</term>
+<listitem><simpara>length of key fingerprint</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>output key.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>On success, <link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (zero) is returned,
+otherwise an error code is returned.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-openpgp-set-recv-key-function" role="function">
+<title>gnutls_openpgp_set_recv_key_function ()</title>
+<indexterm zone="gnutls-openpgp-set-recv-key-function"><primary>gnutls_openpgp_set_recv_key_function</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_openpgp_set_recv_key_function
+                                                        (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-openpgp-recv-key-func"><type>gnutls_openpgp_recv_key_func</type></link> func</parameter>);</programlisting>
+<para>
+This funtion will set a key retrieval function for OpenPGP keys. This
+callback is only useful in server side, and will be used if the peer
+sent a key fingerprint instead of a full key.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>a TLS session</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>func</parameter>&#160;:</term>
+<listitem><simpara>the callback</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+</refentry>

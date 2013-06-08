@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-sig">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-sig.top_of_page">gnutls_sig</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_sig</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-sig.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pk-hash-data">pk_hash_data</link>                        (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *params</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *digest</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="pk-prepare-hash">pk_prepare_hash</link>                     (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *output</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-sig.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-sig.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="pk-hash-data" role="function">
+<title>pk_hash_data ()</title>
+<indexterm zone="pk-hash-data"><primary>pk_hash_data</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pk_hash_data                        (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *params</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *digest</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pk-prepare-hash" role="function">
+<title>pk_prepare_hash ()</title>
+<indexterm zone="pk-prepare-hash"><primary>pk_prepare_hash</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 pk_prepare_hash                     (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> pk</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> hash</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *output</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

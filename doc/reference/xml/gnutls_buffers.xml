@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-buffers">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-buffers.top_of_page">gnutls_buffers</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_buffers</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-buffers.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="MBUFFER-FLUSH:CAPS">MBUFFER_FLUSH</link>
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-buffers.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-buffers.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="MBUFFER-FLUSH:CAPS" role="macro">
+<title>MBUFFER_FLUSH</title>
+<indexterm zone="MBUFFER-FLUSH:CAPS"><primary>MBUFFER_FLUSH</primary></indexterm>
+<programlisting>#define MBUFFER_FLUSH 1
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

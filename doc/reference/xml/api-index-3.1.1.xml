@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-sign-algorithm-get"><link linkend="gnutls-sign-algorithm-get">gnutls_sign_algorithm_get</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-sign-get-hash-algorithm"><link linkend="gnutls-sign-get-hash-algorithm">gnutls_sign_get_hash_algorithm</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-sign-get-pk-algorithm"><link linkend="gnutls-sign-get-pk-algorithm">gnutls_sign_get_pk_algorithm</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

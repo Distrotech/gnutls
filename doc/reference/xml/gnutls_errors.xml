@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-errors">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-errors.top_of_page">gnutls_errors</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_errors</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-errors.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-E-INT-RET-0:CAPS">GNUTLS_E_INT_RET_0</link>
+#define             <link linkend="LEVEL:CAPS">LEVEL</link>                               (l,
+                                                         ...)
+#define             <link linkend="LEVEL-EQ:CAPS">LEVEL_EQ</link>                            (l,
+                                                         ...)
+#define             <link linkend="gnutls-assert">gnutls_assert</link>
+<link linkend="return"><returnvalue>return</returnvalue></link>              <link linkend="gnutls-assert-val">gnutls_assert_val</link>                   (<parameter><link linkend="GNUTLS-E-MEMORY-ERROR:CAPS"><type>GNUTLS_E_MEMORY_ERROR</type></link> Param1</parameter>);
+#define             <link linkend="gnutls-assert-val-fatal">gnutls_assert_val_fatal</link>             (x)
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-assert-val-int">gnutls_assert_val_int</link>               (<parameter><link linkend="int"><type>int</type></link> val</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *file</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-errors.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-errors.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-E-INT-RET-0:CAPS" role="macro">
+<title>GNUTLS_E_INT_RET_0</title>
+<indexterm zone="GNUTLS-E-INT-RET-0:CAPS"><primary>GNUTLS_E_INT_RET_0</primary></indexterm>
+<programlisting>#define GNUTLS_E_INT_RET_0 -1251
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LEVEL:CAPS" role="macro">
+<title>LEVEL()</title>
+<indexterm zone="LEVEL:CAPS"><primary>LEVEL</primary></indexterm>
+<programlisting>#define             LEVEL(l, ...)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="LEVEL-EQ:CAPS" role="macro">
+<title>LEVEL_EQ()</title>
+<indexterm zone="LEVEL-EQ:CAPS"><primary>LEVEL_EQ</primary></indexterm>
+<programlisting>#define             LEVEL_EQ(l, ...)</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-assert" role="macro">
+<title>gnutls_assert</title>
+<indexterm zone="gnutls-assert"><primary>gnutls_assert</primary></indexterm>
+<programlisting>#define gnutls_assert() _gnutls_debug_log( "ASSERT: %s:%d\n", __FILE__,__LINE__);
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-assert-val" role="function">
+<title>gnutls_assert_val ()</title>
+<indexterm zone="gnutls-assert-val"><primary>gnutls_assert_val</primary></indexterm>
+<programlisting><link linkend="return"><returnvalue>return</returnvalue></link>              gnutls_assert_val                   (<parameter><link linkend="GNUTLS-E-MEMORY-ERROR:CAPS"><type>GNUTLS_E_MEMORY_ERROR</type></link> Param1</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-assert-val-fatal" role="macro">
+<title>gnutls_assert_val_fatal()</title>
+<indexterm zone="gnutls-assert-val-fatal"><primary>gnutls_assert_val_fatal</primary></indexterm>
+<programlisting>#define gnutls_assert_val_fatal(x) (((x)!=GNUTLS_E_AGAIN &amp;&amp; (x)!=GNUTLS_E_INTERRUPTED)?gnutls_assert_val_int(x, __FILE__, __LINE__):(x))
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-assert-val-int" role="function">
+<title>gnutls_assert_val_int ()</title>
+<indexterm zone="gnutls-assert-val-int"><primary>gnutls_assert_val_int</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_assert_val_int               (<parameter><link linkend="int"><type>int</type></link> val</parameter>,
+                                                         <parameter>const <link linkend="char"><type>char</type></link> *file</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

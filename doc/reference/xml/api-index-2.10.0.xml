@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-certificate-set-verify-function"><link linkend="gnutls-certificate-set-verify-function">gnutls_certificate_set_verify_function</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-decrypt"><link linkend="gnutls-cipher-decrypt">gnutls_cipher_decrypt</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-deinit"><link linkend="gnutls-cipher-deinit">gnutls_cipher_deinit</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-encrypt"><link linkend="gnutls-cipher-encrypt">gnutls_cipher_encrypt</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-get-block-size"><link linkend="gnutls-cipher-get-block-size">gnutls_cipher_get_block_size</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-cipher-init"><link linkend="gnutls-cipher-init">gnutls_cipher_init</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hash"><link linkend="gnutls-hash">gnutls_hash</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hash-deinit"><link linkend="gnutls-hash-deinit">gnutls_hash_deinit</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hash-fast"><link linkend="gnutls-hash-fast">gnutls_hash_fast</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hash-get-len"><link linkend="gnutls-hash-get-len">gnutls_hash_get_len</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hash-init"><link linkend="gnutls-hash-init">gnutls_hash_init</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hash-output"><link linkend="gnutls-hash-output">gnutls_hash_output</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hmac"><link linkend="gnutls-hmac">gnutls_hmac</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hmac-deinit"><link linkend="gnutls-hmac-deinit">gnutls_hmac_deinit</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hmac-fast"><link linkend="gnutls-hmac-fast">gnutls_hmac_fast</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hmac-get-len"><link linkend="gnutls-hmac-get-len">gnutls_hmac_get_len</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hmac-init"><link linkend="gnutls-hmac-init">gnutls_hmac_init</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-hmac-output"><link linkend="gnutls-hmac-output">gnutls_hmac_output</link>, function in <link linkend="gnutls-crypto">crypto</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-safe-renegotiation-status"><link linkend="gnutls-safe-renegotiation-status">gnutls_safe_renegotiation_status</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-session-ticket-enable-client"><link linkend="gnutls-session-ticket-enable-client">gnutls_session_ticket_enable_client</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-session-ticket-enable-server"><link linkend="gnutls-session-ticket-enable-server">gnutls_session_ticket_enable_server</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-session-ticket-key-generate"><link linkend="gnutls-session-ticket-key-generate">gnutls_session_ticket_key_generate</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-sign-algorithm-get-requested"><link linkend="gnutls-sign-algorithm-get-requested">gnutls_sign_algorithm_get_requested</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-get-issuer-alt-name"><link linkend="gnutls-x509-crt-get-issuer-alt-name">gnutls_x509_crt_get_issuer_alt_name</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-get-issuer-alt-name2"><link linkend="gnutls-x509-crt-get-issuer-alt-name2">gnutls_x509_crt_get_issuer_alt_name2</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-get-issuer-alt-othername-oid"><link linkend="gnutls-x509-crt-get-issuer-alt-othername-oid">gnutls_x509_crt_get_issuer_alt_othername_oid</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

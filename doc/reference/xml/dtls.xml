@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-dtls">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-dtls.top_of_page">dtls</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>dtls</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-dtls.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="GNUTLS-COOKIE-KEY-SIZE:CAPS">GNUTLS_COOKIE_KEY_SIZE</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-dtls-cookie-send">gnutls_dtls_cookie_send</link>             (<parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *client_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> client_data_size</parameter>,
+                                                         <parameter><link linkend="gnutls-dtls-prestate-st"><type>gnutls_dtls_prestate_st</type></link> *prestate</parameter>,
+                                                         <parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter><link linkend="gnutls-push-func"><type>gnutls_push_func</type></link> push_func</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-dtls-cookie-verify">gnutls_dtls_cookie_verify</link>           (<parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *client_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> client_data_size</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *_msg</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> msg_size</parameter>,
+                                                         <parameter><link linkend="gnutls-dtls-prestate-st"><type>gnutls_dtls_prestate_st</type></link> *prestate</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="gnutls-dtls-get-data-mtu">gnutls_dtls_get_data_mtu</link>            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="gnutls-dtls-get-mtu">gnutls_dtls_get_mtu</link>                 (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="gnutls-dtls-get-timeout">gnutls_dtls_get_timeout</link>             (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-dtls-prestate-set">gnutls_dtls_prestate_set</link>            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-dtls-prestate-st"><type>gnutls_dtls_prestate_st</type></link> *prestate</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-dtls-set-data-mtu">gnutls_dtls_set_data_mtu</link>            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> mtu</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-dtls-set-mtu">gnutls_dtls_set_mtu</link>                 (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> mtu</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-dtls-set-timeouts">gnutls_dtls_set_timeouts</link>            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> retrans_timeout</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> total_timeout</parameter>);
+unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        <link linkend="gnutls-record-get-discarded">gnutls_record_get_discarded</link>         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-dtls.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-dtls.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GNUTLS-COOKIE-KEY-SIZE:CAPS" role="macro">
+<title>GNUTLS_COOKIE_KEY_SIZE</title>
+<indexterm zone="GNUTLS-COOKIE-KEY-SIZE:CAPS"><primary>GNUTLS_COOKIE_KEY_SIZE</primary></indexterm>
+<programlisting>#define GNUTLS_COOKIE_KEY_SIZE 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-dtls-cookie-send" role="function" condition="since:3.0">
+<title>gnutls_dtls_cookie_send ()</title>
+<indexterm zone="gnutls-dtls-cookie-send" role="3.0"><primary>gnutls_dtls_cookie_send</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_dtls_cookie_send             (<parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *client_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> client_data_size</parameter>,
+                                                         <parameter><link linkend="gnutls-dtls-prestate-st"><type>gnutls_dtls_prestate_st</type></link> *prestate</parameter>,
+                                                         <parameter><link linkend="gnutls-transport-ptr-t"><type>gnutls_transport_ptr_t</type></link> ptr</parameter>,
+                                                         <parameter><link linkend="gnutls-push-func"><type>gnutls_push_func</type></link> push_func</parameter>);</programlisting>
+<para>
+This function can be used to prevent denial of service
+attacks to a DTLS server by requiring the client to
+reply using a cookie sent by this function. That way
+it can be ensured that a client we allocated resources
+for (i.e. <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link>) is the one that the 
+original incoming packet was originated from.
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is a random key to be used at cookie generation</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>client_data</parameter>&#160;:</term>
+<listitem><simpara>contains data identifying the client (i.e. address)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>client_data_size</parameter>&#160;:</term>
+<listitem><simpara>The size of client's data</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>prestate</parameter>&#160;:</term>
+<listitem><simpara>The previous cookie returned by <link linkend="gnutls-dtls-cookie-verify"><function>gnutls_dtls_cookie_verify()</function></link></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>ptr</parameter>&#160;:</term>
+<listitem><simpara>A transport pointer to be used by <parameter>push_func</parameter></simpara></listitem></varlistentry>
+<varlistentry><term><parameter>push_func</parameter>&#160;:</term>
+<listitem><simpara>A function that will be used to reply</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the number of bytes sent, or a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-dtls-cookie-verify" role="function" condition="since:3.0">
+<title>gnutls_dtls_cookie_verify ()</title>
+<indexterm zone="gnutls-dtls-cookie-verify" role="3.0"><primary>gnutls_dtls_cookie_verify</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_dtls_cookie_verify           (<parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *key</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *client_data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> client_data_size</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *_msg</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> msg_size</parameter>,
+                                                         <parameter><link linkend="gnutls-dtls-prestate-st"><type>gnutls_dtls_prestate_st</type></link> *prestate</parameter>);</programlisting>
+<para>
+This function will verify an incoming message for
+a valid cookie. If a valid cookie is returned then
+it should be associated with the session using
+<link linkend="gnutls-dtls-prestate-set"><function>gnutls_dtls_prestate_set()</function></link>;
+</para><variablelist role="params">
+<varlistentry><term><parameter>key</parameter>&#160;:</term>
+<listitem><simpara>is a random key to be used at cookie generation</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>client_data</parameter>&#160;:</term>
+<listitem><simpara>contains data identifying the client (i.e. address)</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>client_data_size</parameter>&#160;:</term>
+<listitem><simpara>The size of client's data</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>_msg</parameter>&#160;:</term>
+<listitem><simpara>An incoming message that initiates a connection.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>msg_size</parameter>&#160;:</term>
+<listitem><simpara>The size of the message.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>prestate</parameter>&#160;:</term>
+<listitem><simpara>The cookie of this client.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) on success, or a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-dtls-get-data-mtu" role="function" condition="since:3.0">
+<title>gnutls_dtls_get_data_mtu ()</title>
+<indexterm zone="gnutls-dtls-get-data-mtu" role="3.0"><primary>gnutls_dtls_get_data_mtu</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        gnutls_dtls_get_data_mtu            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);</programlisting>
+<para>
+This function will return the actual maximum transfer unit for
+application data. I.e. DTLS headers are subtracted from the
+actual MTU.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the maximum allowed transfer unit.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-dtls-get-mtu" role="function" condition="since:3.0">
+<title>gnutls_dtls_get_mtu ()</title>
+<indexterm zone="gnutls-dtls-get-mtu" role="3.0"><primary>gnutls_dtls_get_mtu</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        gnutls_dtls_get_mtu                 (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);</programlisting>
+<para>
+This function will return the MTU size as set with
+<link linkend="gnutls-dtls-set-mtu"><function>gnutls_dtls_set_mtu()</function></link>. This is not the actual MTU
+of data you can transmit. Use <link linkend="gnutls-dtls-get-data-mtu"><function>gnutls_dtls_get_data_mtu()</function></link>
+for that reason.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the set maximum transfer unit.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-dtls-get-timeout" role="function" condition="since:3.0">
+<title>gnutls_dtls_get_timeout ()</title>
+<indexterm zone="gnutls-dtls-get-timeout" role="3.0"><primary>gnutls_dtls_get_timeout</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        gnutls_dtls_get_timeout             (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);</programlisting>
+<para>
+This function will return the milliseconds remaining
+for a retransmission of the previously sent handshake
+message. This function is useful when DTLS is used in
+non-blocking mode, to estimate when to call <link linkend="gnutls-handshake"><function>gnutls_handshake()</function></link>
+if no packets have been received.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>the remaining time in milliseconds.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-dtls-prestate-set" role="function" condition="since:3.0">
+<title>gnutls_dtls_prestate_set ()</title>
+<indexterm zone="gnutls-dtls-prestate-set" role="3.0"><primary>gnutls_dtls_prestate_set</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_dtls_prestate_set            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-dtls-prestate-st"><type>gnutls_dtls_prestate_st</type></link> *prestate</parameter>);</programlisting>
+<para>
+This function will associate the prestate acquired by
+the cookie authentication with the client, with the newly 
+established session.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>a new session</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>prestate</parameter>&#160;:</term>
+<listitem><simpara>contains the client's prestate</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-dtls-set-data-mtu" role="function" condition="since:3.1">
+<title>gnutls_dtls_set_data_mtu ()</title>
+<indexterm zone="gnutls-dtls-set-data-mtu" role="3.1"><primary>gnutls_dtls_set_data_mtu</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_dtls_set_data_mtu            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> mtu</parameter>);</programlisting>
+<para>
+This function will set the maximum size of the *unencrypted* records
+which will be sent over a DTLS session. It is equivalent to calculating
+the DTLS packet overhead with the current encryption parameters, and
+calling <link linkend="gnutls-dtls-set-mtu"><function>gnutls_dtls_set_mtu()</function></link> with that value. In particular, this means
+that you may need to call this function again after any negotiation or
+renegotiation, in order to ensure that the MTU is still sufficient to
+account for the new protocol overhead.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>mtu</parameter>&#160;:</term>
+<listitem><simpara>The maximum unencrypted transfer unit of the session</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara><link linkend="GNUTLS-E-SUCCESS:CAPS"><literal>GNUTLS_E_SUCCESS</literal></link> (0) on success, or a negative error code.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.1</para></refsect2>
+<refsect2 id="gnutls-dtls-set-mtu" role="function" condition="since:3.0">
+<title>gnutls_dtls_set_mtu ()</title>
+<indexterm zone="gnutls-dtls-set-mtu" role="3.0"><primary>gnutls_dtls_set_mtu</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_dtls_set_mtu                 (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> mtu</parameter>);</programlisting>
+<para>
+This function will set the maximum transfer unit of the transport
+that DTLS packets are sent over. Note that this should exclude
+the IP (or IPv6) and UDP headers. So for DTLS over IPv6 on an
+Ethenet device with MTU 1500, the DTLS MTU set with this function
+would be 1500 - 40 (IPV6 header) - 8 (UDP header) = 1452.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>mtu</parameter>&#160;:</term>
+<listitem><simpara>The maximum transfer unit of the transport</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-dtls-set-timeouts" role="function" condition="since:3.0">
+<title>gnutls_dtls_set_timeouts ()</title>
+<indexterm zone="gnutls-dtls-set-timeouts" role="3.0"><primary>gnutls_dtls_set_timeouts</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_dtls_set_timeouts            (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> retrans_timeout</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> total_timeout</parameter>);</programlisting>
+<para>
+This function will set the timeouts required for the DTLS handshake
+protocol. The retransmission timeout is the time after which a
+message from the peer is not received, the previous messages will
+be retransmitted. The total timeout is the time after which the
+handshake will be aborted with <link linkend="GNUTLS-E-TIMEDOUT:CAPS"><literal>GNUTLS_E_TIMEDOUT</literal></link>.
+</para>
+<para>
+The DTLS protocol recommends the values of 1 sec and 60 seconds
+respectively.
+</para>
+<para>
+If the retransmission timeout is zero then the handshake will operate
+in a non-blocking way, i.e., return <link linkend="GNUTLS-E-AGAIN:CAPS"><literal>GNUTLS_E_AGAIN</literal></link>.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>retrans_timeout</parameter>&#160;:</term>
+<listitem><simpara>The time at which a retransmission will occur in milliseconds</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>total_timeout</parameter>&#160;:</term>
+<listitem><simpara>The time at which the connection will be aborted, in milliseconds.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+<refsect2 id="gnutls-record-get-discarded" role="function" condition="since:3.0">
+<title>gnutls_record_get_discarded ()</title>
+<indexterm zone="gnutls-record-get-discarded" role="3.0"><primary>gnutls_record_get_discarded</primary></indexterm>
+<programlisting>unsigned <link linkend="int"><returnvalue>int</returnvalue></link>        gnutls_record_get_discarded         (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>);</programlisting>
+<para>
+Returns the number of discarded packets in a
+DTLS connection.
+</para><variablelist role="params">
+<varlistentry><term><parameter>session</parameter>&#160;:</term>
+<listitem><simpara>is a <link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> structure.</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>The number of discarded packets.</simpara></listitem></varlistentry>
+</variablelist><para role="since">Since 3.0</para></refsect2>
+
+</refsect1>
+
+</refentry>

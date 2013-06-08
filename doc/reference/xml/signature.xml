@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-signature">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-signature.top_of_page">signature</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>signature</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-signature.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>extern extension_entry_st <link linkend="ext-mod-sig">ext_mod_sig</link>;
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-sign-algorithm-set">gnutls_sign_algorithm_set</link>           (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link> sign</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-signature.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-signature.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="ext-mod-sig" role="variable">
+<title>ext_mod_sig</title>
+<indexterm zone="ext-mod-sig"><primary>ext_mod_sig</primary></indexterm>
+<programlisting>extern extension_entry_st ext_mod_sig;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-sign-algorithm-set" role="function">
+<title>gnutls_sign_algorithm_set ()</title>
+<indexterm zone="gnutls-sign-algorithm-set"><primary>gnutls_sign_algorithm_set</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_sign_algorithm_set           (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-sign-algorithm-t"><type>gnutls_sign_algorithm_t</type></link> sign</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

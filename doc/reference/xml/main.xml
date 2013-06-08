@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-main">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-main.top_of_page">main</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>main</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-main.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="BUFSIZE:CAPS">BUFSIZE</link>
+#define             <link linkend="DEBUG-PKT:CAPS">DEBUG_PKT</link>
+#define             <link linkend="DEF-BLOCKBITS:CAPS">DEF_BLOCKBITS</link>
+#define             <link linkend="DEF-BLOCKSIZE:CAPS">DEF_BLOCKSIZE</link>
+#define             <link linkend="IS-UID-REV:CAPS">IS_UID_REV</link>                          (s)
+#define             <link linkend="IS-UID-SIG:CAPS">IS_UID_SIG</link>                          (s)
+#define             <link linkend="KEY-CAN-AUTH:CAPS">KEY_CAN_AUTH</link>                        (a)
+#define             <link linkend="KEY-CAN-ENCRYPT:CAPS">KEY_CAN_ENCRYPT</link>                     (a)
+#define             <link linkend="KEY-CAN-SIGN:CAPS">KEY_CAN_SIGN</link>                        (a)
+#define             <link linkend="KEY-FPR-LEN:CAPS">KEY_FPR_LEN</link>
+#define             <link linkend="MAX-DIGEST-LEN:CAPS">MAX_DIGEST_LEN</link>
+#define             <link linkend="MAX-MPI-BITS:CAPS">MAX_MPI_BITS</link>
+#define             <link linkend="MAX-MPI-BYTES:CAPS">MAX_MPI_BYTES</link>
+#define             <link linkend="cdk-calloc">cdk_calloc</link>
+#define             <link linkend="cdk-free">cdk_free</link>
+#define             <link linkend="cdk-malloc">cdk_malloc</link>
+#define             <link linkend="cdk-realloc">cdk_realloc</link>
+#define             <link linkend="cdk-salloc">cdk_salloc</link>
+#define             <link linkend="cdk-strdup">cdk_strdup</link>
+#define             <link linkend="map-gnutls-error">map_gnutls_error</link>
+#define             <link linkend="stristr">stristr</link>                             (haystack,
+                                                         needle)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-main.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-main.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="BUFSIZE:CAPS" role="macro">
+<title>BUFSIZE</title>
+<indexterm zone="BUFSIZE:CAPS"><primary>BUFSIZE</primary></indexterm>
+<programlisting>#define BUFSIZE 8192
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DEBUG-PKT:CAPS" role="macro">
+<title>DEBUG_PKT</title>
+<indexterm zone="DEBUG-PKT:CAPS"><primary>DEBUG_PKT</primary></indexterm>
+<programlisting>#define DEBUG_PKT 0
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DEF-BLOCKBITS:CAPS" role="macro">
+<title>DEF_BLOCKBITS</title>
+<indexterm zone="DEF-BLOCKBITS:CAPS"><primary>DEF_BLOCKBITS</primary></indexterm>
+<programlisting>#define DEF_BLOCKBITS   13      /* 2^13 = 8192 */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DEF-BLOCKSIZE:CAPS" role="macro">
+<title>DEF_BLOCKSIZE</title>
+<indexterm zone="DEF-BLOCKSIZE:CAPS"><primary>DEF_BLOCKSIZE</primary></indexterm>
+<programlisting>#define DEF_BLOCKSIZE 8192
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="IS-UID-REV:CAPS" role="macro">
+<title>IS_UID_REV()</title>
+<indexterm zone="IS-UID-REV:CAPS"><primary>IS_UID_REV</primary></indexterm>
+<programlisting>#define IS_UID_REV(s) ((s)-&gt;sig_class == 0x30)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="IS-UID-SIG:CAPS" role="macro">
+<title>IS_UID_SIG()</title>
+<indexterm zone="IS-UID-SIG:CAPS"><primary>IS_UID_SIG</primary></indexterm>
+<programlisting>#define IS_UID_SIG(s) (((s)-&gt;sig_class &amp; ~3) == 0x10)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="KEY-CAN-AUTH:CAPS" role="macro">
+<title>KEY_CAN_AUTH()</title>
+<indexterm zone="KEY-CAN-AUTH:CAPS"><primary>KEY_CAN_AUTH</primary></indexterm>
+<programlisting>#define KEY_CAN_AUTH(a)    ((_cdk_pk_algo_usage ((a))) &amp; CDK_KEY_USG_AUTH)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="KEY-CAN-ENCRYPT:CAPS" role="macro">
+<title>KEY_CAN_ENCRYPT()</title>
+<indexterm zone="KEY-CAN-ENCRYPT:CAPS"><primary>KEY_CAN_ENCRYPT</primary></indexterm>
+<programlisting>#define KEY_CAN_ENCRYPT(a) ((_cdk_pk_algo_usage ((a))) &amp; CDK_KEY_USG_ENCR)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="KEY-CAN-SIGN:CAPS" role="macro">
+<title>KEY_CAN_SIGN()</title>
+<indexterm zone="KEY-CAN-SIGN:CAPS"><primary>KEY_CAN_SIGN</primary></indexterm>
+<programlisting>#define KEY_CAN_SIGN(a)    ((_cdk_pk_algo_usage ((a))) &amp; CDK_KEY_USG_SIGN)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="KEY-FPR-LEN:CAPS" role="macro">
+<title>KEY_FPR_LEN</title>
+<indexterm zone="KEY-FPR-LEN:CAPS"><primary>KEY_FPR_LEN</primary></indexterm>
+<programlisting>#define KEY_FPR_LEN 20
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-DIGEST-LEN:CAPS" role="macro">
+<title>MAX_DIGEST_LEN</title>
+<indexterm zone="MAX-DIGEST-LEN:CAPS"><primary>MAX_DIGEST_LEN</primary></indexterm>
+<programlisting>#define MAX_DIGEST_LEN 64
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-MPI-BITS:CAPS" role="macro">
+<title>MAX_MPI_BITS</title>
+<indexterm zone="MAX-MPI-BITS:CAPS"><primary>MAX_MPI_BITS</primary></indexterm>
+<programlisting>#define MAX_MPI_BITS 16384
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-MPI-BYTES:CAPS" role="macro">
+<title>MAX_MPI_BYTES</title>
+<indexterm zone="MAX-MPI-BYTES:CAPS"><primary>MAX_MPI_BYTES</primary></indexterm>
+<programlisting>#define MAX_MPI_BYTES (MAX_MPI_BITS/8)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cdk-calloc" role="macro">
+<title>cdk_calloc</title>
+<indexterm zone="cdk-calloc"><primary>cdk_calloc</primary></indexterm>
+<programlisting>#define cdk_calloc gnutls_calloc
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cdk-free" role="macro">
+<title>cdk_free</title>
+<indexterm zone="cdk-free"><primary>cdk_free</primary></indexterm>
+<programlisting>#define cdk_free gnutls_free
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cdk-malloc" role="macro">
+<title>cdk_malloc</title>
+<indexterm zone="cdk-malloc"><primary>cdk_malloc</primary></indexterm>
+<programlisting>#define cdk_malloc gnutls_malloc
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cdk-realloc" role="macro">
+<title>cdk_realloc</title>
+<indexterm zone="cdk-realloc"><primary>cdk_realloc</primary></indexterm>
+<programlisting>#define cdk_realloc gnutls_realloc_fast
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cdk-salloc" role="macro">
+<title>cdk_salloc</title>
+<indexterm zone="cdk-salloc"><primary>cdk_salloc</primary></indexterm>
+<programlisting>#define cdk_salloc gnutls_secure_calloc
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cdk-strdup" role="macro">
+<title>cdk_strdup</title>
+<indexterm zone="cdk-strdup"><primary>cdk_strdup</primary></indexterm>
+<programlisting>#define cdk_strdup gnutls_strdup
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="map-gnutls-error" role="macro">
+<title>map_gnutls_error</title>
+<indexterm zone="map-gnutls-error"><primary>map_gnutls_error</primary></indexterm>
+<programlisting>#define map_gnutls_error _cdk_map_gnutls_error
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="stristr" role="macro">
+<title>stristr()</title>
+<indexterm zone="stristr"><primary>stristr</primary></indexterm>
+<programlisting>#define             stristr(haystack, needle)</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

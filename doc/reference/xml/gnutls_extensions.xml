@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-extensions">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-extensions.top_of_page">gnutls_extensions</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_extensions</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-extensions.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="gnutls-ext-deinit-data-func">*gnutls_ext_deinit_data_func</link>)      (<parameter><link linkend="extension-priv-data-t"><type>extension_priv_data_t</type></link> data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-ext-pack-func">*gnutls_ext_pack_func</link>)             (<parameter><link linkend="extension-priv-data-t"><type>extension_priv_data_t</type></link> data</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *packed_data</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-ext-recv-func">*gnutls_ext_recv_func</link>)             (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-ext-send-func">*gnutls_ext_send_func</link>)             (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *extdata</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="gnutls-ext-unpack-func">*gnutls_ext_unpack_func</link>)           (<parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *packed_data</parameter>,
+                                                         <parameter><link linkend="extension-priv-data-t"><type>extension_priv_data_t</type></link> *data</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-extensions.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-extensions.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="gnutls-ext-deinit-data-func" role="function">
+<title>gnutls_ext_deinit_data_func ()</title>
+<indexterm zone="gnutls-ext-deinit-data-func"><primary>gnutls_ext_deinit_data_func</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*gnutls_ext_deinit_data_func)      (<parameter><link linkend="extension-priv-data-t"><type>extension_priv_data_t</type></link> data</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ext-pack-func" role="function">
+<title>gnutls_ext_pack_func ()</title>
+<indexterm zone="gnutls-ext-pack-func"><primary>gnutls_ext_pack_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_ext_pack_func)             (<parameter><link linkend="extension-priv-data-t"><type>extension_priv_data_t</type></link> data</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *packed_data</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ext-recv-func" role="function">
+<title>gnutls_ext_recv_func ()</title>
+<indexterm zone="gnutls-ext-recv-func"><primary>gnutls_ext_recv_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_ext_recv_func)             (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter>const unsigned <link linkend="char"><type>char</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> len</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ext-send-func" role="function">
+<title>gnutls_ext_send_func ()</title>
+<indexterm zone="gnutls-ext-send-func"><primary>gnutls_ext_send_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_ext_send_func)             (<parameter><link linkend="gnutls-session-t"><type>gnutls_session_t</type></link> session</parameter>,
+                                                         <parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *extdata</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-ext-unpack-func" role="function">
+<title>gnutls_ext_unpack_func ()</title>
+<indexterm zone="gnutls-ext-unpack-func"><primary>gnutls_ext_unpack_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*gnutls_ext_unpack_func)           (<parameter><link linkend="gnutls-buffer-st"><type>gnutls_buffer_st</type></link> *packed_data</parameter>,
+                                                         <parameter><link linkend="extension-priv-data-t"><type>extension_priv_data_t</type></link> *data</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

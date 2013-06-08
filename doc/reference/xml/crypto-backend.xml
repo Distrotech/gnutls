@@ -1,0 +1,945 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-crypto-backend">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-crypto-backend.top_of_page">crypto-backend</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>crypto-backend</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-crypto-backend.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="DSA-G:CAPS">DSA_G</link>
+#define             <link linkend="DSA-P:CAPS">DSA_P</link>
+#define             <link linkend="DSA-PRIVATE-PARAMS:CAPS">DSA_PRIVATE_PARAMS</link>
+#define             <link linkend="DSA-PUBLIC-PARAMS:CAPS">DSA_PUBLIC_PARAMS</link>
+#define             <link linkend="DSA-Q:CAPS">DSA_Q</link>
+#define             <link linkend="DSA-X:CAPS">DSA_X</link>
+#define             <link linkend="DSA-Y:CAPS">DSA_Y</link>
+#define             <link linkend="ECC-A:CAPS">ECC_A</link>
+#define             <link linkend="ECC-B:CAPS">ECC_B</link>
+#define             <link linkend="ECC-GX:CAPS">ECC_GX</link>
+#define             <link linkend="ECC-GY:CAPS">ECC_GY</link>
+#define             <link linkend="ECC-K:CAPS">ECC_K</link>
+#define             <link linkend="ECC-ORDER:CAPS">ECC_ORDER</link>
+#define             <link linkend="ECC-PRIME:CAPS">ECC_PRIME</link>
+#define             <link linkend="ECC-PRIVATE-PARAMS:CAPS">ECC_PRIVATE_PARAMS</link>
+#define             <link linkend="ECC-PUBLIC-PARAMS:CAPS">ECC_PUBLIC_PARAMS</link>
+#define             <link linkend="ECC-X:CAPS">ECC_X</link>
+#define             <link linkend="ECC-Y:CAPS">ECC_Y</link>
+#define             <link linkend="GNUTLS-MAX-PK-PARAMS:CAPS">GNUTLS_MAX_PK_PARAMS</link>
+#define             <link linkend="MAX-PRIV-PARAMS-SIZE:CAPS">MAX_PRIV_PARAMS_SIZE</link>
+#define             <link linkend="MAX-PUBLIC-PARAMS-SIZE:CAPS">MAX_PUBLIC_PARAMS_SIZE</link>
+#define             <link linkend="RSA-COEF:CAPS">RSA_COEF</link>
+#define             <link linkend="RSA-E1:CAPS">RSA_E1</link>
+#define             <link linkend="RSA-E2:CAPS">RSA_E2</link>
+#define             <link linkend="RSA-MODULUS:CAPS">RSA_MODULUS</link>
+#define             <link linkend="RSA-PRIME1:CAPS">RSA_PRIME1</link>
+#define             <link linkend="RSA-PRIME2:CAPS">RSA_PRIME2</link>
+#define             <link linkend="RSA-PRIV:CAPS">RSA_PRIV</link>
+#define             <link linkend="RSA-PRIVATE-PARAMS:CAPS">RSA_PRIVATE_PARAMS</link>
+#define             <link linkend="RSA-PUB:CAPS">RSA_PUB</link>
+#define             <link linkend="RSA-PUBLIC-PARAMS:CAPS">RSA_PUBLIC_PARAMS</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="auth">*auth</link>)                             (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> datasize</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-add-ui">*bigint_add_ui</link>)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-addm">*bigint_addm</link>)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="bigint-cmp">*bigint_cmp</link>)                       (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m1</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m2</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="bigint-cmp-ui">*bigint_cmp_ui</link>)                    (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m1</parameter>,
+                                                         <parameter><type>unsigned long </type> m2</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-div">*bigint_div</link>)                       (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> q</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="bigint-generate-group">*bigint_generate_group</link>)            (<parameter><link linkend="gnutls-group-st"><type>gnutls_group_st</type></link> *gg</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-mod">*bigint_mod</link>)                       (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-mul">*bigint_mul</link>)                       (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-mul-ui">*bigint_mul_ui</link>)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-mulm">*bigint_mulm</link>)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-new">*bigint_new</link>)                       (<parameter><link linkend="int"><type>int</type></link> nbits</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-powm">*bigint_powm</link>)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> e</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="bigint-prime-check">*bigint_prime_check</link>)               (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> pp</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="bigint-print">*bigint_print</link>)                     (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *buf</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *buf_size</parameter>,
+                                                         <parameter><link linkend="gnutls-bigint-format-t"><type>gnutls_bigint_format_t</type></link> format</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="bigint-release">*bigint_release</link>)                   (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> n</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-scan">*bigint_scan</link>)                      (<parameter>const <link linkend="void"><type>void</type></link> *buf</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> buf_size</parameter>,
+                                                         <parameter><link linkend="gnutls-bigint-format-t"><type>gnutls_bigint_format_t</type></link> format</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-set">*bigint_set</link>)                       (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-set-ui">*bigint_set_ui</link>)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-sub-ui">*bigint_sub_ui</link>)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);
+<link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (<link linkend="bigint-subm">*bigint_subm</link>)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);
+typedef             <link linkend="bigint-t">bigint_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="decrypt">*decrypt</link>)                          (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *encr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> encrsize</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *plain</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> plainsize</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="deinit">*deinit</link>)                           (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="derive">*derive</link>)                           (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *priv</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *pub</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="encrypt">*encrypt</link>)                          (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *plain</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> plainsize</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *encr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> encrsize</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="exists">*exists</link>)                           (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> Param1</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="fast">*fast</link>)                             (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keysize</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textsize</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="generate">generate</link>                            (<parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>);
+enum                <link linkend="gnutls-bigint-format-t">gnutls_bigint_format_t</link>;
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-bigint-register">gnutls_crypto_bigint_register</link>       (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-bigint-st"><type>gnutls_crypto_bigint_st</type></link> *s</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-cipher-register">gnutls_crypto_cipher_register</link>       (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-cipher-st"><type>gnutls_crypto_cipher_st</type></link> *s</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-digest-register">gnutls_crypto_digest_register</link>       (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-digest-st"><type>gnutls_crypto_digest_st</type></link> *s</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-mac-register">gnutls_crypto_mac_register</link>          (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-mac-st"><type>gnutls_crypto_mac_st</type></link> *s</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-pk-register">gnutls_crypto_pk_register</link>           (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-pk-st"><type>gnutls_crypto_pk_st</type></link> *s</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-rnd-register">gnutls_crypto_rnd_register</link>          (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-rnd-st"><type>gnutls_crypto_rnd_st</type></link> *s</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-single-cipher-register">gnutls_crypto_single_cipher_register</link>
+                                                        (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-single-cipher-st"><type>gnutls_crypto_single_cipher_st</type></link> *s</parameter>);
+#define             <link linkend="gnutls-crypto-single-cipher-st">gnutls_crypto_single_cipher_st</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-single-digest-register">gnutls_crypto_single_digest_register</link>
+                                                        (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-single-digest-st"><type>gnutls_crypto_single_digest_st</type></link> *s</parameter>);
+#define             <link linkend="gnutls-crypto-single-digest-st">gnutls_crypto_single_digest_st</link>
+<link linkend="int"><returnvalue>int</returnvalue></link>                 <link linkend="gnutls-crypto-single-mac-register">gnutls_crypto_single_mac_register</link>   (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-single-mac-st"><type>gnutls_crypto_single_mac_st</type></link> *s</parameter>);
+#define             <link linkend="gnutls-crypto-single-mac-st">gnutls_crypto_single_mac_st</link>
+enum                <link linkend="gnutls-direction-t">gnutls_direction_t</link>;
+enum                <link linkend="gnutls-pk-flag-t">gnutls_pk_flag_t</link>;
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-pk-params-init">gnutls_pk_params_init</link>               (<parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *p</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                <link linkend="gnutls-pk-params-release">gnutls_pk_params_release</link>            (<parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *p</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="hash">*hash</link>)                             (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textsize</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="hash-algorithm">*hash_algorithm</link>)                   (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *sig</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *issuer_params</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *Param4</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="init">*init</link>)                             (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> **ctx</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> enc</parameter>);
+<link linkend="unsigned"><returnvalue>unsigned</returnvalue></link>            <link linkend="int">int</link>                                 ();
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="output">*output</link>)                           (<parameter><link linkend="void"><type>void</type></link> *src_ctx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> digestsize</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="pk-fixup-private-params">*pk_fixup_private_params</link>)          (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-direction-t"><type>gnutls_direction_t</type></link> Param2</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *Param3</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="reset">*reset</link>)                            (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="rnd">*rnd</link>)                              (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> level</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> datasize</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="setiv">*setiv</link>)                            (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *iv</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ivsize</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="setkey">*setkey</link>)                           (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keysize</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="sign">*sign</link>)                             (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *priv</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="tag">*tag</link>)                              (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *tag</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> tagsize</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="verify">*verify</link>)                           (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *sig</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *pub</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="verify-params">*verify_params</link>)                    (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *pub</parameter>);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-crypto-backend.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-crypto-backend.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="DSA-G:CAPS" role="macro">
+<title>DSA_G</title>
+<indexterm zone="DSA-G:CAPS"><primary>DSA_G</primary></indexterm>
+<programlisting>#define DSA_G 2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DSA-P:CAPS" role="macro">
+<title>DSA_P</title>
+<indexterm zone="DSA-P:CAPS"><primary>DSA_P</primary></indexterm>
+<programlisting>#define DSA_P 0
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DSA-PRIVATE-PARAMS:CAPS" role="macro">
+<title>DSA_PRIVATE_PARAMS</title>
+<indexterm zone="DSA-PRIVATE-PARAMS:CAPS"><primary>DSA_PRIVATE_PARAMS</primary></indexterm>
+<programlisting>#define DSA_PRIVATE_PARAMS 5
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DSA-PUBLIC-PARAMS:CAPS" role="macro">
+<title>DSA_PUBLIC_PARAMS</title>
+<indexterm zone="DSA-PUBLIC-PARAMS:CAPS"><primary>DSA_PUBLIC_PARAMS</primary></indexterm>
+<programlisting>#define DSA_PUBLIC_PARAMS 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DSA-Q:CAPS" role="macro">
+<title>DSA_Q</title>
+<indexterm zone="DSA-Q:CAPS"><primary>DSA_Q</primary></indexterm>
+<programlisting>#define DSA_Q 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DSA-X:CAPS" role="macro">
+<title>DSA_X</title>
+<indexterm zone="DSA-X:CAPS"><primary>DSA_X</primary></indexterm>
+<programlisting>#define DSA_X 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="DSA-Y:CAPS" role="macro">
+<title>DSA_Y</title>
+<indexterm zone="DSA-Y:CAPS"><primary>DSA_Y</primary></indexterm>
+<programlisting>#define DSA_Y 3
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-A:CAPS" role="macro">
+<title>ECC_A</title>
+<indexterm zone="ECC-A:CAPS"><primary>ECC_A</primary></indexterm>
+<programlisting>#define ECC_A 2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-B:CAPS" role="macro">
+<title>ECC_B</title>
+<indexterm zone="ECC-B:CAPS"><primary>ECC_B</primary></indexterm>
+<programlisting>#define ECC_B 3
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-GX:CAPS" role="macro">
+<title>ECC_GX</title>
+<indexterm zone="ECC-GX:CAPS"><primary>ECC_GX</primary></indexterm>
+<programlisting>#define ECC_GX 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-GY:CAPS" role="macro">
+<title>ECC_GY</title>
+<indexterm zone="ECC-GY:CAPS"><primary>ECC_GY</primary></indexterm>
+<programlisting>#define ECC_GY 5
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-K:CAPS" role="macro">
+<title>ECC_K</title>
+<indexterm zone="ECC-K:CAPS"><primary>ECC_K</primary></indexterm>
+<programlisting>#define ECC_K 8
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-ORDER:CAPS" role="macro">
+<title>ECC_ORDER</title>
+<indexterm zone="ECC-ORDER:CAPS"><primary>ECC_ORDER</primary></indexterm>
+<programlisting>#define ECC_ORDER 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-PRIME:CAPS" role="macro">
+<title>ECC_PRIME</title>
+<indexterm zone="ECC-PRIME:CAPS"><primary>ECC_PRIME</primary></indexterm>
+<programlisting>#define ECC_PRIME 0
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-PRIVATE-PARAMS:CAPS" role="macro">
+<title>ECC_PRIVATE_PARAMS</title>
+<indexterm zone="ECC-PRIVATE-PARAMS:CAPS"><primary>ECC_PRIVATE_PARAMS</primary></indexterm>
+<programlisting>#define ECC_PRIVATE_PARAMS 9
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-PUBLIC-PARAMS:CAPS" role="macro">
+<title>ECC_PUBLIC_PARAMS</title>
+<indexterm zone="ECC-PUBLIC-PARAMS:CAPS"><primary>ECC_PUBLIC_PARAMS</primary></indexterm>
+<programlisting>#define ECC_PUBLIC_PARAMS 8
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-X:CAPS" role="macro">
+<title>ECC_X</title>
+<indexterm zone="ECC-X:CAPS"><primary>ECC_X</primary></indexterm>
+<programlisting>#define ECC_X 6
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="ECC-Y:CAPS" role="macro">
+<title>ECC_Y</title>
+<indexterm zone="ECC-Y:CAPS"><primary>ECC_Y</primary></indexterm>
+<programlisting>#define ECC_Y 7
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="GNUTLS-MAX-PK-PARAMS:CAPS" role="macro">
+<title>GNUTLS_MAX_PK_PARAMS</title>
+<indexterm zone="GNUTLS-MAX-PK-PARAMS:CAPS"><primary>GNUTLS_MAX_PK_PARAMS</primary></indexterm>
+<programlisting>#define GNUTLS_MAX_PK_PARAMS 16
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-PRIV-PARAMS-SIZE:CAPS" role="macro">
+<title>MAX_PRIV_PARAMS_SIZE</title>
+<indexterm zone="MAX-PRIV-PARAMS-SIZE:CAPS"><primary>MAX_PRIV_PARAMS_SIZE</primary></indexterm>
+<programlisting>#define MAX_PRIV_PARAMS_SIZE GNUTLS_MAX_PK_PARAMS       /* ok for RSA and DSA */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="MAX-PUBLIC-PARAMS-SIZE:CAPS" role="macro">
+<title>MAX_PUBLIC_PARAMS_SIZE</title>
+<indexterm zone="MAX-PUBLIC-PARAMS-SIZE:CAPS"><primary>MAX_PUBLIC_PARAMS_SIZE</primary></indexterm>
+<programlisting>#define MAX_PUBLIC_PARAMS_SIZE 4        /* ok for RSA and DSA */
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-COEF:CAPS" role="macro">
+<title>RSA_COEF</title>
+<indexterm zone="RSA-COEF:CAPS"><primary>RSA_COEF</primary></indexterm>
+<programlisting>#define RSA_COEF 5
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-E1:CAPS" role="macro">
+<title>RSA_E1</title>
+<indexterm zone="RSA-E1:CAPS"><primary>RSA_E1</primary></indexterm>
+<programlisting>#define RSA_E1 6
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-E2:CAPS" role="macro">
+<title>RSA_E2</title>
+<indexterm zone="RSA-E2:CAPS"><primary>RSA_E2</primary></indexterm>
+<programlisting>#define RSA_E2 7
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-MODULUS:CAPS" role="macro">
+<title>RSA_MODULUS</title>
+<indexterm zone="RSA-MODULUS:CAPS"><primary>RSA_MODULUS</primary></indexterm>
+<programlisting>#define RSA_MODULUS 0
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-PRIME1:CAPS" role="macro">
+<title>RSA_PRIME1</title>
+<indexterm zone="RSA-PRIME1:CAPS"><primary>RSA_PRIME1</primary></indexterm>
+<programlisting>#define RSA_PRIME1 3
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-PRIME2:CAPS" role="macro">
+<title>RSA_PRIME2</title>
+<indexterm zone="RSA-PRIME2:CAPS"><primary>RSA_PRIME2</primary></indexterm>
+<programlisting>#define RSA_PRIME2 4
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-PRIV:CAPS" role="macro">
+<title>RSA_PRIV</title>
+<indexterm zone="RSA-PRIV:CAPS"><primary>RSA_PRIV</primary></indexterm>
+<programlisting>#define RSA_PRIV 2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-PRIVATE-PARAMS:CAPS" role="macro">
+<title>RSA_PRIVATE_PARAMS</title>
+<indexterm zone="RSA-PRIVATE-PARAMS:CAPS"><primary>RSA_PRIVATE_PARAMS</primary></indexterm>
+<programlisting>#define RSA_PRIVATE_PARAMS 8
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-PUB:CAPS" role="macro">
+<title>RSA_PUB</title>
+<indexterm zone="RSA-PUB:CAPS"><primary>RSA_PUB</primary></indexterm>
+<programlisting>#define RSA_PUB 1
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="RSA-PUBLIC-PARAMS:CAPS" role="macro">
+<title>RSA_PUBLIC_PARAMS</title>
+<indexterm zone="RSA-PUBLIC-PARAMS:CAPS"><primary>RSA_PUBLIC_PARAMS</primary></indexterm>
+<programlisting>#define RSA_PUBLIC_PARAMS 2
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="auth" role="function">
+<title>auth ()</title>
+<indexterm zone="auth"><primary>auth</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*auth)                             (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> datasize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-add-ui" role="function">
+<title>bigint_add_ui ()</title>
+<indexterm zone="bigint-add-ui"><primary>bigint_add_ui</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_add_ui)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-addm" role="function">
+<title>bigint_addm ()</title>
+<indexterm zone="bigint-addm"><primary>bigint_addm</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_addm)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-cmp" role="function">
+<title>bigint_cmp ()</title>
+<indexterm zone="bigint-cmp"><primary>bigint_cmp</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*bigint_cmp)                       (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m1</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-cmp-ui" role="function">
+<title>bigint_cmp_ui ()</title>
+<indexterm zone="bigint-cmp-ui"><primary>bigint_cmp_ui</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*bigint_cmp_ui)                    (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m1</parameter>,
+                                                         <parameter><type>unsigned long </type> m2</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-div" role="function">
+<title>bigint_div ()</title>
+<indexterm zone="bigint-div"><primary>bigint_div</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_div)                       (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> q</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-generate-group" role="function">
+<title>bigint_generate_group ()</title>
+<indexterm zone="bigint-generate-group"><primary>bigint_generate_group</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*bigint_generate_group)            (<parameter><link linkend="gnutls-group-st"><type>gnutls_group_st</type></link> *gg</parameter>,
+                                                         <parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-mod" role="function">
+<title>bigint_mod ()</title>
+<indexterm zone="bigint-mod"><primary>bigint_mod</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_mod)                       (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-mul" role="function">
+<title>bigint_mul ()</title>
+<indexterm zone="bigint-mul"><primary>bigint_mul</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_mul)                       (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-mul-ui" role="function">
+<title>bigint_mul_ui ()</title>
+<indexterm zone="bigint-mul-ui"><primary>bigint_mul_ui</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_mul_ui)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-mulm" role="function">
+<title>bigint_mulm ()</title>
+<indexterm zone="bigint-mulm"><primary>bigint_mulm</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_mulm)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-new" role="function">
+<title>bigint_new ()</title>
+<indexterm zone="bigint-new"><primary>bigint_new</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_new)                       (<parameter><link linkend="int"><type>int</type></link> nbits</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-powm" role="function">
+<title>bigint_powm ()</title>
+<indexterm zone="bigint-powm"><primary>bigint_powm</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_powm)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> e</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-prime-check" role="function">
+<title>bigint_prime_check ()</title>
+<indexterm zone="bigint-prime-check"><primary>bigint_prime_check</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*bigint_prime_check)               (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> pp</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-print" role="function">
+<title>bigint_print ()</title>
+<indexterm zone="bigint-print"><primary>bigint_print</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*bigint_print)                     (<parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *buf</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> *buf_size</parameter>,
+                                                         <parameter><link linkend="gnutls-bigint-format-t"><type>gnutls_bigint_format_t</type></link> format</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-release" role="function">
+<title>bigint_release ()</title>
+<indexterm zone="bigint-release"><primary>bigint_release</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*bigint_release)                   (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> n</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-scan" role="function">
+<title>bigint_scan ()</title>
+<indexterm zone="bigint-scan"><primary>bigint_scan</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_scan)                      (<parameter>const <link linkend="void"><type>void</type></link> *buf</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> buf_size</parameter>,
+                                                         <parameter><link linkend="gnutls-bigint-format-t"><type>gnutls_bigint_format_t</type></link> format</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-set" role="function">
+<title>bigint_set ()</title>
+<indexterm zone="bigint-set"><primary>bigint_set</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_set)                       (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-set-ui" role="function">
+<title>bigint_set_ui ()</title>
+<indexterm zone="bigint-set-ui"><primary>bigint_set_ui</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_set_ui)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-sub-ui" role="function">
+<title>bigint_sub_ui ()</title>
+<indexterm zone="bigint-sub-ui"><primary>bigint_sub_ui</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_sub_ui)                    (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter><type>unsigned long </type> b</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-subm" role="function">
+<title>bigint_subm ()</title>
+<indexterm zone="bigint-subm"><primary>bigint_subm</primary></indexterm>
+<programlisting><link linkend="bigint-t"><returnvalue>bigint_t</returnvalue></link>            (*bigint_subm)                      (<parameter><link linkend="bigint-t"><type>bigint_t</type></link> w</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> a</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> b</parameter>,
+                                                         <parameter>const <link linkend="bigint-t"><type>bigint_t</type></link> m</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bigint-t" role="typedef">
+<title>bigint_t</title>
+<indexterm zone="bigint-t"><primary>bigint_t</primary></indexterm>
+<programlisting>  typedef void *bigint_t;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="decrypt" role="function">
+<title>decrypt ()</title>
+<indexterm zone="decrypt"><primary>decrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*decrypt)                          (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *encr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> encrsize</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *plain</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> plainsize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="deinit" role="function">
+<title>deinit ()</title>
+<indexterm zone="deinit"><primary>deinit</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*deinit)                           (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="derive" role="function">
+<title>derive ()</title>
+<indexterm zone="derive"><primary>derive</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*derive)                           (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *out</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *priv</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *pub</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="encrypt" role="function">
+<title>encrypt ()</title>
+<indexterm zone="encrypt"><primary>encrypt</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*encrypt)                          (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *plain</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> plainsize</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *encr</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> encrsize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="exists" role="function">
+<title>exists ()</title>
+<indexterm zone="exists"><primary>exists</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*exists)                           (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> Param1</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="fast" role="function">
+<title>fast ()</title>
+<indexterm zone="fast"><primary>fast</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*fast)                             (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keysize</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textsize</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="generate" role="function">
+<title>generate ()</title>
+<indexterm zone="generate"><primary>generate</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                generate                            (<parameter>unsigned <link linkend="int"><type>int</type></link> bits</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-bigint-format-t" role="enum">
+<title>enum gnutls_bigint_format_t</title>
+<indexterm zone="gnutls-bigint-format-t"><primary>gnutls_bigint_format_t</primary></indexterm>
+<programlisting>typedef enum {
+    /* raw unsigned integer format */
+    GNUTLS_MPI_FORMAT_USG = 0,
+    /* raw signed integer format - always a leading zero when positive */
+    GNUTLS_MPI_FORMAT_STD = 1,
+    /* the pgp integer format */
+    GNUTLS_MPI_FORMAT_PGP = 2
+} gnutls_bigint_format_t;
+</programlisting>
+<para>
+Enumeration of different bignum integer encoding formats.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-MPI-FORMAT-USG:CAPS" role="constant">
+<term><literal>GNUTLS_MPI_FORMAT_USG</literal></term>
+<listitem><simpara>Raw unsigned integer format.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-MPI-FORMAT-STD:CAPS" role="constant">
+<term><literal>GNUTLS_MPI_FORMAT_STD</literal></term>
+<listitem><simpara>Raw signed integer format, always a leading
+  zero when positive.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-MPI-FORMAT-PGP:CAPS" role="constant">
+<term><literal>GNUTLS_MPI_FORMAT_PGP</literal></term>
+<listitem><simpara>The pgp integer format.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-crypto-bigint-register" role="function">
+<title>gnutls_crypto_bigint_register ()</title>
+<indexterm zone="gnutls-crypto-bigint-register"><primary>gnutls_crypto_bigint_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_bigint_register       (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-bigint-st"><type>gnutls_crypto_bigint_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-cipher-register" role="function">
+<title>gnutls_crypto_cipher_register ()</title>
+<indexterm zone="gnutls-crypto-cipher-register"><primary>gnutls_crypto_cipher_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_cipher_register       (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-cipher-st"><type>gnutls_crypto_cipher_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-digest-register" role="function">
+<title>gnutls_crypto_digest_register ()</title>
+<indexterm zone="gnutls-crypto-digest-register"><primary>gnutls_crypto_digest_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_digest_register       (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-digest-st"><type>gnutls_crypto_digest_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-mac-register" role="function">
+<title>gnutls_crypto_mac_register ()</title>
+<indexterm zone="gnutls-crypto-mac-register"><primary>gnutls_crypto_mac_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_mac_register          (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-mac-st"><type>gnutls_crypto_mac_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-pk-register" role="function">
+<title>gnutls_crypto_pk_register ()</title>
+<indexterm zone="gnutls-crypto-pk-register"><primary>gnutls_crypto_pk_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_pk_register           (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-pk-st"><type>gnutls_crypto_pk_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-rnd-register" role="function">
+<title>gnutls_crypto_rnd_register ()</title>
+<indexterm zone="gnutls-crypto-rnd-register"><primary>gnutls_crypto_rnd_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_rnd_register          (<parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-rnd-st"><type>gnutls_crypto_rnd_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-single-cipher-register" role="function">
+<title>gnutls_crypto_single_cipher_register ()</title>
+<indexterm zone="gnutls-crypto-single-cipher-register"><primary>gnutls_crypto_single_cipher_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_single_cipher_register
+                                                        (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-single-cipher-st"><type>gnutls_crypto_single_cipher_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-single-cipher-st" role="macro">
+<title>gnutls_crypto_single_cipher_st</title>
+<indexterm zone="gnutls-crypto-single-cipher-st"><primary>gnutls_crypto_single_cipher_st</primary></indexterm>
+<programlisting># define gnutls_crypto_single_cipher_st gnutls_crypto_cipher_st
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-single-digest-register" role="function">
+<title>gnutls_crypto_single_digest_register ()</title>
+<indexterm zone="gnutls-crypto-single-digest-register"><primary>gnutls_crypto_single_digest_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_single_digest_register
+                                                        (<parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-single-digest-st"><type>gnutls_crypto_single_digest_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-single-digest-st" role="macro">
+<title>gnutls_crypto_single_digest_st</title>
+<indexterm zone="gnutls-crypto-single-digest-st"><primary>gnutls_crypto_single_digest_st</primary></indexterm>
+<programlisting># define gnutls_crypto_single_digest_st gnutls_crypto_digest_st
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-single-mac-register" role="function">
+<title>gnutls_crypto_single_mac_register ()</title>
+<indexterm zone="gnutls-crypto-single-mac-register"><primary>gnutls_crypto_single_mac_register</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 gnutls_crypto_single_mac_register   (<parameter><link linkend="gnutls-mac-algorithm-t"><type>gnutls_mac_algorithm_t</type></link> algorithm</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> priority</parameter>,
+                                                         <parameter>const <link linkend="gnutls-crypto-single-mac-st"><type>gnutls_crypto_single_mac_st</type></link> *s</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-crypto-single-mac-st" role="macro">
+<title>gnutls_crypto_single_mac_st</title>
+<indexterm zone="gnutls-crypto-single-mac-st"><primary>gnutls_crypto_single_mac_st</primary></indexterm>
+<programlisting># define gnutls_crypto_single_mac_st gnutls_crypto_mac_st
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-direction-t" role="enum">
+<title>enum gnutls_direction_t</title>
+<indexterm zone="gnutls-direction-t"><primary>gnutls_direction_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_IMPORT = 0,
+    GNUTLS_EXPORT = 1
+} gnutls_direction_t;
+</programlisting>
+<para>
+Enumeration of different directions.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-IMPORT:CAPS" role="constant">
+<term><literal>GNUTLS_IMPORT</literal></term>
+<listitem><simpara>Import direction.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="GNUTLS-EXPORT:CAPS" role="constant">
+<term><literal>GNUTLS_EXPORT</literal></term>
+<listitem><simpara>Export direction.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pk-flag-t" role="enum">
+<title>enum gnutls_pk_flag_t</title>
+<indexterm zone="gnutls-pk-flag-t"><primary>gnutls_pk_flag_t</primary></indexterm>
+<programlisting>typedef enum {
+    GNUTLS_PK_FLAG_NONE = 0
+} gnutls_pk_flag_t;
+</programlisting>
+<para>
+Enumeration of public-key flag.
+</para><variablelist role="enum">
+<varlistentry id="GNUTLS-PK-FLAG-NONE:CAPS" role="constant">
+<term><literal>GNUTLS_PK_FLAG_NONE</literal></term>
+<listitem><simpara>No flag.
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="gnutls-pk-params-init" role="function">
+<title>gnutls_pk_params_init ()</title>
+<indexterm zone="gnutls-pk-params-init"><primary>gnutls_pk_params_init</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_pk_params_init               (<parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *p</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="gnutls-pk-params-release" role="function">
+<title>gnutls_pk_params_release ()</title>
+<indexterm zone="gnutls-pk-params-release"><primary>gnutls_pk_params_release</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                gnutls_pk_params_release            (<parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *p</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="hash" role="function">
+<title>hash ()</title>
+<indexterm zone="hash"><primary>hash</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*hash)                             (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *text</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> textsize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="hash-algorithm" role="function">
+<title>hash_algorithm ()</title>
+<indexterm zone="hash-algorithm"><primary>hash_algorithm</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*hash_algorithm)                   (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *sig</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *issuer_params</parameter>,
+                                                         <parameter><link linkend="gnutls-digest-algorithm-t"><type>gnutls_digest_algorithm_t</type></link> *Param4</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="init" role="function">
+<title>init ()</title>
+<indexterm zone="init"><primary>init</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*init)                             (<parameter><link linkend="gnutls-cipher-algorithm-t"><type>gnutls_cipher_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> **ctx</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> enc</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="int" role="function">
+<title>int ()</title>
+<indexterm zone="int"><primary>int</primary></indexterm>
+<programlisting><link linkend="unsigned"><returnvalue>unsigned</returnvalue></link>            int                                 ();</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="output" role="function">
+<title>output ()</title>
+<indexterm zone="output"><primary>output</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*output)                           (<parameter><link linkend="void"><type>void</type></link> *src_ctx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *digest</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> digestsize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="pk-fixup-private-params" role="function">
+<title>pk_fixup_private_params ()</title>
+<indexterm zone="pk-fixup-private-params"><primary>pk_fixup_private_params</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*pk_fixup_private_params)          (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-direction-t"><type>gnutls_direction_t</type></link> Param2</parameter>,
+                                                         <parameter><link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="reset" role="function">
+<title>reset ()</title>
+<indexterm zone="reset"><primary>reset</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*reset)                            (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="rnd" role="function">
+<title>rnd ()</title>
+<indexterm zone="rnd"><primary>rnd</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*rnd)                              (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter><link linkend="int"><type>int</type></link> level</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> datasize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="setiv" role="function">
+<title>setiv ()</title>
+<indexterm zone="setiv"><primary>setiv</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*setiv)                            (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *iv</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> ivsize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="setkey" role="function">
+<title>setkey ()</title>
+<indexterm zone="setkey"><primary>setkey</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*setkey)                           (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *key</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> keysize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="sign" role="function">
+<title>sign ()</title>
+<indexterm zone="sign"><primary>sign</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*sign)                             (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter><link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *signature</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *priv</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="tag" role="function">
+<title>tag ()</title>
+<indexterm zone="tag"><primary>tag</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*tag)                              (<parameter><link linkend="void"><type>void</type></link> *ctx</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *tag</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> tagsize</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="verify" role="function">
+<title>verify ()</title>
+<indexterm zone="verify"><primary>verify</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*verify)                           (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *data</parameter>,
+                                                         <parameter>const <link linkend="gnutls-datum-t"><type>gnutls_datum_t</type></link> *sig</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *pub</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="verify-params" role="function">
+<title>verify_params ()</title>
+<indexterm zone="verify-params"><primary>verify_params</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*verify_params)                    (<parameter><link linkend="gnutls-pk-algorithm-t"><type>gnutls_pk_algorithm_t</type></link> Param1</parameter>,
+                                                         <parameter>const <link linkend="gnutls-pk-params-st"><type>gnutls_pk_params_st</type></link> *pub</parameter>);</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

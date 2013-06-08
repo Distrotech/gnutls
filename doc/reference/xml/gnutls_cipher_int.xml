@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gnutls-cipher-int">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gnutls-cipher-int.top_of_page">gnutls_cipher_int</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gnutls_cipher_int</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gnutls-cipher-int.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis><link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="cipher-auth-func">*cipher_auth_func</link>)                 (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="cipher-decrypt-func">*cipher_decrypt_func</link>)              (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *plaintext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param5</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="cipher-deinit-func">*cipher_deinit_func</link>)               (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="cipher-encrypt-func">*cipher_encrypt_func</link>)              (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *plaintext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param5</parameter>);
+<link linkend="int"><returnvalue>int</returnvalue></link>                 (<link linkend="cipher-setiv-func">*cipher_setiv_func</link>)                (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *iv</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+<link linkend="void"><returnvalue>void</returnvalue></link>                (<link linkend="cipher-tag-func">*cipher_tag_func</link>)                  (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *tag</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);
+extern int          <link linkend="crypto-cipher-prio">crypto_cipher_prio</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gnutls-cipher-int.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gnutls-cipher-int.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="cipher-auth-func" role="function">
+<title>cipher_auth_func ()</title>
+<indexterm zone="cipher-auth-func"><primary>cipher_auth_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*cipher_auth_func)                 (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *data</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cipher-decrypt-func" role="function">
+<title>cipher_decrypt_func ()</title>
+<indexterm zone="cipher-decrypt-func"><primary>cipher_decrypt_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*cipher_decrypt_func)              (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *plaintext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param5</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cipher-deinit-func" role="function">
+<title>cipher_deinit_func ()</title>
+<indexterm zone="cipher-deinit-func"><primary>cipher_deinit_func</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*cipher_deinit_func)               (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cipher-encrypt-func" role="function">
+<title>cipher_encrypt_func ()</title>
+<indexterm zone="cipher-encrypt-func"><primary>cipher_encrypt_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*cipher_encrypt_func)              (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *plaintext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *ciphertext</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param5</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cipher-setiv-func" role="function">
+<title>cipher_setiv_func ()</title>
+<indexterm zone="cipher-setiv-func"><primary>cipher_setiv_func</primary></indexterm>
+<programlisting><link linkend="int"><returnvalue>int</returnvalue></link>                 (*cipher_setiv_func)                (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter>const <link linkend="void"><type>void</type></link> *iv</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="cipher-tag-func" role="function">
+<title>cipher_tag_func ()</title>
+<indexterm zone="cipher-tag-func"><primary>cipher_tag_func</primary></indexterm>
+<programlisting><link linkend="void"><returnvalue>void</returnvalue></link>                (*cipher_tag_func)                  (<parameter><link linkend="void"><type>void</type></link> *hd</parameter>,
+                                                         <parameter><link linkend="void"><type>void</type></link> *tag</parameter>,
+                                                         <parameter><link linkend="size-t"><type>size_t</type></link> Param3</parameter>);</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="crypto-cipher-prio" role="variable">
+<title>crypto_cipher_prio</title>
+<indexterm zone="crypto-cipher-prio"><primary>crypto_cipher_prio</primary></indexterm>
+<programlisting>extern int crypto_cipher_prio;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

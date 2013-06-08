@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="gnutls-certificate-set-x509-simple-pkcs12-mem"><link linkend="gnutls-certificate-set-x509-simple-pkcs12-mem">gnutls_certificate_set_x509_simple_pkcs12_mem</link>, function in <link linkend="gnutls-gnutls">gnutls</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-get-authority-key-id"><link linkend="gnutls-x509-crl-get-authority-key-id">gnutls_x509_crl_get_authority_key_id</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-get-extension-data"><link linkend="gnutls-x509-crl-get-extension-data">gnutls_x509_crl_get_extension_data</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-get-extension-info"><link linkend="gnutls-x509-crl-get-extension-info">gnutls_x509_crl_get_extension_info</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-get-extension-oid"><link linkend="gnutls-x509-crl-get-extension-oid">gnutls_x509_crl_get_extension_oid</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-get-number"><link linkend="gnutls-x509-crl-get-number">gnutls_x509_crl_get_number</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-set-authority-key-id"><link linkend="gnutls-x509-crl-set-authority-key-id">gnutls_x509_crl_set_authority_key_id</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crl-set-number"><link linkend="gnutls-x509-crl-set-number">gnutls_x509_crl_set_number</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-attribute-data"><link linkend="gnutls-x509-crq-get-attribute-data">gnutls_x509_crq_get_attribute_data</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-attribute-info"><link linkend="gnutls-x509-crq-get-attribute-info">gnutls_x509_crq_get_attribute_info</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-basic-constraints"><link linkend="gnutls-x509-crq-get-basic-constraints">gnutls_x509_crq_get_basic_constraints</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-extension-by-oid"><link linkend="gnutls-x509-crq-get-extension-by-oid">gnutls_x509_crq_get_extension_by_oid</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-extension-data"><link linkend="gnutls-x509-crq-get-extension-data">gnutls_x509_crq_get_extension_data</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-extension-info"><link linkend="gnutls-x509-crq-get-extension-info">gnutls_x509_crq_get_extension_info</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-key-id"><link linkend="gnutls-x509-crq-get-key-id">gnutls_x509_crq_get_key_id</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-key-purpose-oid"><link linkend="gnutls-x509-crq-get-key-purpose-oid">gnutls_x509_crq_get_key_purpose_oid</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-key-rsa-raw"><link linkend="gnutls-x509-crq-get-key-rsa-raw">gnutls_x509_crq_get_key_rsa_raw</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-key-usage"><link linkend="gnutls-x509-crq-get-key-usage">gnutls_x509_crq_get_key_usage</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-subject-alt-name"><link linkend="gnutls-x509-crq-get-subject-alt-name">gnutls_x509_crq_get_subject_alt_name</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-get-subject-alt-othername-oid"><link linkend="gnutls-x509-crq-get-subject-alt-othername-oid">gnutls_x509_crq_get_subject_alt_othername_oid</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-print"><link linkend="gnutls-x509-crq-print">gnutls_x509_crq_print</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-set-basic-constraints"><link linkend="gnutls-x509-crq-set-basic-constraints">gnutls_x509_crq_set_basic_constraints</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-set-key-purpose-oid"><link linkend="gnutls-x509-crq-set-key-purpose-oid">gnutls_x509_crq_set_key_purpose_oid</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-set-key-usage"><link linkend="gnutls-x509-crq-set-key-usage">gnutls_x509_crq_set_key_usage</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crq-set-subject-alt-name"><link linkend="gnutls-x509-crq-set-subject-alt-name">gnutls_x509_crq_set_subject_alt_name</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+<indexentry><primaryie linkends="gnutls-x509-crt-set-crq-extensions"><link linkend="gnutls-x509-crt-set-crq-extensions">gnutls_x509_crt_set_crq_extensions</link>, function in <link linkend="gnutls-x509">x509</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

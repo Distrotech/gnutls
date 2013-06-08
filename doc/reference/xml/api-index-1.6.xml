@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE indexdiv PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<indexdiv>
+<indexdiv><title>A</title>
+<indexentry><primaryie linkends="asn1-perror"><link linkend="asn1-perror">asn1_perror</link>, function in <link linkend="gnutls-libtasn1">libtasn1</link></primaryie></indexentry>
+<indexentry><primaryie linkends="asn1-strerror"><link linkend="asn1-strerror">asn1_strerror</link>, function in <link linkend="gnutls-libtasn1">libtasn1</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

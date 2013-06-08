@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-srp">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-srp.top_of_page">srp</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>srp</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-srp.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>typedef             <link linkend="srp-server-auth-info-st">srp_server_auth_info_st</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-srp.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-srp.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="srp-server-auth-info-st" role="typedef">
+<title>srp_server_auth_info_st</title>
+<indexterm zone="srp-server-auth-info-st"><primary>srp_server_auth_info_st</primary></indexterm>
+<programlisting>typedef struct srp_server_auth_info_st srp_server_auth_info_st;
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>

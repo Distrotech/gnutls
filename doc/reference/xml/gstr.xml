@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="gnutls-gstr">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnutls-gstr.top_of_page">gstr</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>
+  GNUTLS Library
+</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>gstr</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnutls-gstr.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>#define             <link linkend="Estrcat">Estrcat</link>                             (x,
+                                                         y)
+#define             <link linkend="Estrcpy">Estrcpy</link>                             (x,
+                                                         y)
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="gnutls-gstr.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+<refsect1 id="gnutls-gstr.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="Estrcat" role="macro">
+<title>Estrcat()</title>
+<indexterm zone="Estrcat"><primary>Estrcat</primary></indexterm>
+<programlisting>#define Estrcat(x,y) _asn1_str_cat(x,ASN1_MAX_ERROR_DESCRIPTION_SIZE,y)
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="Estrcpy" role="macro">
+<title>Estrcpy()</title>
+<indexterm zone="Estrcpy"><primary>Estrcpy</primary></indexterm>
+<programlisting>#define Estrcpy(x,y) _asn1_str_cpy(x,ASN1_MAX_ERROR_DESCRIPTION_SIZE,y)
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+</refentry>
