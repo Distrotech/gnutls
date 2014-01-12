@@ -369,6 +369,7 @@ if test "$NEED_LIBOPTS_DIR" = "true";then
 	done
 	AC_SUBST([AUTOGEN], [/bin/true])
 	enable_local_libopts=yes
+	PKG_CHECK_MODULES(EVIL, evil >= 1.7.10, [have_lib_evil=yes], [have_lib_evil=no])
 else
 	enable_local_libopts=no
 fi

@@ -5,7 +5,7 @@ noinst_LTLIBRARIES      = libopts.la
  
 libopts_la_SOURCES      = libopts.c
 libopts_la_CPPFLAGS     = -I$(top_srcdir)
-libopts_la_LIBADD       = $(LTLIBINTL)
+libopts_la_LIBADD       = $(LTLIBINTL) $(EVIL_LIBS)
  
 EXTRA_DIST              = \
     ag-char-map.h           alias.c                 ao-strs.c  \
