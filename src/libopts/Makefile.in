@@ -201,7 +201,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-libopts_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
+libopts_la_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_libopts_la_OBJECTS = libopts_la-libopts.lo
 libopts_la_OBJECTS = $(am_libopts_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -325,6 +325,8 @@ ENOLINK_VALUE = @ENOLINK_VALUE@
 EOVERFLOW_HIDDEN = @EOVERFLOW_HIDDEN@
 EOVERFLOW_VALUE = @EOVERFLOW_VALUE@
 ERRNO_H = @ERRNO_H@
+EVIL_CFLAGS = @EVIL_CFLAGS@
+EVIL_LIBS = @EVIL_LIBS@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FLOAT_H = @FLOAT_H@
@@ -1237,7 +1239,7 @@ MAINTAINERCLEANFILES = Makefile.in
 noinst_LTLIBRARIES = libopts.la
 libopts_la_SOURCES = libopts.c
 libopts_la_CPPFLAGS = -I$(top_srcdir)
-libopts_la_LIBADD = $(LTLIBINTL)
+libopts_la_LIBADD = $(LTLIBINTL) $(EVIL_LIBS)
 EXTRA_DIST = \
     ag-char-map.h           alias.c                 ao-strs.c  \
     ao-strs.h               autoopts/options.h      autoopts/usage-txt.h  \
