@@ -1317,7 +1317,7 @@ get_alt_name(gnutls_x509_crt_t cert, const char *extension_id,
 		goto cleanup;
 	}
 
-	ret = gnutls_subject_alt_names_get(sans, seq, &type, &res);
+	ret = gnutls_subject_alt_names_get(sans, seq, &type, &res, NULL);
 	if (ret < 0) {
 		gnutls_assert();
 		goto cleanup;
