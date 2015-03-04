@@ -3,7 +3,7 @@
 <id>http://www.gnutls.org/news.atom</id>
 <link href="http://www.gnutls.org/news.atom" rel="self"/> 
 <title>GnuTLS - News</title>
-<updated>2015-03-04T17:14:53+00:00</updated>
+<updated>2015-03-04T17:17:31+00:00</updated>
 
   <entry>
     <id>http://www.gnutls.org/news.html#2015-03-04</id>
@@ -17,7 +17,7 @@
     <content type='xhtml' xml:base='http://www.gnutls.org/news-entries/2015-03-04.xml'><div xmlns='http://www.w3.org/1999/xhtml'>
 
 <p>
-The source code has been <a href="https://gitlab.com/gnutls/gnutls">moved to
+The source code has been <a href="http://article.gmane.org/gmane.comp.encryption.gpg.gnutls.devel/8043">moved to
 gitlab</a>.
 </p>
 
