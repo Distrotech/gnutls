@@ -20,8 +20,8 @@ The project news are also available via an <a href="http://www.gnutls.org/news.a
 #include 'rawnews.wml' MAX_NEWS=15 TABLE_CLASS=news
 
 <p>See also the 
-the <a href="http://gitorious.org/gnutls/gnutls/blobs/master/NEWS">live NEWS file</a>
-or the <a href="http://gitorious.org/gnutls/gnutls/commits/master">live git shortlog</a>.
+the <a href="https://gitlab.com/gnutls/gnutls/blob/master/NEWS">live NEWS file</a>
+or the <a href="https://gitlab.com/gnutls/gnutls/commits/master">live git shortlog</a>.
 </p>
 
 </center>
