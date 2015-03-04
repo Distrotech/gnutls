@@ -2499,7 +2499,7 @@ full handshake will be performed.
 </p>
 <p>The non-fatal errors expected by this function are:
 <code>GNUTLS_E_INTERRUPTED</code> , <code>GNUTLS_E_AGAIN</code> , 
-<code>GNUTLS_E_WARNING_ALERT_RECEIVED</code> , and <code>GNUTLS_GOT_APPLICATION_DATA</code> ,
+<code>GNUTLS_E_WARNING_ALERT_RECEIVED</code> , and <code>GNUTLS_E_GOT_APPLICATION_DATA</code> ,
 the latter only in a case of rehandshake.
 </p>
 <p>The former two interrupt the handshake procedure due to the lower
@@ -4039,7 +4039,7 @@ padding, false (0) if the current session does not.
 <dd><p><var>session</var>: is a <code>gnutls_session_t</code>  structure.
 </p>
 <p>This function checks if there pending corked
-data in the gnutls buffers &ndash;see <code>gnutls_cork()</code> . 
+data in the gnutls buffers &ndash;see <code>gnutls_record_cork()</code> . 
 </p>
 <p><strong>Returns:</strong> Returns the size of the corked data or zero.
 </p>
@@ -4066,9 +4066,8 @@ is guaranteed not to block.
 <dt><a name="index-gnutls_005frecord_005fcork-1"></a>Function: <em>void</em> <strong>gnutls_record_cork</strong> <em>(gnutls_session_t <var>session</var>)</em></dt>
 <dd><p><var>session</var>: is a <code>gnutls_session_t</code>  structure.
 </p>
-<p>If called <code>gnutls_record_send()</code>  will no longer send partial records.
-All queued records will be sent when <code>gnutls_uncork()</code>  is called, or
-when the maximum record size is reached.
+<p>If called, <code>gnutls_record_send()</code>  will no longer send any records.
+Any sent records will be cached until <code>gnutls_record_uncork()</code>  is called.
 </p>
 <p>This function is safe to use with DTLS after GnuTLS 3.3.0.
 </p>
@@ -4106,6 +4105,9 @@ tell you whether a file descriptor should be selected for either
 reading or writing, <code>gnutls_record_get_direction()</code>  returns 0 if the
 interrupted function was trying to read data, and 1 if it was
 trying to write data.
+</p>
+<p>This function&rsquo;s output is unreliable if you are using the
+ <code>session</code> in different threads, for sending and receiving.
 </p>
 <p><strong>Returns:</strong> 0 if trying to read data, 1 if trying to write data.
 </p></dd></dl>
@@ -4346,7 +4348,7 @@ timeout (the default).
 </p>
 <p><var>flags</var>: Could be zero or <code>GNUTLS_RECORD_WAIT</code> 
 </p>
-<p>This resets the effect of <code>gnutls_cork()</code> , and flushes any pending
+<p>This resets the effect of <code>gnutls_record_cork()</code> , and flushes any pending
 data. If the <code>GNUTLS_RECORD_WAIT</code>  flag is specified then this
 function will block until the data is sent or a fatal error
 occurs (i.e., the function will retry on <code>GNUTLS_E_AGAIN</code>  and
@@ -4583,7 +4585,8 @@ applications.
 <p>Returns all session parameters needed to be stored to support resumption.
 The client should call this, and store the returned session data. A session
 may be resumed later by calling <code>gnutls_session_set_data()</code> .  
-This function must be called after a successful handshake. 
+This function must be called after a successful (full) handshake. It should
+not be used in resumed sessions &ndash;see <code>gnutls_session_is_resumed()</code> .
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise
 an error code is returned.
@@ -4600,8 +4603,10 @@ an error code is returned.
 <p>Returns all session parameters needed to be stored to support resumption.
 The client should call this, and store the returned session data. A session
 may be resumed later by calling <code>gnutls_session_set_data()</code> .  
-This function must be called after a successful handshake. 
-The returned  <code>data</code> are allocated and must be released using <code>gnutls_free()</code> .
+This function must be called after a successful (full) handshake. It should
+not be used in resumed sessions &ndash;see <code>gnutls_session_is_resumed()</code> .
+</p>
+<p>The returned  <code>data</code> are allocated and must be released using <code>gnutls_free()</code> .
 </p>
 <p><strong>Returns:</strong> On success, <code>GNUTLS_E_SUCCESS</code>  (0) is returned, otherwise
 an error code is returned.

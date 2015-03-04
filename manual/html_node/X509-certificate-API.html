@@ -2581,6 +2581,9 @@ starts at the leftmost position.
 given issuer. It checks the DN fields and the authority
 key identifier and subject key identifier fields match.
 </p>
+<p>If the same certificate is provided at the  <code>cert</code> and  <code>issuer</code> fields,
+it will check whether the certificate is self-signed.
+</p>
 <p><strong>Returns:</strong> It will return true (1) if the given certificate is issued
 by the given issuer, and false (0) if not.  
 </p></dd></dl>
@@ -2725,17 +2728,20 @@ hold the accessLocation GeneralName type (e.g.,
 </p>
 <p>If  <code>what</code> is <code>GNUTLS_IA_URI</code> ,  <code>data</code> will hold the accessLocation URI
 data.  Requesting this  <code>what</code> value leads to an error if the
-accessLocation is not of the &quot;uniformResourceIdentifier&quot; type.
+accessLocation is not of the &quot;uniformResourceIdentifier&quot; type. 
 </p>
 <p>If  <code>what</code> is <code>GNUTLS_IA_OCSP_URI</code> ,  <code>data</code> will hold the OCSP URI.
 Requesting this  <code>what</code> value leads to an error if the accessMethod
 is not 1.3.6.1.5.5.7.48.1 aka OSCP, or if accessLocation is not of
-the &quot;uniformResourceIdentifier&quot; type.
+the &quot;uniformResourceIdentifier&quot; type. In that case <code>GNUTLS_E_UNKNOWN_ALGORITHM</code> 
+will be returned, and  <code>seq</code> should be increased and this function
+called again.
 </p>
 <p>If  <code>what</code> is <code>GNUTLS_IA_CAISSUERS_URI</code> ,  <code>data</code> will hold the caIssuers
 URI.  Requesting this  <code>what</code> value leads to an error if the
 accessMethod is not 1.3.6.1.5.5.7.48.2 aka caIssuers, or if
 accessLocation is not of the &quot;uniformResourceIdentifier&quot; type.
+In that case handle as in <code>GNUTLS_IA_OCSP_URI</code> .
 </p>
 <p>More  <code>what</code> values may be allocated in the future as needed.
 </p>

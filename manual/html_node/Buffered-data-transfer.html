@@ -178,9 +178,8 @@ before transmission. The following functions provide that functionality.
 <dt><a name="index-gnutls_005frecord_005fcork"></a>Function: <em>void</em> <strong>gnutls_record_cork</strong> <em>(gnutls_session_t <var>session</var>)</em></dt>
 <dd><p><var>session</var>: is a <code>gnutls_session_t</code>  structure.
 </p>
-<p>If called <code>gnutls_record_send()</code>  will no longer send partial records.
-All queued records will be sent when <code>gnutls_uncork()</code>  is called, or
-when the maximum record size is reached.
+<p>If called, <code>gnutls_record_send()</code>  will no longer send any records.
+Any sent records will be cached until <code>gnutls_record_uncork()</code>  is called.
 </p>
 <p>This function is safe to use with DTLS after GnuTLS 3.3.0.
 </p>
@@ -197,7 +196,7 @@ when the maximum record size is reached.
 </p>
 <p><var>flags</var>: Could be zero or <code>GNUTLS_RECORD_WAIT</code> 
 </p>
-<p>This resets the effect of <code>gnutls_cork()</code> , and flushes any pending
+<p>This resets the effect of <code>gnutls_record_cork()</code> , and flushes any pending
 data. If the <code>GNUTLS_RECORD_WAIT</code>  flag is specified then this
 function will block until the data is sent or a fatal error
 occurs (i.e., the function will retry on <code>GNUTLS_E_AGAIN</code>  and
