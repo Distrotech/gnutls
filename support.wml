@@ -62,7 +62,7 @@ Answers to <a href="faq.html">frequently asked questions</a>.
 
   <p><b>Bug reports should be addressed to <a
       href="mailto:$(EMAIL)">$(EMAIL)</a>, which
-      is forwarded to the gnutls-devel list, or on <a href="https://savannah.gnu.org/support/?group=gnutls">our issue tracker</a>.</b> </p>
+      is forwarded to the gnutls-devel list, or on <a href="https://gitlab.com/gnutls/gnutls/issues">our issue tracker</a>.</b> </p>
    </td></tr>
 </table>
 
